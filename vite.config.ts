@@ -7,7 +7,16 @@ import svgrPlugin from "vite-plugin-svgr";
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react(), tsconfigPaths(), svgrPlugin()],
-
+	css: {
+		modules: {
+			scopeBehaviour: "local",
+		},
+		preprocessorOptions: {
+			scss: {
+				additionalData: "$injectedColor: orange;",
+			},
+		},
+	},
 	server: {
 		port: 3000,
 	},
