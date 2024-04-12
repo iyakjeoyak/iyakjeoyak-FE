@@ -1,5 +1,5 @@
 import "./styles/_reset.scss";
-import "./styles/globals.scss";
+import "./styles/global.scss";
 
 import Router from "./router/Router";
 

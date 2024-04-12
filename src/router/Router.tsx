@@ -1,13 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import HomePage from "../pages/home";
+import Layout from "../pages/layout";
 import LoginPage from "../pages/login";
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<main>홈페이지입니다</main>} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route element={<Layout />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
