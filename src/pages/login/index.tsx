@@ -1,5 +1,3 @@
-function LoginPage() {
-	return <main>로그인페이지</main>;
+export default function LoginPage() {
+  return <section>로그인 페이지입니다.</section>;
 }
-
-export default LoginPage;
