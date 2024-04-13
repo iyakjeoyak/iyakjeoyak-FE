@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Pretendard-Regular;
+}
+
+body {
+  background-color: rgb(227, 227, 227);
+}
+
+main {
+  margin: 0 auto;
+  height: 100vh;
+  max-width: 500px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
