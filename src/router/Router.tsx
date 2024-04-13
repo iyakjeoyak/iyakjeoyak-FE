@@ -11,6 +11,7 @@ function Router() {
 				<Route element={<Layout />}>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/login" element={<LoginPage />} />
+					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
