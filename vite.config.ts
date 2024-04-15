@@ -10,6 +10,7 @@ export default defineConfig({
 	css: {
 		modules: {
 			scopeBehaviour: "local",
+			localsConvention: "camelCase",
 		},
 		preprocessorOptions: {
 			scss: {
