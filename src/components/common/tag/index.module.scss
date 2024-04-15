@@ -45,8 +45,9 @@
 
 .background {
 	&-green {
-		background-color: #23cc87;
+		background-color: $main-green;
 		color: $white;
+		border: 1px solid $main-green;
 	}
 
 	&-white {
