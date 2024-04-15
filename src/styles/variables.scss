@@ -15,4 +15,149 @@ $gray3: #cccfd7;
 $gray5: #9299aa;
 $gray6: #6e768c;
 $gray8: #363a45;
+
 /** Font */
+
+/* Font Style */
+
+@font-face {
+	font-family: "Pretendard";
+	src:
+		url("/fonts/Pretendard-Bold.woff2") format("woff2"),
+		url("/fonts/Pretendard-Bold.woff") format("woff");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Pretendard";
+	src:
+		url("/fonts/Pretendard-SemiBold.woff2") format("woff2"),
+		url("/fonts/Pretendard-SemiBold.woff") format("woff");
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Pretendard";
+	src:
+		url("/fonts/Pretendard-Medium.woff2") format("woff2"),
+		url("/fonts/Pretendard-Medium.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+}
+
+/* Font Size */
+:root {
+	--large-font-size: 16px;
+	--big-font-size: 14px;
+	--medium-font-size: 12px;
+	--small-font-size: 10px;
+}
+
+.disabled {
+	color: $main-green;
+	background-color: $main-lightgreen;
+}
+
+.active {
+	color: $white;
+	background-color: $main-green;
+}
+
+/* Font Classes */
+/* Common font style */
+.font-style {
+	font-family: "Pretendard", sans-serif;
+}
+
+/* Bold Class */
+.b-super {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: 40px;
+}
+.b-large {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: 27px;
+}
+.b-big {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: 24px;
+}
+.b-medium {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: 18px;
+}
+.b-regular {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: var(--large-font-size);
+}
+.b-small {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: var(--medium-font-size);
+}
+.b-tiny {
+	@extend .font-style;
+	font-weight: 700;
+	font-size: var(--small-font-size);
+}
+
+/* Semi-Bold Class */
+.sb-large {
+	@extend .font-style;
+	font-weight: 600;
+	font-size: var(--large-font-size);
+}
+.sb-big {
+	@extend .font-style;
+	font-weight: 600;
+	font-size: var(--big-font-size);
+}
+.sb-medium {
+	@extend .font-style;
+	font-weight: 600;
+	font-size: var(--medium-font-size);
+}
+.sb-regular {
+	@extend .font-style;
+	font-weight: 600;
+	font-size: 11px;
+}
+.sb-small {
+	@extend .font-style;
+	font-weight: 600;
+	font-size: var(--small-font-size);
+}
+
+/* Medium Class */
+.m-large {
+	@extend .font-style;
+	font-weight: 500;
+	font-size: var(--large-font-size);
+}
+.m-big {
+	@extend .font-style;
+	font-weight: 500;
+	font-size: var(--big-font-size);
+}
+.m-medium {
+	@extend .font-style;
+	font-weight: 500;
+	font-size: var(--medium-font-size);
+}
+.m-regular {
+	@extend .font-style;
+	font-weight: 500;
+	font-size: 11px;
+}
+.m-small {
+	@extend .font-style;
+	font-weight: 500;
+	font-size: var(--small-font-size);
+}
