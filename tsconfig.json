@@ -20,7 +20,7 @@
 		},
 
 		/* Bundler mode */
-		"moduleResolution": "bundler",
+		"moduleResolution": "Node",
 		"allowImportingTsExtensions": true,
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
