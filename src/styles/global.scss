@@ -35,19 +35,19 @@ main {
 	margin: 0 auto;
 	height: auto;
 	max-width: 100%;
-	min-height: 95vh;
+	height: 100vh;
 	padding: 20px;
 	background-color: #ffffff;
 	position: relative;
-
+	padding-top: 90px;
 	@include responsive("tablet") {
-		margin: 20px auto;
+		padding-top: 100px;
 	}
 
 	@include responsive("desktop") {
 		max-width: 480px;
 		padding: 40px;
-		margin: 50px auto;
+		padding-top: 110px;
 	}
 }
 
@@ -58,4 +58,5 @@ main {
 	left: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 998;
 }

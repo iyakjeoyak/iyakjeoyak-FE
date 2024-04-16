@@ -1,10 +1,12 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { motion } from "framer-motion";
 import styles from "./Nav.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MAIN_NAVS = [
-	{ string: "홈", to: "/home" },
-	{ string: "약 조회하기", to: "#" },
+	{ string: "홈", to: "/" },
+	{ string: "약 조회하기", to: "/search" },
 	{ string: "명예의 전당", to: "#" },
 	{ string: "근처 약국", to: "#" },
 ];
@@ -15,6 +17,12 @@ export default function Nav({
 	toggleIsOpenNav: () => void;
 }) {
 	const navigator = useNavigate();
+
+	const location = useLocation();
+
+	useEffect(() => {
+		toggleIsOpenNav();
+	}, [location, toggleIsOpenNav]);
 
 	return (
 		<motion.nav
