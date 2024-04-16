@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
-import { Form } from "@/components/form";
+import { Form } from "@/components/Form";
 import { Link } from "react-router-dom";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import styles from "../styles/LoginBtnForm.module.scss";
