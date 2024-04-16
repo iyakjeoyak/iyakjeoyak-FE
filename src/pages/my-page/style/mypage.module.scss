@@ -1,8 +1,9 @@
 @import "@styles/variables.scss";
+@import "@styles/global.scss";
 
 .mypageContainer {
 	margin-top: 28px;
-	padding: 1.5rem;
+	padding: 1rem;
 	background-color: $white;
 
 	.profileSection {

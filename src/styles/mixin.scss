@@ -1,0 +1,21 @@
+@use "variables" as vars;
+
+@mixin responsive-font-size($size) {
+	font-size: calc(#{$size} * 0.2667vw);
+}
+
+@mixin responsive($size) {
+	@if $size == "phone" {
+		@media (min-width: #{vars.$mobile-width}) and (max-width: #{vars.$tablet-width - 1}px) {
+			@content;
+		}
+	} @else if $size == "tablet" {
+		@media (min-width: #{vars.$tablet-width}) and (max-width: #{vars.$desktop-width - 1}px) {
+			@content;
+		}
+	} @else if $size == "desktop" {
+		@media (min-width: #{vars.$desktop-width}) {
+			@content;
+		}
+	}
+}
