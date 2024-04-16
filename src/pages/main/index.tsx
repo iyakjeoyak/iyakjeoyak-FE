@@ -1,8 +1,4 @@
-import {
-	BestReviewBoard,
-	MyMedicineBoard,
-	PickedMedicine,
-} from "@/components/main";
+import { BestReviewBoard, MyMedicineBoard, PickedMedicine } from "./UI";
 
 export default function MainPage() {
 	return (

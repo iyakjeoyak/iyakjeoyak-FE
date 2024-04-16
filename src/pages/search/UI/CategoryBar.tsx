@@ -1,4 +1,4 @@
-import SelectSort from "../../common/selectsort";
+import SelectSort from "@/components/SelectSort";
 
 export default function CategoryBar() {
 	return (

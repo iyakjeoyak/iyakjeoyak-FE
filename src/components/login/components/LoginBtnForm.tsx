@@ -1,8 +1,8 @@
-import { Form } from "@/components/common/form";
 import { FcGoogle } from "react-icons/fc";
+import { Form } from "@/components/form";
+import { Link } from "react-router-dom";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import styles from "../styles/LoginBtnForm.module.scss";
-import { Link } from "react-router-dom";
 
 export default function LoginBtnForm() {
 	const handleClick = async () => {};

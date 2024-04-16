@@ -1,5 +1,6 @@
-import { Form } from "@/components/common/form";
 import * as yup from "yup";
+
+import { Form } from "@/components/form";
 
 export default function LoginInputForm() {
 	return (

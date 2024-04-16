@@ -1,4 +1,4 @@
-import ModalContainer from "../../common/modalcontainer";
+import ModalContainer from "@/components/ModalContainer";
 
 export default function ReviewDetailModal({
 	toggleModalOpen,
