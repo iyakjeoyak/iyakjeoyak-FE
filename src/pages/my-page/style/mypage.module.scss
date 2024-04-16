@@ -1,0 +1,91 @@
+@import "@styles/variables.scss";
+
+.mypageContainer {
+	margin-top: 28px;
+	padding: 1.5rem;
+	background-color: $white;
+
+	.profileSection {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.profilePic {
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			margin-right: 17px;
+		}
+
+		.profileInfo {
+			display: flex;
+			flex-direction: column;
+
+			.nameArea {
+				display: flex;
+				align-items: center;
+				margin-top: 0.5rem;
+				margin-bottom: 0.2rem;
+
+				.nickname {
+					@extend .m-large;
+					color: $black;
+					font-weight: bold;
+					margin-right: 0.5rem;
+				}
+			}
+
+			.userIntroduce {
+				@extend .m-big;
+				color: $gray3;
+				font-size: 0.875rem;
+			}
+
+			.editprofile {
+				@extend .m-small;
+				color: $black;
+				cursor: pointer;
+				margin-top: 0.2rem;
+			}
+		}
+	}
+
+	.myPageContent {
+		margin-top: 2rem;
+		.pointSection {
+			.pointFixArea {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				background-color: $main-lightgreen;
+				margin-top: 0.6rem;
+				border-radius: 10px;
+				padding: 1rem;
+				min-height: 46px;
+
+				.pointSVG {
+					width: 1rem;
+					height: 1rem;
+					margin-right: 0.5rem;
+				}
+
+				.pointTitle {
+					@extend .sb-big;
+				}
+			}
+
+			.pointArea,
+			.sectionBoxArea {
+				.userPoint,
+				.sectionBox {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					border-top: 1px solid #eaeaea;
+					padding-top: 0.5rem;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}

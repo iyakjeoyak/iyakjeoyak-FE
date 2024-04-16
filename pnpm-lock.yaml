@@ -49,9 +49,6 @@ devDependencies:
   '@storybook/addon-onboarding':
     specifier: ^8.0.8
     version: 8.0.8
-  '@storybook/addon-styling-webpack':
-    specifier: ^1.0.0
-    version: 1.0.0(webpack@5.91.0)
   '@storybook/blocks':
     specifier: ^8.0.8
     version: 8.0.8(@types/react@18.2.78)(react-dom@18.2.0)(react@18.2.0)
@@ -2248,15 +2245,6 @@ packages:
     dependencies:
       '@storybook/global': 5.0.0
       ts-dedent: 2.2.0
-    dev: true
-
-  /@storybook/addon-styling-webpack@1.0.0(webpack@5.91.0):
-    resolution: {integrity: sha512-jo1kzn7pi+NA+LZxrWoRvW6w7dXIKY/BjTG80XX2uU92lIKT+X1k/9vYk/0KPVK3Bsf4tO6ToAuqIRyOk7MHtg==}
-    peerDependencies:
-      webpack: ^5.0.0
-    dependencies:
-      '@storybook/node-logger': 8.0.8
-      webpack: 5.91.0(esbuild@0.20.2)
     dev: true
 
   /@storybook/addon-toolbars@8.0.8:
