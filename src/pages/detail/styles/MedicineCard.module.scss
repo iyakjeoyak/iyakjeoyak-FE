@@ -1,0 +1,10 @@
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $gray3;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	height: 200px;
+}
