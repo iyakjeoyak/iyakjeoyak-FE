@@ -1,9 +1,12 @@
-import { CategoryBar, MedicineCardList } from "@/pages/search/UI";
+import { MedicineCardList } from "@/pages/search/UI";
+import SearchBar from "@/components/SearchBar";
+import TabBar from "@/components/TabBar";
 
 export default function SearchPage() {
 	return (
 		<section>
-			<CategoryBar />
+			<SearchBar />
+			<TabBar />
 			<MedicineCardList />
 		</section>
 	);
