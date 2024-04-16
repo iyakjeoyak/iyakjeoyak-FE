@@ -1,4 +1,4 @@
-import { InfoBoard, MedicineCard } from "@/pages/detailId/UI";
+import { InfoBoard, MedicineCard } from "./UI";
 
 export default function DetailIdPage() {
 	return (
