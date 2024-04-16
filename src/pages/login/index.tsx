@@ -6,7 +6,11 @@ export default function LoginPage() {
 		<section>
 			로그인 페이지입니다.
 			<Form schema={yup.object().shape({})} onSubmit={() => {}}>
-				<Form.Input name="아이디" type="text"></Form.Input>
+				<Form.Input
+					name="아이디"
+					type="text"
+					placeholder="아이디를 입력해주세요."
+				></Form.Input>
 			</Form>
 		</section>
 	);
