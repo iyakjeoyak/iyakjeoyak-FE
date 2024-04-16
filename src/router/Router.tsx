@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import DetailIdPage from "@/pages/detail";
-import Layout from "../pages/layout";
-import LoginPage from "../pages/login";
-import MainPage from "../pages/main";
+import Layout from "@pages/layout";
+import LoginPage from "@pages/login";
+import MainPage from "@pages/main";
 import SearchPage from "@/pages/search";
 import MyPage from "@/pages/my-page/UI/MyPage";
 
