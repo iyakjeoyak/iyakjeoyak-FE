@@ -4,14 +4,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FormContext } from "../../../hooks/useFormContext";
 import { Input } from "./input";
+import { Button } from "./button";
 
 interface FormProps {
 	children: React.ReactNode;
 	onSubmit: SubmitHandler<FieldValues>; // 폼 제출 핸들러
 	schema?: yup.ObjectSchema<FieldValues>; // 폼 유효성 검사 스키마
+	className?: string;
 }
 
-export const Form = ({ children, onSubmit, schema }: FormProps) => {
+export const Form = ({ children, onSubmit, schema, className }: FormProps) => {
 	// 로딩 상태 변경 핸들러
 	const [isLoading, setIsLoading] = useState(false);
 	const loadingHandler = (boolean: boolean) => setIsLoading(boolean);
@@ -39,9 +41,11 @@ export const Form = ({ children, onSubmit, schema }: FormProps) => {
 		<FormContext.Provider
 			value={{ isLoading, errors, register, loadingHandler }}
 		>
-			<form onSubmit={handleSubmit(submit)}>{children}</form>
+			<form className={className} onSubmit={handleSubmit(submit)}>
+				{children}
+			</form>
 		</FormContext.Provider>
 	);
 };
 Form.Input = Input;
-// Form.Button = Button;
+Form.Button = Button;

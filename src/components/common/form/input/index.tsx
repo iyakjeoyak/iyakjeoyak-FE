@@ -1,5 +1,5 @@
-import { useFormContext } from "../../../../hooks/useFormContext";
-
+import { useFormContext } from "@/hooks/useFormContext";
+import styles from "./index.module.scss";
 interface InputProps {
 	name: string;
 	type?: string;
@@ -13,9 +13,10 @@ export const Input: React.FC<InputProps> = ({ name, type, placeholder }) => {
 
 	return (
 		<div>
-			<label>
+			<label className={styles.container}>
 				<span>{name}</span>
 				<input
+					className={`${styles.element} m-big`}
 					type={type}
 					disabled={isLoading} // 로딩 중일 때 입력 필드 비활성화
 					{...register(name)} // react-hook-form 레지스터 함수 사용하여 입력 필드 등록
