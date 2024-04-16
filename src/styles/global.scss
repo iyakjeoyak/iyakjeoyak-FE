@@ -1,31 +1,61 @@
+@use "variables" as vars;
+
 @font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+	font-family: "Pretendard-Regular";
+	src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+		format("woff");
 }
 
 * {
-  box-sizing: border-box;
-  font-family: Pretendard-Regular;
+	box-sizing: border-box;
+	font-family: Pretendard-Regular;
 }
 
 body {
-  background-color: rgb(227, 227, 227);
+	background-color: rgb(227, 227, 227);
+}
+
+@mixin responsive($size) {
+	@if $size == "phone" {
+		@media (max-width: #{vars.$mobile-width}) {
+			@content;
+		}
+	} @else if $size == "tablet" {
+		@media (min-width: #{vars.$mobile-width}) and (max-width: #{vars.$tablet-width}) {
+			@content;
+		}
+	} @else if $size == "desktop" {
+		@media (min-width: #{vars.$desktop-width}) {
+			@content;
+		}
+	}
 }
 
 main {
-  margin: 0 auto;
-  height: 100vh;
-  max-width: 500px;
-  background-color: #ffffff;
-  position: relative;
+	margin: 0 auto;
+	height: auto;
+	max-width: 100%;
+	min-height: 95vh;
+	padding: 20px;
+	background-color: #ffffff;
+	position: relative;
+
+	@include responsive("tablet") {
+		margin: 20px auto;
+	}
+
+	@include responsive("desktop") {
+		max-width: 480px;
+		padding: 40px;
+		margin: 50px auto;
+	}
 }
 
 .background {
-  position: absolute;
-  right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	right: 0;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
 }

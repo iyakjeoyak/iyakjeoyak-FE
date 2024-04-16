@@ -7,16 +7,26 @@ export default {
 	component: TagCommon,
 };
 
-const Template = () => {
+export const Default = () => {
 	return (
-		<main>
-			<div>
-				<TagCommon text="Default" />
-				<TagCommon text="비타민" size="small" backgroundColor="green" />
-				<TagCommon text="아연" size="medium" backgroundColor="white" />
-			</div>
-		</main>
+		<div>
+			<TagCommon text="Default" />
+		</div>
 	);
 };
 
-export const Default = Template.bind({});
+export const MediumTag = () => {
+	return (
+		<div>
+			<TagCommon text="아연" size="medium" backgroundColor="white" />
+		</div>
+	);
+};
+
+export const SmallTag = () => {
+	return (
+		<div>
+			<TagCommon text="비타민" size="small" backgroundColor="green" />
+		</div>
+	);
+};

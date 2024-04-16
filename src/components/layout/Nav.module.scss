@@ -1,42 +1,63 @@
-@import "../../styles/variables.scss";
+@import "@styles/variables.scss";
 
 nav {
-  background-color: $main-midgreen;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 180px;
-  padding: 20px;
+	background-color: $main-midgreen;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 180px;
+	padding: 20px;
+
+	@media (min-width: $tablet-width) {
+		width: 240px;
+		padding: 30px;
+	}
+	@media (min-width: $desktop-width) {
+		width: 180px;
+		padding: 20px;
+	}
 }
 
 .main-nav-container {
-  margin-top: 70px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 15px;
-  .main-nav-item {
-    color: white;
-  }
+	margin-top: 70px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 15px;
+	.main-nav-item {
+		color: white;
+	}
+	@media (min-width: $tablet-width) {
+		gap: 20px;
+	}
+	@media (min-width: $desktop-width) {
+		gap: 15px;
+	}
 }
 
 .divide {
-  position: relative;
-  left: 5px;
-  width: 20px;
-  height: 2px;
-  background-color: white;
+	position: relative;
+	left: 5px;
+	width: 20px;
+	height: 2px;
+	background-color: white;
 }
 
 .sub-nav-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 15px;
-  button {
-    color: white;
-  }
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 15px;
+	button {
+		color: white;
+	}
+	@media (min-width: $tablet-width) {
+		gap: 20px;
+	}
+	@media (min-width: $desktop-width) {
+		gap: 15px;
+	}
 }
