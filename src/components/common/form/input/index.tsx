@@ -1,4 +1,4 @@
-import { useFormContext } from "../../../../hooks/useFormContext";
+import { useFormContext } from "@/hooks/useFormContext";
 import styles from "./index.module.scss";
 interface InputProps {
 	name: string;
