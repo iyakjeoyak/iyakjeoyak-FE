@@ -21,7 +21,7 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: "tag",
 	},
-	viteFinal: async (viteConfig, { configType }) => {
+	viteFinal: async (viteConfig) => {
 		return mergeConfig(viteConfig, {
 			css: {
 				preprocessorOptions: {

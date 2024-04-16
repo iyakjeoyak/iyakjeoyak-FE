@@ -25,10 +25,7 @@ const MyPage: React.FC = () => {
 							backgroundColor="lightgreen"
 						></TagCommon>
 					</div>
-					<div className={style.userIntroduce}>
-						{" "}
-						자기소개글 {userData.points}
-					</div>
+					<div className={style.userIntroduce}> 자기소개글</div>
 					<div className={style.editprofile}>프로필 수정하기</div>
 				</div>
 			</div>

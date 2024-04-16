@@ -21,7 +21,7 @@ body {
 			@content;
 		}
 	} @else if $size == "tablet" {
-		@media (min-width: #{vars.$mobile-width}) and (max-width: #{vars.$tablet-width}) {
+		@media (min-width: #{vars.$mobile-width+1}) and (max-width: #{vars.$tablet-width}) {
 			@content;
 		}
 	} @else if $size == "desktop" {
@@ -35,6 +35,7 @@ main {
 	margin: 0 auto;
 	height: auto;
 	max-width: 100%;
+	height: auto;
 	min-height: 100vh;
 	padding: 20px;
 	background-color: #ffffff;

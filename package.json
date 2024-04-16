@@ -52,6 +52,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "node-sass": "^9.0.0",
     "prettier": "^3.2.5",
+    "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.74.1",
     "sass-loader": "^14.2.0",
     "storybook": "^8.0.8",

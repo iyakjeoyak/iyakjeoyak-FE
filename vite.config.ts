@@ -3,10 +3,20 @@ import * as path from "path";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import svgrPlugin from "vite-plugin-svgr";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), tsconfigPaths(), svgrPlugin()],
+	plugins: [
+		react(),
+		tsconfigPaths(),
+		svgrPlugin(),
+		visualizer({
+			open: true,
+			gzipSize: true,
+			brotliSize: true,
+		}),
+	],
 	css: {
 		modules: {
 			scopeBehaviour: "local",
