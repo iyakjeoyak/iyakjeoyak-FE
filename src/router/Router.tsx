@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import HomePage from "../pages/home";
-import Layout from "../pages/layout";
-import LoginPage from "../pages/login";
+import HomePage from "@pages/home";
+import Layout from "@pages/layout";
+import LoginPage from "@pages/login";
 
 function Router() {
 	return (
