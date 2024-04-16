@@ -35,10 +35,12 @@ main {
 	margin: 0 auto;
 	height: auto;
 	max-width: 100%;
-	min-height: 95vh;
+	min-height: 100vh;
 	padding: 20px;
 	background-color: #ffffff;
 	position: relative;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 
 	@include responsive("tablet") {
 		margin: 20px auto;
@@ -48,6 +50,7 @@ main {
 		max-width: 480px;
 		padding: 40px;
 		margin: 50px auto;
+		min-height: 100vh;
 	}
 }
 
@@ -58,4 +61,13 @@ main {
 	left: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.scroll_container {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.main::-webkit-scrollbar {
+	display: none;
 }
