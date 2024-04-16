@@ -1,2 +1,2 @@
-export { default as Mypage } from "./component/MyPage";
-export { default as MyPageBox } from "./component/MyPageBox";
+export { default as Mypage } from "./UI/MyPage";
+export { default as MyPageBox } from "./UI/MyPageBox";
