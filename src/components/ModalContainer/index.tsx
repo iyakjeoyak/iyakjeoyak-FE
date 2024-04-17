@@ -5,16 +5,20 @@ import styles from "./index.module.scss";
 interface ModalContainerProps extends HTMLMotionProps<"div"> {
 	children: React.ReactNode;
 	toggleModalOpen: () => void;
+	className?: string;
 }
 
 export default function ModalContainer({
 	children,
 	toggleModalOpen,
+	className,
+	...props
 }: ModalContainerProps) {
 	return (
 		<div className="background" onClick={toggleModalOpen}>
 			<motion.div
-				className={styles.container}
+				{...props}
+				className={`{styles.container} ${className || ""}`}
 				initial={{ opacity: 0, y: "100%" }}
 				animate={{ opacity: 1, y: 0 }}
 				exit={{ opacity: 0, y: "100%" }}
