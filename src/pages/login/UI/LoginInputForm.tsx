@@ -77,7 +77,7 @@ export default function LoginInputForm() {
 					</div>
 					<div className={styles.registerWrap}>
 						<span className="m-medium">회원이 아니신가요?</span>
-						<Link className={`${styles.register} m-medium`} to={"./register"}>
+						<Link className={`${styles.register} m-medium`} to={"/register"}>
 							회원가입하러 가기
 						</Link>
 					</div>
