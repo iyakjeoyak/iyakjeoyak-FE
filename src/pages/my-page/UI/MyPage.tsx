@@ -1,12 +1,24 @@
+import "@styles/global.scss";
 import style from "../style/mypage.module.scss";
+import modalStyle from "@/components/ModalContainer/index.module.scss";
+
 import mockData from "../mockData";
 import TagCommon from "@/components/Tag";
 import Point from "@/assets/Point";
 import MyPageBox from "./MyPageBox";
 import { UserData } from "../MyPageType";
+import ModalContainer from "@/components/ModalContainer";
+import MyPageEdit from "./MyPageEdit";
+import { useState } from "react";
 
 const MyPage: React.FC = () => {
+	const [isModalOpen, setIsOpenModal] = useState(false);
+
 	const userData: UserData = mockData;
+
+	const toggleModalOpen = () => {
+		setIsOpenModal((prev) => !prev);
+	};
 
 	return (
 		<section className={style.mypageContainer}>
@@ -26,7 +38,17 @@ const MyPage: React.FC = () => {
 						></TagCommon>
 					</div>
 					<div className={style.userIntroduce}> 자기소개글</div>
-					<div className={style.editprofile}>프로필 수정하기</div>
+					{isModalOpen && (
+						<ModalContainer
+							className={`${style.profileEditModal} ${modalStyle.container}`}
+							toggleModalOpen={toggleModalOpen}
+						>
+							<MyPageEdit />
+						</ModalContainer>
+					)}
+					<div className={style.editprofile} onClick={toggleModalOpen}>
+						프로필 수정하기
+					</div>
 				</div>
 			</div>
 
