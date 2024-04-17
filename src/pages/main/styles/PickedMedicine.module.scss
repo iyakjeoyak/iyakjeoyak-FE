@@ -8,7 +8,26 @@
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	background-color: $main-lightgreen;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 	padding: 20px;
 	.title {
+		span {
+			color: $main-green;
+		}
+	}
+	.item-container {
+		display: flex;
+		gap: 10px;
+	}
+	.content-container {
+	}
+	.handle {
+		width: 107px;
+		height: 102px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
 	}
 }

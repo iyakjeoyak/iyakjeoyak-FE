@@ -1,3 +1,10 @@
+import styles from "../styles/MyMedicineItem.module.scss";
+
 export default function MyMedicineItem() {
-	return <div>메인 페이지입니다.</div>;
+	return (
+		<div className={styles.container}>
+			<div className={styles.top}>얍</div>
+			<div className={styles.bottom}>얍</div>
+		</div>
+	);
 }
