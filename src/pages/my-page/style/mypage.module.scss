@@ -72,6 +72,16 @@
 			padding: 15rem;
 			margin-top: 15rem;
 
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			background-color: $main-lightgreen;
+			min-height: 46px;
+			border-radius: 10px;
+			padding: 15rem;
+			margin-top: 15rem;
+
 			.pointFixArea {
 				display: flex;
 				flex-direction: row;
