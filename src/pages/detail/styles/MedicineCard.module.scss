@@ -1,0 +1,28 @@
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $gray0;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	height: 200px;
+	display: flex;
+	gap: 15px;
+	padding: 20px;
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		.sub-info {
+			color: $main-yellow;
+			span {
+				color: $gray6;
+			}
+		}
+		.tags {
+			display: flex;
+			gap: 5px;
+		}
+	}
+}

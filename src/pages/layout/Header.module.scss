@@ -12,7 +12,7 @@ header {
 	right: 0;
 	left: 0;
 
-	@media (min-width: $tablet-width) {
+	@media (min-width: $tablet-width) and (max-width: $desktop-width) {
 		padding: 0 40px;
 		min-height: 80px;
 	}

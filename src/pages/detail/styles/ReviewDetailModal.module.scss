@@ -1,0 +1,13 @@
+@import "@/styles/variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	.tags {
+		background-color: $gray0;
+		display: flex;
+		gap: 15px;
+		padding: 10px;
+		border-radius: 10px;
+	}
+}

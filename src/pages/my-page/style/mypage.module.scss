@@ -1,5 +1,7 @@
-@import "@styles/variables.scss";
-@import "@styles/global.scss";
+@use "@styles/mixin" as mixins;
+@use "@styles/global" as *;
+@import "@styles/variables";
+@import "@/components/ModalContainer/index.module.scss";
 
 .mypageContainer {
 	margin-top: 28px;
@@ -12,10 +14,14 @@
 		align-items: center;
 
 		.profilePic {
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
+			width: 50rem;
+			height: 50rem;
+			border-radius: 100%;
 			margin-right: 17px;
+			@include mixins.responsive("desktop") {
+				width: 70px;
+				height: 70px;
+			}
 		}
 
 		.profileInfo {
@@ -29,62 +35,115 @@
 				margin-bottom: 0.2rem;
 
 				.nickname {
-					@extend .m-large;
+					@include mixins.sb-large;
 					color: $black;
-					font-weight: bold;
 					margin-right: 0.5rem;
 				}
 			}
 
 			.userIntroduce {
-				@extend .m-big;
+				@include mixins.m-big;
 				color: $gray3;
-				font-size: 0.875rem;
+				margin-top: 6rem;
+			}
+			.profileEditModal {
+				height: 550px;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 0px;
 			}
 
 			.editprofile {
-				@extend .m-small;
+				@include mixins.m-small;
 				color: $black;
 				cursor: pointer;
-				margin-top: 0.2rem;
 			}
 		}
 	}
 
 	.myPageContent {
-		margin-top: 2rem;
 		.pointSection {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			background-color: $main-lightgreen;
+			min-height: 46px;
+			border-radius: 10px;
+			padding: 15rem;
+			margin-top: 15rem;
+
 			.pointFixArea {
 				display: flex;
 				flex-direction: row;
-				align-items: center;
-				background-color: $main-lightgreen;
-				margin-top: 0.6rem;
-				border-radius: 10px;
-				padding: 1rem;
-				min-height: 46px;
 
 				.pointSVG {
-					width: 1rem;
-					height: 1rem;
-					margin-right: 0.5rem;
+					width: 15rem;
+					height: 15rem;
+					margin-right: 5rem;
 				}
 
 				.pointTitle {
-					@extend .sb-big;
+					@include mixins.sb-big;
 				}
 			}
 
-			.pointArea,
-			.sectionBoxArea {
-				.userPoint,
-				.sectionBox {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					border-top: 1px solid #eaeaea;
-					padding-top: 0.5rem;
+			.pointArea {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				.userPoint {
+					@include mixins.sb-big;
+
+					color: $point-blue;
+				}
+				.pointDetail {
+					@include mixins.sb-regular;
+					margin-left: 10rem;
 					cursor: pointer;
+					color: $point-blue;
+				}
+			}
+		}
+
+		.sectionBoxArea {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 15rem;
+			margin-top: 18rem;
+
+			.sectionFixArea {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-bottom: 15rem;
+
+				.sectionTitle {
+				}
+				.sectionDetail {
+					cursor: pointer;
+				}
+			}
+
+			.sectionBox {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				border: 0.5px solid $gray3;
+				border-radius: 10px;
+				min-height: 46px;
+				margin-bottom: 5rem;
+				padding: 4rem 8rem;
+				.sectionName {
+				}
+				.sectionRateBox {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					.sectionText {
+					}
+					.sectionRate {
+					}
 				}
 			}
 		}

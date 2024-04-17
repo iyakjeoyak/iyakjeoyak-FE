@@ -1,15 +1,13 @@
 import BestReviewItem from "./BestReviewItem";
+import BoardContainer from "./BoardConatiner";
 
 export default function BestReviewBoard() {
 	return (
-		<article>
-			<div>Best 후기</div>
-			<div>
-				<BestReviewItem />
-				<BestReviewItem />
-				<BestReviewItem />
-				<BestReviewItem />
-			</div>
-		</article>
+		<BoardContainer title="Best 후기">
+			<BestReviewItem />
+			<BestReviewItem />
+			<BestReviewItem />
+			<BestReviewItem />
+		</BoardContainer>
 	);
 }

@@ -1,7 +1,13 @@
 @use "variables" as vars;
 
 @mixin responsive-font-size($size) {
+	// 모바일, 태블릿 사이즈 계산
 	font-size: calc(#{$size} * 0.2667vw);
+
+	// 데스크톱은 폰트 픽스되게
+	@include responsive("desktop") {
+		font-size: #{$size}px;
+	}
 }
 
 @mixin responsive($size) {
@@ -18,4 +24,96 @@
 			@content;
 		}
 	}
+}
+
+/* Font Classes */
+/* Common font style */
+
+/* Bold Class */
+
+@mixin b-super {
+	@include responsive-font-size(40);
+	font-weight: 700;
+}
+
+@mixin b-large {
+	@include responsive-font-size(27);
+	font-weight: 700;
+}
+
+@mixin b-big {
+	@include responsive-font-size(24);
+	font-weight: 700;
+}
+
+@mixin b-medium {
+	@include responsive-font-size(18);
+	font-weight: 700;
+}
+
+@mixin b-regular {
+	@include responsive-font-size(vars.$large-font-size);
+	font-weight: 700;
+}
+
+@mixin b-small {
+	@include responsive-font-size(vars.$medium-font-size);
+	font-weight: 700;
+}
+
+@mixin b-tiny {
+	@include responsive-font-size(vars.$small-font-size);
+	font-weight: 700;
+}
+
+/* Semi-Bold Class */
+@mixin sb-large {
+	@include responsive-font-size(vars.$large-font-size);
+	font-weight: 600;
+}
+
+@mixin sb-big {
+	@include responsive-font-size(vars.$big-font-size);
+	font-weight: 600;
+}
+
+@mixin sb-medium {
+	@include responsive-font-size(vars.$medium-font-size);
+	font-weight: 600;
+}
+
+@mixin sb-regular {
+	@include responsive-font-size(11);
+	font-weight: 600;
+}
+
+@mixin sb-small {
+	@include responsive-font-size(vars.$small-font-size);
+	font-weight: 600;
+}
+
+/* Medium Class */
+@mixin m-large {
+	@include responsive-font-size(vars.$large-font-size);
+	font-weight: 500;
+}
+
+@mixin m-big {
+	@include responsive-font-size(vars.$big-font-size);
+	font-weight: 500;
+}
+
+@mixin m-medium {
+	@include responsive-font-size(vars.$medium-font-size);
+	font-weight: 500;
+}
+
+@mixin m-regular {
+	@include responsive-font-size(11);
+	font-weight: 500;
+}
+
+@mixin m-small {
+	@include responsive-font-size(vars.$small-font-size);
+	font-weight: 500;
 }

@@ -1,10 +1,11 @@
-import { LoginBtnForm, LoginInputForm } from "@/components/login";
+import { PathButton } from "@/components/PathButton/PathButton";
+import LoginForm from "./UI/LoginForm";
 
 export default function LoginPage() {
 	return (
 		<section>
-			<LoginInputForm />
-			<LoginBtnForm />
+			<PathButton paths={[{ text: "로그인", path: "/login" }]} />
+			<LoginForm />
 		</section>
 	);
 }
