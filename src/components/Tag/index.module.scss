@@ -1,4 +1,6 @@
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
+@import "@/styles/global.scss";
 
 @mixin tag-base {
 	box-sizing: border-box;
@@ -7,25 +9,26 @@
 	align-items: center;
 	justify-content: center;
 	font-weight: bold;
-	padding: 4px 4px;
+	padding: 0.1rem 0.1rem;
 	border: 1px solid $gray3;
 }
 
 @mixin tag-size($width, $height) {
-	width: $width;
-	height: $height;
+	width: $width * 1rem;
+	height: $height * 1rem;
 
-	@media (max-width: 600px) {
-		width: $width * 0.8;
-		height: $height * 0.8;
+	@media (min-width: $desktop-width) {
+		width: #{$width}px;
+		height: #{$height}px;
+		font-size: 2.5rem;
 	}
 }
 
 .tag {
 	&-medium {
 		@include tag-base;
-		@include tag-size(65px, 25px);
-		font-size: 0.75rem;
+		@include tag-size(65, 25);
+		font-size: 10rem;
 		background-color: $white;
 		color: $gray5;
 
@@ -36,10 +39,12 @@
 
 	&-small {
 		@include tag-base;
-		@include tag-size(45px, 16px);
-		font-size: 0.5rem;
+		@include tag-size(45, 16);
+		@include mixins.sb-small;
+		font-size: 10rem;
 		background-color: $main-green;
 		color: $white;
+		border: 1px solid $main-green;
 	}
 }
 
@@ -54,5 +59,11 @@
 		background-color: $white;
 		color: $gray3;
 		border: 1px solid $gray3;
+	}
+
+	&-lightgreen {
+		background-color: $main-lightgreen;
+		color: $main-green;
+		border: 1px solid $main-lightgreen;
 	}
 }

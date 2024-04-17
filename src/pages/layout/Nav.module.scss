@@ -10,7 +10,7 @@ nav {
 	padding: 20px;
 	z-index: 999;
 
-	@media (min-width: $tablet-width) {
+	@media (min-width: $tablet-width) and (max-width: $desktop-width) {
 		width: 240px;
 		padding: 30px;
 	}
