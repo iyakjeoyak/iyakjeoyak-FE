@@ -7,6 +7,7 @@ import MainPage from "@pages/main";
 import SearchPage from "@/pages/search";
 import MyPage from "@/pages/my-page/UI/MyPage";
 import SignUpPage from "@/pages/signup";
+import OnBoarding from "@/pages/onboarding";
 
 function Router() {
 	return (
@@ -14,6 +15,7 @@ function Router() {
 			<Routes>
 				<Route element={<Layout />}>
 					<Route path="/" element={<MainPage />} />
+					<Route path="/home" element={<OnBoarding />} />
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/detail/:id" element={<DetailIdPage />} />
 					<Route path="/login" element={<LoginPage />} />
