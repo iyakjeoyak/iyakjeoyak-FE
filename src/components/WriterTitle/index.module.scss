@@ -13,13 +13,16 @@
 	}
 	.content-container {
 		.star {
+			color: $main-yellow;
 			span {
 				margin-left: 5px;
+				color: black;
 			}
 		}
 		.writer {
 			span {
 				margin-left: 5px;
+				color: $gray5;
 			}
 		}
 	}

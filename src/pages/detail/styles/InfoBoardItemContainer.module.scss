@@ -1,0 +1,20 @@
+@import "@/styles/variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.content-container {
+		min-height: 70px;
+		border: 1px solid $gray3;
+		border-radius: 10px;
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		button {
+			background-color: $main-lightgreen;
+			border-radius: 10px;
+		}
+	}
+}
