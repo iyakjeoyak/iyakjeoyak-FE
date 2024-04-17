@@ -8,6 +8,7 @@ import SearchPage from "@/pages/search";
 import MyPage from "@/pages/my-page/UI/MyPage";
 import SignUpPage from "@/pages/signup";
 import OnBoarding from "@/pages/onboarding";
+import { Fame } from "@/pages/fame";
 
 function Router() {
 	return (
@@ -21,6 +22,7 @@ function Router() {
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
 					<Route path="/my-page" element={<MyPage />} />
+					<Route path="/fame" element={<Fame />} />
 					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
 			</Routes>
