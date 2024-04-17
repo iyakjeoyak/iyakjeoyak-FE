@@ -1,5 +1,5 @@
-@use "variables" as vars;
 @use "mixin" as mixins;
+@use "variables" as vars;
 
 @font-face {
 	font-family: "Pretendard";
@@ -85,96 +85,87 @@ main {
 	z-index: 998;
 }
 
-/* Font Classes */
-/* Common font style */
+// .b-large {
+// 	@include mixins.responsive-font-size(27px);
+// 	font-weight: 700;
+// }
 
-/* Bold Class */
-.b-super {
-	@include mixins.responsive-font-size(40);
-	font-weight: 700;
-}
+// .b-big {
+// 	@include mixins.responsive-font-size(24px);
+// 	font-weight: 700;
+// }
 
-.b-large {
-	@include mixins.responsive-font-size(27);
-	font-weight: 700;
-}
+// .b-medium {
+// 	@include mixins.responsive-font-size(18px);
+// 	font-weight: 700;
+// }
 
-.b-big {
-	@include mixins.responsive-font-size(24);
-	font-weight: 700;
-}
+// .b-regular {
+// 	@include mixins.responsive-font-size(vars.$large-font-size);
+// 	font-weight: 700;
+// }
 
-.b-medium {
-	@include mixins.responsive-font-size(18);
-	font-weight: 700;
-}
+// .b-small {
+// 	@include mixins.responsive-font-size(vars.$medium-font-size);
+// 	font-weight: 700;
+// }
 
-.b-regular {
-	@include mixins.responsive-font-size(vars.$large-font-size);
-	font-weight: 700;
-}
+// .b-tiny {
+// 	@include mixins.responsive-font-size(vars.$small-font-size);
+// 	font-weight: 700;
+// }
 
-.b-small {
-	@include mixins.responsive-font-size(vars.$medium-font-size);
-	font-weight: 700;
-}
+// /* Semi-Bold Class */
+// .sb-large {
+// 	@include mixins.responsive-font-size(vars.$large-font-size);
+// 	font-weight: 600;
+// }
 
-.b-tiny {
-	@include mixins.responsive-font-size(vars.$small-font-size);
-	font-weight: 700;
-}
+// .sb-big {
+// 	@include mixins.responsive-font-size(vars.$big-font-size);
+// 	font-weight: 600;
+// }
 
-/* Semi-Bold Class */
-.sb-large {
-	@include mixins.responsive-font-size(vars.$large-font-size);
-	font-weight: 600;
-}
+// .sb-medium {
+// 	@include mixins.responsive-font-size(vars.$medium-font-size);
+// 	font-weight: 600;
+// }
 
-.sb-big {
-	@include mixins.responsive-font-size(vars.$big-font-size);
-	font-weight: 600;
-}
+// .sb-regular {
+// 	@include mixins.responsive-font-size(11px);
+// 	font-weight: 600;
+// }
 
-.sb-medium {
-	@include mixins.responsive-font-size(vars.$medium-font-size);
-	font-weight: 600;
-}
+// .sb-small {
+// 	@include mixins.responsive-font-size(vars.$small-font-size);
+// 	font-weight: 600;
+// }
 
-.sb-regular {
-	@include mixins.responsive-font-size(11);
-	font-weight: 600;
-}
+// /* Medium Class */
+// .m-large {
+// 	@include mixins.responsive-font-size(vars.$large-font-size);
+// 	font-weight: 500;
+// }
 
-.sb-small {
-	@include mixins.responsive-font-size(vars.$small-font-size);
-	font-weight: 600;
-}
+// .m-big {
+// 	@include mixins.responsive-font-size(vars.$big-font-size);
+// 	font-weight: 500;
+// }
 
-/* Medium Class */
-.m-large {
-	@include mixins.responsive-font-size(vars.$large-font-size);
-	font-weight: 500;
-}
+// .m-medium {
+// 	@include mixins.responsive-font-size(vars.$medium-font-size);
+// 	font-weight: 500;
+// }
 
-.m-big {
-	@include mixins.responsive-font-size(vars.$big-font-size);
-	font-weight: 500;
-}
+// .m-regular {
+// 	@include mixins.responsive-font-size(11px);
+// 	font-weight: 500;
+// }
 
-.m-medium {
-	@include mixins.responsive-font-size(vars.$medium-font-size);
-	font-weight: 500;
-}
-
-.m-regular {
-	@include mixins.responsive-font-size(11);
-	font-weight: 500;
-}
-
-.m-small {
-	@include mixins.responsive-font-size(vars.$small-font-size);
-	font-weight: 500;
-}
+// .m-small {
+// 	@include mixins.responsive-font-size(vars.$small-font-size);
+// 	font-weight: 500;
+// }
 
 /* 스크롤 스타일 */
 .scroll_container {
