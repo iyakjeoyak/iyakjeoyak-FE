@@ -2,11 +2,17 @@ import { useFormContext } from "@/hooks/useFormContext";
 import styles from "./index.module.scss";
 interface InputProps {
 	name: string;
+	text: string;
 	type?: string;
 	placeholder?: string;
 }
 
-export const Input: React.FC<InputProps> = ({ name, type, placeholder }) => {
+export const Input: React.FC<InputProps> = ({
+	name,
+	text,
+	type,
+	placeholder,
+}) => {
 	const { errors, isLoading, register } = useFormContext();
 	// 에러 메시지 가져오기
 	const errorMessage = errors[name]?.message as string;
@@ -14,7 +20,7 @@ export const Input: React.FC<InputProps> = ({ name, type, placeholder }) => {
 	return (
 		<div>
 			<label className={styles.container}>
-				<span>{name}</span>
+				<span>{text}</span>
 				<input
 					className={`${styles.element} m-big`}
 					type={type}
