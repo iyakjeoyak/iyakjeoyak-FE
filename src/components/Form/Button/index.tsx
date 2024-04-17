@@ -4,11 +4,11 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 
 interface ButtonProps {
-	name?: string;
-	icon?: IconType;
+	name?: string; // 버튼 텍스트
+	icon?: IconType; // 아이콘 버튼
 	onClick?: () => Promise<void>;
 	type?: "submit" | "button";
-	variant?: "light" | "dark" | "icon";
+	variant?: "light" | "dark" | "icon"; // 버튼 색상
 }
 
 export const Button = ({
@@ -28,7 +28,7 @@ export const Button = ({
 		try {
 			await onClick();
 		} catch (error) {
-			console.error("onClick error", error);
+			console.error("Button Click error", error);
 			loadingHandler(false);
 		}
 	};

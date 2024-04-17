@@ -1,1 +1,1 @@
-export { default as LoginInputForm } from "../UI/LoginInputForm";
+export { default as LoginForm } from "../UI/LoginForm";
