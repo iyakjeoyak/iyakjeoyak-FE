@@ -1,10 +1,9 @@
-import { LoginBtnForm, LoginInputForm } from "@/components/login";
+import { LoginInputForm } from "./UI";
 
 export default function LoginPage() {
 	return (
 		<section>
 			<LoginInputForm />
-			<LoginBtnForm />
 		</section>
 	);
 }
