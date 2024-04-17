@@ -1,26 +1,26 @@
+import { pathName } from "@/utils/\bpathName";
 import React from "react";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-interface Path {
-	text: string;
-	path: string;
-}
-
 interface PathButtonProps {
-	paths: Path[];
+	paths: string[];
 }
 
 export function PathButton({ paths }: PathButtonProps) {
 	return (
 		<>
+			{/* 홈으로 가는 링크 */}
 			<Link to="/">
-				<IoHomeOutline></IoHomeOutline>
+				<IoHomeOutline />
 			</Link>{" "}
-			/{" "}
-			{paths.map((pathObj, index) => (
+			/ {/* 각 경로에 대한 링크 생성 */}
+			{paths.map((path, index) => (
 				<React.Fragment key={index}>
 					{index > 0 && " / "}
-					<Link to={pathObj.path}>{pathObj.text}</Link>
+					{/* 경로와 텍스트에 대한 링크 생성 */}
+					<Link to={path} className="active">
+						{pathName[path]}
+					</Link>
 				</React.Fragment>
 			))}
 		</>
