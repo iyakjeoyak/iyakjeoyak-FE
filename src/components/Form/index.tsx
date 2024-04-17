@@ -37,6 +37,7 @@ export const Form = ({ children, onSubmit, schema, className }: FormProps) => {
 			await onSubmit(data);
 		} catch (error) {
 			console.error("submit error", error);
+			setIsLoading(false);
 		}
 	};
 	return (
