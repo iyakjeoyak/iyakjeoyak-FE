@@ -1,3 +1,4 @@
+@use "@styles/mixin" as mixins;
 @import "@styles/variables.scss";
 
 .container {
@@ -23,6 +24,17 @@
 		border: 1px solid $main-green;
 		border-radius: 20px;
 		padding: 10px 15px;
+		.text-container {
+			display: flex;
+			justify-content: space-between;
+			.name {
+				@include mixins.b-small;
+			}
+			.info {
+				@include mixins.sb-regular;
+				color: $gray6;
+			}
+		}
 		.tags {
 			display: flex;
 			gap: 5px;

@@ -1,11 +1,12 @@
-@import "../../../styles/variables.scss";
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
 
 .container {
-	width: 58px;
-	height: 120px;
+	width: 70px;
+	height: 150px;
 	position: relative;
 	border-radius: 50%;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 	margin: auto;
 	.top {
 		display: flex;
@@ -32,5 +33,15 @@
 		background-color: $point-blue;
 		border-bottom-left-radius: 50%;
 		border-bottom-right-radius: 50%;
+		color: $white;
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		.name {
+			@include mixins.b-small;
+		}
+		.feature {
+			@include mixins.sb-small;
+		}
 	}
 }

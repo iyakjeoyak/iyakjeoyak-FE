@@ -7,8 +7,10 @@ export default function MedicineCard() {
 		<div className={styles.container}>
 			<img src={medicine} />
 			<div className={styles["content-container"]}>
-				<div>어쩌구 브랜드</div>
-				<div>어쩌구 영양제</div>
+				<div className={styles["info"]}>
+					<div className={styles.brand}>어쩌구 브랜드</div>
+					<div className={styles.name}>어쩌구 영양제</div>
+				</div>
 				<div className={styles["sub-info"]}>
 					★<span>4.0 (311개)</span>
 				</div>
@@ -16,7 +18,6 @@ export default function MedicineCard() {
 					<TagCommon text="피로개선" backgroundColor="green" />
 					<TagCommon text="감기" backgroundColor="green" />
 				</div>
-				<div>멀티비타민</div>
 			</div>
 		</div>
 	);

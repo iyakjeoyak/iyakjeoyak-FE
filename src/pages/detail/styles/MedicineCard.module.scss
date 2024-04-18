@@ -1,3 +1,4 @@
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 
 .container {
@@ -14,8 +15,23 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+		.info {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			.brand {
+				@include mixins.b-small;
+				color: $gray6;
+			}
+			.name {
+				@include mixins.b-regular;
+			}
+		}
 		.sub-info {
 			color: $main-yellow;
+			@include mixins.sb-regular;
+			display: flex;
+			gap: 5px;
 			span {
 				color: $gray6;
 			}

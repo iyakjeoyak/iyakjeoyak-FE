@@ -1,3 +1,4 @@
+@use "@styles/mixin" as mixins;
 @import "@styles/variables.scss";
 
 nav {
@@ -9,7 +10,6 @@ nav {
 	width: 180px;
 	padding: 20px;
 	z-index: 999;
-
 	@media (min-width: $tablet-width) and (max-width: $desktop-width) {
 		width: 240px;
 		padding: 30px;
@@ -29,7 +29,8 @@ nav {
 	align-items: start;
 	gap: 15px;
 	.main-nav-item {
-		color: white;
+		@include mixins.sb-large;
+		color: $white;
 	}
 	@media (min-width: $tablet-width) {
 		gap: 20px;
@@ -53,8 +54,9 @@ nav {
 	flex-direction: column;
 	align-items: start;
 	gap: 15px;
-	button {
-		color: white;
+	.sub-nav-item {
+		@include mixins.sb-medium;
+		color: $white;
 	}
 	@media (min-width: $tablet-width) {
 		gap: 20px;

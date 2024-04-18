@@ -16,8 +16,8 @@ export default function BestReviewItem({
 		<div className={styles["container"]}>
 			<div className={styles.img}>{imgUrl}</div>
 			<div className={styles["content-container"]}>
-				<div>{name}</div>
-				<TagCommon text={tag} size="medium" backgroundColor={"green"} />
+				<div className={styles.name}>{name}</div>
+				<TagCommon text={tag} size="small" backgroundColor={"green"} />
 			</div>
 		</div>
 	);
