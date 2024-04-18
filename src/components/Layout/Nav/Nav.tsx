@@ -1,14 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./Nav.module.scss";
 import { useEffect } from "react";
 
 const MAIN_NAVS = [
 	{ string: "홈", to: "/" },
 	{ string: "약 조회하기", to: "/search" },
-	{ string: "명예의 전당", to: "#" },
+	{ string: "명예의 전당", to: "/fame" },
 	{ string: "근처 약국", to: "#" },
+	{ string: "마이 페이지", to: "/my-page" },
 ];
 
 export default function Nav({
@@ -25,16 +26,16 @@ export default function Nav({
 	}, [location, toggleIsOpenNav]);
 
 	return (
-		<m.nav
+		<motion.nav
 			onClick={toggleIsOpenNav}
-			initial={{ opacity: 0, x: "100%" }}
+			initial={{ opacity: 1, x: "100%" }}
 			animate={{ opacity: 1, x: 0 }}
-			exit={{ opacity: 0, x: "100%" }}
+			exit={{ opacity: 0, x: "-100%" }}
 			transition={{ duration: 0.3 }}
 		>
 			<div className={styles["main-nav-container"]}>
 				{MAIN_NAVS.map((navItem) => (
-					<m.button
+					<motion.button
 						key={navItem.string}
 						className={styles["main-nav-item"]}
 						onClick={() => {
@@ -44,18 +45,18 @@ export default function Nav({
 						whileTap={{ scale: 0.9 }}
 					>
 						{navItem.string}
-					</m.button>
+					</motion.button>
 				))}
 			</div>
 			<div className={styles["divide"]} />
 			<div className={styles["sub-nav-container"]}>
-				<m.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+				<motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
 					로그인
-				</m.button>
-				<m.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+				</motion.button>
+				<motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
 					회원가입
-				</m.button>
+				</motion.button>
 			</div>
-		</m.nav>
+		</motion.nav>
 	);
 }

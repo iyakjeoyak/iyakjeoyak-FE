@@ -1,11 +1,11 @@
-const userImage = "/images/no_profile_image.jpg";
+const userImage = "/images/no_profile_image?.jpg";
 
 import {
-	UserData,
+	LikeRecordData,
 	PointData,
 	ReviewData,
 	SupplementRecordData,
-	LikeRecordData,
+	UserData,
 } from "./MyPageType";
 
 export const userMockData: UserData = {

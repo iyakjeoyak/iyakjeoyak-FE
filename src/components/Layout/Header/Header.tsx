@@ -1,8 +1,8 @@
 import "./Header.module.scss";
 
 import { FiMenu } from "react-icons/fi";
-import LogoIcon from "../../assets/LogoIcon";
-import Nav from "./Nav";
+import LogoIcon from "../../../assets/LogoIcon";
+import Nav from "../Nav/Nav";
 import { useState } from "react";
 
 export default function Header() {
