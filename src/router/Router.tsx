@@ -9,7 +9,7 @@ import MainPage from "@pages/main";
 import MyPage from "@/pages/my-page";
 import OnBoarding from "@/pages/onboarding";
 import SearchPage from "@/pages/search";
-import SignUpPage from "@/pages/signup";
+import { SignUpFormTest } from "@/pages/signup/UI/SignUpFormTest";
 
 function Router() {
 	return (
@@ -21,7 +21,7 @@ function Router() {
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/detail/:id" element={<DetailIdPage />} />
 					<Route path="/login" element={<LoginPage />} />
-					<Route path="/signup" element={<SignUpPage />} />
+					<Route path="/signup" element={<SignUpFormTest />} />
 					<Route path="/fame" element={<Fame />} />
 					<Route path="/my-page" element={<MyPage />} />
 					<Route path="/my-page/point" element={<PointHistory />} />
