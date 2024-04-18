@@ -1,7 +1,7 @@
 import { Form } from "@/components/Form";
 import TagCommon from "@/components/Tag";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import * as yup from "yup";
 import { DevTool } from "@hookform/devtools";
 
@@ -14,7 +14,7 @@ interface SignUpData {
 	age?: number | undefined | null;
 	tag: (string | undefined)[]; // 태그
 }
-export function SignUpForm() {
+export function SignUpFormTest() {
 	const schema = yup.object().shape({
 		username: yup
 			.string()
@@ -41,7 +41,6 @@ export function SignUpForm() {
 		tag: yup.array().of(yup.string()).required("태그를 입력하세요."),
 	});
 	const {
-		register,
 		handleSubmit,
 		formState: { errors },
 		control,
@@ -52,13 +51,14 @@ export function SignUpForm() {
 			gender: "남성",
 		},
 	});
+	const { register } = useFormContext();
 	console.log(watch());
-	const onSubmit: SubmitHandler<SignUpData> = async (formData) => {
-		console.log(formData);
+	const onSubmit = async (data: SignUpData) => {
+		console.log(data);
 	};
 	return (
 		<div>
-			<Form schema={schema} onSubmit={(e) => handleSubmit(onSubmit)(e)}>
+			<Form onSubmit={handleSubmit(onSubmit)}>
 				<Form.Input
 					text="아이디"
 					type="text"
