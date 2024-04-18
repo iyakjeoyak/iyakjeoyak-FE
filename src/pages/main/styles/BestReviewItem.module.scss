@@ -1,3 +1,5 @@
+@use "@styles/mixin" as mixins;
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -15,6 +17,7 @@
 		gap: 5px;
 		align-items: center;
 		.name {
+			@include mixins.sb-big;
 		}
 	}
 }

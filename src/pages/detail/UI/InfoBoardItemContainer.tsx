@@ -13,7 +13,7 @@ export default function InfoBoardItemContainer({
 }: InfoBoardItemContainerProps) {
 	return (
 		<div className={styles.container}>
-			<div>{title}</div>
+			<div className={styles.title}>{title}</div>
 			<div className={styles["content-container"]}>
 				<p className={styles.description}>{children}</p>
 				{isMoreBtn && <button>more</button>}

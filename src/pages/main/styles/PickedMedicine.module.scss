@@ -1,4 +1,5 @@
-@import "../../../styles/variables.scss";
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
 
 .container {
 	position: absolute;
@@ -12,7 +13,15 @@
 	flex-direction: column;
 	gap: 12px;
 	padding: 20px;
+	.title-container {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
 	.title {
+		@include mixins.b-medium;
+		color: $gray6;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 		span {
 			color: $main-green;
 		}
@@ -22,10 +31,36 @@
 		gap: 10px;
 	}
 	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		.brand {
+			@include mixins.b-small;
+			color: $gray6;
+		}
+		.name {
+			@include mixins.b-regular;
+			color: $black;
+		}
+		.star {
+			@include mixins.b-medium;
+			color: $main-yellow;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			span {
+				@include mixins.b-small;
+				color: $gray6;
+			}
+		}
+		.tags {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+		}
 	}
 	.handle {
-		width: 107px;
-		height: 102px;
+		width: 200px;
 		position: absolute;
 		bottom: 0;
 		right: 0;

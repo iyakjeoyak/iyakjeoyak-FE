@@ -1,3 +1,4 @@
+import StarRating from "../StarRating";
 import styles from "./index.module.scss";
 
 export default function WriterTitle() {
@@ -6,7 +7,7 @@ export default function WriterTitle() {
 			<img />
 			<div className={styles["content-container"]}>
 				<div className={styles.star}>
-					★★★★☆<span>4</span>
+					<StarRating filledStars={1} />
 				</div>
 				<div className={styles.writer}>
 					작성자<span>2024.04.17</span>

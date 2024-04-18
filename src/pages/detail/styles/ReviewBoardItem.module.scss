@@ -1,3 +1,4 @@
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 
 .container {
@@ -20,6 +21,7 @@
 			flex-direction: column;
 			justify-content: space-between;
 			gap: 20px;
+			@include mixins.sb-medium;
 			.tags {
 				display: flex;
 				gap: 10px;

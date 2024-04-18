@@ -5,11 +5,17 @@ import styles from "./Nav.module.scss";
 import { useEffect } from "react";
 
 const MAIN_NAVS = [
-	{ string: "홈", to: "/" },
-	{ string: "약 조회하기", to: "/search" },
-	{ string: "명예의 전당", to: "/fame" },
-	{ string: "근처 약국", to: "#" },
-	{ string: "마이 페이지", to: "/my-page" },
+	{ name: "홈", to: "/home" },
+	{ name: "약 조회하기", to: "/search" },
+	{ name: "명예의 전당", to: "/fame" },
+	{ name: "근처 약국", to: "#" },
+	{ name: "마이 페이지", to: "/my-page" },
+];
+
+const SUB_NAVS = [
+	{ name: "로그인", to: "/login" },
+	{ name: "회원가입", to: "/signup" },
+	{ name: "마이페이지", to: "/my-page" },
 ];
 
 export default function Nav({
@@ -36,7 +42,7 @@ export default function Nav({
 			<div className={styles["main-nav-container"]}>
 				{MAIN_NAVS.map((navItem) => (
 					<motion.button
-						key={navItem.string}
+						key={navItem.name}
 						className={styles["main-nav-item"]}
 						onClick={() => {
 							navigator(navItem.to);
@@ -44,18 +50,25 @@ export default function Nav({
 						whileHover={{ scale: 1.1 }}
 						whileTap={{ scale: 0.9 }}
 					>
-						{navItem.string}
+						{navItem.name}
 					</motion.button>
 				))}
 			</div>
-			<div className={styles["divide"]} />
 			<div className={styles["sub-nav-container"]}>
-				<motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-					로그인
-				</motion.button>
-				<motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-					회원가입
-				</motion.button>
+				<div className={styles["divide"]} />
+				{SUB_NAVS.map((navItem) => (
+					<motion.button
+						key={navItem.name}
+						className={styles["sub-nav-item"]}
+						onClick={() => {
+							navigator(navItem.to);
+						}}
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
+					>
+						{navItem.name}
+					</motion.button>
+				))}
 			</div>
 		</motion.nav>
 	);

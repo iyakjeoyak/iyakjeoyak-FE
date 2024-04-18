@@ -1,6 +1,5 @@
 @use "@styles/mixin.scss" as mixins;
 @use "@styles/variables.scss" as *;
-
 .starRatingContainer {
 	display: flex;
 	align-items: center;
@@ -8,7 +7,6 @@
 		display: flex;
 		color: #ffc700;
 		width: 60rem;
-		height: 20rem;
 	}
 	.ratingNumber {
 		margin-left: 5rem;

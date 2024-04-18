@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import ReviewBoardItem from "./ReviewBoardItem";
 import ReviewDetailModal from "./ReviewDetailModal";
 import ReviewPostModal from "./ReviewPostModal";
@@ -24,7 +25,11 @@ export default function ReviewBoard() {
 					<ReviewBoardItem onClick={toggleIsOpenReviewDetailModal} />
 					<ReviewBoardItem onClick={toggleIsOpenReviewDetailModal} />
 				</div>
-				<button onClick={toggleIsOpenReviewPostModal}>후기 작성하기</button>
+				<Button
+					onClick={toggleIsOpenReviewPostModal}
+					variant="dark"
+					name="후기 작성하기"
+				/>
 			</div>
 			{isOpenReviewPostModal && (
 				<ReviewPostModal toggleModalOpen={toggleIsOpenReviewPostModal} />
