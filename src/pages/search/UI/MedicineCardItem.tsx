@@ -1,3 +1,4 @@
+import { FaStar } from "react-icons/fa";
 import TagCommon from "@/components/Tag";
 import medicine from "@/assets/images/Medicine.png";
 import styles from "../styles/MedicineCardItem.module.scss";
@@ -18,7 +19,8 @@ export default function MedicineCardItem() {
 				<div className={styles["text-container"]}>
 					<div className={styles.name}>어쩌구영양제</div>
 					<div className={styles.info}>
-						<span>★</span>4.0(311개)
+						<FaStar />
+						4.0(311개)
 					</div>
 				</div>
 				<div className={styles.tags}>
