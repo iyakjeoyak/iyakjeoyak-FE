@@ -10,7 +10,7 @@ const ElementIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
 			xmlns="http://www.w3.org/2000/svg"
 			{...props}
 		>
-			<g clip-path="url(#clip0_229_633)">
+			<g clipPath="url(#clip0_229_633)">
 				<path
 					d="M10 17.3738C2.43642 23.6944 -3.69438 17.5636 2.62622 10C-3.69438 2.43642 2.43642 -3.69438 10 2.62622C17.5621 -3.69438 23.6944 2.43642 17.3738 10C23.6944 17.5578 17.5621 23.6944 10 17.3738Z"
 					fill="url(#paint0_linear_229_633)"
@@ -25,9 +25,9 @@ const ElementIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
 					y2="0"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="#23CC87" />
-					<stop offset="0.483516" stop-color="#EACCF8" />
-					<stop offset="1" stop-color="#39CC23" />
+					<stop stopColor="#23CC87" />
+					<stop offset="0.483516" stopColor="#EACCF8" />
+					<stop offset="1" stopColor="#39CC23" />
 				</linearGradient>
 				<clipPath id="clip0_229_633">
 					<rect width="20" height="20" fill="white" />
