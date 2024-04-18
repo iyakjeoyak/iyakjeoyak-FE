@@ -8,7 +8,7 @@ import Point from "@/assets/Point";
 import MyPageBox from "./MyPageBox";
 import { UserData } from "../MyPageType";
 import ModalContainer from "@/components/ModalContainer";
-// import MyPageEdit from "./MyPageEdit";
+import MyPageEdit from "./MyPageEdit";
 import { useState } from "react";
 
 const MyPage: React.FC = () => {
