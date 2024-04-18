@@ -1,0 +1,77 @@
+@use "@styles/mixin" as mixins;
+@use "@styles/global" as *;
+@import "@styles/variables";
+@import "@/components/ModalContainer/index.module.scss";
+
+.mypageEditContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 15rem;
+
+	.profileEditTitle {
+		display: flex;
+		justify-content: left;
+		margin-bottom: 15rem;
+		width: 100%;
+	}
+
+	.profilePicEdit {
+		position: relative;
+		width: 100rem;
+		height: 100rem;
+		border-radius: 100%;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.userProfile,
+		.defaultProfile {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			border-radius: 100%;
+			object-fit: cover;
+			border: 3px solid $main-green;
+		}
+
+		.imgButton {
+			position: absolute;
+			background-color: $white;
+			border-radius: 100%;
+			width: 25rem;
+			height: 25rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 25rem;
+			color: $gray5;
+			cursor: pointer;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+			z-index: 1000;
+		}
+
+		input {
+			display: none;
+		}
+	}
+	.profileInfoEdit {
+		min-width: 300rem;
+		margin-bottom: 30rem;
+		.inputStyle {
+			background-color: $white;
+			border-radius: 10px;
+			font-size: 15rem;
+			color: $black;
+			margin-bottom: 1rem;
+
+			&:focus {
+				outline: $main-green;
+				border-color: $main-green;
+				box-shadow: 0 0 0 2px rgba($black, 0.2);
+			}
+		}
+	}
+}

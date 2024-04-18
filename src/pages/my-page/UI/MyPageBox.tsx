@@ -1,4 +1,5 @@
-import style from "../style/mypage.module.scss";
+import { useNavigate } from "react-router-dom";
+import style from "../index.module.scss";
 import { MyPageBoxProps, Review, Supplement } from "../MyPageType";
 
 const MyPageBox: React.FC<MyPageBoxProps> = ({
@@ -6,15 +7,23 @@ const MyPageBox: React.FC<MyPageBoxProps> = ({
 	reviews,
 	supplements,
 }) => {
-	const items = sectionType === "review" ? reviews ?? [] : supplements ?? [];
+	const navigate = useNavigate();
 
+	const items = sectionType === "review" ? reviews ?? [] : supplements ?? [];
 	return (
 		<div className={style.sectionBoxArea}>
 			<div className={style.sectionFixArea}>
 				<div className={style.sectionTitle}>
 					{sectionType === "review" ? "작성한 후기" : "내 영양제"}
 				</div>
-				<div className={style.sectionDetail}>더보기</div>
+				<div
+					className={style.sectionDetail}
+					onClick={() => {
+						navigate(`/my-page/review`);
+					}}
+				>
+					더보기
+				</div>
 			</div>
 			{items.map((item, index) => (
 				<div key={index} className={style.sectionBox}>
@@ -27,6 +36,14 @@ const MyPageBox: React.FC<MyPageBoxProps> = ({
 						<div className={style.sectionRateBox}>
 							<div className={style.sectionText}>평균 평점</div>
 							<div className={style.sectionRate}>{item.rating} / 5.0</div>
+						</div>
+					)}
+
+					{sectionType === "review" && "history" in item && (
+						<div className={style.sectionReviewBox}>
+							<div className={style.sectionText}>
+								{(item as Review).history}
+							</div>
 						</div>
 					)}
 				</div>
