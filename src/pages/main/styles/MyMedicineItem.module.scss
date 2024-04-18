@@ -22,7 +22,6 @@
 		border-top-right-radius: 50%;
 	}
 	.bottom {
-		display: flex;
 		justify-content: center;
 		align-items: center;
 		position: absolute;
@@ -43,5 +42,17 @@
 		.feature {
 			@include mixins.sb-small;
 		}
+	}
+}
+
+.container {
+	border-radius: 50px;
+	&.hover {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: $point-blue;
+		color: $white;
+		@include mixins.b-small;
 	}
 }
