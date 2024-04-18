@@ -1,12 +1,10 @@
-import * as yup from "yup";
-
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import React, { useState } from "react";
-
-import { Button } from "./Button";
+import * as yup from "yup";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FormContext } from "@hooks/useFormContext";
-import { Input } from "./Input";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "./Button";
+import { Input } from "./Input";
 
 interface FormProps {
 	children: React.ReactNode;

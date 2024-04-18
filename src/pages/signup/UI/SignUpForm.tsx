@@ -52,7 +52,7 @@ export function SignUpForm() {
 	};
 	return (
 		<div>
-			<Form schema={schema} onSubmit={() => handleSubmit(onSubmit)}>
+			<Form schema={schema} onSubmit={handleSubmit(onSubmit)}>
 				<Form.Input
 					text="아이디"
 					type="text"
@@ -99,12 +99,7 @@ export function SignUpForm() {
 					{errors.age && <p className="error">{errors.age.message}</p>}
 				</div>
 				<TagCommon text="비타민" />
-				<Form.Button
-					name="확인"
-					type="submit"
-					onClick={async () => {}}
-					variant="dark"
-				/>
+				<Form.Button name="확인" type="submit" variant="dark" />
 			</Form>
 		</div>
 	);
