@@ -1,20 +1,30 @@
 import "@styles/global.scss";
-import {
-	userMockData,
-	supplementRecordMockData,
-	ReviewData,
-} from "../mockData";
 
-const ShowReview = (reviews: ReviewData) => {
+import { DetailedReview } from "../MyPageType";
+import StarRating from "@/components/StarRating";
+import style from "../style/showreview.module.scss";
+
+const ShowReview = (reviews: DetailedReview[]) => {
 	return (
-		<div className="reviews-container">
+		<div className={style.reviewContainer}>
 			{reviews.map((review, index) => (
-				<div key={index} className="review">
-					<div className="review-header">
-						<div className="review-user">{review.user}</div>
-						<div className="review-date">{review.date}</div>
+				<div key={index} className={style.reviewBox}>
+					<div className={style.reviewHeadArea}>
+						<div className={style.supplementName}>{review.itemName}</div>
+						<StarRating filledStars={4.5} size={20} />
 					</div>
-					<div className="review-content">{review.content}</div>
+					<div className={style.reviewContents}>
+						<img
+							src={review.reviewImg[0].userImage}
+							alt="유저 제품 후기 사진"
+							className={style.reviewImg}
+						/>
+
+						<div className={style.reviewTextBox}>
+							<div className={style.reviewText}>{review.content}</div>
+							<div className={style.reviewDate}>{review.date} </div>
+						</div>
+					</div>
 				</div>
 			))}
 		</div>

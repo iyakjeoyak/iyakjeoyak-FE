@@ -7,12 +7,9 @@ import MainPage from "@pages/main";
 import SearchPage from "@/pages/search";
 import MyPage from "@/pages/my-page";
 import SignUpPage from "@/pages/signup";
-<<<<<<< Updated upstream
 import OnBoarding from "@/pages/onboarding";
 import { Fame } from "@/pages/fame";
-=======
 import { PointHistory, ReviewHistory } from "@/pages/my-page/UI";
->>>>>>> Stashed changes
 
 function Router() {
 	return (
@@ -26,13 +23,10 @@ function Router() {
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
 					<Route path="/my-page" element={<MyPage />} />
-<<<<<<< Updated upstream
 					<Route path="/fame" element={<Fame />} />
-=======
 					<Route path="/my-page/point" element={<PointHistory />} />
 					<Route path="/my-page/review" element={<ReviewHistory />} />
 
->>>>>>> Stashed changes
 					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
 			</Routes>

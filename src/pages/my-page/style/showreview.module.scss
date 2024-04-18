@@ -1,0 +1,46 @@
+@use "@styles/mixin" as mixins;
+@use "@styles/global" as *;
+@use "@styles/variables" as *;
+
+.reviewContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.reviewBox {
+		padding: 17rem 20rem;
+		border: 1px solid $main-gray;
+		border-radius: 10px;
+		margin-bottom: 15rem;
+	}
+
+	.reviewHeadArea {
+		display: flex;
+		flex-direction: row;
+		.supplementName {
+			margin-right: 7rem;
+		}
+	}
+
+	.reviewContents {
+		display: flex;
+		flex-direction: row;
+		width: 300rem;
+		.reviewImg {
+			width: 65rem;
+			height: 65rem;
+			border-radius: 10px;
+			margin-right: 10rem;
+		}
+
+		.reviewTextBox {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.reviewText {
+			}
+			.reviewDate {
+			}
+		}
+	}
+}
