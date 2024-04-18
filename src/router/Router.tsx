@@ -9,7 +9,11 @@ import MyPage from "@/pages/my-page";
 import SignUpPage from "@/pages/signup";
 import OnBoarding from "@/pages/onboarding";
 import { Fame } from "@/pages/fame";
-import { PointHistory, ReviewHistory } from "@/pages/my-page/UI";
+import {
+	PointHistory,
+	ReviewHistory,
+	SupplementHistory,
+} from "@/pages/my-page/UI";
 
 function Router() {
 	return (
@@ -22,10 +26,14 @@ function Router() {
 					<Route path="/detail/:id" element={<DetailIdPage />} />
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
-					<Route path="/my-page" element={<MyPage />} />
 					<Route path="/fame" element={<Fame />} />
+					<Route path="/my-page" element={<MyPage />} />
 					<Route path="/my-page/point" element={<PointHistory />} />
 					<Route path="/my-page/review" element={<ReviewHistory />} />
+					<Route
+						path="/my-page/my-supplement"
+						element={<SupplementHistory />}
+					/>
 
 					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
