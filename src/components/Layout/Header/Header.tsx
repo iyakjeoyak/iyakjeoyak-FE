@@ -3,9 +3,11 @@ import "./Header.module.scss";
 import { FiMenu } from "react-icons/fi";
 import LogoIcon from "../../../assets/LogoIcon";
 import Nav from "../Nav/Nav";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Header() {
+	const navigate = useNavigate();
 	const [isOpenNav, setIsOpenNav] = useState(false);
 
 	const toggleIsOpenNav = () => {
@@ -15,7 +17,13 @@ export default function Header() {
 	return (
 		<>
 			<header>
-				<LogoIcon fill={"#ffffff"} width="60px" />
+				<LogoIcon
+					fill={"#ffffff"}
+					width="60px"
+					onClick={() => {
+						navigate("/");
+					}}
+				/>
 				<FiMenu onClick={toggleIsOpenNav} size="40px" color="white" />
 			</header>
 			{isOpenNav && (

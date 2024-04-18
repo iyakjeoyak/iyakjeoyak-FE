@@ -18,7 +18,7 @@ export default function ModalContainer({
 		<div className="background" onClick={toggleModalOpen}>
 			<motion.div
 				{...props}
-				className={`{styles.container} ${className || ""}`}
+				className={`${styles.container} ${className}`}
 				initial={{ opacity: 0, y: "100%" }}
 				animate={{ opacity: 1, y: 0 }}
 				exit={{ opacity: 0, y: "100%" }}

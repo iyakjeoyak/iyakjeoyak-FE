@@ -1,11 +1,11 @@
 import { IconType } from "react-icons";
-import styles from "./index.module.scss";
 import classNames from "classnames";
+import styles from "./index.module.scss";
 
 interface ButtonProps {
 	name?: string; // 버튼 텍스트
 	icon?: IconType; // 아이콘 버튼
-	onClick?: () => Promise<void>;
+	onClick?: (() => Promise<void>) | (() => void);
 	type?: "submit" | "button";
 	variant?: "light" | "dark" | "icon"; // 버튼 색상
 	size?: "default" | "medium";
