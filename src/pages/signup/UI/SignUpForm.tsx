@@ -3,6 +3,7 @@ import TagCommon from "@/components/Tag";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { DevTool } from "@hookform/devtools";
 
 interface SignUpData {
 	username: string; // 아이디
@@ -43,8 +44,12 @@ export function SignUpForm() {
 		register,
 		handleSubmit,
 		formState: { errors },
+		control,
 	} = useForm<SignUpData>({
 		resolver: yupResolver<SignUpData>(schema),
+		defaultValues: {
+			gender: "남성",
+		},
 	});
 
 	const onSubmit: SubmitHandler<SignUpData> = async (formData) => {
@@ -52,6 +57,8 @@ export function SignUpForm() {
 	};
 	return (
 		<div>
+			<div>성별</div>
+
 			<Form schema={schema} onSubmit={handleSubmit(onSubmit)}>
 				<Form.Input
 					text="아이디"
@@ -83,12 +90,26 @@ export function SignUpForm() {
 					{...register("nickname", { required: true })}
 				/>
 				{errors.nickname && <p className="error">{errors.nickname.message}</p>}
-				<Form.Input
-					text="성별"
-					type="radio"
-					{...register("gender", { required: true })}
-				/>
-				{errors.gender && <p className="error">{errors.gender.message}</p>}
+				<div>
+					<div>성별</div>
+					<Form.RadioButton
+						text="남성"
+						value="남성"
+						{...register("gender", { required: true })}
+					/>
+					<Form.RadioButton
+						text="여성"
+						value="여성"
+						{...register("gender", { required: true })}
+					/>
+					<Form.RadioButton
+						text="비공개"
+						value="비공개"
+						{...register("gender", { required: true })}
+					/>
+					{errors.gender && <p className="error">{errors.gender.message}</p>}
+				</div>
+
 				<div>
 					<Form.Input
 						text="만 나이"
@@ -101,6 +122,7 @@ export function SignUpForm() {
 				<TagCommon text="비타민" />
 				<Form.Button name="확인" type="submit" variant="dark" />
 			</Form>
+			<DevTool control={control} />
 		</div>
 	);
 }
