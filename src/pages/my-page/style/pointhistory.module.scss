@@ -1,0 +1,29 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/global.scss";
+@import "@styles/variables.scss";
+
+.pointContainer {
+	width: 100%;
+	padding: 10rem;
+	.pointHistoryList {
+		min-width: 46px;
+		.pointItem {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10rem 15rem;
+			font-size: 15rem;
+			border: 1px solid $main-gray;
+			border-radius: 10px;
+			@include mixins.m-medium;
+
+			.date {
+				color: $black;
+			}
+
+			.description {
+				color: $black;
+			}
+		}
+	}
+}
