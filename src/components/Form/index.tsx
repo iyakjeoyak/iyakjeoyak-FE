@@ -5,6 +5,7 @@ import { FormContext } from "@hooks/useFormContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "./Button";
 import { Input } from "./Input";
+import { RadioButton } from "./RadioButton/RadioButton";
 
 interface FormProps {
 	children: React.ReactNode;
@@ -50,3 +51,4 @@ export const Form = ({ children, onSubmit, schema, className }: FormProps) => {
 };
 Form.Input = Input;
 Form.Button = Button;
+Form.RadioButton = RadioButton;
