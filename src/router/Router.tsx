@@ -16,8 +16,8 @@ function Router() {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<Layout />}>
-					<Route path="/" element={<MainPage />} />
-					<Route path="/home" element={<OnBoarding />} />
+					<Route path="/home" element={<MainPage />} />
+					<Route path="/" element={<OnBoarding />} />
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/detail/:id" element={<DetailIdPage />} />
 					<Route path="/login" element={<LoginPage />} />

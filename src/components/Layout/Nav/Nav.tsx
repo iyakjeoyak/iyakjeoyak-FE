@@ -5,7 +5,7 @@ import styles from "./Nav.module.scss";
 import { useEffect } from "react";
 
 const MAIN_NAVS = [
-	{ name: "홈", to: "/" },
+	{ name: "홈", to: "/home" },
 	{ name: "약 조회하기", to: "/search" },
 	{ name: "명예의 전당", to: "/fame" },
 	{ name: "근처 약국", to: "#" },
