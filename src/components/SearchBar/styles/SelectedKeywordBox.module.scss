@@ -1,0 +1,12 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	margin-top: 5px;
+	display: flex;
+	.tag {
+		padding: 5px;
+		border-radius: 20px;
+		background-color: $gray3;
+	}
+}
