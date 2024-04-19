@@ -1,36 +1,40 @@
-import { IconType } from "react-icons";
-import classNames from "classnames";
 import styles from "./index.module.scss";
+import { ElementType, useMemo } from "react";
+import { getButtonClasses, ButtonStyles } from "@/utils/getButtonClasses";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	name?: string; // 버튼 텍스트
-	icon?: IconType; // 아이콘 버튼
+	icon?: ElementType; // 아이콘 버튼
 	onClick?: (() => Promise<void>) | (() => void);
 	type?: "submit" | "button";
-	variant?: "light" | "dark" | "icon"; // 버튼 색상
+	variant: "light" | "dark" | "greentransparent"; // 버튼 색상
 	size?: "default" | "medium";
+	className?: string;
 }
 
 export const Button = ({
 	name,
 	icon: Icon,
 	onClick,
-	type,
+	type = "button",
 	variant,
 	size = "default",
+	className,
+	children,
 }: ButtonProps) => {
-	const buttonClasses = classNames(styles.container, {
-		[styles.light]: variant === "light",
-		[styles.dark]: variant === "dark",
-		[styles.icon]: variant === "icon",
-		[styles.medium]: size === "medium",
-		[styles[size]]: size !== "default",
-	});
+	const buttonClasses = useMemo(
+		() => getButtonClasses(styles as ButtonStyles, { variant, name, size }),
+		[variant, name, size],
+	);
 
 	return (
-		<button className={buttonClasses} type={type} onClick={onClick}>
+		<button
+			className={`${buttonClasses} ${className}`}
+			type={type}
+			onClick={onClick}
+		>
 			{Icon && <Icon />}
-			{name}
+			{children || (name && <span>{name}</span>)}
 		</button>
 	);
 };

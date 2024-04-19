@@ -2,6 +2,7 @@ import { MouseEventHandler } from "react";
 import TagCommon from "@/components/Tag";
 import style from "../style/commoncardbox.module.scss";
 import PlusIcon from "@/assets/icons/PlusIcon";
+import { Button } from "@/components/Button";
 
 interface CardProps {
 	title?: string;
@@ -29,7 +30,12 @@ const CommonCardBox: React.FC<CardProps> = ({
 			{img ? (
 				<img src={img} className={style.cardImage} />
 			) : (
-				<PlusIcon className={style.emptyIcon} />
+				<Button
+					icon={PlusIcon}
+					onClick={() => console.log("모냐")}
+					variant="greentransparent"
+					size="medium"
+				/>
 			)}
 
 			<div className={style.cardContent}>
