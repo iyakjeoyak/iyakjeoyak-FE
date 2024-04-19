@@ -1,12 +1,12 @@
 const userImage = "/images/no_profile_image?.jpg";
 
 import {
+	UserData,
 	LikeRecordData,
 	PointData,
 	ReviewData,
 	SupplementRecordData,
-	UserData,
-} from "./MyPageType";
+} from "./userInfoType";
 
 export const userMockData: UserData = {
 	gender: "female",

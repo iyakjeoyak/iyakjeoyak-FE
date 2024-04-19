@@ -105,3 +105,9 @@ export interface MyPageBoxProps {
 	reviews?: Review[];
 	supplements?: Supplement[];
 }
+
+export interface MyPageCommonHeaderProps {
+	titleText: string;
+	count: number;
+	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import style from "../index.module.scss";
-import { MyPageBoxProps, Review, Supplement } from "../MyPageType";
+import { MyPageBoxProps, Review, Supplement } from "../userInfoType";
 
-const MyPageBox: React.FC<MyPageBoxProps> = ({
+const SimpleInfoBox: React.FC<MyPageBoxProps> = ({
 	sectionType,
 	reviews,
 	supplements,
@@ -19,7 +19,9 @@ const MyPageBox: React.FC<MyPageBoxProps> = ({
 				<div
 					className={style.sectionDetail}
 					onClick={() => {
-						navigate(`/my-page/review`);
+						sectionType === "review"
+							? navigate(`/userinfo/review`)
+							: navigate(`/userinfo/user-supplement`);
 					}}
 				>
 					더보기
@@ -52,4 +54,4 @@ const MyPageBox: React.FC<MyPageBoxProps> = ({
 	);
 };
 
-export default MyPageBox;
+export default SimpleInfoBox;

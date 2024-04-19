@@ -4,14 +4,14 @@ import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { userMockData } from "./mockData";
 import TagCommon from "@/components/Tag";
 import Point from "@/assets/Point";
-import MyPageBox from "./UI/MyPageBox";
-import { UserData } from "./MyPageType";
+import SimpleInfoBox from "./UI/SimpleInfoBox";
+import { UserData } from "./userInfoType";
 import ModalContainer from "@/components/ModalContainer";
-import MyPageEdit from "./UI/MyPageEdit";
+import UserInfoEdit from "./UI/UserInfoEdit";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MyPage: React.FC = () => {
+const UserInfo: React.FC = () => {
 	const navigate = useNavigate();
 	const userData: UserData = userMockData;
 	const [isModalOpen, setIsOpenModal] = useState(false);
@@ -22,7 +22,7 @@ const MyPage: React.FC = () => {
 	};
 
 	const pointDetail = () => {
-		navigate(`/my-page/point`);
+		navigate(`/userinfo/point`);
 	};
 
 	return (
@@ -48,7 +48,7 @@ const MyPage: React.FC = () => {
 							className={` ${modalStyle.container} ${style.profileEditModal}`}
 							toggleModalOpen={toggleModalOpen}
 						>
-							<MyPageEdit data={userData} />
+							<UserInfoEdit data={userData} />
 						</ModalContainer>
 					)}
 					<div className={style.editprofile} onClick={toggleModalOpen}>
@@ -73,9 +73,9 @@ const MyPage: React.FC = () => {
 					</div>
 				</section>
 
-				<MyPageBox sectionType="review" reviews={userData.latestReviews} />
+				<SimpleInfoBox sectionType="review" reviews={userData.latestReviews} />
 
-				<MyPageBox
+				<SimpleInfoBox
 					sectionType="supplement"
 					supplements={userData.favoriteSupplements}
 				/>
@@ -84,4 +84,4 @@ const MyPage: React.FC = () => {
 	);
 };
 
-export default MyPage;
+export default UserInfo;

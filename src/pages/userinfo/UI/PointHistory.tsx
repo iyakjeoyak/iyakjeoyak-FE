@@ -1,7 +1,7 @@
 import "@styles/global.scss";
 
 import { pointMockData } from "../mockData";
-import { ShortPointHistory } from "../MyPageType";
+import { ShortPointHistory } from "../userInfoType";
 import style from "../style/pointhistory.module.scss";
 import { useState } from "react";
 

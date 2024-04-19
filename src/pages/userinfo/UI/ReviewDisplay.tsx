@@ -1,10 +1,10 @@
 import "@styles/global.scss";
 
-import { DetailedReview } from "../MyPageType";
+import { DetailedReview } from "../userInfoType";
 import StarRating from "@/components/StarRating";
-import style from "../style/showreview.module.scss";
+import style from "../style/reviewdisplay.module.scss";
 
-const ShowReview = (reviews: DetailedReview[]) => {
+const ReviewDisplay = (reviews: DetailedReview[]) => {
 	return (
 		<div className={style.reviewContainer}>
 			{reviews.map((review, index) => (
@@ -31,4 +31,4 @@ const ShowReview = (reviews: DetailedReview[]) => {
 	);
 };
 
-export default ShowReview;
+export default ReviewDisplay;

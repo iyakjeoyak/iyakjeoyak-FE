@@ -1,17 +1,15 @@
-import * as yup from "yup";
-
+import { useRef } from "react";
 import {
-	Controller,
-	FieldValues,
-	SubmitHandler,
 	useForm,
+	Controller,
+	SubmitHandler,
+	FieldValues,
 } from "react-hook-form";
-import React, { useRef } from "react";
-
-import { Form } from "@/components/Form";
+import style from "../style/userinfoedit.module.scss";
+import { UserData } from "../userInfoType";
 import { Input } from "@/components/Form/Input";
-import { UserData } from "../MyPageType";
-import style from "../style/mypageedit.module.scss";
+import { Form } from "@/components/Form";
+import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup
@@ -61,8 +59,8 @@ const inputFields: {
 	},
 ];
 
-const MyPageEdit: React.FC<MyPageEditProps> = ({ data }) => {
-	const defaultImage = "/images/no_profile_image?.jpg";
+const UserInfoEdit: React.FC<MyPageEditProps> = ({ data }) => {
+	const defaultImage = "/images/no_profile_image.jpg";
 	const methods = useForm<FormData>({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -155,4 +153,4 @@ const MyPageEdit: React.FC<MyPageEditProps> = ({ data }) => {
 	);
 };
 
-export default MyPageEdit;
+export default UserInfoEdit;

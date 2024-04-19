@@ -1,6 +1,6 @@
 import "@styles/global.scss";
 // import { userMockData, supplementRecordMockData } from "../mockData";
-import style from "../style/noreview.module.scss";
+import style from "../style/reviewempty.module.scss";
 import { Button } from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 

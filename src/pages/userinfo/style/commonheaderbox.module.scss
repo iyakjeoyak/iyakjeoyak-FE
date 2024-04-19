@@ -1,0 +1,16 @@
+@use "@styles/variables.scss" as *;
+@use "@styles/mixin.scss" as mixins;
+.container {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid $main-gray;
+	padding: 10rem 10rem;
+	border-radius: 10px;
+}
+
+.icon {
+	margin-right: 10rem;
+}
+
+.title {
+}
