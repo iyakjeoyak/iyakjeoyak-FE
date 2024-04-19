@@ -3,7 +3,7 @@ import style from "./index.module.scss";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { userMockData } from "./mockData";
 import TagCommon from "@/components/Tag";
-import Point from "@/assets/Point";
+import PointIcon from "@/assets/PointIcon";
 import SimpleInfoBox from "./UI/SimpleInfoBox";
 import { UserData } from "./userInfoType";
 import ModalContainer from "@/components/ModalContainer";
@@ -60,7 +60,7 @@ const UserInfo: React.FC = () => {
 			<section className={style.myPageContent}>
 				<section className={style.pointSection}>
 					<div className={style.pointFixArea}>
-						<Point className={style.pointSVG} />
+						<PointIcon className={style.pointSVG} />
 						<div className={style.pointTitle}>내 포인트</div>
 					</div>
 

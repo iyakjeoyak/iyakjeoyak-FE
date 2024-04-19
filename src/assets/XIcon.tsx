@@ -1,6 +1,6 @@
 import { FC, SVGProps } from "react";
 
-const NoReview: FC<SVGProps<SVGSVGElement>> = (props) => {
+const XIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -40,4 +40,4 @@ const NoReview: FC<SVGProps<SVGSVGElement>> = (props) => {
 	);
 };
 
-export default NoReview;
+export default XIcon;

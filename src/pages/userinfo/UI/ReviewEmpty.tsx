@@ -4,7 +4,7 @@ import style from "../style/reviewempty.module.scss";
 import { Button } from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 
-const NoReviews = () => {
+const ReviewEmpty = () => {
 	const navigate = useNavigate();
 	return (
 		<section className={style.noReviewContainer}>
@@ -24,4 +24,4 @@ const NoReviews = () => {
 	);
 };
 
-export default NoReviews;
+export default ReviewEmpty;

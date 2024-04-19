@@ -12,7 +12,7 @@ import { Fame } from "@/pages/fame";
 import {
 	PointHistory,
 	ReviewHistory,
-	// SupplementHistory,
+	SupplementHistory,
 } from "@/pages/userinfo/UI";
 
 function Router() {
@@ -30,10 +30,10 @@ function Router() {
 					<Route path="/userinfo" element={<UserInfo />} />
 					<Route path="/userinfo/point" element={<PointHistory />} />
 					<Route path="/userinfo/review" element={<ReviewHistory />} />
-					{/* <Route
+					<Route
 						path="/userinfo/user-supplement"
 						element={<SupplementHistory />}
-					/> */}
+					/>
 					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
 			</Routes>

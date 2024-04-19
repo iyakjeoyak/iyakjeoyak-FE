@@ -5,7 +5,7 @@ import ListIcon from "../assets/ListIcon";
 // import style from "../style/supplementhistory.scss";
 // import { SupplementDetail, SupplementRecordData } from "../MyPageType";
 
-const SupplementHistory: React.FC = () => {
+const SuplementHistory: React.FC = () => {
 	const count = supplementRecordMockData.mySupplements.length;
 	return (
 		<>
@@ -18,4 +18,4 @@ const SupplementHistory: React.FC = () => {
 	);
 };
 
-export default SupplementHistory;
+export default SuplementHistory;

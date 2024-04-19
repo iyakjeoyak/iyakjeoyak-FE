@@ -1,6 +1,6 @@
 import { FC, SVGProps } from "react";
 
-const Point: FC<SVGProps<SVGSVGElement>> = (props) => {
+const PointIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -40,4 +40,4 @@ const Point: FC<SVGProps<SVGSVGElement>> = (props) => {
 	);
 };
 
-export default Point;
+export default PointIcon;
