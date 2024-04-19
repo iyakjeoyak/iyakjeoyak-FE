@@ -84,6 +84,7 @@ export interface SupplementInfo {
 	dueDate: string;
 	effect: string[];
 	memo: string;
+	img?: string;
 }
 
 export interface SupplementRecordData {
@@ -110,4 +111,15 @@ export interface MyPageCommonHeaderProps {
 	titleText: string;
 	count: number;
 	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+	onClick: (evet: React.MouseEvent<SVGSVGElement>) => void;
+	className: string;
+}
+
+export interface UserInfoBoxProps {
+	userData: UserData;
+}
+
+export interface UserPointInfoProps {
+	points: number;
+	onNavigate: () => void;
 }

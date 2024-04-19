@@ -60,7 +60,7 @@ const inputFields: {
 ];
 
 const UserInfoEdit: React.FC<MyPageEditProps> = ({ data }) => {
-	const defaultImage = "/images/no_profile_image.jpg";
+	const defaultImage = "/images/no_profile_image.jpg?url";
 	const methods = useForm<FormData>({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -83,9 +83,8 @@ const UserInfoEdit: React.FC<MyPageEditProps> = ({ data }) => {
 		console.log("button formData:", watch());
 	};
 
-	const onSubmit: SubmitHandler<FormData> = async (data) => {
+	const onSubmit: SubmitHandler<FormData> = async () => {
 		// const onSubmit = (formData: FormData) => {
-		console.log(data);
 	};
 	return (
 		<Form

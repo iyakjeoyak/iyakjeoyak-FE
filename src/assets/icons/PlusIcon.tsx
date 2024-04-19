@@ -1,6 +1,6 @@
 import { FC, SVGProps } from "react";
 
-const ListIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
+const PlusIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
 			className="w-6 h-6 text-gray-800 dark:text-white"
@@ -15,11 +15,12 @@ const ListIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 			<path
 				stroke="currentColor"
 				strokeLinecap="round"
+				strokeLinejoin="round"
 				strokeWidth="2"
-				d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"
+				d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
 			/>
 		</svg>
 	);
 };
 
-export default ListIcon;
+export default PlusIcon;

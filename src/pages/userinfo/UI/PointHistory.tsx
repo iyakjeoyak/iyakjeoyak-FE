@@ -17,7 +17,6 @@ const PointHistory: React.FC = () => {
 
 	const pointDetailModalOpen = () => {
 		setIsOpenModal((prev) => !prev);
-		console.log("포인트 상세 내역 모달 open");
 	};
 
 	const renderPointItems = pointData.map((item, index) => (

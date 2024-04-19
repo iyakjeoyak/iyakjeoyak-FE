@@ -1,0 +1,84 @@
+@use "@styles/variables.scss" as *;
+@use "@styles/mixin.scss" as mixins;
+
+.card {
+	border: 1px solid $main-gray;
+	border-radius: 20px;
+	overflow: hidden;
+	display: flex;
+
+	&.slim {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 140rem;
+		height: 180rem;
+		padding: 10rem 0;
+		.cardImage {
+			width: 60rem;
+			height: 100rem;
+			margin-bottom: 10rem;
+		}
+
+		.cardTitle {
+			@include mixins.sb-large;
+		}
+		.cardMemo,
+		.cardTag {
+			display: none;
+		}
+
+		&.empty {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			.emptyIcon {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
+
+	&.wide {
+		flex-direction: row;
+		padding: 30rem;
+		width: 300rem;
+
+		.cardImage {
+			margin-right: 15rem;
+			width: 60rem;
+			height: 100rem;
+		}
+		.cardTitle {
+			margin: 10rem 0 5rem 0;
+			@include mixins.b-medium;
+		}
+		.cardDate {
+			color: $gray5;
+		}
+		.cardMemo {
+			margin: 6rem 0;
+		}
+		.cardTag {
+		}
+
+		&.empty {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin: auto;
+
+			.emptyIcon {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
+}

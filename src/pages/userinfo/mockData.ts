@@ -1,4 +1,5 @@
-const userImage = "/images/no_profile_image?.jpg";
+const itemImage = "/images/Medicine.png?.url";
+const userImage = "/images/no_profile_image.jpg?url";
 
 import {
 	UserData,
@@ -125,6 +126,7 @@ export const supplementRecordMockData: SupplementRecordData = {
 			dueDate: "2025.03.05",
 			effect: ["감기"],
 			memo: "1일 3회 복용",
+			img: itemImage,
 		},
 
 		{
@@ -133,6 +135,7 @@ export const supplementRecordMockData: SupplementRecordData = {
 			dueDate: "2025.03.05",
 			effect: ["감기"],
 			memo: "아침 저녁 복용",
+			img: itemImage,
 		},
 	],
 };

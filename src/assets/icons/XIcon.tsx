@@ -20,18 +20,18 @@ const XIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 					id="SvgjsLinearGradient2050"
 				>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(35, 204, 135)"
+						stopOpacity="1"
+						stopColor="rgba(35, 204, 135)"
 						offset="0.00578125"
 					></stop>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(234, 204, 248)"
+						stopOpacity="1"
+						stopColor="rgba(234, 204, 248)"
 						offset="0.48"
 					></stop>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(34, 176, 190)"
+						stopOpacity="1"
+						stopColor="rgba(34, 176, 190)"
 						offset="1"
 					></stop>
 				</linearGradient>

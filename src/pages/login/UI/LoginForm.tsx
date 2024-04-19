@@ -32,13 +32,13 @@ export default function LoginForm() {
 		resolver: yupResolver(schema),
 	});
 
-	console.log(watch("username"));
+	// console.log(watch("username"));
 
 	const onSubmit: SubmitHandler<LoginData> = async (formData) => {
-		console.log(formData);
+		// console.log(formData);
 	};
 	const handleClick = async () => {
-		console.log("button formData:", watch());
+		// console.log("button formData:", watch());
 	};
 	// const onInvalid = (data) => console.log(data, "onInvalid");
 	return (

@@ -1,6 +1,5 @@
 import { FaStar } from "react-icons/fa";
 import TagCommon from "@/components/Tag";
-import medicine from "@/assets/images/Medicine.png";
 import styles from "../styles/MedicineCardItem.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +13,7 @@ export default function MedicineCardItem() {
 				navigator("/detail/1");
 			}}
 		>
-			<img src={medicine} alt="어쩌구영양제" />
+			<img src="/images/Medicine.png" alt="어쩌구영양제" />
 			<div className={styles["content-container"]}>
 				<div className={styles["text-container"]}>
 					<div className={styles.name}>어쩌구영양제</div>

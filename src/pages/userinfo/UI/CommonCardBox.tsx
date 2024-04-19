@@ -1,32 +1,49 @@
+import { MouseEventHandler } from "react";
 import TagCommon from "@/components/Tag";
 import style from "../style/commoncardbox.module.scss";
+import PlusIcon from "@/assets/icons/PlusIcon";
 
 interface CardProps {
-	title: string;
-	date: string;
+	title?: string;
+	date?: string;
+	img?: string;
 	memo?: string;
 	tagText?: string;
-	form?: "slim" | "wide";
+	form?: "slim" | "wide" | "empty";
+	onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 const CommonCardBox: React.FC<CardProps> = ({
 	title,
 	date,
+	img,
 	memo,
 	tagText,
 	form = "slim",
+	onClick,
 }) => {
-	const cardStyle = `${style.card} ${form === "slim" ? style.slim : style.wide}`;
+	const cardStyle = `${style.card} ${style[form]}`;
 
 	return (
-		<div className={cardStyle}>
-			<div className={style.cardImage}>{/* 이미지 자리 */}</div>
+		<div className={cardStyle} onClick={onClick}>
+			{img ? (
+				<img src={img} className={style.cardImage} />
+			) : (
+				<PlusIcon className={style.emptyIcon} />
+			)}
 
 			<div className={style.cardContent}>
-				<h3 className={style.cardTitle}>{title}</h3>
-				<time className={style.cardDate}>{date}</time>
+				{title && <div className={style.cardTitle}>{title}</div>}
+				{date && <time className={style.cardDate}>{date} 까지</time>}
 				{memo && <p className={style.cardMemo}>{memo}</p>}
-				{tagText && <TagCommon text={tagText} />}
+				{tagText && (
+					<TagCommon
+						text={tagText}
+						backgroundColor="green"
+						size="small"
+						className={style.cardTag}
+					/>
+				)}
 			</div>
 		</div>
 	);
