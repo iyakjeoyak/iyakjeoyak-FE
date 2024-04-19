@@ -1,0 +1,14 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $gray0;
+	margin: 0 15px 15px 15px;
+	.current {
+		@include mixins.b-medium;
+		color: $main-red;
+	}
+	.option {
+		@include mixins.b-medium;
+	}
+}

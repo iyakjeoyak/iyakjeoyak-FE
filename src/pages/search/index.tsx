@@ -18,7 +18,11 @@ export default function SearchPage() {
 
 	return (
 		<section>
-			<SearchBar />
+			<SearchBar>
+				<SearchBar.SearchField />
+				<SearchBar.Options />
+				<SearchBar.Keyword />
+			</SearchBar>
 			<TapBar
 				taps={TABS}
 				currentTapValue={currentTapValue}
