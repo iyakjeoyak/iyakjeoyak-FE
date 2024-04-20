@@ -16,6 +16,10 @@
 		color: $main-red;
 	}
 	.option {
+		&.active {
+			background-color: $gray5;
+			color: $main-red;
+		}
 		@include mixins.b-medium;
 	}
 }
