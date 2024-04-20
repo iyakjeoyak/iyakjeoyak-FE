@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function SelectedKeywordTagsList() {
 	const navigate = useNavigate();
 	// props 전달 필요없이 외부랑 URL로 props 상태 공유
+	// 뒤로가기를 이렇게 해도 되나?
 	const currentSearchKeywordValue = useGetURLSearch("keyword");
 
 	if (!currentSearchKeywordValue) return null;
