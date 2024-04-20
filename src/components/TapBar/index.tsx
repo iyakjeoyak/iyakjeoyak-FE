@@ -1,14 +1,12 @@
+import { TapType } from "@/constants/TAPS";
 import styles from "./index.module.scss";
 
-interface TapType {
-	name: string;
-	value: string;
-}
 interface TapBarProps {
 	currentTapValue: string;
 	handleChangeCurrentTapValue: (tapValue: string) => void;
 	taps: TapType[];
 }
+
 export default function TapBar({
 	taps,
 	currentTapValue,
@@ -24,7 +22,7 @@ export default function TapBar({
 						handleChangeCurrentTapValue(tap.value);
 					}}
 				>
-					{tap.name}
+					{tap.label}
 				</div>
 			))}
 		</div>

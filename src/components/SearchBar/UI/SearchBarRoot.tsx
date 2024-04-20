@@ -1,17 +1,12 @@
 import { SelectContext } from "../hooks/useSelect";
+import styles from "../styles/SearchBarRoot.module.scss";
 import { useState } from "react";
 
-interface SelectProviderProps {
+interface SearchBarRootProps {
 	children: React.ReactNode;
 }
 
-// TODO
-// main => 검색 클릭시 서치 달고 검색페이지 이동
-// search => 검색 클릭시 api 요청
-// modal => 약 검색 시 약 반환
-// selectedKeword는 외부에서 가져와야할거같기도함(Select 외 공유 필요)
-
-export default function SelectMain({ children }: SelectProviderProps) {
+export default function SearchBarRoot({ children }: SearchBarRootProps) {
 	const [currentKeyword, setCurrentKeyword] = useState("");
 	const [currentOption, setCurrentOption] = useState("");
 	const [selectedKeyword, setSelectedKeyword] = useState("");
@@ -35,20 +30,20 @@ export default function SelectMain({ children }: SelectProviderProps) {
 		setKeywordSearchResultList([]);
 	};
 
+	const value = {
+		currentKeyword,
+		selectedKeyword,
+		currentOption,
+		keywordSearchResultList,
+		handleCurrentKeyword,
+		handleSelectedKeyword,
+		handleCurrentOption,
+		handleCurrentKeywordSearchResultList,
+	};
+
 	return (
-		<SelectContext.Provider
-			value={{
-				currentKeyword,
-				selectedKeyword,
-				currentOption,
-				keywordSearchResultList,
-				handleCurrentKeyword,
-				handleSelectedKeyword,
-				handleCurrentOption,
-				handleCurrentKeywordSearchResultList,
-			}}
-		>
-			<div>{children}</div>
+		<SelectContext.Provider value={value}>
+			<div className={styles.container}>{children}</div>
 		</SelectContext.Provider>
 	);
 }

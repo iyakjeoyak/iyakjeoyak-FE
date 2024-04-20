@@ -1,7 +1,7 @@
-import styles from "../styles/Options.module.scss";
+import styles from "../styles/SearchResultList.module.scss";
 import { useSelect } from "../hooks/useSelect";
 
-export default function Options() {
+export default function SearchResultList() {
 	const { currentKeyword, keywordSearchResultList } = useSelect();
 
 	if (!currentKeyword) {

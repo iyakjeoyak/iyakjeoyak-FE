@@ -1,19 +1,30 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
+import { SORT_OPTIONS, SORT_QUERIES } from "@/constants/SORT_OPTIONS";
 
-import { SELECT_SORTS } from "@/constants/SelectSort";
 import SelectSort from "@/components/SelectSort";
+import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import styles from "./index.module.scss";
 import { useState } from "react";
 
-const TABS = [
-	{ name: "정보", value: "all" },
-	{ name: "후기", value: "review" },
+const TAPS = [
+	{
+		label: "정보",
+		value: TAPS_QUERIES.INFO,
+	},
+	{
+		label: "후기",
+		value: TAPS_QUERIES.REVIEW,
+	},
 ];
 
 export default function DetailIdPage() {
-	const [currentTapValue, setCurrentTapValue] = useState("all");
-	const [currentSortValue, setCurrentSortValue] = useState("bestReview");
+	const [currentTapValue, setCurrentTapValue] = useState<string>(
+		TAPS_QUERIES.INFO,
+	);
+	const [currentSortValue, setCurrentSortValue] = useState<string>(
+		SORT_QUERIES.BEST,
+	);
 
 	const handleChangeCurrentTapValue = (tapValue: string) => {
 		setCurrentTapValue(tapValue);
@@ -29,7 +40,7 @@ export default function DetailIdPage() {
 				<MedicineCard />
 				<div className={styles.board}>
 					<TapBar
-						taps={TABS}
+						taps={TAPS}
 						currentTapValue={currentTapValue}
 						handleChangeCurrentTapValue={handleChangeCurrentTapValue}
 					/>
@@ -38,7 +49,7 @@ export default function DetailIdPage() {
 					) : (
 						<>
 							<SelectSort
-								options={SELECT_SORTS}
+								options={SORT_OPTIONS}
 								currentValue={currentSortValue}
 								handleCurrentValue={handleCurrentSortValue}
 							/>
