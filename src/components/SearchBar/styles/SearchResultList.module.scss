@@ -3,7 +3,14 @@
 
 .container {
 	background-color: $gray0;
-	margin: 0 15px 15px 15px;
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	right: 65px;
+	z-index: 900;
+	::placeholder {
+		@include mixins.b-medium;
+	}
 	.current {
 		@include mixins.b-medium;
 		color: $main-red;

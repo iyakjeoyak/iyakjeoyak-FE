@@ -1,12 +1,8 @@
+import { SortOptionType } from "@/constants/SORT_OPTIONS";
 import styles from "./index.module.scss";
 
-export interface SortType {
-	name: string;
-	value: string;
-}
-
 interface SelectSortProps {
-	options: SortType[];
+	options: SortOptionType[];
 	currentValue: string;
 	handleCurrentValue: (value: string) => void;
 }
@@ -25,7 +21,7 @@ export default function SelectSort({
 			<select value={currentValue} onChange={handleChange}>
 				{options.map((option) => (
 					<option key={option.value} value={option.value}>
-						{option.name}
+						{option.label}
 					</option>
 				))}
 			</select>

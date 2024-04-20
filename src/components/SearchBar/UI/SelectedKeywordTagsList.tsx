@@ -1,7 +1,7 @@
-import styles from "../styles/SelectedKeywordBox.module.scss";
+import styles from "../styles/SelectedKeywordTagsList.module.scss";
 import { useSelect } from "../hooks/useSelect";
 
-export default function SelectedKeywordBox() {
+export default function SelectedKeywordTagsList() {
 	const { selectedKeyword, handleSelectedKeyword } = useSelect();
 
 	if (!selectedKeyword) {
