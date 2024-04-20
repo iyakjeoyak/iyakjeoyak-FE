@@ -26,16 +26,10 @@ export default function SearchPage() {
 		setCurrentTapValue(tapValue);
 	};
 
-	const handleKeywordThrottled = (keyword: string) => {
-		console.log(keyword);
-		console.log("keyword로 api 요청보내기");
-		console.log("결과를 어떻게 다시 보내지..? 비동기..?");
-	};
-
 	return (
 		<section>
 			<SearchBar>
-				<SearchBar.KeywordInput onClick={handleKeywordThrottled} />
+				<SearchBar.KeywordInput />
 				<SearchBar.SearchResultList />
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
