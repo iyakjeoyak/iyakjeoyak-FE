@@ -17,3 +17,8 @@ export const useLoginValidation = () => {
 	const validationSchema = useMemo(() => loginValidation, []);
 	return validationSchema;
 };
+
+export const loginDefault = {
+	username: "", // 아이디
+	password: "", // 비밀번호
+};

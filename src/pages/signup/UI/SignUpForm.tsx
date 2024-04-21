@@ -2,10 +2,11 @@ import { Form } from "@/components/Form";
 import { useFormContext } from "react-hook-form";
 import { signUpDefault, useSignupValidation } from "./signupValidation";
 import { ErrorMessage } from "@hookform/error-message";
-import TagButton from "@/components/Form/TagButton/TagButton";
 import { DevTool } from "@hookform/devtools";
 import { tagData } from "../../../components/Form/TagButton/TagData";
+import TagButton from "@/components/Form/TagButton";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
+
 export interface SignUpType {
 	username: string; // 아이디
 	password: string; // 비밀번호

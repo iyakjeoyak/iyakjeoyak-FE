@@ -7,9 +7,10 @@ import {
 } from "react-hook-form";
 import { Button } from "./Button";
 import { Input } from "./Input";
-import { RadioButton } from "./RadioButton/RadioButton";
+
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { RadioButton } from "./RadioButton";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
