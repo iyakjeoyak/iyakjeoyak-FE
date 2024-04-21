@@ -1,7 +1,7 @@
 import "./Header.module.scss";
 
 import { FiMenu } from "react-icons/fi";
-import LogoIcon from "../../../assets/LogoIcon";
+import LogoIcon from "@assets/icons/LogoIcon";
 import Nav from "../Nav/Nav";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export default function Header() {
 					fill={"#ffffff"}
 					width="60px"
 					onClick={() => {
-						navigate("/");
+						navigate("/home");
 					}}
 				/>
 				<FiMenu onClick={toggleIsOpenNav} size="40px" color="white" />

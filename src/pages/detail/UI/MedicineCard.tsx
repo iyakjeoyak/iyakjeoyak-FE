@@ -6,7 +6,7 @@ import styles from "../styles/MedicineCard.module.scss";
 export default function MedicineCard() {
 	return (
 		<div className={styles.container}>
-			<img src={medicine} />
+			<img src="/images/Medicine.png" />
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
 					<div className={styles.brand}>어쩌구 브랜드</div>

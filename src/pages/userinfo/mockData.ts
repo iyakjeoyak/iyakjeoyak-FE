@@ -1,12 +1,13 @@
-const userImage = "/images/no_profile_image?.jpg";
+const itemImage = "/images/Medicine.png?.url";
+const userImage = "/images/no_profile_image.jpg?url";
 
 import {
+	UserData,
 	LikeRecordData,
 	PointData,
 	ReviewData,
 	SupplementRecordData,
-	UserData,
-} from "./MyPageType";
+} from "./userInfoType";
 
 export const userMockData: UserData = {
 	gender: "female",
@@ -117,7 +118,7 @@ export const pointMockData: PointData = {
 	reviewMockData,
 };
 
-export const supplementRecordMockData: SupplementRecordData = {
+export const supplementRecords: SupplementRecordData = {
 	mySupplements: [
 		{
 			name: "비타민D",
@@ -125,6 +126,7 @@ export const supplementRecordMockData: SupplementRecordData = {
 			dueDate: "2025.03.05",
 			effect: ["감기"],
 			memo: "1일 3회 복용",
+			img: itemImage,
 		},
 
 		{
@@ -133,6 +135,7 @@ export const supplementRecordMockData: SupplementRecordData = {
 			dueDate: "2025.03.05",
 			effect: ["감기"],
 			memo: "아침 저녁 복용",
+			img: itemImage,
 		},
 	],
 };

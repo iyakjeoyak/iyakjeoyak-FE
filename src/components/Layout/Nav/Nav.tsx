@@ -9,13 +9,13 @@ const MAIN_NAVS = [
 	{ name: "약 조회하기", to: "/search" },
 	{ name: "명예의 전당", to: "/fame" },
 	{ name: "근처 약국", to: "#" },
-	{ name: "마이 페이지", to: "/my-page" },
+	{ name: "마이 페이지", to: "/userInfo" },
 ];
 
 const SUB_NAVS = [
 	{ name: "로그인", to: "/login" },
 	{ name: "회원가입", to: "/signup" },
-	{ name: "마이페이지", to: "/my-page" },
+	{ name: "마이페이지", to: "/userInfo" },
 ];
 
 export default function Nav({

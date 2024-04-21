@@ -68,6 +68,10 @@ export interface ReviewData {
 	reviews: DetailedReview[];
 }
 
+export interface ReviewDisplayProps {
+	reviews: DetailedReview[];
+}
+
 export interface ShortPointHistory {
 	date: string;
 	category: string;
@@ -84,6 +88,7 @@ export interface SupplementInfo {
 	dueDate: string;
 	effect: string[];
 	memo: string;
+	img?: string;
 }
 
 export interface SupplementRecordData {
@@ -98,10 +103,4 @@ export interface LikedSupplement {
 
 export interface LikeRecordData {
 	likedSupplement: LikedSupplement[];
-}
-
-export interface MyPageBoxProps {
-	sectionType: "review" | "supplement";
-	reviews?: Review[];
-	supplements?: Supplement[];
 }

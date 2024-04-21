@@ -1,7 +1,7 @@
 import TagCommon from "@/components/Tag";
 import { Link } from "react-router-dom";
 import styles from "@/pages/fame/styles/FameBottom.module.scss";
-import profile from "../../../../public/images/no_profile_image.jpg";
+import profile from "/images/no_profile_image.jpg?url";
 
 export function FameBottom() {
 	const users = [

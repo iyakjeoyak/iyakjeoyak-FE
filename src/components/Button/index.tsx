@@ -1,36 +1,38 @@
-import { IconType } from "react-icons";
-import classNames from "classnames";
 import styles from "./index.module.scss";
+import { getButtonClasses, ButtonStyles } from "@/utils/getButtonClasses";
+import { Sizes, Variant } from "@/types/styleType";
 
-interface ButtonProps {
-	name?: string; // 버튼 텍스트
-	icon?: IconType; // 아이콘 버튼
-	onClick?: (() => Promise<void>) | (() => void);
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	icon?: JSX.Element;
+	onClick: () => Promise<void> | void;
 	type?: "submit" | "button";
-	variant?: "light" | "dark" | "icon"; // 버튼 색상
-	size?: "default" | "medium";
+	variant: Variant;
+	size?: Sizes;
+	className?: string;
 }
 
 export const Button = ({
-	name,
-	icon: Icon,
+	icon,
 	onClick,
-	type,
+	type = "button",
 	variant,
-	size = "default",
+	size = "m",
+	className,
+	children,
 }: ButtonProps) => {
-	const buttonClasses = classNames(styles.container, {
-		[styles.light]: variant === "light",
-		[styles.dark]: variant === "dark",
-		[styles.icon]: variant === "icon",
-		[styles.medium]: size === "medium",
-		[styles[size]]: size !== "default",
+	const buttonClasses = getButtonClasses(styles as ButtonStyles, {
+		variant,
+		size,
 	});
 
 	return (
-		<button className={buttonClasses} type={type} onClick={onClick}>
-			{Icon && <Icon />}
-			{name}
+		<button
+			className={`${buttonClasses} ${className}`}
+			type={type}
+			onClick={onClick}
+		>
+			{icon}
+			{children}
 		</button>
 	);
 };

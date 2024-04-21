@@ -10,12 +10,23 @@
 	height: 50rem;
 	@include mixins.m-large;
 
-	&.default {
+	&.xlarge {
+		width: 100%;
+	}
+
+	&.large {
 		width: 100%;
 	}
 
 	&.medium {
 		width: 75%;
+	}
+
+	&.small {
+		width: 50%;
+	}
+	&.xsmall {
+		width: 30%;
 	}
 }
 
@@ -29,8 +40,9 @@
 	color: #ffffff;
 }
 
-.icon {
-	background-color: transparent;
+.greentransparent {
+	background-color: white;
+	color: $main-green;
 }
 
 .disabled {

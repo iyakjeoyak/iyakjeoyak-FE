@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import * as yup from "yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+	FieldValues,
+	SubmitHandler,
+	useForm,
+	useFormContext,
+} from "react-hook-form";
 import { FormContext } from "@hooks/useFormContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "./Button";
@@ -16,6 +21,7 @@ interface FormProps {
 
 export const Form = ({ children, onSubmit, schema, className }: FormProps) => {
 	// 로딩 상태 변경 핸들러
+	const FormContext = useFormContext();
 	const [isLoading, setIsLoading] = useState(false);
 	const loadingHandler = (boolean: boolean) => setIsLoading(boolean);
 

@@ -7,6 +7,7 @@
 	margin-top: 28px;
 	padding: 1rem;
 	background-color: $white;
+	flex: 1;
 
 	.profileSection {
 		display: flex;
@@ -31,6 +32,7 @@
 			.nameArea {
 				display: flex;
 				align-items: center;
+
 				margin-top: 0.5rem;
 				margin-bottom: 0.2rem;
 
@@ -61,21 +63,13 @@
 	}
 
 	.myPageContent {
+		width: 100%;
+		height: 100%;
 		.pointSection {
 			display: flex;
-			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
-			background-color: $main-lightgreen;
-			min-height: 46px;
-			border-radius: 10px;
-			padding: 15rem;
-			margin-top: 15rem;
 
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
 			background-color: $main-lightgreen;
 			min-height: 46px;
 			border-radius: 10px;
@@ -84,7 +78,6 @@
 
 			.pointFixArea {
 				display: flex;
-				flex-direction: row;
 
 				.pointSVG {
 					width: 15rem;
@@ -99,7 +92,6 @@
 
 			.pointArea {
 				display: flex;
-				flex-direction: row;
 				align-items: center;
 				.userPoint {
 					@include mixins.sb-big;
@@ -113,62 +105,63 @@
 				}
 			}
 		}
+	}
+	.sectionBoxArea {
+		margin-bottom: 15rem;
+		margin-top: 18rem;
 
-		.sectionBoxArea {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		.sectionBoxHeader {
 			display: flex;
-			flex-direction: column;
-			margin-bottom: 15rem;
-			margin-top: 18rem;
+			flex-direction: row;
+			justify-content: space-between;
 
-			.sectionFixArea {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				margin-bottom: 7rem;
-				padding: 4rem;
+			margin-bottom: 7rem;
+			padding: 4rem;
 
-				.sectionTitle {
-					@include mixins.sb-big;
-					color: $point-blue;
-				}
-				.sectionDetail {
-					cursor: pointer;
-					@include mixins.sb-regular;
-					color: $point-blue;
-				}
+			.sectionTitle {
+				@include mixins.sb-big;
+				color: $point-blue;
 			}
-
-			.sectionBox {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: space-between;
-				border: 0.5px solid $gray3;
-				border-radius: 10px;
-				min-height: 46px;
-				margin-bottom: 5rem;
-				padding: 4rem 8rem;
-				.sectionName {
-					@include mixins.sb-medium;
-				}
-				.sectionRateBox {
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					@include mixins.m-medium;
-
-					.sectionText {
-					}
-					.sectionRate {
-					}
-				}
-
-				.sectionReviewBox {
-					.sectionText {
-						@include mixins.m-medium;
-					}
-				}
+			.sectionDetail {
+				cursor: pointer;
+				@include mixins.sb-regular;
+				color: $point-blue;
 			}
+		}
+	}
+}
+
+.sectionBox {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border: 0.5px solid $gray3;
+	border-radius: 10px;
+	min-height: 46px;
+	margin-bottom: 5rem;
+	padding: 4rem 8rem;
+
+	.sectionName {
+		@include mixins.sb-medium;
+	}
+	.sectionReviewBox {
+		@include mixins.m-medium;
+	}
+
+	.sectionRateBox {
+		display: flex;
+		align-items: center;
+		@include mixins.m-medium;
+
+		.sectionText {
+		}
+		.sectionRate {
 		}
 	}
 }

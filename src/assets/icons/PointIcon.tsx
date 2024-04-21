@@ -1,6 +1,6 @@
 import { FC, SVGProps } from "react";
 
-const Point: FC<SVGProps<SVGSVGElement>> = (props) => {
+const PointIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -20,18 +20,18 @@ const Point: FC<SVGProps<SVGSVGElement>> = (props) => {
 					id="SvgjsLinearGradient2960"
 				>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(105, 234, 203)"
+						stopOpacity="1"
+						stopColor="rgba(105, 234, 203)"
 						offset="0"
 					></stop>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(234, 204, 248)"
+						stopOpacity="1"
+						stopColor="rgba(234, 204, 248)"
 						offset="0.5"
 					></stop>
 					<stop
-						stop-opacity="1"
-						stop-color="rgba(34, 176, 190)"
+						stopOpacity="1"
+						stopColor="rgba(34, 176, 190)"
 						offset="1"
 					></stop>
 				</linearGradient>
@@ -40,4 +40,4 @@ const Point: FC<SVGProps<SVGSVGElement>> = (props) => {
 	);
 };
 
-export default Point;
+export default PointIcon;

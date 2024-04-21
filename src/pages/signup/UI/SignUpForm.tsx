@@ -53,7 +53,7 @@ export function SignUpForm() {
 	});
 
 	const onSubmit: SubmitHandler<SignUpData> = async (formData) => {
-		console.log(formData);
+		// console.log(formData);
 	};
 	return (
 		<div>
