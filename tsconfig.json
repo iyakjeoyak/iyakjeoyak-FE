@@ -15,7 +15,8 @@
 			"@pages/*": ["src/pages/*"],
 			"@router/*": ["src/router/*"],
 			"@styles/*": ["src/styles/*"],
-			"@utils/*": ["src/utils/*"]
+			"@utils/*": ["src/utils/*"],
+			"@types/*": ["src/types/*"]
 		},
 
 		/* Bundler mode */

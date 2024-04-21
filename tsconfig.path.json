@@ -1,31 +1,16 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./src",
-      "paths": {
-        "@/*" : [
-          "./*"
-        ],
-        "@assets/*" : [
-          "./assets/*"
-        ],
-        "@components/*" : [
-          "./components/*"
-        ],
-        "@hooks/*" : [
-            "./hooks/*"
-          ],
-        "@pages/*" : [
-            "./pages/*"
-          ],
-        "@router/*" : [
-            "./router/*"
-          ],
-        "@styles/*" : [
-            "./styles/*"
-          ],
-        "@utils/*" : [
-            "./utils/*"
-          ],
-      }
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"],
+			"@assets/*": ["./assets/*"],
+			"@components/*": ["./components/*"],
+			"@hooks/*": ["./hooks/*"],
+			"@pages/*": ["./pages/*"],
+			"@router/*": ["./router/*"],
+			"@styles/*": ["./styles/*"],
+			"@utils/*": ["./utils/*"],
+			"@types/*": ["./types/*"]
+		}
+	}
+}
