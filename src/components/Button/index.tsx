@@ -1,31 +1,29 @@
 import styles from "./index.module.scss";
-import { ElementType, useMemo } from "react";
 import { getButtonClasses, ButtonStyles } from "@/utils/getButtonClasses";
+import { Sizes, Variant } from "@/types/styleType";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	name?: string; // 버튼 텍스트
-	icon?: ElementType; // 아이콘 버튼
-	onClick?: (() => Promise<void>) | (() => void);
+	icon?: JSX.Element;
+	onClick: () => Promise<void> | void;
 	type?: "submit" | "button";
-	variant: "light" | "dark" | "greentransparent"; // 버튼 색상
-	size?: "default" | "medium";
+	variant: Variant;
+	size?: Sizes;
 	className?: string;
 }
 
 export const Button = ({
-	name,
-	icon: Icon,
+	icon,
 	onClick,
 	type = "button",
 	variant,
-	size = "default",
+	size = "m",
 	className,
 	children,
 }: ButtonProps) => {
-	const buttonClasses = useMemo(
-		() => getButtonClasses(styles as ButtonStyles, { variant, name, size }),
-		[variant, name, size],
-	);
+	const buttonClasses = getButtonClasses(styles as ButtonStyles, {
+		variant,
+		size,
+	});
 
 	return (
 		<button
@@ -33,8 +31,8 @@ export const Button = ({
 			type={type}
 			onClick={onClick}
 		>
-			{Icon && <Icon />}
-			{children || (name && <span>{name}</span>)}
+			{icon}
+			{children}
 		</button>
 	);
 };
