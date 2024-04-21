@@ -1,7 +1,14 @@
 import style from "../style/commonheaderbox.module.scss";
-import { MyPageCommonHeaderProps } from "../userInfoType";
 
-const CommonHeaderBox: React.FC<MyPageCommonHeaderProps> = ({
+interface UserCommonHeaderProps {
+	titleText: string;
+	count: number;
+	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+	onClick: (evet: React.MouseEvent<SVGSVGElement>) => void;
+	className: string;
+}
+
+const CommonHeaderBox: React.FC<UserCommonHeaderProps> = ({
 	onClick,
 	titleText,
 	count,

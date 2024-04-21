@@ -118,7 +118,7 @@ export const pointMockData: PointData = {
 	reviewMockData,
 };
 
-export const supplementRecordMockData: SupplementRecordData = {
+export const supplementRecords: SupplementRecordData = {
 	mySupplements: [
 		{
 			name: "비타민D",

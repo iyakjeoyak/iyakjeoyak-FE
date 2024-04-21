@@ -2,15 +2,18 @@
 @use "@styles/mixin.scss" as mixins;
 .container {
 	display: flex;
-	flex-direction: row;
+	align-items: center;
 	border: 1px solid $main-gray;
-	padding: 10rem 10rem;
+	padding: 10rem;
 	border-radius: 10px;
 	width: 90%;
 }
 
 .icon {
 	margin-right: 10rem;
+	width: 30rem;
+	height: 30rem;
+	color: $main-green;
 }
 
 .title {

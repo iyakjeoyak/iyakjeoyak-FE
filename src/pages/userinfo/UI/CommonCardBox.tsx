@@ -1,8 +1,8 @@
 import { MouseEventHandler } from "react";
-import TagCommon from "@/components/Tag";
 import style from "../style/commoncardbox.module.scss";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import { Button } from "@/components/Button";
+import UserCardInfo from "./UserCardInfo";
 
 interface CardProps {
 	title?: string;
@@ -15,13 +15,10 @@ interface CardProps {
 }
 
 const CommonCardBox: React.FC<CardProps> = ({
-	title,
-	date,
 	img,
-	memo,
-	tagText,
 	form = "slim",
 	onClick,
+	...UserCardInfoProps
 }) => {
 	const cardStyle = `${style.card} ${style[form]}`;
 
@@ -31,26 +28,14 @@ const CommonCardBox: React.FC<CardProps> = ({
 				<img src={img} className={style.cardImage} />
 			) : (
 				<Button
-					icon={PlusIcon}
+					icon={<PlusIcon />}
 					onClick={() => console.log("모냐")}
 					variant="greentransparent"
-					size="medium"
+					size="l"
 				/>
 			)}
 
-			<div className={style.cardContent}>
-				{title && <div className={style.cardTitle}>{title}</div>}
-				{date && <time className={style.cardDate}>{date} 까지</time>}
-				{memo && <p className={style.cardMemo}>{memo}</p>}
-				{tagText && (
-					<TagCommon
-						text={tagText}
-						backgroundColor="green"
-						size="small"
-						className={style.cardTag}
-					/>
-				)}
-			</div>
+			<UserCardInfo {...UserCardInfoProps} />
 		</div>
 	);
 };

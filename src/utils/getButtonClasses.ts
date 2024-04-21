@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ElementType } from "react";
+import { Sizes, Variant } from "@/types/styleType";
 
 export interface ButtonStyles {
 	container: string;
@@ -11,9 +12,9 @@ export interface ButtonStyles {
 }
 
 export interface ButtonOptions {
-	variant: "light" | "dark" | "greentransparent";
+	variant: Variant;
 	name?: string;
-	size: "default" | "medium";
+	size?: Sizes;
 	transparent?: ElementType;
 }
 
@@ -27,8 +28,11 @@ export const getButtonClasses = (
 			[styles.light]: variant === "light",
 			[styles.dark]: variant === "dark",
 			[styles.greentransparent]: variant === "greentransparent" && !name,
-			[styles.medium]: size === "medium",
-			[styles.default]: size === "default",
+			[styles.xlarge]: size === "xl",
+			[styles.large]: size === "l",
+			[styles.medium]: size === "m",
+			[styles.small]: size === "s",
+			[styles.xsmall]: size === "xs",
 		},
 		[styles, variant, name, size],
 	);

@@ -1,10 +1,10 @@
 import "@styles/global.scss";
 
-import { DetailedReview } from "../userInfoType";
+import { ReviewDisplayProps } from "../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../style/reviewdisplay.module.scss";
 
-const ReviewDisplay = (reviews: DetailedReview[]) => {
+const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 	return (
 		<div className={style.reviewContainer}>
 			{reviews.map((review, index) => (

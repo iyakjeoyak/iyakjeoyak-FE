@@ -21,7 +21,7 @@ export default function Header() {
 					fill={"#ffffff"}
 					width="60px"
 					onClick={() => {
-						navigate("/");
+						navigate("/home");
 					}}
 				/>
 				<FiMenu onClick={toggleIsOpenNav} size="40px" color="white" />

@@ -13,17 +13,15 @@
 
 	.cardGrid {
 		display: grid;
-		width: 100%;
+		width: fit-content;
 		justify-content: center;
-		grid-template-columns: repeat(2, 0fr);
-		gap: 20rem;
-
+		grid-template-columns: repeat(2, 1fr);
+		gap: 17rem;
 		&.wide {
-			width: 100%;
 			grid-template-columns: 1fr;
 			justify-content: center;
 			width: fit-content;
-			margin: auto;
+			gap: 15rem;
 		}
 	}
 }

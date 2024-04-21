@@ -1,11 +1,12 @@
 import style from "../index.module.scss";
 import PointIcon from "@/assets/icons/PointIcon";
-import { UserPointInfoProps } from "../userInfoType";
 
-const SimplePointBox: React.FC<UserPointInfoProps> = ({
-	points,
-	onNavigate,
-}) => {
+interface UserPointInfoProps {
+	points: number;
+	onNavigate: () => void;
+}
+
+const UserPointBox: React.FC<UserPointInfoProps> = ({ points, onNavigate }) => {
 	return (
 		<section className={style.myPageContent}>
 			<section className={style.pointSection}>
@@ -25,4 +26,4 @@ const SimplePointBox: React.FC<UserPointInfoProps> = ({
 	);
 };
 
-export default SimplePointBox;
+export default UserPointBox;

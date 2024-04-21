@@ -1,33 +1,30 @@
 import "@styles/global.scss";
 import style from "./index.module.scss";
-import { userMockData } from "./mockData";
-import SimpleInfoBox from "./UI/SimpleInfoBox";
-import { UserData } from "./userInfoType";
-
+import { userMockData as userData } from "./mockData";
 import { useNavigate } from "react-router-dom";
 import UserInfoBox from "./UI/UserInfoBox";
-import SimplePointBox from "./UI/SimplePointBox";
+import SimplePointBox from "./UI/UserPointBox";
+import { UserInfoContent } from "./UI";
+import FlexBox from "@/styles/FlexBox";
 
-const UserInfo: React.FC = () => {
+const UserInfo = () => {
 	const navigate = useNavigate();
-	const userData: UserData = userMockData;
 
-	const pointDetail = () => {
+	const goToPointDetail = () => {
 		navigate(`/userinfo/point`);
 	};
 
 	return (
 		<section className={style.mypageContainer}>
 			<UserInfoBox userData={userData} />
-
-			<SimplePointBox points={userData.points} onNavigate={pointDetail} />
-
-			<SimpleInfoBox sectionType="review" reviews={userData.latestReviews} />
-
-			<SimpleInfoBox
-				sectionType="supplement"
-				supplements={userData.favoriteSupplements}
-			/>
+			<FlexBox direction="column">
+				<SimplePointBox points={userData.points} onNavigate={goToPointDetail} />
+				<UserInfoContent sectionType="review" data={userData.latestReviews} />
+				<UserInfoContent
+					sectionType="supplement"
+					data={userData.favoriteSupplements}
+				/>
+			</FlexBox>
 		</section>
 	);
 };

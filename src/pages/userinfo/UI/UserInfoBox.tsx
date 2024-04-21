@@ -1,12 +1,16 @@
 import style from "../index.module.scss";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
-import { UserInfoBoxProps } from "../userInfoType";
+import { UserData } from "../userInfoType";
 import TagCommon from "@/components/Tag";
 import ModalContainer from "@/components/ModalContainer";
-import React, { useState } from "react";
+import { useState } from "react";
 import UserInfoEdit from "../UI/UserInfoEdit";
 
-const UserInfoBox: React.FC<UserInfoBoxProps> = ({ userData }) => {
+export interface UserInfoBoxProps {
+	userData: UserData;
+}
+
+const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const toggleModalOpen = () => {
