@@ -9,6 +9,7 @@ interface ButtonProps {
 	variant?: "light" | "dark" | "icon"; // 버튼 색상
 	size?: "default" | "medium";
 	type: "submit" | "button";
+	onClick?: () => void;
 }
 
 export const Button = ({
@@ -18,6 +19,7 @@ export const Button = ({
 	variant,
 	size = "default",
 	type = "submit",
+	onClick,
 }: ButtonProps) => {
 	const buttonClasses = classNames(styles.container, {
 		[styles.light]: variant === "light",
@@ -30,6 +32,7 @@ export const Button = ({
 		<button
 			className={`${buttonClasses} m-large ${className || ""}`}
 			type={type}
+			onClick={onClick}
 		>
 			{Icon && <Icon />}
 			{text}

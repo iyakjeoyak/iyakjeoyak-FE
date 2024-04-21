@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import * as yup from "yup";
 export const signupValidation = yup.object().shape({
 	username: yup
@@ -30,7 +31,25 @@ export const signupValidation = yup.object().shape({
 		.integer("나이를 정수로 입력하세요.")
 		.positive("나이는 양수여야 합니다.")
 		.required("나이를 입력하세요."),
-
-	// tag: yup.array().of(yup.string()).required("태그를 입력하세요."),
+	tag: yup
+		.array()
+		.of(yup.string())
+		.min(1, "태그를 선택하세요.")
+		.required("태그를 선택하세요."),
 });
-//useMemo사용하기
+
+// useMemo사용하기
+export const useSignupValidation = () => {
+	const validationSchema = useMemo(() => signupValidation, []);
+	return validationSchema;
+};
+
+export const signUpDefault = {
+	username: "", // 아이디
+	password: "", // 비밀번호
+	confirmPassword: "", // 비밀번호 검사
+	nickname: "", // 닉네임
+	gender: "", // 성별
+	age: undefined, // 나이
+	tag: [], //태그
+};

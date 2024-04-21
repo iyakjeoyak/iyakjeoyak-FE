@@ -19,7 +19,7 @@ export const Input = <T,>({
 	const { register } = useFormContext();
 	return (
 		<label className={styles.container}>
-			{title && <div className={className}>{title}</div>}
+			{title && <div>{title}</div>}
 			<input
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록

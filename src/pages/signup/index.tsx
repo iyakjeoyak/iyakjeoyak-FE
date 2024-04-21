@@ -1,6 +1,6 @@
 import { PathButton } from "@/components/PathButton/PathButton";
 import { useLocation } from "react-router-dom";
-import SignUpForm from "./UI/SignUpForm";
+import { SignUpForm } from "./UI/SignUpForm";
 
 function SignUp() {
 	const location = useLocation();

@@ -4,8 +4,8 @@ import { useFormContext } from "react-hook-form";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { ErrorMessage } from "@hookform/error-message";
-import { loginValidation } from "./loginValidation";
-import styles from "../styles/LoginBtnForm.module.scss";
+import { useLoginValidation } from "./loginValidation";
+import styles from "../styles/LoginForm.module.scss";
 import { DevTool } from "@hookform/devtools";
 export interface LoginType {
 	username: string; // 아이디
@@ -15,7 +15,7 @@ export interface LoginType {
 export default function LoginForm() {
 	return (
 		// 로그인 유효성 검사
-		<Form validationSchema={loginValidation}>
+		<Form validationSchema={useLoginValidation()}>
 			<LoginInput />
 		</Form>
 	);
