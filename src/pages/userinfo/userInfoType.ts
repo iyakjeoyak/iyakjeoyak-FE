@@ -68,6 +68,10 @@ export interface ReviewData {
 	reviews: DetailedReview[];
 }
 
+export interface ReviewDisplayProps {
+	reviews: DetailedReview[];
+}
+
 export interface ShortPointHistory {
 	date: string;
 	category: string;
@@ -99,27 +103,4 @@ export interface LikedSupplement {
 
 export interface LikeRecordData {
 	likedSupplement: LikedSupplement[];
-}
-
-export interface MyPageBoxProps {
-	sectionType: "review" | "supplement";
-	reviews?: Review[];
-	supplements?: Supplement[];
-}
-
-export interface MyPageCommonHeaderProps {
-	titleText: string;
-	count: number;
-	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-	onClick: (evet: React.MouseEvent<SVGSVGElement>) => void;
-	className: string;
-}
-
-export interface UserInfoBoxProps {
-	userData: UserData;
-}
-
-export interface UserPointInfoProps {
-	points: number;
-	onNavigate: () => void;
 }
