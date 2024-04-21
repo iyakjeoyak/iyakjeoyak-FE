@@ -1,76 +1,77 @@
 import { Link } from "react-router-dom";
 import { Form } from "@/components/Form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
-import * as yup from "yup";
+import { ErrorMessage } from "@hookform/error-message";
+import { loginValidation } from "./loginValidation";
 import styles from "../styles/LoginBtnForm.module.scss";
-
-export interface LoginData {
-	username: string;
+import { DevTool } from "@hookform/devtools";
+export interface LoginType {
+	username: string; // 아이디
 	password: string;
 }
 
 export default function LoginForm() {
-	const schema = yup.object().shape({
-		username: yup
-			.string()
-			.min(6, "아이디는 6자리 이상이어야합니다.")
-			.required("아이디를 입력하세요."),
-		password: yup
-			.string()
-			.min(8, "비밀번호는 8자리 이상이어야 합니다.")
-			.required("비밀번호를 입력하세요."),
-	});
+	return (
+		// 로그인 유효성 검사
+		<Form validationSchema={loginValidation}>
+			<LoginInput />
+		</Form>
+	);
+}
+
+function LoginInput() {
 	const {
-		register,
 		handleSubmit,
 		formState: { errors },
-		watch,
-	} = useForm<LoginData>({
-		resolver: yupResolver(schema),
-	});
+		control,
+	} = useFormContext<LoginType>();
 
-	console.log(watch("username"));
+	const onSubmit = async (data: LoginType) => {
+		console.log(data);
+	};
+	const handleClick = async () => {};
 
-	const onSubmit: SubmitHandler<LoginData> = async (formData) => {
-		console.log(formData);
-	};
-	const handleClick = async () => {
-		console.log("button formData:", watch());
-	};
-	// const onInvalid = (data) => console.log(data, "onInvalid");
 	return (
 		<>
 			<div>
-				<Form schema={schema} onSubmit={() => handleSubmit(onSubmit)}>
-					<Form.Input
-						text="아이디"
-						type="text"
-						placeholder="아이디를 입력해주세요."
-						{...register("username", { required: true })}
-					/>
-					{errors.username && (
-						<p className="error">{errors.username.message}</p>
-					)}
-					<Form.Input
-						text="비밀번호"
-						type="password"
-						placeholder="비밀번호를 입력해주세요."
-						{...register("password", { required: true })}
-					/>
-					{errors.password && (
-						<p className="error">{errors.password.message}</p>
-					)}
-				</Form>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<div>
+						<Form.Input<LoginType>
+							name="username"
+							title="아이디"
+							placeholder="아이디를 입력해주세요."
+							type="text"
+						/>
+						{/* <div>{formState.errors.username?.message}</div> */}
+						<ErrorMessage
+							errors={errors}
+							name="username"
+							render={({ message }) => <p>{message}</p>}
+						/>
+					</div>
+					<div>
+						<Form.Input<LoginType>
+							name="password"
+							title="비밀번호"
+							placeholder="비밀번호를 입력해주세요."
+							type="password"
+						/>
+						<ErrorMessage
+							errors={errors}
+							name="password"
+							render={({ message }) => <p>{message}</p>}
+						/>
+					</div>
+				</form>
 			</div>
 			<div className={styles.wrap}>
 				<div className={styles.textWrap}>
 					<div className={`m-big`}>SNS 계정으로 로그인</div>
 				</div>
 
-				<Form onSubmit={() => {}}>
+				<form onSubmit={() => {}}>
 					<div className={styles.container}>
 						<div className={styles.google}>
 							<Form.Button icon={FcGoogle} variant="icon" />
@@ -91,8 +92,9 @@ export default function LoginForm() {
 						onClick={handleClick}
 						variant="dark"
 					/>
-				</Form>
+				</form>
 			</div>
+			<DevTool control={control} />
 		</>
 	);
 }
