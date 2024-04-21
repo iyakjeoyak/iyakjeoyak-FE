@@ -92,25 +92,17 @@ function SignUpInput() {
 					/>
 				</div>
 
-				{/* <div>
+				<div>
 					<div>성별</div>
-					<Form.RadioButton
-						text="남성"
-						value="남성"
-						{...register("gender", { required: true })}
+					<Form.RadioButton name="gender" text="남성" value="남성" />
+					<Form.RadioButton name="gender" text="여성" value="여성" />
+					<Form.RadioButton name="gender" text="비공개" value="비공개" />
+					<ErrorMessage
+						errors={errors}
+						name="gender"
+						render={({ message }) => <p>{message}</p>}
 					/>
-					<Form.RadioButton
-						text="여성"
-						value="여성"
-						{...register("gender", { required: true })}
-					/>
-					<Form.RadioButton
-						text="비공개"
-						value="비공개"
-						{...register("gender", { required: true })}
-					/>
-					{errors.gender && <p className="error">{errors.gender.message}</p>}
-				</div> */}
+				</div>
 
 				<div>
 					<Form.Input<SignUpType>

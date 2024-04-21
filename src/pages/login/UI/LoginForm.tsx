@@ -31,7 +31,6 @@ function LoginInput() {
 	const onSubmit = async (data: LoginType) => {
 		console.log(data);
 	};
-	const handleClick = async () => {};
 
 	return (
 		<>
@@ -74,10 +73,14 @@ function LoginInput() {
 				<form onSubmit={() => {}}>
 					<div className={styles.container}>
 						<div className={styles.google}>
-							<Form.Button icon={FcGoogle} variant="icon" />
+							<Form.Button icon={FcGoogle} type="submit" variant="icon" />
 						</div>
 						<div className={styles.kakao}>
-							<Form.Button icon={RiKakaoTalkFill} variant="icon" />
+							<Form.Button
+								icon={RiKakaoTalkFill}
+								type="submit"
+								variant="icon"
+							/>
 						</div>
 					</div>
 					<div className={styles.registerWrap}>
@@ -86,12 +89,7 @@ function LoginInput() {
 							회원가입하러 가기
 						</Link>
 					</div>
-					<Form.Button
-						name="로그인"
-						type="submit"
-						onClick={handleClick}
-						variant="dark"
-					/>
+					<Form.Button text="로그인" type="submit" variant="dark" />
 				</form>
 			</div>
 			<DevTool control={control} />
