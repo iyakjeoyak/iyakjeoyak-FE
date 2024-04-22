@@ -1,7 +1,7 @@
 import styles from "@/components/Form/ImgInput/index.module.scss";
 import getImgPreview from "@/utils/getImgPreview";
 import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { FiPlusCircle } from "react-icons/fi";
 
 interface ImgInput {
@@ -9,11 +9,11 @@ interface ImgInput {
 	title?: string;
 }
 export const ImgInput = ({ name, title }: ImgInput) => {
-	const { register, watch } = useFormContext();
+	const { register } = useFormContext();
 	// 이미지 미리보기 URL 상태 관리
 	const [previewUrl, setPreviewUrl] = useState<string | undefined>();
 
-	const fileList = watch(name);
+	const fileList = useWatch({ name });
 	console.log("fileList", fileList);
 	// file url로 변환
 	useEffect(() => {

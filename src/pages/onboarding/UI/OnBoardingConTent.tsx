@@ -1,5 +1,5 @@
 import styles from "../styles/OnBoardingForm.module.scss";
-function OnBoardingForm() {
+function OnBoardingConTent() {
 	return (
 		<div className={styles.container}>
 			<img src="/images/onboarding.png" alt="logo" />
@@ -12,4 +12,4 @@ function OnBoardingForm() {
 	);
 }
 
-export default OnBoardingForm;
+export default OnBoardingConTent;
