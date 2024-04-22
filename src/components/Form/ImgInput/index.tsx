@@ -1,4 +1,5 @@
 import styles from "@/components/Form/ImgInput/index.module.scss";
+import getImgPreview from "@/utils/getImgPreview";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FiPlusCircle } from "react-icons/fi";
@@ -13,19 +14,15 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 	const [previewUrl, setPreviewUrl] = useState<string | undefined>();
 
 	const fileList = watch(name);
-	console.log("file", fileList);
+	console.log("fileList", fileList);
 	// file url로 변환
 	useEffect(() => {
 		if (fileList && fileList.length > 0) {
 			const file = fileList[0];
 			if (file instanceof File) {
-				const reader = new FileReader();
-				reader.onload = () => {
-					if (typeof reader.result === "string") {
-						setPreviewUrl(reader.result);
-					}
-				};
-				reader.readAsDataURL(file);
+				getImgPreview(file, setPreviewUrl, (prev) =>
+					console.log("이미지 첨부", prev),
+				);
 			}
 		}
 	}, [fileList]);
@@ -59,16 +56,3 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 		</div>
 	);
 };
-
-{
-	/* <img
-				className={
-					profileImage === defaultImage
-						? style.defaultProfile
-						: style.userProfile
-				}
-				src={profileImage}
-				alt="사용자 프로필"
-				onClick={handleImageClick}
-			/> */
-}
