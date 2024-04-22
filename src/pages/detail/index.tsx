@@ -3,7 +3,8 @@ import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import styles from "./index.module.scss";
-import { useState } from "react";
+import useGetURLSearch from "@/hooks/useGetURLSearch";
+import { useNavigate } from "react-router-dom";
 
 const TAPS = [
 	{
@@ -17,12 +18,12 @@ const TAPS = [
 ];
 
 export default function DetailIdPage() {
-	const [currentTapValue, setCurrentTapValue] = useState<string>(
-		TAPS_QUERIES.INFO,
-	);
+	const navigate = useNavigate();
 
-	const handleChangeCurrentTapValue = (tapValue: string) => {
-		setCurrentTapValue(tapValue);
+	const currentTapValue = useGetURLSearch("tap");
+
+	const handleTapClick = (tapValue: string) => {
+		navigate(`/detail/1?tap=${tapValue}`);
 	};
 
 	return (
@@ -30,12 +31,8 @@ export default function DetailIdPage() {
 			<section className={styles.container}>
 				<MedicineCard />
 				<div className={styles.board}>
-					<TapBar
-						taps={TAPS}
-						currentTapValue={currentTapValue}
-						handleChangeCurrentTapValue={handleChangeCurrentTapValue}
-					/>
-					{currentTapValue === "all" ? <InfoBoard /> : <ReviewBoard />}
+					<TapBar taps={TAPS} onClick={handleTapClick} />
+					{currentTapValue === "review" ? <ReviewBoard /> : <InfoBoard />}
 				</div>
 			</section>
 		</>

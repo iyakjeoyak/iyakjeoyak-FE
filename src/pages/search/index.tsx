@@ -2,7 +2,7 @@ import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TAPS = [
 	{
@@ -20,10 +20,10 @@ const TAPS = [
 ];
 
 export default function SearchPage() {
-	const [currentTapValue, setCurrentTapValue] = useState("all");
+	const navigate = useNavigate();
 
-	const handleChangeCurrentTapValue = (tapValue: string) => {
-		setCurrentTapValue(tapValue);
+	const handleTapClick = (tapValue: string) => {
+		navigate(`/search?tap=${tapValue}`);
 	};
 
 	return (
@@ -33,11 +33,7 @@ export default function SearchPage() {
 				<SearchBar.SearchResultList />
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
-			<TapBar
-				taps={TAPS}
-				currentTapValue={currentTapValue}
-				handleChangeCurrentTapValue={handleChangeCurrentTapValue}
-			/>
+			<TapBar taps={TAPS} onClick={handleTapClick} />
 			<MedicineCardList />
 		</section>
 	);
