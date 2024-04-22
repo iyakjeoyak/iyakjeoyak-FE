@@ -17,7 +17,7 @@ const TAPS = [
 	},
 ];
 
-export default function DetailIdPage() {
+export default function DetailMedicineById() {
 	const navigate = useNavigate();
 
 	const currentTapValue = useGetURLSearch("tap");

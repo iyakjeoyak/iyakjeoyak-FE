@@ -19,7 +19,7 @@ const TAPS = [
 	},
 ];
 
-export default function SearchPage() {
+export default function MedicineSearch() {
 	const navigate = useNavigate();
 
 	const handleTapClick = (tapValue: string) => {

@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 
-export default function MainPage() {
+export default function Main() {
 	const navigate = useNavigate();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
