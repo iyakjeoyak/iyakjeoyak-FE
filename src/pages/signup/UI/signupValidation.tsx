@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import * as yup from "yup";
 export const signupValidation = yup.object().shape({
+	profileImage: yup.mixed().required("이미지를 선택해주세요."),
 	username: yup
 		.string()
 		.matches(
@@ -45,6 +46,7 @@ export const useSignupValidation = () => {
 };
 
 export const signUpDefault = {
+	profileImage: undefined,
 	username: "", // 아이디
 	password: "", // 비밀번호
 	confirmPassword: "", // 비밀번호 검사

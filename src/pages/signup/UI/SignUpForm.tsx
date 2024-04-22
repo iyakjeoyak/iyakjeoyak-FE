@@ -6,8 +6,10 @@ import { DevTool } from "@hookform/devtools";
 import { tagData } from "../../../components/Form/TagButton/TagData";
 import TagButton from "@/components/Form/TagButton";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
+import { ImgInput } from "@/components/Form/ImgInput";
 
 export interface SignUpType {
+	profileImage: File;
 	username: string; // 아이디
 	password: string; // 비밀번호
 	confirmPassword: string; // 비밀번호 검사
@@ -42,6 +44,14 @@ function SignUpInput() {
 	return (
 		<div>
 			<form className={`${styles.container}`} onSubmit={handleSubmit(onSubmit)}>
+				<div>
+					<ImgInput name="profileImage" />
+					<ErrorMessage
+						errors={errors}
+						name="profileImage"
+						render={({ message }) => <p>{message}</p>}
+					/>
+				</div>
 				<div>
 					<Form.Input<SignUpType>
 						name="username"

@@ -1,4 +1,4 @@
-import styles from "@/components/Form/RadioButton/RadioButton.module.scss";
+import styles from "./index.module.scss";
 import { useFormContext } from "react-hook-form";
 
 interface RadioButtonProps<T> {
