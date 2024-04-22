@@ -1,7 +1,5 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
-import { SORT_OPTIONS, SORT_QUERIES } from "@/constants/SORT_OPTIONS";
 
-import SelectSort from "@/components/SelectSort";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import styles from "./index.module.scss";
@@ -22,16 +20,9 @@ export default function DetailIdPage() {
 	const [currentTapValue, setCurrentTapValue] = useState<string>(
 		TAPS_QUERIES.INFO,
 	);
-	const [currentSortValue, setCurrentSortValue] = useState<string>(
-		SORT_QUERIES.BEST,
-	);
 
 	const handleChangeCurrentTapValue = (tapValue: string) => {
 		setCurrentTapValue(tapValue);
-	};
-
-	const handleCurrentSortValue = (sortValue: string) => {
-		setCurrentSortValue(sortValue);
 	};
 
 	return (
@@ -44,18 +35,7 @@ export default function DetailIdPage() {
 						currentTapValue={currentTapValue}
 						handleChangeCurrentTapValue={handleChangeCurrentTapValue}
 					/>
-					{currentTapValue === "all" ? (
-						<InfoBoard />
-					) : (
-						<>
-							<SelectSort
-								options={SORT_OPTIONS}
-								currentValue={currentSortValue}
-								handleCurrentValue={handleCurrentSortValue}
-							/>
-							<ReviewBoard />
-						</>
-					)}
+					{currentTapValue === "all" ? <InfoBoard /> : <ReviewBoard />}
 				</div>
 			</section>
 		</>
