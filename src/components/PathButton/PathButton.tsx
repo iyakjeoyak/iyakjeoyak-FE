@@ -1,4 +1,4 @@
-import { pathName } from "@/utils/pathName";
+import { pathName } from "@/constants/pathName";
 import React from "react";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
