@@ -1,0 +1,16 @@
+@use "@styles/mixin.scss" as mixins;
+@use "@styles/variables.scss" as *;
+.starRatingContainer {
+	display: flex;
+	align-items: center;
+	.stars {
+		display: flex;
+		color: #ffc700;
+		width: 60rem;
+	}
+	.ratingNumber {
+		margin-left: 5rem;
+		color: $black;
+		@include mixins.sb-regular;
+	}
+}

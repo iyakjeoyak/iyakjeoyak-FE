@@ -1,0 +1,56 @@
+@use "@/styles/mixin.scss" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 20px;
+	height: 50rem;
+	@include mixins.m-large;
+
+	&.xlarge {
+		width: 100%;
+	}
+
+	&.large {
+		width: 100%;
+	}
+
+	&.medium {
+		width: 75%;
+	}
+
+	&.small {
+		width: 50%;
+	}
+	&.xsmall {
+		width: 30%;
+	}
+}
+
+.light {
+	background-color: $main-lightgreen;
+	color: $main-green;
+}
+
+.dark {
+	background-color: $main-green;
+	color: #ffffff;
+}
+
+.greentransparent {
+	background-color: white;
+	color: $main-green;
+}
+
+.disabled {
+	color: $main-green;
+	background-color: $main-lightgreen;
+}
+
+.active {
+	color: $white;
+	background-color: $main-green;
+}

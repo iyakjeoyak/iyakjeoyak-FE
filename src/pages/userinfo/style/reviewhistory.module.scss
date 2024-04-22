@@ -1,0 +1,23 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/global.scss";
+@import "@styles/variables.scss";
+
+// .noReviewContainer {
+// 	display: flex;
+// 	flex-direction: column;
+// 	width: 100%;
+// 	align-items: center;
+
+// 	.noReviewContent {
+// 		.noReviewTitle {
+// 			@include mixins.m-big;
+// 		}
+// 	}
+// }
+.reviewContainer {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

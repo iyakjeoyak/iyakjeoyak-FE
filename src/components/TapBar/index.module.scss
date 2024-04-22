@@ -1,0 +1,22 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	padding-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	@include mixins.sb-big;
+	.item {
+		text-align: center;
+		width: 100%;
+		padding: 5px;
+		border-bottom: 1px solid $gray3;
+		&.active {
+			background-color: $white;
+			color: $main-green;
+			border-bottom: 2px solid $main-green;
+		}
+	}
+}

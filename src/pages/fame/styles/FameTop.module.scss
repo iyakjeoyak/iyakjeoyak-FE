@@ -1,0 +1,40 @@
+.contaier {
+  display: flex;
+  flex-wrap: wrap;
+
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  &>li:nth-child(1) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &>li:nth-child(2) {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .gold {
+    background-color: gold;
+  }
+
+  .silver {
+    background-color: silver;
+  }
+
+  .bronze {
+    background-color: #cd7f32;
+
+  }
+}
