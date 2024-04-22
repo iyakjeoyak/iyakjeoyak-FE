@@ -1,25 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { routerpaths } from "@/utils/pathName";
-import DetailIdPage from "@/pages/detail";
-import Layout from "@/components/Layout";
-import LoginPage from "@pages/login";
-import MainPage from "@pages/main";
-import SearchPage from "@/pages/search";
-import UserInfo from "@/pages/userinfo";
-import SignUpPage from "@/pages/signup";
-import OnBoarding from "@/pages/onboarding";
-import { Fame } from "@/pages/fame";
 import {
 	PointHistory,
 	ReviewHistory,
 	SupplementHistory,
 } from "@/pages/userinfo/UI";
 
+import DetailIdPage from "@/pages/detail";
+import { Fame } from "@/pages/fame";
+import Layout from "@/components/Layout";
+import LoginPage from "@pages/login";
+import MainPage from "@pages/main";
+import OnBoarding from "@/pages/onboarding";
+import SearchPage from "@/pages/search";
+import SignUpPage from "@/pages/signup";
+import UserInfo from "@/pages/userinfo";
+import { routerpaths } from "@/utils/pathName";
+
 function Router() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route element={<Layout />}>
+				<Route
+					element={<Layout />}
+					errorElement={<section>잘못된 접근입니다</section>}
+				>
 					<Route path={routerpaths.HOME} element={<MainPage />} />
 					<Route path={routerpaths.ONBOARDING} element={<OnBoarding />} />
 					<Route path={routerpaths.SEARCH} element={<SearchPage />} />
@@ -34,7 +38,6 @@ function Router() {
 						path={routerpaths.SUPPLEMENTHISTORY}
 						element={<SupplementHistory />}
 					/>
-					<Route path="*" element={<section>잘못된 접근입니다</section>} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

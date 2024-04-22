@@ -1,8 +1,6 @@
-import { useLocation, useNavigate } from "react-router-dom";
-
 import { motion } from "framer-motion";
 import styles from "./Nav.module.scss";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MAIN_NAVS = [
 	{ name: "홈", to: "/home" },
@@ -24,12 +22,6 @@ export default function Nav({
 	toggleIsOpenNav: () => void;
 }) {
 	const navigator = useNavigate();
-
-	const location = useLocation();
-
-	useEffect(() => {
-		toggleIsOpenNav();
-	}, [location, toggleIsOpenNav]);
 
 	return (
 		<motion.nav

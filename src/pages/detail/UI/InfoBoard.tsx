@@ -7,7 +7,7 @@ export default function InfoBoard() {
 			<InfoBoardItemContainer title="👍 이런 분에게 추천합니다!">
 				내용
 			</InfoBoardItemContainer>
-			<InfoBoardItemContainer title="💊 함량 성분" isMoreBtn={true}>
+			<InfoBoardItemContainer title="💊 함량 성분" hasMoreBtn>
 				내용
 			</InfoBoardItemContainer>
 			<InfoBoardItemContainer title="🕛 복용 방법 & 시간">
