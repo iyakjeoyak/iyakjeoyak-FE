@@ -11,7 +11,7 @@
 	padding: 20px;
 	padding-top: 40px;
 	min-height: 200px;
-	z-index: 1;
+	z-index: $z-index-modalContainer;
 	.element {
 		height: 7px;
 		width: 80px;

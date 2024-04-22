@@ -1,18 +1,25 @@
 import "./Header.module.scss";
 
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FiMenu } from "react-icons/fi";
 import LogoIcon from "@assets/icons/LogoIcon";
 import Nav from "../Nav/Nav";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export default function Header() {
 	const navigate = useNavigate();
 	const [isOpenNav, setIsOpenNav] = useState(false);
 
-	const toggleIsOpenNav = () => {
+	const toggleIsOpenNav = useCallback(() => {
 		setIsOpenNav((prev) => !prev);
-	};
+	}, []);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		setIsOpenNav(false);
+	}, [location, toggleIsOpenNav]);
 
 	return (
 		<>

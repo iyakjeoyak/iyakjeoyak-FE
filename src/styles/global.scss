@@ -82,7 +82,7 @@ main {
 	left: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 998;
+	z-index: vars.$z-index-modalBackground;
 }
 
 /* 스크롤 스타일 */
