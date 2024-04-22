@@ -3,7 +3,7 @@
 		"target": "ES2020",
 		"useDefineForClassFields": true,
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"types": ["vite/client", "vite-plugin-svgr"],
+		"types": ["vite/client", "vite-plugin-svgr/client", "jest", "node"],
 		"module": "ESNext",
 		"skipLibCheck": true,
 		"baseUrl": ".",
@@ -35,5 +35,8 @@
 		"noFallthroughCasesInSwitch": true
 	},
 	"include": ["src", ".storybook/**/*"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [{ "path": "./tsconfig.node.json" }],
+	"jest": {
+		"preset": "ts-jest"
+	}
 }

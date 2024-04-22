@@ -1,12 +1,22 @@
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
+import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import { useState } from "react";
 
-const TABS = [
-	{ name: "전체", value: "all" },
-	{ name: "기능별", value: "feature" },
-	{ name: "성능별", value: "ingredient" },
+const TAPS = [
+	{
+		label: "전체",
+		value: TAPS_QUERIES.ALL,
+	},
+	{
+		label: "기능별",
+		value: TAPS_QUERIES.FEATURE,
+	},
+	{
+		label: "성능별",
+		value: TAPS_QUERIES.FUNCTION,
+	},
 ];
 
 export default function SearchPage() {
@@ -18,9 +28,13 @@ export default function SearchPage() {
 
 	return (
 		<section>
-			<SearchBar />
+			<SearchBar>
+				<SearchBar.KeywordInput />
+				<SearchBar.SearchResultList />
+				<SearchBar.SelectedKeywordTagsList />
+			</SearchBar>
 			<TapBar
-				taps={TABS}
+				taps={TAPS}
 				currentTapValue={currentTapValue}
 				handleChangeCurrentTapValue={handleChangeCurrentTapValue}
 			/>
