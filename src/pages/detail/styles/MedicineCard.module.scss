@@ -1,0 +1,44 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $gray0;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	height: 200px;
+	display: flex;
+	gap: 15px;
+	padding: 20px;
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		.info {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			.brand {
+				@include mixins.b-small;
+				color: $gray6;
+			}
+			.name {
+				@include mixins.b-regular;
+			}
+		}
+		.sub-info {
+			color: $main-yellow;
+			@include mixins.sb-regular;
+			display: flex;
+			gap: 5px;
+			span {
+				color: $gray6;
+			}
+		}
+		.tags {
+			display: flex;
+			gap: 5px;
+		}
+	}
+}

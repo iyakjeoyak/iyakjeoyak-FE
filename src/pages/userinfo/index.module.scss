@@ -1,0 +1,167 @@
+@use "@styles/mixin" as mixins;
+@use "@styles/global" as *;
+@import "@styles/variables";
+@import "@/components/ModalContainer/index.module.scss";
+
+.mypageContainer {
+	margin-top: 28px;
+	padding: 1rem;
+	background-color: $white;
+	flex: 1;
+
+	.profileSection {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.profilePic {
+			width: 50rem;
+			height: 50rem;
+			border-radius: 100%;
+			margin-right: 17px;
+			@include mixins.responsive("desktop") {
+				width: 70px;
+				height: 70px;
+			}
+		}
+
+		.profileInfo {
+			display: flex;
+			flex-direction: column;
+
+			.nameArea {
+				display: flex;
+				align-items: center;
+
+				margin-top: 0.5rem;
+				margin-bottom: 0.2rem;
+
+				.nickname {
+					@include mixins.sb-large;
+					color: $black;
+					margin-right: 0.5rem;
+				}
+			}
+
+			.userIntroduce {
+				@include mixins.m-big;
+				color: $gray3;
+				margin-top: 6rem;
+			}
+			.profileEditModal {
+				height: 640rem;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 0px;
+			}
+
+			.editprofile {
+				@include mixins.m-small;
+				color: $black;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.myPageContent {
+		width: 100%;
+		height: 100%;
+		.pointSection {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			background-color: $main-lightgreen;
+			min-height: 46px;
+			border-radius: 10px;
+			padding: 15rem;
+			margin-top: 15rem;
+
+			.pointFixArea {
+				display: flex;
+
+				.pointSVG {
+					width: 15rem;
+					height: 15rem;
+					margin-right: 5rem;
+				}
+
+				.pointTitle {
+					@include mixins.sb-big;
+				}
+			}
+
+			.pointArea {
+				display: flex;
+				align-items: center;
+				.userPoint {
+					@include mixins.sb-big;
+					color: $point-blue;
+				}
+				.pointDetail {
+					@include mixins.sb-regular;
+					margin-left: 10rem;
+					cursor: pointer;
+					color: $point-blue;
+				}
+			}
+		}
+	}
+	.sectionBoxArea {
+		margin-bottom: 15rem;
+		margin-top: 18rem;
+
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		.sectionBoxHeader {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			margin-bottom: 7rem;
+			padding: 4rem;
+
+			.sectionTitle {
+				@include mixins.sb-big;
+				color: $point-blue;
+			}
+			.sectionDetail {
+				cursor: pointer;
+				@include mixins.sb-regular;
+				color: $point-blue;
+			}
+		}
+	}
+}
+
+.sectionBox {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border: 0.5px solid $gray3;
+	border-radius: 10px;
+	min-height: 46px;
+	margin-bottom: 5rem;
+	padding: 4rem 8rem;
+
+	.sectionName {
+		@include mixins.sb-medium;
+	}
+	.sectionReviewBox {
+		@include mixins.m-medium;
+	}
+
+	.sectionRateBox {
+		display: flex;
+		align-items: center;
+		@include mixins.m-medium;
+
+		.sectionText {
+		}
+		.sectionRate {
+		}
+	}
+}

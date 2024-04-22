@@ -1,0 +1,25 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $gray0;
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	right: 65px;
+	z-index: 900;
+	::placeholder {
+		@include mixins.b-medium;
+	}
+	.current {
+		@include mixins.b-medium;
+		color: $main-red;
+	}
+	.option {
+		&.active {
+			background-color: $gray5;
+			color: $main-red;
+		}
+		@include mixins.b-medium;
+	}
+}

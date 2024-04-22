@@ -1,0 +1,38 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 15px;
+	img {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: $gray3;
+	}
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		.star {
+			@include mixins.b-regular;
+			color: $main-yellow;
+			display: flex;
+			align-items: center;
+			span {
+				@include mixins.b-small;
+				margin-left: 5px;
+				color: black;
+			}
+		}
+		.writer {
+			@include mixins.m-medium;
+			span {
+				margin-left: 5px;
+				color: $gray5;
+			}
+		}
+	}
+}

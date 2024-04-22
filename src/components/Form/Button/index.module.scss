@@ -1,0 +1,34 @@
+@import "@/styles/variables.scss";
+
+.container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 20px;
+	height: 50px;
+}
+
+.light {
+	background-color: $main-lightgreen;
+	color: $main-green;
+}
+
+.dark {
+	background-color: $main-green;
+	color: #ffffff;
+}
+
+.icon {
+	background-color: transparent;
+}
+
+.disabled {
+	color: $main-green;
+	background-color: $main-lightgreen;
+}
+
+.active {
+	color: $white;
+	background-color: $main-green;
+}

@@ -1,0 +1,27 @@
+@use "@styles/variables.scss" as *;
+@use "@styles/mixin.scss" as mixins;
+
+.userSupplementContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.header {
+		width: 90%;
+		margin-bottom: 20rem;
+	}
+
+	.cardGrid {
+		display: grid;
+		width: fit-content;
+		justify-content: center;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 17rem;
+		&.wide {
+			grid-template-columns: 1fr;
+			justify-content: center;
+			width: fit-content;
+			gap: 15rem;
+		}
+	}
+}

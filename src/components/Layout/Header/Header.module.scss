@@ -1,0 +1,24 @@
+@import "@styles/variables.scss";
+
+header {
+	background-color: $main-green;
+	min-height: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+
+	@media (min-width: $tablet-width) and (max-width: $desktop-width) {
+		padding: 0 40px;
+		min-height: 80px;
+	}
+
+	@media (min-width: $desktop-width) {
+		padding: 0 20px;
+		min-height: 70px;
+	}
+}

@@ -1,0 +1,51 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	border: 1px solid $gray3;
+	border-radius: 20px;
+	position: relative;
+	height: 250px;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	img {
+		width: 100px;
+	}
+	.content-container {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		background-color: $white;
+		border: 1px solid $main-green;
+		border-radius: 20px;
+		padding: 10px 15px;
+		.text-container {
+			display: flex;
+			justify-content: space-between;
+			.name {
+				@include mixins.b-small;
+			}
+			.info {
+				@include mixins.sb-regular;
+				color: $gray6;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				svg {
+					@include mixins.m-medium;
+					color: $main-yellow;
+				}
+			}
+		}
+		.tags {
+			display: flex;
+			gap: 5px;
+			justify-content: space-between;
+		}
+	}
+}
