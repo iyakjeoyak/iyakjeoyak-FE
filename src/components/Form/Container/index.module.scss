@@ -11,4 +11,7 @@
 	.title {
 		@include mixins.b-small;
 	}
+	p {
+		color: $main-green;
+	}
 }

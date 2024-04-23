@@ -9,7 +9,7 @@ export default function IconTag({ icon, text, onClick }: IconTagProps) {
 	return (
 		<div onClick={onClick} className={styles.container}>
 			{icon}
-			<div>{text}</div>
+			<button>{text}</button>
 		</div>
 	);
 }

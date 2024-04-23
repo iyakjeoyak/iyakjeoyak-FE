@@ -1,5 +1,4 @@
 import Container from "../Container";
-import { ErrorMessage } from "@hookform/error-message";
 import styles from "./index.module.scss";
 import { useFormContext } from "react-hook-form";
 
@@ -14,23 +13,14 @@ export const Textarea = <T,>({
 	title,
 	placeholder,
 }: TextareaProps<T>) => {
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext();
+	const { register } = useFormContext();
 
 	return (
-		<Container title={title}>
+		<Container title={title} name={name as string}>
 			<textarea
 				className={styles.textarea}
 				{...register(name as string)}
 				placeholder={placeholder}
-			/>
-			{/* 추후 Container로 집어 넣기*/}
-			<ErrorMessage
-				errors={errors}
-				name={name as string}
-				render={({ message }) => <p>{message}</p>}
 			/>
 		</Container>
 	);

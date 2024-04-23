@@ -19,7 +19,7 @@ export const Input = <T,>({
 }: InputProps<T>) => {
 	const { register } = useFormContext();
 	return (
-		<Container title={title}>
+		<Container title={title} name={name}>
 			<input
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록

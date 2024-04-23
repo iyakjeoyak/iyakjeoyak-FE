@@ -52,11 +52,11 @@ function SignUpInput() {
 			<form className={`${styles.container}`} onSubmit={handleSubmit(onSubmit)}>
 				<div>
 					<ImgInput name="profileImage" />
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="profileImage"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -71,11 +71,11 @@ function SignUpInput() {
 						}
 					/>
 					{/* <div>{formState.errors.username?.message}</div> */}
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="username"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -89,11 +89,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="password"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -107,11 +107,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="confirmPassword"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -125,11 +125,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="nickname"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div className={`${styles.genderWrap}`}>
 					<div>성별</div>
@@ -154,11 +154,11 @@ function SignUpInput() {
 							errors.age ? `${styles.input} ${styles.inputError}` : styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="age"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div className={`${styles.tagWrap}`}>
 					{tagData.map((tags) => (

@@ -29,7 +29,7 @@ export default function PickedMedicine() {
 			</div>
 			<img
 				className={styles.handle}
-				src="/images/TwoHandsImg"
+				src="/images/TwoHands.png"
 				alt="장식 이미지"
 			/>
 		</article>

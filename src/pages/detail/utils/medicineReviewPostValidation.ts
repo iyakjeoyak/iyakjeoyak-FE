@@ -19,8 +19,11 @@ export const initialMedicineReviewPostBody = {
 };
 
 const medicineReviewPostValidation = yup.object().shape({
-	title: yup.string().required(),
-	content: yup.string().min(50).required(),
+	title: yup.string().required("영양제 리뷰 제목을 작성해주세요."),
+	content: yup
+		.string()
+		.min(50, "50자 이상의 후기를 입력해주세요")
+		.required("영양제 리뷰를 작성해주세요"),
 });
 
 export default medicineReviewPostValidation;

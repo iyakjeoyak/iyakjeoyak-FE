@@ -41,7 +41,7 @@ export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
 					<TagCommon text="감기" backgroundColor="green" />
 				</div>
 			</div>
-			<div className={styles.tags}>
+			<div className={styles.buttons}>
 				<IconTag
 					icon={heartCount === 0 ? <IoMdHeartEmpty /> : <IoMdHeart />}
 					text="관심 등록"

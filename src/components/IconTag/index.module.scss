@@ -3,11 +3,13 @@
 
 .container {
 	display: flex;
-	gap: 10px;
+	gap: 5px;
 	align-items: center;
 	button {
 		background-color: $main-lightgreen;
 		color: $main-green;
-		@include mixins.b-tiny;
+		@include mixins.b-small;
+		padding: 5px;
+		border-radius: 5px;
 	}
 }
