@@ -49,15 +49,16 @@ export default defineConfig({
 		},
 		rollupOptions: {
 			// 번들에 포함시키지 않을 외부 종속성
-			external: ["react"],
+			external: ["react", "react-dom"],
 			// 번들의 출력 옵션 설정
 			output: {
 				globals: {
 					react: "React",
+					"react-dom": "ReactDOM",
 				},
 			},
 		},
-		// CommonJS 번들러에 대한 옵션을 정의한다.
+		// CommonJS 번들러에 대한 옵션을 정의
 		commonjsOptions: {
 			esmExternals: ["react"],
 		},
@@ -78,4 +79,6 @@ export default defineConfig({
 			"@types": path.resolve(__dirname, "src/types"),
 		},
 	},
+
+	publicDir: "public",
 });
