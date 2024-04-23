@@ -1,4 +1,4 @@
-import { sectionConfig, renderFunctions } from "../utils";
+import { sectionConfig, renderFunctions } from "./InfoBox/utils";
 import InfoBox from "./InfoBox";
 import { Item } from "../InfoBoxType";
 
