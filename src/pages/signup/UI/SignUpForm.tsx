@@ -9,7 +9,7 @@ import styles from "@/pages/signup/style/SignUpForm.module.scss";
 import { ImgInput } from "@/components/Form/ImgInput";
 
 export interface SignUpType {
-	profileImage: File;
+	profileImage: FileList; // 프로필
 	username: string; // 아이디
 	password: string; // 비밀번호
 	confirmPassword: string; // 비밀번호 검사
@@ -38,7 +38,12 @@ function SignUpInput() {
 	} = useFormContext<SignUpType>();
 
 	const onSubmit = async (data: SignUpType) => {
-		console.log("data", data);
+		const firstFile = data.profileImage?.[0];
+		const updatedData = {
+			...data,
+			profileImage: firstFile,
+		};
+		console.log("data", updatedData);
 	};
 
 	return (

@@ -26,7 +26,7 @@ export const Form = <T extends FieldValues>({
 	// useForm을 사용하여 폼 상태를 관리하고 yup 스키마를 사용하여 입력 양식의 유효성을 검사
 	const methods = useForm<T>({
 		resolver: yupResolver(validationSchema) as unknown as Resolver<T>, // yup 스키마를 해결하는 resolver 설정
-		mode: "onChange", // 기본값은 onSubmit
+		mode: "onSubmit",
 		defaultValues: pageDefaultValues,
 	});
 
