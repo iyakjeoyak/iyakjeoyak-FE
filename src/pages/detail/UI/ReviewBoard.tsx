@@ -24,7 +24,11 @@ export default function ReviewBoard() {
 				<SelectSort.SortCurrentOption />
 				<SelectSort.SortOptionList>
 					{SORT_OPTIONS.map((sort) => (
-						<SelectSort.SortOption value={sort.value} label={sort.label} />
+						<SelectSort.SortOption
+							key={sort.value}
+							value={sort.value}
+							label={sort.label}
+						/>
 					))}
 				</SelectSort.SortOptionList>
 			</SelectSort>
