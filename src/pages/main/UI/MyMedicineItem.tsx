@@ -1,8 +1,16 @@
+import calculateDday from "@/utils/calculateDday";
 import styles from "../styles/MyMedicineItem.module.scss";
 import { useState } from "react";
 
 export default function MyMedicineItem() {
 	const [isItemHovered, setIsItemHovered] = useState(false);
+
+	const today = new Date();
+
+	const medicineExpiration = new Date("2025-05-23");
+
+	const dday = calculateDday(today, medicineExpiration);
+
 	if (isItemHovered) {
 		return (
 			<div
@@ -10,7 +18,7 @@ export default function MyMedicineItem() {
 				onMouseEnter={() => setIsItemHovered(true)}
 				onMouseLeave={() => setIsItemHovered(false)}
 			>
-				<div>D-10</div>
+				<div>{dday}</div>
 			</div>
 		);
 	}

@@ -1,9 +1,29 @@
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+
+import { FaShare } from "react-icons/fa";
+import IconTag from "@/components/IconTag";
 import StarRating from "@/components/StarRating";
 import TagCommon from "@/components/Tag";
-import medicine from "@/assets/images/Medicine.png";
 import styles from "../styles/MedicineCard.module.scss";
 
-export default function MedicineCard() {
+interface MedicineCardProps {
+	// id: number;
+	heartCount?: number;
+	// star: null;
+	// reviewCount: number;
+	// bssh_NM: string;
+	// prdlst_NM: string;
+}
+
+export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
+	const handleLikeClick = () => {
+		console.log("관심 등록");
+	};
+
+	const handleShareClick = () => {
+		console.log("공유하기");
+	};
+
 	return (
 		<div className={styles.container}>
 			<img src="/images/Medicine.png" />
@@ -20,6 +40,18 @@ export default function MedicineCard() {
 					<TagCommon text="피로개선" backgroundColor="green" />
 					<TagCommon text="감기" backgroundColor="green" />
 				</div>
+			</div>
+			<div className={styles.tags}>
+				<IconTag
+					icon={heartCount === 0 ? <IoMdHeartEmpty /> : <IoMdHeart />}
+					text="관심 등록"
+					onClick={handleLikeClick}
+				/>
+				<IconTag
+					icon={<FaShare />}
+					text="공유하기"
+					onClick={handleShareClick}
+				/>
 			</div>
 		</div>
 	);
