@@ -1,4 +1,4 @@
-import calculateDday from "@/utils/calculateDday";
+import { calculateDday } from ".";
 
 describe("나의 영양제 디데이 계산 테스트", () => {
 	test("유통기한이 미래 시점인 경우", () => {

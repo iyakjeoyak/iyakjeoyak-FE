@@ -1,4 +1,4 @@
-export default function calculateDday(startDate: Date, endDate?: Date | null) {
+export function calculateDday(startDate: Date, endDate?: Date | null) {
 	if (!endDate) return "유통기한없음";
 
 	const millisecondsPerDay = 1000 * 60 * 60 * 24;
