@@ -1,9 +1,29 @@
 import * as yup from "yup";
-
 import { useMemo } from "react";
 
+export interface SignUpType {
+	profileImage: FileList; // 프로필
+	username: string; // 아이디
+	password: string; // 비밀번호
+	confirmPassword: string; // 비밀번호 검사
+	nickname: string; // 닉네임
+	gender: string; // 성별
+	age: number; // 나이
+	tag: string[]; //태그
+}
+export const signUpDefault = {
+	profileImage: undefined,
+	username: "", // 아이디
+	password: "", // 비밀번호
+	confirmPassword: "", // 비밀번호 검사
+	nickname: "", // 닉네임
+	gender: "", // 성별
+	age: 0, // 나이
+	tag: [], //태그
+};
+
 export const signupValidation = yup.object().shape({
-	profileImage: yup.mixed().required("이미지를 선택해주세요."),
+	profileImage: yup.mixed<FileList>().required("이미지를 선택해주세요."),
 	username: yup
 		.string()
 		.matches(
@@ -36,7 +56,7 @@ export const signupValidation = yup.object().shape({
 		.required("나이를 입력하세요."),
 	tag: yup
 		.array()
-		.of(yup.string())
+		.of(yup.string().required())
 		.min(1, "태그를 선택하세요.")
 		.required("태그를 선택하세요."),
 });
@@ -45,15 +65,4 @@ export const signupValidation = yup.object().shape({
 export const useSignupValidation = () => {
 	const validationSchema = useMemo(() => signupValidation, []);
 	return validationSchema;
-};
-
-export const signUpDefault = {
-	profileImage: undefined,
-	username: "", // 아이디
-	password: "", // 비밀번호
-	confirmPassword: "", // 비밀번호 검사
-	nickname: "", // 닉네임
-	gender: "", // 성별
-	age: undefined, // 나이
-	tag: [], //태그
 };
