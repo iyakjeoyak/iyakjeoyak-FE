@@ -9,7 +9,7 @@ interface TagBoardProps {
 
 export default function TagBoard({ title, tags }: TagBoardProps) {
 	return (
-		<Container title={title}>
+		<Container title={title} name="tag">
 			<div className={styles.container}>
 				{tags.map((tags) => (
 					<TagButton key={tags.id} text={tags.name} name="tag" />
