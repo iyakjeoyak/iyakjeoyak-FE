@@ -7,7 +7,7 @@ interface TagButtonProps<T> {
 	text: string;
 	size?: "small" | "medium";
 	backgroundColor?: "green" | "midgreen" | "lightgreen" | "white";
-	value?: string;
+	value?: number;
 }
 
 const TagButton = <T,>({
@@ -25,11 +25,11 @@ const TagButton = <T,>({
 
 	const handleClick = () => {
 		const currentTags = getValues(name as string) || []; // 현재 선택된 태그 배열 가져오기
-		const isSelected = currentTags.includes(text);
+		const isSelected = currentTags.includes(value);
 		// 선택된 태그 배열 업데이트
 		const updatedTags = isSelected
-			? currentTags.filter((tag: string) => tag !== text) // 선택 취소 시 해당 태그 제거
-			: [...currentTags, text]; // 선택 시 해당 태그 추가
+			? currentTags.filter((tag: number) => tag !== value) // 선택 취소 시 해당 태그 제거
+			: [...currentTags, value]; // 선택 시 해당 태그 추가
 		// 클릭시 스타일 추가
 		setSelected((prev) => !prev);
 		// 업데이트된 태그 배열을 폼 상태에 저장
