@@ -4,7 +4,7 @@ interface SelectContextType {
 	currentKeyword: string;
 	keywordSearchResultList: string[];
 	handleCurrentKeyword: (keyword: string) => void;
-	handleCurrentKeywordSearchResultList: () => void;
+	handleCurrentKeywordSearchResultList: (result: string[]) => void;
 }
 
 export const SelectContext = createContext<SelectContextType>({

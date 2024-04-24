@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
-import styles from "./index.module.scss";
 import classNames from "classnames";
+import styles from "./index.module.scss";
 
 interface ButtonProps {
 	text?: string; // 버튼 텍스트
@@ -8,7 +8,7 @@ interface ButtonProps {
 	className?: string;
 	variant?: "light" | "dark" | "icon"; // 버튼 색상
 	size?: "default" | "medium";
-	type: "submit" | "button";
+	type?: "submit" | "button";
 	onClick?: () => void;
 }
 

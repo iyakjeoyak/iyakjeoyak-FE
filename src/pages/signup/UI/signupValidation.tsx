@@ -1,5 +1,7 @@
-import { useMemo } from "react";
 import * as yup from "yup";
+
+import { useMemo } from "react";
+
 export const signupValidation = yup.object().shape({
 	profileImage: yup.mixed().required("이미지를 선택해주세요."),
 	username: yup

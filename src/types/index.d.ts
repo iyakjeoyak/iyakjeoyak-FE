@@ -22,3 +22,7 @@ interface ReviewItemType {
 	description: string; // 리뷰 설명
 	tags: string[]; // 태그 모음
 }
+
+export interface ReviewItemType {
+	review: string;
+}

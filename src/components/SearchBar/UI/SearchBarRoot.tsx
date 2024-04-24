@@ -16,8 +16,8 @@ export default function SearchBarRoot({ children }: SearchBarRootProps) {
 		setCurrentKeyword(keyword);
 	};
 
-	const handleCurrentKeywordSearchResultList = () => {
-		setKeywordSearchResultList([]);
+	const handleCurrentKeywordSearchResultList = (result: string[]) => {
+		setKeywordSearchResultList(result);
 	};
 
 	const value = {

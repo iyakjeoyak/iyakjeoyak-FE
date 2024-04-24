@@ -1,0 +1,40 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.button {
+	width: 100%;
+	padding: 10px;
+	border-radius: 20px;
+	background-color: $main-green;
+	color: white;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	h2 {
+		@include mixins.b-large;
+	}
+	label {
+		@include mixins.b-regular;
+	}
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	textarea {
+		height: 200px;
+		border-radius: 10px;
+		border: 1px solid $gray3;
+		resize: none;
+	}
+}
+
+.tags-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}

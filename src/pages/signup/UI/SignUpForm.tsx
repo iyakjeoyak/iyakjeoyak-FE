@@ -1,12 +1,13 @@
-import { Form } from "@/components/Form";
-import { useFormContext } from "react-hook-form";
 import { signUpDefault, useSignupValidation } from "./signupValidation";
-import { ErrorMessage } from "@hookform/error-message";
+
 import { DevTool } from "@hookform/devtools";
-import { tagData } from "../../../components/Form/TagButton/TagData";
+import { ErrorMessage } from "@hookform/error-message";
+import { Form } from "@/components/Form";
+import { ImgInput } from "@/components/Form/ImgInput";
 import TagButton from "@/components/Form/TagButton";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
-import { ImgInput } from "@/components/Form/ImgInput";
+import { tagData } from "../../../components/Form/TagButton/TagData";
+import { useFormContext } from "react-hook-form";
 
 export interface SignUpType {
 	profileImage: FileList; // 프로필
@@ -51,11 +52,11 @@ function SignUpInput() {
 			<form className={`${styles.container}`} onSubmit={handleSubmit(onSubmit)}>
 				<div>
 					<ImgInput name="profileImage" />
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="profileImage"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -70,11 +71,11 @@ function SignUpInput() {
 						}
 					/>
 					{/* <div>{formState.errors.username?.message}</div> */}
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="username"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -88,11 +89,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="password"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -106,11 +107,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="confirmPassword"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div>
 					<Form.Input<SignUpType>
@@ -124,11 +125,11 @@ function SignUpInput() {
 								: styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="nickname"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div className={`${styles.genderWrap}`}>
 					<div>성별</div>
@@ -153,11 +154,11 @@ function SignUpInput() {
 							errors.age ? `${styles.input} ${styles.inputError}` : styles.input
 						}
 					/>
-					<ErrorMessage
+					{/* <ErrorMessage
 						errors={errors}
 						name="age"
 						render={({ message }) => <p>{message}</p>}
-					/>
+					/> */}
 				</div>
 				<div className={`${styles.tagWrap}`}>
 					{tagData.map((tags) => (
