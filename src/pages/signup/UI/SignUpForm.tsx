@@ -8,6 +8,8 @@ import TagButton from "@/components/Form/TagButton";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
 import { tagData } from "../../../components/Form/TagButton/TagData";
 import { useFormContext } from "react-hook-form";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export interface SignUpType {
 	profileImage: FileList; // 프로필
@@ -32,6 +34,7 @@ export function SignUpForm() {
 }
 
 function SignUpInput() {
+	const navigate = useNavigate();
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -44,7 +47,23 @@ function SignUpInput() {
 			...data,
 			profileImage: firstFile,
 		};
-		console.log("data", updatedData);
+		console.log(updatedData);
+		try {
+			const response = await axios.post(
+				"http://54.180.121.206:8080/user",
+				updatedData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+			console.log("response", response);
+			alert("회원가입이 완료되었습니다.");
+			navigate("/login");
+		} catch (error) {
+			console.error("api error", error);
+		}
 	};
 
 	return (
@@ -162,7 +181,12 @@ function SignUpInput() {
 				</div>
 				<div className={`${styles.tagWrap}`}>
 					{tagData.map((tags) => (
-						<TagButton key={tags.id} text={tags.name} name="tag" />
+						<TagButton
+							key={tags.id}
+							text={tags.name}
+							name="tag"
+							value={tags.id}
+						/>
 					))}
 					<ErrorMessage
 						errors={errors}
