@@ -58,8 +58,8 @@ export const Form = <T extends FieldValues>({
 
 Form.Input = Input;
 Form.Button = Button;
+Form.ImgInput = ImgInput;
 Form.TagButton = TagButton;
 Form.TagBoard = TagBoard;
 Form.RadioButton = RadioButton;
 Form.Textarea = Textarea;
-Form.ImgInput = ImgInput;
