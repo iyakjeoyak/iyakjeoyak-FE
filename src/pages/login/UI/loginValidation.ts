@@ -1,6 +1,15 @@
 import { useMemo } from "react";
 import * as yup from "yup";
 
+export interface LoginType {
+	username: string; // 아이디
+	password: string;
+}
+export const loginDefault = {
+	username: "", // 아이디
+	password: "", // 비밀번호
+};
+
 export const loginValidation = yup.object().shape({
 	username: yup
 		.string()
@@ -16,9 +25,4 @@ export const loginValidation = yup.object().shape({
 export const useLoginValidation = () => {
 	const validationSchema = useMemo(() => loginValidation, []);
 	return validationSchema;
-};
-
-export const loginDefault = {
-	username: "", // 아이디
-	password: "", // 비밀번호
 };

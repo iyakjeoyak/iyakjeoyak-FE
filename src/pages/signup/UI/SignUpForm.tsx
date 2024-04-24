@@ -63,6 +63,7 @@ export function SignUpForm() {
 			onSubmit={onSubmit}
 		>
 			<Form.ImgInput name="profileImage" />
+
 			<Form.Input<SignUpType>
 				name="username"
 				title="아이디"
@@ -101,16 +102,18 @@ export function SignUpForm() {
 				placeholder="나이를 입력해주세요."
 				type="number"
 			/>
-			<div className={`${styles.tagWrap}`}>
-				{tagData.map((tags) => (
-					<Form.TagButton
-						key={tags.id}
-						text={tags.name}
-						name="tag"
-						value={tags.id}
-					/>
-				))}
-			</div>
+			<Container title="성별" name="gender">
+				<div className={`${styles.tagWrap}`}>
+					{tagData.map((tags) => (
+						<Form.TagButton
+							key={tags.id}
+							text={tags.name}
+							name="tag"
+							value={tags.id}
+						/>
+					))}
+				</div>
+			</Container>
 			<Form.Button text="확인" type="submit" variant="dark" />
 		</Form>
 	);
