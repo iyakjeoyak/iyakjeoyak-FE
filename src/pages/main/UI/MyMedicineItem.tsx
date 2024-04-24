@@ -1,4 +1,4 @@
-import calculateDday from "@/utils/calculateDday";
+import { calculateDday } from "../utils";
 import styles from "../styles/MyMedicineItem.module.scss";
 import { useState } from "react";
 
