@@ -3,6 +3,7 @@ import getImgPreview from "@/utils/getImgPreview";
 import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { FiPlusCircle } from "react-icons/fi";
+import Container from "../Container";
 
 interface ImgInput {
 	name: string;
@@ -28,31 +29,28 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 	}, [fileList]);
 
 	return (
-		<div className={styles.profilePicEdit}>
-			{title && <div className={styles.ImgTitle}>{title}</div>}
-			<div className={styles.imgWrap}>
-				<input
-					type="file"
-					accept="image/*"
-					style={{ display: "none" }}
-					{...register(name)}
-					id="fileupload"
-				/>
-				<div className={styles.imgBox}>
-					<label htmlFor="fileupload" className={styles.imgLabel}>
-						{previewUrl ? "" : <FiPlusCircle />}
-					</label>
-					<div className={styles.imgCon}>
-						{previewUrl && (
-							<img
-								src={previewUrl}
-								alt="사용자 프로필"
-								className={styles.userProfile}
-							/>
-						)}
-					</div>
+		<Container title={title} name={name}>
+			<input
+				type="file"
+				accept="image/*"
+				style={{ display: "none" }}
+				{...register(name)}
+				id="fileupload"
+			/>
+			<div className={styles.imgBox}>
+				<label htmlFor="fileupload" className={styles.imgLabel}>
+					{previewUrl ? "" : <FiPlusCircle />}
+				</label>
+				<div className={styles.imgCon}>
+					{previewUrl && (
+						<img
+							src={previewUrl}
+							alt="사용자 프로필"
+							className={styles.userProfile}
+						/>
+					)}
 				</div>
 			</div>
-		</div>
+		</Container>
 	);
 };
