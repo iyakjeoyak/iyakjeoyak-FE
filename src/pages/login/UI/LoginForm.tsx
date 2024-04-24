@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form } from "@/components/Form";
 import { useFormContext } from "react-hook-form";
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -7,6 +7,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { loginDefault, useLoginValidation } from "./loginValidation";
 import styles from "../styles/LoginForm.module.scss";
 import { DevTool } from "@hookform/devtools";
+import axios from "axios";
 export interface LoginType {
 	username: string; // 아이디
 	password: string;
@@ -30,9 +31,35 @@ function LoginInput() {
 		formState: { errors },
 		control,
 	} = useFormContext<LoginType>();
+	const navigate = useNavigate();
 
 	const onSubmit = async (data: LoginType) => {
-		console.log(data);
+		console.log("data", data);
+		try {
+			const response = await axios.post(
+				"http://54.180.121.206:8080/user/login",
+				{
+					username: data.username,
+					password: data.password,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+						// authorization: `Bearer ${data.accessToken}`,
+					},
+				},
+			);
+			console.log(response);
+			const accessToken = response.data;
+			console.log("accessToken", accessToken);
+			alert("로그인에 성공했습니다.");
+			navigate("/home");
+			if (accessToken) {
+				localStorage.setItem("accessToken", accessToken);
+			}
+		} catch (error) {
+			console.error("Login error:", error);
+		}
 	};
 
 	return (
@@ -73,7 +100,7 @@ function LoginInput() {
 					<div className={`m-big`}>SNS 계정으로 로그인</div>
 				</div>
 
-				<form onSubmit={() => {}}>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.container}>
 						<div className={styles.google}>
 							<Form.Button icon={FcGoogle} type="submit" variant="icon" />

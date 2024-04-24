@@ -17,6 +17,7 @@ import TagButton from "./TagButton";
 import { Textarea } from "./Textarea";
 import styles from "./index.module.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ImgInput } from "@/components/Form/ImgInput";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
@@ -57,6 +58,7 @@ export const Form = <T extends FieldValues>({
 
 Form.Input = Input;
 Form.Button = Button;
+Form.ImgInput = ImgInput;
 Form.TagButton = TagButton;
 Form.TagBoard = TagBoard;
 Form.RadioButton = RadioButton;
