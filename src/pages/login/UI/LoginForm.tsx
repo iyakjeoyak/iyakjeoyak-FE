@@ -6,9 +6,15 @@ import { LoginType, loginDefault, useLoginValidation } from "./loginValidation";
 import styles from "../styles/LoginForm.module.scss";
 import axios from "axios";
 
-export function LoginForm() {
+export default function LoginForm() {
 	const navigate = useNavigate();
+	const handleGoogleLogin = async () => {
+		console.log("Google login clicked");
+	};
 
+	const handleKakaoLogin = async () => {
+		console.log("Kakao login clicked");
+	};
 	const onSubmit = async (data: LoginType) => {
 		console.log("data", data);
 		try {
@@ -21,7 +27,7 @@ export function LoginForm() {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						// authorization: `Bearer ${data.accessToken}`,
+						authorization: `Bearer ${data}`,
 					},
 				},
 			);
@@ -64,10 +70,20 @@ export function LoginForm() {
 
 				<div className={styles.container}>
 					<div className={styles.google}>
-						<Form.Button icon={FcGoogle} type="submit" variant="icon" />
+						<Form.Button
+							icon={FcGoogle}
+							type="button"
+							variant="icon"
+							onClick={handleGoogleLogin}
+						/>
 					</div>
 					<div className={styles.kakao}>
-						<Form.Button icon={RiKakaoTalkFill} type="submit" variant="icon" />
+						<Form.Button
+							icon={RiKakaoTalkFill}
+							type="button"
+							variant="icon"
+							onClick={handleKakaoLogin}
+						/>
 					</div>
 				</div>
 				<div className={styles.registerWrap}>
