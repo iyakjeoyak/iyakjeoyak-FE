@@ -4,7 +4,8 @@ import instance from "..";
 
 export default async function getMedicines() {
 	try {
-		return await instance.get<{ content: MedicineItemType[] }>(`/medicines`);
+		const response = await instance.get<{ content: MedicineItemType[] }>(`/medicines`);
+		return response.data;
 	} catch (err) {
 		if (err instanceof AxiosError) {
 			console.error(err);

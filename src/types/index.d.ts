@@ -1,3 +1,20 @@
+export interface RequestPagenation {
+  page: number;
+  size: number;
+}
+
+
+export interface ResponsePagenation {
+	data: [
+	  {}
+	],
+	number: 0,
+	size: 0,
+	totalPages: 0,
+	totalElement: 0,
+	numberOfElement: 0
+  }
+
 export interface MedicineItemType {
 	id: number; // DB ID
 	name: string; // 영양제명=> prdlst_NM
