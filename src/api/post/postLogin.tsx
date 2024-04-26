@@ -1,11 +1,11 @@
-import { SignUpType } from "@/pages/signup/utils/signupValidation";
 import instance from "..";
 import { AxiosError, AxiosResponse } from "axios";
+import { LoginType } from "@/pages/login/utils/loginValidation";
 
-export default async function postSignUp(data: SignUpType) {
+export default async function postLogin(data: LoginType) {
 	try {
-		const response: AxiosResponse = await instance.post<SignUpType>(
-			"/user",
+		const response: AxiosResponse = await instance.post<LoginType>(
+			"/user/login",
 			data,
 		);
 		return response.data;

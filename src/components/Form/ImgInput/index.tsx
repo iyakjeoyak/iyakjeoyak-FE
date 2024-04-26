@@ -15,7 +15,7 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 	const [previewUrl, setPreviewUrl] = useState<string | undefined>();
 
 	const fileList = useWatch({ name });
-	console.log("fileList", fileList);
+	// console.log("fileList", fileList);
 	// file url로 변환
 	useEffect(() => {
 		if (fileList && fileList.length > 0) {

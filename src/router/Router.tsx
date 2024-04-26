@@ -10,7 +10,7 @@ import {
 import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";
 import Layout from "@/components/Layout";
-import LoginPage from "@pages/login";
+import Login from "@pages/login";
 import MainPage from "@pages/main";
 import MedicineSearch from "@/pages/search";
 import OnBoarding from "@/pages/onboarding";
@@ -33,7 +33,7 @@ function Router() {
 						path={routerpaths.DETAILIDPAGE}
 						element={<DetailMedicineById />}
 					/>
-					<Route path={routerpaths.LOGIN} element={<LoginPage />} />
+					<Route path={routerpaths.LOGIN} element={<Login />} />
 					<Route path={routerpaths.SIGNUP} element={<SignUp />} />
 					<Route path={routerpaths.FAME} element={<Fame />} />
 					<Route path={routerpaths.USERINFO} element={<UserInfo />} />
