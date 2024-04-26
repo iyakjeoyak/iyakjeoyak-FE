@@ -7,11 +7,6 @@ export default async function postSignUp(data: SignUpType) {
 		const response: AxiosResponse = await instance.post<SignUpType>(
 			"http://54.180.121.206:8080/user",
 			data,
-			{
-				headers: {
-					"Content-Type": "application/json",
-				},
-			},
 		);
 		return response.data;
 	} catch (err) {
