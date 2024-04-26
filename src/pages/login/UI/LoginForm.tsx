@@ -1,11 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form } from "@/components/Form";
-
+import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { LoginType, loginDefault, useLoginValidation } from "./loginValidation";
 import styles from "../styles/LoginForm.module.scss";
 import axios from "axios";
-import { SocialKakao } from "./SocialKakao";
 
 export default function LoginForm() {
 	const navigate = useNavigate();
@@ -13,6 +12,9 @@ export default function LoginForm() {
 		console.log("Google login clicked");
 	};
 
+	const handleKakaoLogin = async () => {
+		console.log("Kakao login clicked");
+	};
 	const onSubmit = async (data: LoginType) => {
 		console.log("data", data);
 		try {
@@ -76,7 +78,12 @@ export default function LoginForm() {
 						/>
 					</div>
 					<div className={styles.kakao}>
-						<SocialKakao />
+						<Form.Button
+							icon={RiKakaoTalkFill}
+							type="button"
+							variant="icon"
+							onClick={handleKakaoLogin}
+						/>
 					</div>
 				</div>
 				<div className={styles.registerWrap}>
