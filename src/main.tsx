@@ -1,22 +1,32 @@
 import App from "./App.tsx";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from "@pages/feedback/UI/Error.tsx";
+import Loading from "./pages/feedback/Loading.tsx";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			retry: 1,
-			retryDelay: 0,
+			refetchOnWindowFocus: false,
+			retry: false,
+			staleTime: 5000,
 		},
+		mutations: {},
 	},
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<QueryClientProvider client={queryClient}>
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>
-		,
-	</QueryClientProvider>,
+	<React.StrictMode>
+		<ErrorBoundary FallbackComponent={Error}>
+			<Suspense fallback={<Loading />}>
+				<QueryClientProvider client={queryClient}>
+					<App />
+					<ReactQueryDevtools initialIsOpen={false} position="bottom" />;
+				</QueryClientProvider>
+			</Suspense>
+		</ErrorBoundary>
+	</React.StrictMode>,
 );
