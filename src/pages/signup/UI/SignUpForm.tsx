@@ -39,7 +39,6 @@ export function SignUpForm() {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						authorization: `Bearer ${data}`,
 					},
 				},
 			);
