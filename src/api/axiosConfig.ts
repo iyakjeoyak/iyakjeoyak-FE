@@ -68,9 +68,6 @@ instance.interceptors.response.use(
 
 				// 토큰 리프레시 실패 시
 				case "만료된 접근입니다.":
-					logout();
-					break;
-				default:
 					return Promise.reject(error);
 			}
 		}
