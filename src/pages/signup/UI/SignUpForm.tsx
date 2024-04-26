@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
 	SignUpType,
@@ -8,7 +9,6 @@ import { Form } from "@/components/Form";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
 import { tagData } from "../../../components/Form/TagButton/TagData";
 import Container from "@/components/Form/Container";
-import { postSignUp } from "@/api/post";
 
 export function SignUpI() {
 	return (
@@ -29,15 +29,26 @@ export function SignUpForm() {
 		const firstFile = data.profileImage?.[0];
 		const updatedData = {
 			...data,
-			profileImage: firstFile as File,
+			profileImage: firstFile,
 		};
 		console.log(updatedData);
 		try {
-			const response = await postSignUp(updatedData);
+			const response = await axios.post(
+				"http://54.180.121.206:8080/user",
+				updatedData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
 			console.log("response", response);
-			if (response.status >= 200 && response.status < 300) {
-				alert("회원가입이 완료되었습니다.");
-				navigate("/login");
+			const accessToken = response.data;
+			console.log("accessToken", accessToken);
+			alert("회원가입이 완료되었습니다.");
+			navigate("/login");
+			if (accessToken) {
+				localStorage.setItem("accessToken", accessToken);
 			}
 		} catch (error) {
 			console.error("api error", error);
