@@ -11,6 +11,12 @@ dependencies:
   "@hookform/resolvers":
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.51.3)
+  "@tanstack/react-query":
+    specifier: ^5.31.0
+    version: 5.31.0(react@18.2.0)
+  "@tanstack/react-query-devtools":
+    specifier: ^5.31.0
+    version: 5.31.0(@tanstack/react-query@5.31.0)(react@18.2.0)
   axios:
     specifier: ^1.6.8
     version: 1.6.8
@@ -4335,6 +4341,46 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
+  /@tanstack/query-core@5.31.0:
+    resolution:
+      {
+        integrity: sha512-r1V6RXB1LUGoEp7HGHVK4Tl59kOvAfwI9/kNNwPsb6cR5oHgfn1683sQnoH/3xEDUKOen3fEO90EnGE+OjRw5A==,
+      }
+    dev: false
+
+  /@tanstack/query-devtools@5.28.10:
+    resolution:
+      {
+        integrity: sha512-5UN629fKa5/1K/2Pd26gaU7epxRrYiT1gy+V+pW5K6hnf1DeUKK3pANSb2eHKlecjIKIhTwyF7k9XdyE2gREvQ==,
+      }
+    dev: false
+
+  /@tanstack/react-query-devtools@5.31.0(@tanstack/react-query@5.31.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-YAS9JT/9fq+0a6kXh2cgpJiJvrguHMJcXmQvJqcx14c2EJjdVGdcxDPhqrWeeUp5yO9uY3glyZ4XZ9YkUcNRUQ==,
+      }
+    peerDependencies:
+      "@tanstack/react-query": ^5.31.0
+      react: ^18.0.0
+    dependencies:
+      "@tanstack/query-devtools": 5.28.10
+      "@tanstack/react-query": 5.31.0(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@tanstack/react-query@5.31.0(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-/GUUDFA8yNIYZaSyImkecVfN9mAVw1Y+9LpHkOQ1DdWaKnbLtwfjelh6OF+6EtwQCycH50EjTL68UK3YTMxwvg==,
+      }
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      "@tanstack/query-core": 5.31.0
+      react: 18.2.0
+    dev: false
+
   /@testing-library/dom@9.3.4:
     resolution:
       {
@@ -4517,6 +4563,16 @@ packages:
     dependencies:
       "@types/connect": 3.4.38
       "@types/node": 20.12.7
+    dev: true
+
+  /@types/classnames@2.3.1:
+    resolution:
+      {
+        integrity: sha512-zeOWb0JGBoVmlQoznvqXbE0tEC/HONsnoUNH19Hc96NFsTAwTXbTqb8FMYkru1F/iqp7a18Ws3nWJvtA1sHD1A==,
+      }
+    deprecated: This is a stub types definition. classnames provides its own type definitions, so you do not need this installed.
+    dependencies:
+      classnames: 2.5.1
     dev: true
 
   /@types/connect@3.4.38:

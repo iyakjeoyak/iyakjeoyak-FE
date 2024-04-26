@@ -15,7 +15,7 @@ export function PathButton({ paths }: PathButtonProps) {
 			</Link>{" "}
 			/ {/* 각 경로에 대한 링크 생성 */}
 			{paths.map((path, index) => (
-				<React.Fragment key={index}>
+				<React.Fragment key={path}>
 					{index > 0 && " / "}
 					{/* 경로와 텍스트에 대한 링크 생성 */}
 					<Link to={path} className="active">

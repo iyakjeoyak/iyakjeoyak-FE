@@ -1,11 +1,10 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
-import { SORT_OPTIONS, SORT_QUERIES } from "@/constants/SORT_OPTIONS";
 
-import SelectSort from "@/components/SelectSort";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import styles from "./index.module.scss";
-import { useState } from "react";
+import useGetURLSearch from "@/hooks/useGetURLSearch";
+import { useNavigate } from "react-router-dom";
 
 const TAPS = [
 	{
@@ -18,20 +17,13 @@ const TAPS = [
 	},
 ];
 
-export default function DetailIdPage() {
-	const [currentTapValue, setCurrentTapValue] = useState<string>(
-		TAPS_QUERIES.INFO,
-	);
-	const [currentSortValue, setCurrentSortValue] = useState<string>(
-		SORT_QUERIES.BEST,
-	);
+export default function DetailMedicineById() {
+	const navigate = useNavigate();
 
-	const handleChangeCurrentTapValue = (tapValue: string) => {
-		setCurrentTapValue(tapValue);
-	};
+	const currentTapValue = useGetURLSearch("tap");
 
-	const handleCurrentSortValue = (sortValue: string) => {
-		setCurrentSortValue(sortValue);
+	const handleTapClick = (tapValue: string) => {
+		navigate(`/detail/1?tap=${tapValue}`);
 	};
 
 	return (
@@ -39,23 +31,8 @@ export default function DetailIdPage() {
 			<section className={styles.container}>
 				<MedicineCard />
 				<div className={styles.board}>
-					<TapBar
-						taps={TAPS}
-						currentTapValue={currentTapValue}
-						handleChangeCurrentTapValue={handleChangeCurrentTapValue}
-					/>
-					{currentTapValue === "all" ? (
-						<InfoBoard />
-					) : (
-						<>
-							<SelectSort
-								options={SORT_OPTIONS}
-								currentValue={currentSortValue}
-								handleCurrentValue={handleCurrentSortValue}
-							/>
-							<ReviewBoard />
-						</>
-					)}
+					<TapBar taps={TAPS} onClick={handleTapClick} />
+					{currentTapValue === "review" ? <ReviewBoard /> : <InfoBoard />}
 				</div>
 			</section>
 		</>

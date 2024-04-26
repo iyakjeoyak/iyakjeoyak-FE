@@ -1,0 +1,32 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: $white;
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	padding: 20px;
+	padding-top: 40px;
+	min-height: 200px;
+	width: 500%;
+	z-index: $z-index-modalContainer;
+	@include mixins.responsive("desktop") {
+		max-width: 480px;
+		position: absolute;
+		bottom: 0;
+	}
+	.element {
+		height: 7px;
+		width: 80px;
+		border-radius: 30px;
+		background-color: $main-gray;
+		position: absolute;
+		top: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
