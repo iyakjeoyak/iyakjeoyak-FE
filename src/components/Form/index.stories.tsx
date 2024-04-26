@@ -1,5 +1,4 @@
 import { Form } from ".";
-import * as yup from "yup";
 
 export default {
 	title: "Form",
@@ -8,13 +7,14 @@ export default {
 
 const Template = () => {
 	return (
-		<Form schema={yup.object().shape({})} onSubmit={() => {}}>
-			<Form.Input
-				name="name"
-				type="text"
-				placeholder="placeholder"
-			></Form.Input>
-		</Form>
+		<></>
+		// <Form schema={yup.object().shape({})} onSubmit={() => {}}>
+		// 	<Form.Input
+		// 		name="name"
+		// 		type="text"
+		// 		placeholder="placeholder"
+		// 	></Form.Input>
+		// </Form>
 	);
 };
 

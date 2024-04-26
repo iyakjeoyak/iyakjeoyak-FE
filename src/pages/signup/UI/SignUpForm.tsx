@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
 	SignUpType,
@@ -9,6 +8,7 @@ import { Form } from "@/components/Form";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
 import { tagData } from "../../../components/Form/TagButton/TagData";
 import Container from "@/components/Form/Container";
+import { useSignUpMutation } from "@/hooks/mutation/useSignUpMutation";
 
 export function SignUpI() {
 	return (
@@ -24,28 +24,29 @@ export function SignUpI() {
 
 export function SignUpForm() {
 	const navigate = useNavigate();
-
+	const { mutateAsync: signUpMutation } = useSignUpMutation();
 	const onSubmit = async (data: SignUpType) => {
 		const firstFile = data.profileImage?.[0];
 		const updatedData = {
 			...data,
 			profileImage: firstFile,
+			// userRoleList: [0], 1로 설정해서 추가하기
 		};
 		console.log(updatedData);
 		try {
-			const response = await axios.post(
-				"http://54.180.121.206:8080/user",
-				updatedData,
-				{
-					headers: {
-						"Content-Type": "application/json",
-						authorization: `Bearer ${data}`,
-					},
-				},
-			);
-			console.log("response", response);
+			// const response = await axios.post(
+			// 	"http://54.180.121.206:8080/user",
+			// 	updatedData,
+			// 	{
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 		},
+			// 	},
+			// );
+			// console.log("response", response);
+
+			const response = await signUpMutation(updatedData);
 			const accessToken = response.data;
-			console.log("accessToken", accessToken);
 			alert("회원가입이 완료되었습니다.");
 			navigate("/login");
 			if (accessToken) {

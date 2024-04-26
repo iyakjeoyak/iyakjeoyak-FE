@@ -9,7 +9,7 @@ export interface SignUpType {
 	nickname: string; // 닉네임
 	gender: string; // 성별
 	age: number; // 나이
-	tag: string[]; //태그
+	tag: number[]; //태그
 }
 export const signUpDefault = {
 	profileImage: undefined,
@@ -56,7 +56,7 @@ export const signupValidation = yup.object().shape({
 		.required("나이를 입력하세요."),
 	tag: yup
 		.array()
-		.of(yup.string().required())
+		.of(yup.number().required())
 		.min(1, "태그를 선택하세요.")
 		.required("태그를 선택하세요."),
 });

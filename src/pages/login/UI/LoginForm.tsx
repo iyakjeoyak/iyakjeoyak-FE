@@ -1,33 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form } from "@/components/Form";
-import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
-import { LoginType, loginDefault, useLoginValidation } from "./loginValidation";
+import {
+	LoginType,
+	loginDefault,
+	useLoginValidation,
+} from "../utils/loginValidation";
 import styles from "../styles/LoginForm.module.scss";
-import axios from "axios";
+import { SocialKakao } from "./SocialKakao";
 
-export function LoginForm() {
+export default function LoginForm() {
 	const navigate = useNavigate();
+	const handleGoogleLogin = async () => {
+		console.log("Google login clicked");
+	};
 
 	const onSubmit = async (data: LoginType) => {
 		console.log("data", data);
 		try {
-			const response = await axios.post(
-				"http://54.180.121.206:8080/user/login",
-				{
-					username: data.username,
-					password: data.password,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-						// authorization: `Bearer ${data.accessToken}`,
-					},
-				},
-			);
-			console.log(response);
+			// const response = await axios.post(
+			// 	"http://54.180.121.206:8080/user/login",
+			// 	{
+			// 		username: data.username,
+			// 		password: data.password,
+			// 	},
+			// 	{
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			authorization: `Bearer ${data}`,
+			// 		},
+			// 	},
+			// );
+
 			const accessToken = response.data;
-			console.log("accessToken", accessToken);
+			// console.log("accessToken", accessToken);
 			alert("로그인에 성공했습니다.");
 			navigate("/home");
 			if (accessToken) {
@@ -64,10 +70,15 @@ export function LoginForm() {
 
 				<div className={styles.container}>
 					<div className={styles.google}>
-						<Form.Button icon={FcGoogle} type="submit" variant="icon" />
+						<Form.Button
+							icon={FcGoogle}
+							type="button"
+							variant="icon"
+							onClick={handleGoogleLogin}
+						/>
 					</div>
 					<div className={styles.kakao}>
-						<Form.Button icon={RiKakaoTalkFill} type="submit" variant="icon" />
+						<SocialKakao />
 					</div>
 				</div>
 				<div className={styles.registerWrap}>
