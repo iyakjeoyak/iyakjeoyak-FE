@@ -1,57 +1,70 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, {
+	AxiosInstance,
+	AxiosResponse,
+	AxiosError,
+	AxiosRequestHeaders,
+	InternalAxiosRequestConfig,
+} from "axios";
 
-type requestType = {
-	baseURL: string;
-	headers: {
-		"Content-Type": string;
-		Authorization?: string;
-	};
+export const instance: AxiosInstance = axios.create({
+	withCredentials: true,
+	baseURL: process.env.API_URL || "/api",
+});
+
+const getAccessToken = (): string | null => {
+	return localStorage.getItem("accessToken");
 };
 
-const config: requestType = {
-	baseURL: "/api",
-	headers: {
-		"Content-Type": "application/json",
+// 요청 인터셉터
+// access 토큰 가져오기
+instance.interceptors.request.use(
+	(config: InternalAxiosRequestConfig) => {
+		const headers: AxiosRequestHeaders = config.headers || {};
+		const accessToken = getAccessToken();
+
+		if (!accessToken) {
+			window.location.href = "/login";
+			return Promise.resolve(config);
+		}
+
+		headers["Content-Type"] = "application/json";
+		headers["Authorization"] = `Bearer ${accessToken}`;
+
+		config.headers = headers;
+		return Promise.resolve(config);
 	},
-};
+	(error: AxiosError) => {
+		return Promise.reject(error);
+	},
+);
 
-interface Params {
-	[key: string]: string | number | boolean;
-}
-interface ApiData {
-	data: any;
-}
+// 응답 인터셉터
+instance.interceptors.response.use(
+	(response: AxiosResponse) => {
+		// 200번대 상태 코드 처리
+		return response;
+	},
+	(error) => {
+		const { status, data } = error.response;
+		// 2xx 외 상태 코드 처리
 
-type ApiFetcherParams = [string, any];
-export type ApiMethods = "get" | "post" | "put" | "delete" | "patch";
-export type APiFetcher = (...args: ApiFetcherParams) => Promise<any>;
+		// 401 Status
+		if (error.response && status === 401) {
+			if (data.message === "유효하지 않은 사용자입니다.") {
+				return data.message;
+			}
+			window.location.href = "/login";
+		}
 
-const getFetcher = async (
-	path: string,
-	{ params }: { params: Params },
-): Promise<AxiosResponse<ApiData>> => {
-	return await api.get(path, { params });
-};
-const postFetcher = async (path: string, body: ApiData) => {
-	return await api.post(path, body);
-};
-
-const patchFetcher = async (path: string, body: ApiData) => {
-	return await api.put(path, body);
-};
-const putFetcher = async (path: string, body: ApiData) => {
-	return await api.put(path, body);
-};
-const deleteFetcher = async (path: string, params: ApiData) => {
-	return await api.delete(path, { params });
-};
-
-export const API_FETCHER: { [key in ApiMethods]: APiFetcher } = {
-	get: (...args) => getFetcher(...args),
-	post: (...args) => postFetcher(...args),
-	put: (...args) => putFetcher(...args),
-	patch: (...args) => patchFetcher(...args),
-	delete: (...args) => deleteFetcher(...args),
-};
-
-export const api: AxiosInstance = axios.create(config);
+		// 409 Status
+		if (error.response && status === 409) {
+			if (data.message === "이미 등록된 아이디입니다.") {
+				return data.message;
+			}
+			if (data.message === "이미 등록된 닉네임입니다.") {
+				return data.message;
+			}
+		}
+		return Promise.reject(error);
+	},
+);
