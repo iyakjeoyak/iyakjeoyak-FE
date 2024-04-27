@@ -7,11 +7,13 @@ const etcQueries = {
      queryOptions({
       queryKey:['etc', 'categories'],
       queryFn: getHashtags,
+      initialData: [],
    }),
    getCategories: () => 
     queryOptions({
      queryKey:['etc', 'categories'],
-     queryFn: getCategories,
+     queryFn: ()=> getCategories(),
+     initialData: [],
   }),
 }
    
