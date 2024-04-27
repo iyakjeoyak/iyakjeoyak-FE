@@ -1,6 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { Suspense, lazy } from "react";
-
 import {
 	PointHistory,
 	ReviewHistory,

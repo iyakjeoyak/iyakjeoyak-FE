@@ -20,4 +20,5 @@ export const routerpaths: PathNameType = {
 	POINTHISTORY: "/userinfo/point",
 	REVIEWHISTORY: "/userinfo/review",
 	SUPPLEMENTHISTORY: "/userinfo/user-supplement",
+	NOTFOUND: "/notfound",
 };
