@@ -1,10 +1,10 @@
 import { useModal } from "../hooks/useModal";
 
-interface ModalOpenNodeProps {
+interface TriggerProps {
 	openElement: React.ReactNode;
 }
 
-export default function ModalOpenNode({ openElement }: ModalOpenNodeProps) {
+export default function Trigger({ openElement }: TriggerProps) {
 	const { toggleModalOpen } = useModal();
 
 	return <div onClick={toggleModalOpen}>{openElement}</div>;

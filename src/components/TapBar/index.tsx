@@ -8,14 +8,15 @@ interface TapBarProps {
 }
 
 export default function TapBar({ taps, onClick }: TapBarProps) {
-	const currentTapValue = useGetURLSearch("tap");
+	const currentTapValue = useGetURLSearch("tap") || taps[0].value;
 
 	return (
 		<div className={styles.container}>
 			{taps.map((tap) => (
 				<div
 					key={tap.value}
-					className={`${styles.item} ${(currentTapValue === tap.value || (currentTapValue === null && tap.value === taps[0].value)) && styles.active}`}
+					className={styles.item}
+					data-active={currentTapValue === tap.value}
 					onClick={() => {
 						onClick(tap.value);
 					}}
