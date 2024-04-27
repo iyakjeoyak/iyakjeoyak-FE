@@ -7,12 +7,12 @@ import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import styles from "../styles/ReviewPostModal.module.scss";
 import { tagData } from "@/components/Form/TagButton/TagData";
-// import etcQueries from "@/hooks/queries/etcQueries";
+// import ectQueryOptions from '@/api/etc'
 // import { useQuery } from "@tanstack/react-query";
 
 export default function ReviewPostModal() {
 
-	// const {data: tags} = useQuery(etcQueries.getCategories())
+	// const {data: tags} = useQuery(ectQueryOptions.getCategories())
 
 	const onSubmit = (data: MedicineReviewPostBodyType) => {
 		console.log(data);
