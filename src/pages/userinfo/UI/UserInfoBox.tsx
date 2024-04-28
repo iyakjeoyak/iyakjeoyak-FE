@@ -28,18 +28,18 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 					</div>
 					<div className={style.userIntroduce}> 자기소개글</div>
 					<Modal>
-						<Modal.ModalOpenNode
+						<Modal.Trigger
 							openElement={
 								<div className={style.editprofile}>프로필 수정하기</div>
 							}
 						/>
-						<Modal.ModalContent>
+						<Modal.Content>
 							<div
 								className={` ${modalStyle.container} ${style.profileEditModal}`}
 							>
 								<UserInfoEdit data={userData} />
 							</div>
-						</Modal.ModalContent>
+						</Modal.Content>
 					</Modal>
 				</div>
 			</div>

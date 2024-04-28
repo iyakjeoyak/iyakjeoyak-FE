@@ -1,4 +1,4 @@
-import style from "../index.module.scss";
+import style from "../../index.module.scss";
 import PointIcon from "@/assets/icons/PointIcon";
 
 interface UserPointInfoProps {
