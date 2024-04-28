@@ -1,8 +1,8 @@
 import "@styles/global.scss";
-import CommonHeaderBox from "./CommonHeaderBox";
-import { supplementRecords } from "../mockData";
-import ListIcon from "../assets/ListIcon";
-import CommonCardBox from "./CommonCardBox";
+import CommonHeaderBox from "../CommonHeaderBox";
+import { supplementRecords } from "../../mockData";
+import ListIcon from "../../assets/ListIcon";
+import CommonCardBox from "../CommonCardBox";
 import style from "../style/supplementhistory.module.scss";
 import { useState } from "react";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";

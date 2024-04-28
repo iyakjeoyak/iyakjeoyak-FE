@@ -6,7 +6,7 @@ interface UserPointInfoProps {
 	onNavigate: () => void;
 }
 
-const UserPointBox: React.FC<UserPointInfoProps> = ({ points, onNavigate }) => {
+const PointContent: React.FC<UserPointInfoProps> = ({ points, onNavigate }) => {
 	return (
 		<section className={style.myPageContent}>
 			<section className={style.pointSection}>
@@ -26,4 +26,4 @@ const UserPointBox: React.FC<UserPointInfoProps> = ({ points, onNavigate }) => {
 	);
 };
 
-export default UserPointBox;
+export default PointContent;

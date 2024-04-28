@@ -1,24 +1,7 @@
-export interface Review {
-	date: string;
-	history?: string;
-}
+import { ReviewType, SupplementType } from "../userinfo/userInfoType";
 
-export interface Supplement {
-	name: string;
-	rating?: number;
-	frequency?: string;
-}
+export type InfoItem = ReviewType | SupplementType;
 
-export interface SectionConfig {
-	[key: string]: {
-		title: string;
-		navigateTo: string;
-		getData: (data: Item[]) => Item[];
-	};
-}
-
-export type Item = Review | Supplement;
-
-export interface RenderFunction {
-	(item: Item, index: number): JSX.Element;
+export interface ItemProps {
+	items: InfoItem[];
 }
