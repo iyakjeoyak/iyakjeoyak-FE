@@ -7,18 +7,23 @@ import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import styles from "../styles/ReviewPostModal.module.scss";
 import { tagData } from "@/components/Form/TagButton/TagData";
+// import ectQueryOptions from '@/api/etc'
+// import { useQuery } from "@tanstack/react-query";
 
 export default function ReviewPostModal() {
+
+	// const {data: tags} = useQuery(ectQueryOptions.getCategories())
+
 	const onSubmit = (data: MedicineReviewPostBodyType) => {
 		console.log(data);
 	};
 
 	return (
 		<Modal>
-			<Modal.ModalOpenNode
+			<Modal.Trigger
 				openElement={<button className={styles.button}>후기 작성하기</button>}
 			/>
-			<Modal.ModalContent>
+			<Modal.Content>
 				<Form
 					validationSchema={medicineReviewPostValidation}
 					pageDefaultValues={initialMedicineReviewPostBody}
@@ -37,7 +42,7 @@ export default function ReviewPostModal() {
 					/>
 					<Form.Button text="후기 작성완료" variant="dark" />
 				</Form>
-			</Modal.ModalContent>
+			</Modal.Content>
 		</Modal>
 	);
 }

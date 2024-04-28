@@ -1,9 +1,7 @@
-import {
-	SortCurrentOption,
-	SortOption,
-	SortOptionList,
-	SortSelectRoot,
-} from "./UI";
+import SortCurrentOption from "./UI/SortCurrentOption";
+import SortOption from "./UI/SortOption";
+import SortOptionList from "./UI/SortOptionList";
+import SortSelectRoot from "./UI/SortSelectRoot";
 
 const SelectSort = Object.assign(SortSelectRoot, {
 	SortOption,

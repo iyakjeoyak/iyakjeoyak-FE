@@ -1,6 +1,6 @@
 import { SORT_QUERIES } from "@/constants/SORT_OPTIONS";
 
-export default function getValueLabel(value: string) {
+export function getValueLabel(value: string) {
 	switch (value) {
 		case SORT_QUERIES.BEST:
 			return "베스트 리뷰 순";

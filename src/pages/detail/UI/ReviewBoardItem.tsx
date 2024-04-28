@@ -7,7 +7,7 @@ import styles from "../styles/ReviewBoardItem.module.scss";
 export default function ReviewBoardItem() {
 	return (
 		<Modal>
-			<Modal.ModalOpenNode
+			<Modal.Trigger
 				openElement={
 					<div className={styles.container}>
 						<WriterTitle />
@@ -25,9 +25,9 @@ export default function ReviewBoardItem() {
 					</div>
 				}
 			/>
-			<Modal.ModalContent>
+			<Modal.Content>
 				<ReviewDetailModal />
-			</Modal.ModalContent>
+			</Modal.Content>
 		</Modal>
 	);
 }
