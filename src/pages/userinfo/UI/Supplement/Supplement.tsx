@@ -1,5 +1,5 @@
-import { SupplementType } from "../userInfoType";
-import InfoBox from "./InfoBox";
+import { SupplementType } from "../../userInfoType";
+import InfoBox from "../InfoBox";
 
 interface SupplementProps {
 	supplement: SupplementType[];

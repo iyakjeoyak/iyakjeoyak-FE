@@ -1,4 +1,4 @@
-import InfoBox from "./InfoBox";
+import InfoBox from "../InfoBox";
 
 export interface Review {
 	date: string;

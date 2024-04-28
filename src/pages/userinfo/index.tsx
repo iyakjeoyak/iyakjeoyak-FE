@@ -3,9 +3,9 @@ import style from "./index.module.scss";
 import { userMockData as userData } from "./mockData";
 import { useNavigate } from "react-router-dom";
 import UserInfoBox from "./UI/UserInfoBox";
-import PointContent from "./UI/PointContent";
+import PointContent from "./UI/Point/PointContent";
 import FlexBox from "@/styles/FlexBox";
-import { Review, Supplement, UserInfoEdit } from "./UI";
+import { Review, Supplement } from "./UI";
 
 const UserInfo = () => {
 	const navigate = useNavigate();
@@ -22,7 +22,6 @@ const UserInfo = () => {
 				<Review review={userData.latestReviews} />
 				<Supplement supplement={userData.favoriteSupplements} />
 			</FlexBox>
-			<UserInfoEdit data={userData} />
 		</section>
 	);
 };
