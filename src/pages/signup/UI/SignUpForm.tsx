@@ -1,22 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import {
-	SignUpType,
+	SignUpFormType,
 	signUpDefault,
-	useSignupValidation,
+	signupValidation,
 } from "../utils/signupValidation";
 import { Form } from "@/components/Form";
 import styles from "@/pages/signup/style/SignUpForm.module.scss";
 import { tagData } from "../../../components/Form/TagButton/TagData";
 import Container from "@/components/Form/Container";
-import { useSignUpMutation } from "@/hooks/mutation/useSignUpMutation";
+import { useMutation } from "@tanstack/react-query";
+import postSignUp from "@/api/post/postSignUp";
 
 export function SignUpI() {
 	return (
 		// 로그인 유효성 검사
-		<Form
-			validationSchema={useSignupValidation()}
-			pageDefaultValues={signUpDefault}
-		>
+		<Form validationSchema={signupValidation} pageDefaultValues={signUpDefault}>
 			<SignUpForm />
 		</Form>
 	);
@@ -24,67 +22,53 @@ export function SignUpI() {
 
 export function SignUpForm() {
 	const navigate = useNavigate();
-	const { mutateAsync: signUpMutation } = useSignUpMutation();
-	const onSubmit = async (data: SignUpType) => {
+	// const { mutate } = useSignUpMutation;
+	const { mutate } = useMutation({
+		mutationFn: postSignUp,
+	});
+
+	const onSubmit = (data: SignUpFormType) => {
 		const firstFile = data.profileImage?.[0];
 		const updatedData = {
 			...data,
-			profileImage: firstFile,
+			imageUrl: firstFile,
 			// userRoleList: [0], 1로 설정해서 추가하기
 		};
 		console.log(updatedData);
-		try {
-			// const response = await axios.post(
-			// 	"http://54.180.121.206:8080/user",
-			// 	updatedData,
-			// 	{
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 		},
-			// 	},
-			// );
-			// console.log("response", response);
 
-			const response = await signUpMutation(updatedData);
-			const accessToken = response.data;
-			alert("회원가입이 완료되었습니다.");
-			navigate("/login");
-			if (accessToken) {
-				localStorage.setItem("accessToken", accessToken);
-			}
-		} catch (error) {
-			console.error("api error", error);
-		}
+		mutate(updatedData);
+		alert("회원가입이 완료되었습니다.");
+		navigate("/login");
 	};
 
 	return (
 		<Form
-			validationSchema={useSignupValidation()}
+			validationSchema={signupValidation}
 			pageDefaultValues={signUpDefault}
 			onSubmit={onSubmit}
 		>
 			<Form.ImgInput name="profileImage" />
 
-			<Form.Input<SignUpType>
+			<Form.Input<SignUpFormType>
 				name="username"
 				title="아이디"
 				placeholder="아이디를 입력해주세요."
 			/>
-			<Form.Input<SignUpType>
+			<Form.Input<SignUpFormType>
 				name="password"
 				title="비밀번호"
 				placeholder="비밀번호를 입력해주세요."
 				type="password"
 			/>
 
-			<Form.Input<SignUpType>
+			<Form.Input<SignUpFormType>
 				name="confirmPassword"
 				title="비밀번호 확인"
 				placeholder="비밀번호를 입력해주세요."
 				type="password"
 			/>
 
-			<Form.Input<SignUpType>
+			<Form.Input<SignUpFormType>
 				name="nickname"
 				title="닉네임"
 				placeholder="닉네임을 입력해주세요."
@@ -97,7 +81,7 @@ export function SignUpForm() {
 				</div>
 			</Container>
 
-			<Form.Input<SignUpType>
+			<Form.Input<SignUpFormType>
 				name="age"
 				title="만 나이"
 				placeholder="나이를 입력해주세요."
