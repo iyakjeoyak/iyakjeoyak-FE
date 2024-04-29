@@ -12,11 +12,6 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 		svgrPlugin(),
-		// visualizer({
-		// 	open: true,
-		// 	gzipSize: true,
-		// 	brotliSize: true,
-		// }),
 	],
 	css: {
 		modules: {
@@ -48,28 +43,10 @@ export default defineConfig({
 	},
 
 	build: {
-		// 빌드할 라이브러리에 대한 설정
-		lib: {
-			// 라이브러리의 진입점
-			entry: path.resolve(__dirname, "src/main.tsx"),
-			// 라이브러리 이름
-			name: "index",
-			fileName: "index",
-		},
 		rollupOptions: {
-			// 번들에 포함시키지 않을 외부 종속성
-			external: ["react", "react-dom"],
-			// 번들의 출력 옵션 설정
-			output: {
-				globals: {
-					react: "React",
-					"react-dom": "ReactDOM",
-				},
+			input:{
+				main: path.resolve(__dirname, 'index.html'),
 			},
-		},
-		// CommonJS 번들러에 대한 옵션을 정의
-		commonjsOptions: {
-			esmExternals: ["react"],
 		},
 	},
 
