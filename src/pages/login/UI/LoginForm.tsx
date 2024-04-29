@@ -25,7 +25,7 @@ export default function LoginForm() {
 		mutate(data, {
 			onSuccess: (data) => {
 				const accessToken = data.data;
-				localStorage.setItem("accessToken", accessToken); // 기본, 구글, 카카오 저장소 구분
+				localStorage.setItem("accessToken", accessToken);
 
 				alert("로그인이 완료되었습니다.");
 				navigate("/login");
