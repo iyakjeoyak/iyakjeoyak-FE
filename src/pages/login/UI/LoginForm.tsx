@@ -15,8 +15,6 @@ import styles from "../styles/LoginForm.module.scss";
 
 export default function LoginForm() {
 	const navigate = useNavigate();
-
-	// const { mutate } = useLoginMutation;
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
 	});
