@@ -1,10 +1,12 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
+import medicineQueryOptions from "@/api/medicine";
 import styles from "./index.module.scss";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const TAPS = [
 	{
@@ -22,17 +24,34 @@ export default function DetailMedicineById() {
 
 	const currentTapValue = useGetURLSearch("tap");
 
+  const location = useLocation();
+  
+  const id = Number(location.pathname.split('/')[2]);
+  
+  const {data: {
+    id: medicineId, 
+    grade,
+    bssh_NM: brand, 
+    prdlst_NM: name, 
+    heartCount, 
+    ntk_MTHD: howToEat, 
+    indiv_RAWMTRL_NM: ingredient, 
+    primary_FNCLTY: describe, 
+    reviewCount
+  }} 
+  = useQuery(medicineQueryOptions.getMedicineById({medicineId: id}))
+
 	const handleTapClick = (tapValue: string) => {
-		navigate(`/detail/1?tap=${tapValue}`);
+		navigate(`/detail/${medicineId}?tap=${tapValue}`);
 	};
 
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard />
+				<MedicineCard name={name} brand={brand} grade={grade} heartCount={heartCount} reviewCount={reviewCount} />
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
-					{currentTapValue === "review" ? <ReviewBoard /> : <InfoBoard />}
+					{currentTapValue === "review" ? <ReviewBoard medicineId={medicineId} /> : <InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}
 				</div>
 			</section>
 		</>

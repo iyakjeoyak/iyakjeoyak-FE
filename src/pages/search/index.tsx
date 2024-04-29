@@ -35,7 +35,7 @@ export default function MedicineSearch() {
 		const result = ["리", "리액", "리액트"];
 		return result;
 	};
-
+  
 	return (
 		<section>
 			<SearchBar>

@@ -1,11 +1,15 @@
 import Modal from "@/components/Modal";
 import ReviewDetailModal from "./ReviewDetailModal";
+import { ReviewItemType } from "@/types";
 import TagCommon from "@/components/Tag";
 import WriterTitle from "@/components/WriterTitle";
 import styles from "../styles/ReviewBoardItem.module.scss";
 
-export default function ReviewBoardItem() {
-	return (
+export default function ReviewBoardItem({reviewItem}:{reviewItem: ReviewItemType}) {
+
+  const { content } = reviewItem;
+	
+  return (
 		<Modal>
 			<Modal.Trigger
 				openElement={
@@ -14,7 +18,7 @@ export default function ReviewBoardItem() {
 						<div className={styles["review-container"]}>
 							<img />
 							<div className={styles["content-container"]}>
-								<p>맛있어요~!</p>
+								<p>{content}</p>
 								<div className={styles["tags"]}>
 									<TagCommon text="태그" />
 									<TagCommon text="태그" />

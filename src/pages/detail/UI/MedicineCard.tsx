@@ -7,15 +7,15 @@ import TagCommon from "@/components/Tag";
 import styles from "../styles/MedicineCard.module.scss";
 
 interface MedicineCardProps {
-	// id: number;
-	heartCount?: number;
-	// star: null;
-	// reviewCount: number;
-	// bssh_NM: string;
-	// prdlst_NM: string;
+  name: string;
+  brand: string;
+  heartCount: number;
+  reviewCount: number;
+  grade: number
 }
 
-export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
+export default function MedicineCard({name, brand, heartCount, grade, reviewCount}:MedicineCardProps) {
+
 	const handleLikeClick = () => {
 		console.log("관심 등록");
 	};
@@ -29,12 +29,12 @@ export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
 			<img src="/images/Medicine.png" />
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
-					<div className={styles.brand}>어쩌구 브랜드</div>
-					<div className={styles.name}>어쩌구 영양제</div>
+					<div className={styles.brand}>{brand}</div>
+					<div className={styles.name}>{name}</div>
 				</div>
 				<div className={styles["sub-info"]}>
-					<StarRating filledStars={3.5} />
-					<span>(311개)</span>
+					<StarRating filledStars={grade} />
+					<span>({reviewCount}개)</span>
 				</div>
 				<div className={styles.tags}>
 					<TagCommon text="피로개선" backgroundColor="green" />
