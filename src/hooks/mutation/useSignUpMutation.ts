@@ -1,11 +1,13 @@
-import { SignUpType } from "@/pages/signup/utils/signupValidation";
-import { AxiosError } from "axios";
+import { SignUpFormType } from "@/pages/signup/utils/signupValidation";
+import { AxiosError, AxiosResponse } from "axios";
 import { postSignUp } from "@/api/post";
 import { useMutation } from "@tanstack/react-query";
 
-export function useSignUpMutation() {
-	return useMutation<SignUpType, AxiosError>({
-		mutationFn: (newSignUpData: SignUpType) => postSignUp(newSignUpData),
-		onSuccess: () => {},
-	});
-}
+export const useSignUpMutation = useMutation<
+	AxiosResponse,
+	AxiosError,
+	SignUpFormType,
+	unknown
+>({
+	mutationFn: (newSignUpData: SignUpFormType) => postSignUp(newSignUpData),
+});

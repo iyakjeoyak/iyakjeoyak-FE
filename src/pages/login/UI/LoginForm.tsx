@@ -1,62 +1,51 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { postLogin } from "@/api/post";
 import { Form } from "@/components/Form";
 import { FcGoogle } from "react-icons/fc";
 import {
-	LoginType,
+	LoginFormType,
 	loginDefault,
-	useLoginValidation,
+	loginValidation,
 } from "../utils/loginValidation";
+import { handleKakaoLogin } from "../utils/getKakaoAuthUrl";
+import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
+import { RiKakaoTalkFill } from "react-icons/ri";
 import styles from "../styles/LoginForm.module.scss";
-import { SocialKakao } from "./SocialKakao";
 
 export default function LoginForm() {
 	const navigate = useNavigate();
-	const handleGoogleLogin = async () => {
-		console.log("Google login clicked");
-	};
 
-	const onSubmit = async (data: LoginType) => {
-		console.log("data", data);
-		try {
-			// const response = await axios.post(
-			// 	"http://54.180.121.206:8080/user/login",
-			// 	{
-			// 		username: data.username,
-			// 		password: data.password,
-			// 	},
-			// 	{
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 			authorization: `Bearer ${data}`,
-			// 		},
-			// 	},
-			// );
+	// const { mutate } = useLoginMutation;
+	const { mutate } = useMutation({
+		mutationFn: postLogin,
+	});
 
-			const accessToken = response.data;
-			// console.log("accessToken", accessToken);
-			alert("로그인에 성공했습니다.");
-			navigate("/home");
-			if (accessToken) {
-				localStorage.setItem("accessToken", accessToken);
-			}
-		} catch (error) {
-			console.error("Login error:", error);
-		}
+	const onSubmit = (data: LoginFormType) => {
+		mutate(data, {
+			onSuccess: (data) => {
+				const accessToken = data.data;
+				localStorage.setItem("accessToken", accessToken); // 기본, 구글, 카카오 구현
+
+				alert("로그인이 완료되었습니다.");
+				navigate("/login");
+			},
+		});
 	};
 
 	return (
 		<Form
-			validationSchema={useLoginValidation()}
+			validationSchema={loginValidation}
 			pageDefaultValues={loginDefault}
 			onSubmit={onSubmit}
 		>
-			<Form.Input<LoginType>
+			<Form.Input<LoginFormType>
 				name="username"
 				title="아이디"
 				placeholder="아이디를 입력해주세요."
 			/>
 
-			<Form.Input<LoginType>
+			<Form.Input<LoginFormType>
 				name="password"
 				title="비밀번호"
 				placeholder="비밀번호를 입력해주세요."
@@ -78,7 +67,12 @@ export default function LoginForm() {
 						/>
 					</div>
 					<div className={styles.kakao}>
-						<SocialKakao />
+						<Form.Button
+							icon={RiKakaoTalkFill}
+							type="button"
+							variant="icon"
+							onClick={handleKakaoLogin}
+						/>
 					</div>
 				</div>
 				<div className={styles.registerWrap}>

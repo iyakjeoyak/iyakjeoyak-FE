@@ -17,6 +17,8 @@ import OnBoarding from "@/pages/onboarding";
 import SignUp from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
 import { routerpaths } from "@/utils/pathName";
+import { KakaoLogin } from "@/pages/login/UI/KakaoLogin";
+import { GoogleLogin } from "@/pages/login/UI/GoogleLogin";
 
 function Router() {
 	return (
@@ -34,6 +36,8 @@ function Router() {
 						element={<DetailMedicineById />}
 					/>
 					<Route path={routerpaths.LOGIN} element={<Login />} />
+					<Route path={routerpaths.KAKAOLOGIN} element={<KakaoLogin />} />
+					<Route path={routerpaths.GOOGLELOGIN} element={<GoogleLogin />} />
 					<Route path={routerpaths.SIGNUP} element={<SignUp />} />
 					<Route path={routerpaths.FAME} element={<Fame />} />
 					<Route path={routerpaths.USERINFO} element={<UserInfo />} />

@@ -1,7 +1,6 @@
 import * as yup from "yup";
-import { useMemo } from "react";
 
-export interface SignUpType {
+export interface SignUpFormType {
 	profileImage: FileList; // 프로필
 	username: string; // 아이디
 	password: string; // 비밀번호
@@ -60,9 +59,3 @@ export const signupValidation = yup.object().shape({
 		.min(1, "태그를 선택하세요.")
 		.required("태그를 선택하세요."),
 });
-
-// useMemo사용하기
-export const useSignupValidation = () => {
-	const validationSchema = useMemo(() => signupValidation, []);
-	return validationSchema;
-};
