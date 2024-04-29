@@ -7,7 +7,6 @@ import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import ectQueryOptions from '@/api/etc'
 import styles from "../styles/ReviewPostModal.module.scss";
-import { tagData } from "@/components/Form/TagButton/TagData";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ReviewPostModal() {
