@@ -1,8 +1,9 @@
-import { defineConfig } from "vite";
 import * as path from "path";
+
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
 import svgrPlugin from "vite-plugin-svgr";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
@@ -50,7 +51,7 @@ export default defineConfig({
 		// 빌드할 라이브러리에 대한 설정
 		lib: {
 			// 라이브러리의 진입점
-			entry: path.resolve(__dirname, "src/index.tsx"),
+			entry: path.resolve(__dirname, "src/main.tsx"),
 			// 라이브러리 이름
 			name: "index",
 			fileName: "index",
