@@ -1,4 +1,4 @@
-import instance from "..";
+import axios from "../axiosConfig";
 
 interface HashtagsType {
     id: number,
@@ -18,6 +18,6 @@ interface HashtagsType {
 */
 
 export default async function getHashtags() {
-	const response = await instance.get<HashtagsType[]>(`/hashtag`);
+	const response = await axios.get<HashtagsType[]>(`/hashtag`);
 	return response.data;
 }

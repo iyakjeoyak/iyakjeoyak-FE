@@ -1,7 +1,7 @@
 import { MedicineItemType } from "@/types";
-import instance from "..";
+import axios from "../axiosConfig";
 
 export default async function getMedicines() {
-	const response = await instance.get<{ content: MedicineItemType[] }>(`/medicines`);
+	const response = await axios.get<{ content: MedicineItemType[] }>(`/medicines`);
 	return response.data;
 }

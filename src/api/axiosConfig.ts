@@ -1,15 +1,15 @@
-import Axios from "axios";
-import { AxiosInstance } from "axios";
-
 import {
 	rejectInterceptor,
 	requestInterceptor,
 	responseInterceptor,
 } from "@/utils/interceptor";
 
+import Axios from "axios";
+import { AxiosInstance } from "axios";
+
 const axios: AxiosInstance = Axios.create({
 	withCredentials: true,
-	baseURL: import.meta.env.API_URL,
+	baseURL: import.meta.env.VITE_BASE_URL,
 	headers: {
 		"Content-Type": "application/json",
 	},

@@ -5,14 +5,14 @@ import medicineReviewPostValidation, {
 
 import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
+import ectQueryOptions from '@/api/etc'
 import styles from "../styles/ReviewPostModal.module.scss";
 import { tagData } from "@/components/Form/TagButton/TagData";
-// import ectQueryOptions from '@/api/etc'
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ReviewPostModal() {
 
-	// const {data: tags} = useQuery(ectQueryOptions.getCategories())
+ const {data: tags} = useQuery(ectQueryOptions.getCategories())
 
 	const onSubmit = (data: MedicineReviewPostBodyType) => {
 		console.log(data);
@@ -34,7 +34,7 @@ export default function ReviewPostModal() {
 						title="리뷰 제목"
 						placeholder="리뷰 제목을 입력해주세요"
 					/>
-					<Form.TagBoard title="태그 선택" tags={tagData} />
+					<Form.TagBoard title="태그 선택" tags={ tags ?? []} />
 					<Form.Textarea
 						name="content"
 						title="후기 작성"
