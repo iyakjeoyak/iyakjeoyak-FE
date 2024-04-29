@@ -3,8 +3,7 @@ export interface RequestPagenation {
   size: number;
 }
 
-
-export interface ResponsePagenation {
+export interface ResponsePagenation<T> {
 	data: [
 	  {}
 	],
@@ -13,13 +12,16 @@ export interface ResponsePagenation {
 	totalPages: 0,
 	totalElement: 0,
 	numberOfElement: 0
-  }
+}
 
 export interface MedicineItemType {
 	id: number; // DB ID
-	name: string; // 영양제명=> prdlst_NM
+	prdlst_NM: string; // 영양제명=> prdlst_NM
+	heartCount: number;
+	ntk_MTHD: string;  // 먹는 방법   "1일 1회, 1회 1정을 물과 함께 섭취하십시오.",
+	iftkn_ATNT_MATR_CN: string;  // 주의 사항  "이상사례 발생 시 섭취를 중단하고 전문가와 상담할 것"
+	garde: number;  // 리뷰 평점
 	tags: string[]; // 해시 태그 모음
-	starAvg: number; // 평균 평점
 	reviewCount: number; // 후기 수
 }
 
@@ -41,5 +43,9 @@ interface ReviewItemType {
 }
 
 export interface ReviewItemType {
-	review: string;
-}
+	id: number,
+	title: string,
+	content: string,
+	star: number,
+	heartCount: number
+  }

@@ -1,57 +1,21 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import {
+	rejectInterceptor,
+	requestInterceptor,
+	responseInterceptor,
+} from "@/utils/interceptor";
 
-type requestType = {
-	baseURL: string;
-	headers: {
-		"Content-Type": string;
-		Authorization?: string;
-	};
-};
+import Axios from "axios";
+import { AxiosInstance } from "axios";
 
-const config: requestType = {
-	baseURL: "/api",
+const axios: AxiosInstance = Axios.create({
+	withCredentials: true,
+	baseURL: import.meta.env.VITE_BASE_URL,
 	headers: {
 		"Content-Type": "application/json",
 	},
-};
+});
 
-interface Params {
-	[key: string]: string | number | boolean;
-}
-interface ApiData {
-	data: any;
-}
+axios.interceptors.request.use(requestInterceptor);
+axios.interceptors.response.use(responseInterceptor, rejectInterceptor);
 
-type ApiFetcherParams = [string, any];
-export type ApiMethods = "get" | "post" | "put" | "delete" | "patch";
-export type APiFetcher = (...args: ApiFetcherParams) => Promise<any>;
-
-const getFetcher = async (
-	path: string,
-	{ params }: { params: Params },
-): Promise<AxiosResponse<ApiData>> => {
-	return await api.get(path, { params });
-};
-const postFetcher = async (path: string, body: ApiData) => {
-	return await api.post(path, body);
-};
-
-const patchFetcher = async (path: string, body: ApiData) => {
-	return await api.put(path, body);
-};
-const putFetcher = async (path: string, body: ApiData) => {
-	return await api.put(path, body);
-};
-const deleteFetcher = async (path: string, params: ApiData) => {
-	return await api.delete(path, { params });
-};
-
-export const API_FETCHER: { [key in ApiMethods]: APiFetcher } = {
-	get: (...args) => getFetcher(...args),
-	post: (...args) => postFetcher(...args),
-	put: (...args) => putFetcher(...args),
-	patch: (...args) => patchFetcher(...args),
-	delete: (...args) => deleteFetcher(...args),
-};
-
-export const api: AxiosInstance = axios.create(config);
+export default axios;

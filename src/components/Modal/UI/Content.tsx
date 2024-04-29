@@ -1,4 +1,4 @@
-import { HTMLMotionProps, LazyMotion, m  } from "framer-motion";
+import { HTMLMotionProps, motion  } from "framer-motion";
 import styles from "../styles/Content.module.scss";
 import { useModal } from "../hooks/useModal";
 import stopEvent from "@/utils/stopEvent";
@@ -8,8 +8,8 @@ interface ContentProps extends HTMLMotionProps<"div"> {
 	className?: string;
 }
 
-const loadFeatures = () =>
-	import("../utils/features.ts").then(res => res.default)
+// const loadFeatures = () =>
+// 	import("../utils/features.ts").then(res => res.default)
 
 export default function Content({
 	children,
@@ -20,9 +20,9 @@ export default function Content({
 	if (!isModalOpen) return null;
 
 	return (
-		<LazyMotion features={loadFeatures}>
+		// <LazyMotion features={loadFeatures}>
 			<div className="background" onClick={toggleModalOpen}>
-				<m.div
+				<motion.div
 					{...props}
 					className={`${styles.container} ${className}`}
 					initial={{ opacity: 0, y: "100%" }}
@@ -33,8 +33,8 @@ export default function Content({
 					>
 					<div className={styles.element} />
 					{children}
-				</m.div>
+				</motion.div>
 			</div>
-		</LazyMotion>
+		// </LazyMotion>
 	);
 }

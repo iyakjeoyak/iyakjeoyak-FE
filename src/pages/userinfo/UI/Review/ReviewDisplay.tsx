@@ -1,8 +1,8 @@
 import "@styles/global.scss";
 
-import { ReviewDisplayProps } from "../userInfoType";
+import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
-import style from "../style/reviewdisplay.module.scss";
+import style from "../../style/reviewdisplay.module.scss";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 	return (

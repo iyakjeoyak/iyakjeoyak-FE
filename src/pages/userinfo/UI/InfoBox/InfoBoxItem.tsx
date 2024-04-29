@@ -1,36 +1,37 @@
-import { RenderFunction, Item } from "../../InfoBoxType";
 import style from "../../index.module.scss";
+import { ReviewType, SupplementType } from "../../userInfoType";
 
-const renderReview: RenderFunction = (item: Item): JSX.Element => {
-	if ("date" in item) {
-		return (
-			<div className={style.sectionBox}>
-				<div className={style.sectionName}>{item.date}</div>
-				{item.history && (
-					<div className={style.sectionReviewBox}>
-						<div className={style.sectionText}>{item.history}</div>
-					</div>
-				)}
-			</div>
-		);
+type InfoItem = ReviewType | SupplementType;
+
+export interface ItemProps {
+	items: InfoItem[];
+}
+function InfoBoxItem({ items }: ItemProps): JSX.Element {
+	if (items.length === 0) {
+		return <div className={style.sectionBox}>작성된 정보가 없습니다.</div>;
 	}
-	return <div className={style.sectionBox}>작성된 리뷰가 없습니다</div>;
-};
+	return (
+		<div>
+			{items.map((item, index) => (
+				<div key={index} className={style.sectionBox}>
+					{"date" in item && (
+						<div className={style.sectionName}>{item.date}</div>
+					)}
+					{"history" in item && (
+						<div className={style.sectionReviewBox}>
+							<div className={style.sectionText}>{item.history}</div>
+						</div>
+					)}
+					{"rating" in item && (
+						<div className={style.sectionRateBox}>
+							<div className={style.sectionText}>평균 평점</div>
+							<div className={style.sectionRate}>{item.rating} / 5.0</div>
+						</div>
+					)}
+				</div>
+			))}
+		</div>
+	);
+}
 
-const renderSupplement: RenderFunction = (item: Item): JSX.Element => {
-	if ("name" in item)
-		return (
-			<div className={style.sectionBox}>
-				<div className={style.sectionName}>{item.name}</div>
-				{item.rating && (
-					<div className={style.sectionRateBox}>
-						<div className={style.sectionText}>평균 평점</div>
-						<div className={style.sectionRate}>{item.rating} / 5.0</div>
-					</div>
-				)}
-			</div>
-		);
-	return <div className={style.sectionBox}>내 영양제 내역이 없습니다</div>;
-};
-
-export { renderReview, renderSupplement };
+export default InfoBoxItem;
