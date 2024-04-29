@@ -7,17 +7,12 @@ import { useState } from "react";
 
 const PointHistory: React.FC = () => {
 	// const userData = userMockData;
-	const [pointData, SetPointData] = useState<ShortPointHistory[]>(
+	const [pointData, _] = useState<ShortPointHistory[]>(
 		pointMockData.pointHistory,
 	);
-	const [reviewData, SetReviewData] = useState(
-		pointMockData.reviewMockData.reviews,
-	);
-	const [isModalOpen, setIsOpenModal] = useState(false);
-
-	const pointDetailModalOpen = () => {
-		setIsOpenModal((prev) => !prev);
-	};
+	// const [reviewData, SetReviewData] = useState(
+	// 	pointMockData.reviewMockData.reviews,
+	// );
 
 	const renderPointItems = pointData.map((item, index) => (
 		<div key={index} className={style.pointItem}>
@@ -27,7 +22,7 @@ const PointHistory: React.FC = () => {
 	));
 
 	return (
-		<section className={style.pointContainer} onClick={pointDetailModalOpen}>
+		<section className={style.pointContainer}>
 			{/* {isModalOpen && (
 						<작성한 후기 컴포넌트 userName = {userData.nickName}>
 					)} */}
