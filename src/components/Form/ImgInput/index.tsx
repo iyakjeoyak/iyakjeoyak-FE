@@ -1,74 +1,61 @@
-import styles from "@/components/Form/ImgInput/index.module.scss";
-import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import getImgPreview from "@/utils/getImgPreview";
+import { useRef } from "react";
 import { FiPlusCircle } from "react-icons/fi";
+import Container from "../Container";
+import styles from "@/components/Form/ImgInput/index.module.scss";
+import { useController, useFormContext } from "react-hook-form";
 
 interface ImgInput {
 	name: string;
 	title?: string;
 }
 export const ImgInput = ({ name, title }: ImgInput) => {
-	const { register, watch } = useFormContext();
-	// 이미지 미리보기 URL 상태 관리
-	const [previewUrl, setPreviewUrl] = useState<string | undefined>();
+	const { control } = useFormContext();
+	const imgInputRef = useRef<HTMLInputElement>(null);
+	const handleImageClick = () => {
+		imgInputRef.current?.click();
+	};
+	const {
+		field: { value: profileImage, onChange: setProfileImage },
+	} = useController({
+		control,
+		name,
+	});
 
-	const fileList = watch(name);
-	console.log("file", fileList);
 	// file url로 변환
-	useEffect(() => {
-		if (fileList && fileList.length > 0) {
-			const file = fileList[0];
-			if (file instanceof File) {
-				const reader = new FileReader();
-				reader.onload = () => {
-					if (typeof reader.result === "string") {
-						setPreviewUrl(reader.result);
-					}
-				};
-				reader.readAsDataURL(file);
-			}
-		}
-	}, [fileList]);
 
 	return (
-		<div className={styles.profilePicEdit}>
-			{title && <div className={styles.ImgTitle}>{title}</div>}
-			<div className={styles.imgWrap}>
-				<input
-					type="file"
-					accept="image/*"
-					style={{ display: "none" }}
-					{...register(name)}
-					id="fileupload"
-				/>
-				<div className={styles.imgBox}>
-					<label htmlFor="fileupload" className={styles.imgLabel}>
-						{previewUrl ? "" : <FiPlusCircle />}
-					</label>
-					<div className={styles.imgCon}>
-						{previewUrl && (
-							<img
-								src={previewUrl}
-								alt="사용자 프로필"
-								className={styles.userProfile}
-							/>
-						)}
-					</div>
+		<Container title={title} name={name}>
+			<input
+				type="file"
+				accept="image/*"
+				style={{ display: "none" }}
+				onChange={(event) => {
+					const file = event.target.files?.[0] as File;
+					if (file) {
+						getImgPreview(file, setProfileImage, () => {});
+					}
+				}}
+				id="fileupload"
+			/>
+			<div className={styles.imgBox}>
+				<label
+					htmlFor="fileupload"
+					className={styles.imgLabel}
+					onClick={handleImageClick}
+				>
+					{profileImage ? "" : <FiPlusCircle />}
+				</label>
+				<div className={styles.imgCon}>
+					{profileImage && (
+						<img
+							src={profileImage}
+							alt="사용자 프로필"
+							className={styles.userProfile}
+						/>
+					)}
 				</div>
 			</div>
-		</div>
+		</Container>
 	);
 };
-
-{
-	/* <img
-				className={
-					profileImage === defaultImage
-						? style.defaultProfile
-						: style.userProfile
-				}
-				src={profileImage}
-				alt="사용자 프로필"
-				onClick={handleImageClick}
-			/> */
-}

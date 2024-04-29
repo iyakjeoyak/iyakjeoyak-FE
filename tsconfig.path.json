@@ -10,7 +10,8 @@
 			"@router/*": ["./router/*"],
 			"@styles/*": ["./styles/*"],
 			"@utils/*": ["./utils/*"],
-			"@types/*": ["./types/*"]
+			"@types/*": ["./types/*"],
+			"@api/*": ["./api/*"]
 		}
 	}
 }

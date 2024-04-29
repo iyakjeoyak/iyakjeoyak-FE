@@ -1,20 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { Suspense, lazy } from "react";
+
 import {
 	PointHistory,
 	ReviewHistory,
 	SupplementHistory,
 } from "@/pages/userinfo/UI";
 
-import DetailIdPage from "@/pages/detail";
+import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";
 import Layout from "@/components/Layout";
-import LoginPage from "@pages/login";
+import Login from "@pages/login";
 import MainPage from "@pages/main";
+import MedicineSearch from "@/pages/search";
 import OnBoarding from "@/pages/onboarding";
-import SearchPage from "@/pages/search";
 import SignUp from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
 import { routerpaths } from "@/utils/pathName";
+import { KakaoLogin } from "@/pages/login/UI/KakaoLogin";
+import { GoogleLogin } from "@/pages/login/UI/GoogleLogin";
 
 function Router() {
 	return (
@@ -26,9 +30,14 @@ function Router() {
 				>
 					<Route path={routerpaths.HOME} element={<MainPage />} />
 					<Route path={routerpaths.ONBOARDING} element={<OnBoarding />} />
-					<Route path={routerpaths.SEARCH} element={<SearchPage />} />
-					<Route path={routerpaths.DETAILIDPAGE} element={<DetailIdPage />} />
-					<Route path={routerpaths.LOGIN} element={<LoginPage />} />
+					<Route path={routerpaths.SEARCH} element={<MedicineSearch />} />
+					<Route
+						path={routerpaths.DETAILIDPAGE}
+						element={<DetailMedicineById />}
+					/>
+					<Route path={routerpaths.LOGIN} element={<Login />} />
+					<Route path={routerpaths.KAKAOLOGIN} element={<KakaoLogin />} />
+					<Route path={routerpaths.GOOGLELOGIN} element={<GoogleLogin />} />
 					<Route path={routerpaths.SIGNUP} element={<SignUp />} />
 					<Route path={routerpaths.FAME} element={<Fame />} />
 					<Route path={routerpaths.USERINFO} element={<UserInfo />} />

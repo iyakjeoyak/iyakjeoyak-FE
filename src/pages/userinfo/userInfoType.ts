@@ -1,6 +1,6 @@
-export interface Review {
+export interface ReviewType {
 	date: string;
-	history: string;
+	history?: string;
 }
 
 export interface ReviewDetail {
@@ -9,17 +9,10 @@ export interface ReviewDetail {
 	rating: number;
 }
 
-export interface Supplement {
+export interface SupplementType {
 	name: string;
 	frequency?: string;
-	rating: number;
-}
-
-export interface SupplementDetail {
-	name: string;
-	dosage: string;
-	dueDate: string;
-	effect: string;
+	rating?: number;
 }
 
 export interface SupplementDetail {
@@ -38,8 +31,8 @@ export interface UserData {
 	interests: string[];
 	profileImage: string;
 	points: number;
-	latestReviews: Review[];
-	favoriteSupplements: Supplement[];
+	latestReviews: ReviewType[];
+	favoriteSupplements: SupplementType[];
 }
 
 export interface ReviewTag {

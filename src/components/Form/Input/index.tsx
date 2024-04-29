@@ -1,31 +1,37 @@
+import { InputHTMLAttributes } from "react";
+import Container from "../Container";
 import styles from "./index.module.scss";
 import { useFormContext } from "react-hook-form";
 
-interface InputProps<T> {
-	name: keyof T;
+type GenericString<T> = Extract<keyof T, string>;
+
+type GenericStringRecord<T> = Record<GenericString<T>, unknown>;
+
+interface InputProps<T extends GenericStringRecord<T>>
+	extends InputHTMLAttributes<HTMLInputElement> {
+	name: GenericString<T>;
 	className?: string;
 	placeholder: string;
 	title?: string;
-	type: string;
+	type?: string;
 }
 
-export const Input = <T,>({
+export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 	name, // 입력 필드의 이름
 	className,
 	placeholder,
 	title,
-	type,
+	type = "text",
 }: InputProps<T>) => {
 	const { register } = useFormContext();
 	return (
-		<label className={styles.container}>
-			{title && <div>{title}</div>}
+		<Container title={title} name={name as keyof T}>
 			<input
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록
 				placeholder={placeholder}
 				type={type}
 			/>
-		</label>
+		</Container>
 	);
 };
