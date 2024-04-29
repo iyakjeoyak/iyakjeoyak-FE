@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# pnpm run test 및 pnpm run checkTs를 실행합니다.
+# pnpm run test 및 pnpm run checkTs를 실행합니다
 pnpm run test
 pnpm run checkTs
 
