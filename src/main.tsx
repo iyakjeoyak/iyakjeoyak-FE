@@ -2,7 +2,8 @@ import App from "./App.tsx";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import {
-	MutationCache,
+	// MutationCache,
+	// Mutation,
 	QueryCache,
 	QueryClient,
 	QueryClientProvider,
@@ -31,13 +32,13 @@ const queryClient = new QueryClient({
 			}
 		},
 	}),
-	mutationCache: new MutationCache({
-		onError: (error, request, context, mutation) => {
-			if (!mutation.meta?.ignoreToast) {
-				showToast({ type: "error", message: error.message });
-			}
-		},
-	}),
+	// mutationCache: new MutationCache({
+	// 	onError: (error, mutation: Mutation) => {
+	// 		if (!mutation.meta?.ignoreToast) {
+	// 			showToast({ type: "error", message: error.message });
+	// 		}
+	// 	},
+	// }),
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

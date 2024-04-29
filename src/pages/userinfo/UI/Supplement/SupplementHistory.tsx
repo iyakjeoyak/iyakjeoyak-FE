@@ -9,8 +9,8 @@ import GridIcon from "@/pages/userinfo/assets/GridIcon";
 
 const SupplementHistory = () => {
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
-	const [isAddModalOpen, setIsAddModal] = useState(false);
-	const [isEditModalOpen, setIsEditModal] = useState(false);
+	// const [isAddModalOpen, setIsAddModal] = useState(false);
+	// const [isEditModalOpen, setIsEditModal] = useState(false);
 
 	const supplemenRecordtdata = supplementRecords.mySupplements;
 	const count = supplementRecords.mySupplements.length;
@@ -19,13 +19,13 @@ const SupplementHistory = () => {
 		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
 	};
 
-	const openAddModal = () => {
-		setIsAddModal((prev) => !prev);
-	};
+	// const openAddModal = () => {
+	// 	setIsAddModal((prev) => !prev);
+	// };
 
-	const openEditModal = () => {
-		setIsEditModal((prev) => !prev);
-	};
+	// const openEditModal = () => {
+	// 	setIsEditModal((prev) => !prev);
+	// };
 
 	return (
 		<section className={style.userSupplementContainer}>
@@ -41,11 +41,14 @@ const SupplementHistory = () => {
 					<CommonCardBox
 						key={index} // 이후에 item id로 수정
 						form={cardForm}
-						onClick={openEditModal}
+						// onClick={openEditModal}
 						{...cardInfo}
 					/>
 				))}
-				<CommonCardBox onClick={openAddModal} form={cardForm} />
+				<CommonCardBox
+					// onClick={openAddModal}
+					form={cardForm}
+				/>
 			</div>
 		</section>
 	);
