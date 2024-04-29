@@ -12,11 +12,11 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 		svgrPlugin(),
-		visualizer({
-			open: true,
-			gzipSize: true,
-			brotliSize: true,
-		}),
+		// visualizer({
+		// 	open: true,
+		// 	gzipSize: true,
+		// 	brotliSize: true,
+		// }),
 	],
 	css: {
 		modules: {
