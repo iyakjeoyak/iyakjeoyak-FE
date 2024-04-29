@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
+
+# pnpm run test 및 pnpm run checkTs를 실행합니다.
+pnpm run test
+pnpm run checkTs
 # . "${0%/*}/h"
 FORBIDDEN_HTTPS_URL="<https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team01/thistthat.git>"
 FORBIDDEN_SSH_URL="git@kdt-gitlab.elice.io:cloud_track/class_01/web_project3/team01/thistthat.git"
@@ -32,7 +36,5 @@ then
         exit 1 # 금지된 ref 로 push 를 실행하면 에러
     fi
 fi
-# pnpm run test 및 pnpm run checkTs를 실행합니다.
-pnpm run test
-pnpm run checkTs
+
 exit 0
