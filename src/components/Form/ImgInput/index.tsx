@@ -1,20 +1,26 @@
 import getImgPreview from "@/utils/getImgPreview";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import Container from "../Container";
 import styles from "@/components/Form/ImgInput/index.module.scss";
+import { useController, useFormContext } from "react-hook-form";
 
 interface ImgInput {
 	name: string;
 	title?: string;
 }
 export const ImgInput = ({ name, title }: ImgInput) => {
-	// 이미지 미리보기 URL 상태 관리
-	const [profileImage, setProfileImage] = useState<string | undefined>();
+	const { control } = useFormContext();
 	const imgInputRef = useRef<HTMLInputElement>(null);
 	const handleImageClick = () => {
 		imgInputRef.current?.click();
 	};
+	const {
+		field: { value: profileImage, onChange: setProfileImage },
+	} = useController({
+		control,
+		name,
+	});
 
 	// file url로 변환
 

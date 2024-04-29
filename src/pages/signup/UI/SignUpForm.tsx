@@ -22,7 +22,6 @@ export function SignUpI() {
 
 export function SignUpForm() {
 	const navigate = useNavigate();
-	// const { mutate } = useSignUpMutation;
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
@@ -36,9 +35,15 @@ export function SignUpForm() {
 		};
 		console.log(updatedData);
 
-		mutate(updatedData);
-		alert("회원가입이 완료되었습니다.");
-		navigate("/login");
+		mutate(updatedData, {
+			onSuccess: () => {
+				alert("회원가입이 완료되었습니다.");
+				navigate("/login");
+			},
+			onError: () => {
+				alert("회원가입에 실패하였습니다.");
+			},
+		});
 	};
 
 	return (
