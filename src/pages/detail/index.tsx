@@ -1,4 +1,5 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
