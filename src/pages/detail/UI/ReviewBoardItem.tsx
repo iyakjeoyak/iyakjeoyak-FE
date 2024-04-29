@@ -1,22 +1,33 @@
+import Modal from "@/components/Modal";
+import ReviewDetailModal from "./ReviewDetailModal";
 import TagCommon from "@/components/Tag";
 import WriterTitle from "@/components/WriterTitle";
 import styles from "../styles/ReviewBoardItem.module.scss";
 
-export default function ReviewBoardItem({ onClick }: { onClick: () => void }) {
+export default function ReviewBoardItem() {
 	return (
-		<div className={styles.container} onClick={onClick}>
-			<WriterTitle />
-			<div className={styles["review-container"]}>
-				<img />
-				<div className={styles["content-container"]}>
-					<p>맛있어요~!</p>
-					<div className={styles["tags"]}>
-						<TagCommon text="태그" />
-						<TagCommon text="태그" />
-						<TagCommon text="태그" />
+		<Modal>
+			<Modal.Trigger
+				openElement={
+					<div className={styles.container}>
+						<WriterTitle />
+						<div className={styles["review-container"]}>
+							<img />
+							<div className={styles["content-container"]}>
+								<p>맛있어요~!</p>
+								<div className={styles["tags"]}>
+									<TagCommon text="태그" />
+									<TagCommon text="태그" />
+									<TagCommon text="태그" />
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
+				}
+			/>
+			<Modal.Content>
+				<ReviewDetailModal />
+			</Modal.Content>
+		</Modal>
 	);
 }

@@ -1,6 +1,6 @@
 import style from "../../index.module.scss";
-import InfoBoxContent from "./InfoBoxContent";
 import InfoBoxHeader from "./InfoBoxHeader";
+import InfoBoxItem from "./InfoBoxItem";
 
 interface InfoBoxProps {
 	children: React.ReactNode;
@@ -11,6 +11,6 @@ const InfoBox = ({ children }: InfoBoxProps) => (
 );
 
 InfoBox.Header = InfoBoxHeader;
-InfoBox.Content = InfoBoxContent;
+InfoBox.Item = InfoBoxItem;
 
 export default InfoBox;

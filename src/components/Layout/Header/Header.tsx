@@ -1,11 +1,10 @@
-import "./Header.module.scss";
-
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { FiMenu } from "react-icons/fi";
 import LogoIcon from "@assets/icons/LogoIcon";
 import Nav from "../Nav/Nav";
+import styles from "./Header.module.scss";
 
 export default function Header() {
 	const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function Header() {
 
 	return (
 		<>
-			<header>
+			<header className={styles.header}>
 				<LogoIcon
 					fill={"#ffffff"}
 					width="60px"

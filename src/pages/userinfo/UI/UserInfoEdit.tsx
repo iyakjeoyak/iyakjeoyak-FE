@@ -1,18 +1,12 @@
-import { useRef } from "react";
-import {
-	useForm,
-	Controller,
-	SubmitHandler,
-	FieldValues,
-} from "react-hook-form";
+import { useRef, useState } from "react";
 import style from "../style/userinfoedit.module.scss";
 import { UserData } from "../userInfoType";
-import { Input } from "@/components/Form/Input";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import getImgPreview from "@/utils/getImgPreview";
+import ImageWithDefault from "@/utils/ImageWithDefault";
 
-const schema = yup
+const userInfoSchema = yup
 	.object({
 		nickname: yup
 			.string()
@@ -27,68 +21,31 @@ const schema = yup
 	})
 	.required();
 
-interface FormData extends FieldValues {
-	[key: string]: string | number | undefined | string[];
-	nickname: string;
-	introduce: string;
-	age: number;
-	profileImage?: string;
-}
-
 interface MyPageEditProps {
 	data: UserData;
 }
 
-const inputFields: {
-	name: keyof FormData;
-	text: string;
-	placeholder: string;
-	type?: string;
-}[] = [
-	{ name: "nickname", text: "닉네임", placeholder: "닉네임을 입력해주세요." },
-	{
-		name: "introduce",
-		text: "한줄 소개",
-		placeholder: "한줄 소개를 입력해주세요.",
-	},
-	{
-		name: "age",
-		text: "만 나이",
-		placeholder: "만 나이를 입력해주세요.",
-		type: "number",
-	},
-];
-
-const UserInfoEdit: React.FC<MyPageEditProps> = ({ data }) => {
+const UserInfoEdit = ({ data }: MyPageEditProps) => {
 	const defaultImage = "/images/no_profile_image.jpg?url";
-	const methods = useForm<FormData>({
-		resolver: yupResolver(schema),
-		defaultValues: {
-			nickname: data.nickname || "",
-			introduce: data.introduce || "",
-			age: data.age || 0,
-			profileImage: data.profileImage || defaultImage,
-		},
-	});
+	const [profileImage, setProfileImage] = useState<string | undefined>(
+		data.profileImage || defaultImage,
+	);
 
-	const { control, setValue, handleSubmit, watch } = methods;
-
-	const profileImage = watch("profileImage");
 	const imgInputRef = useRef<HTMLInputElement>(null);
 
 	const handleImageClick = () => {
 		imgInputRef.current?.click();
 	};
-	const handleClick = async () => {
-		console.log("button formData:", watch());
-	};
 
-	const onSubmit: SubmitHandler<FormData> = async () => {
-		// const onSubmit = (formData: FormData) => {
-	};
+	// const onSubmit = (data) => {
+	// 	console.log("폼 제출이랄까");
+	// };
+
 	return (
 		<Form
-			onSubmit={() => handleSubmit(onSubmit)}
+			validationSchema={userInfoSchema}
+			pageDefaultValues={data}
+			// onSubmit={onSubmit}
 			className={style.mypageEditContainer}
 		>
 			<div className={style.profileEditTitle}> 내 프로필</div>
@@ -100,53 +57,49 @@ const UserInfoEdit: React.FC<MyPageEditProps> = ({ data }) => {
 					style={{ display: "none" }}
 					ref={imgInputRef}
 					onChange={(event) => {
-						const file = event.target.files?.[0];
+						const file = event.target.files?.[0] as File;
 						if (file) {
-							const reader = new FileReader();
-							reader.onload = () => {
-								if (typeof reader.result === "string") {
-									setValue("profileImage", reader.result);
-								}
-							};
-							reader.readAsDataURL(file);
+							getImgPreview(file, setProfileImage, () => {});
 						}
 					}}
 				/>
-				<img
-					className={
-						profileImage === defaultImage
-							? style.defaultProfile
-							: style.userProfile
-					}
+				<ImageWithDefault
 					src={profileImage}
+					defaultSrc={defaultImage}
 					alt="사용자 프로필"
+					className={style.userProfile}
 					onClick={handleImageClick}
 				/>
+
 				<span className={style.imgButton}>+</span>
 			</section>
 			<section className={style.profileInfoEdit}>
-				{inputFields.map((field) => (
-					<Controller
-						key={field.name}
-						name={field.name as string}
-						control={control}
-						render={({ field: { ...rest } }) => (
-							<Input
-								{...rest}
-								text={field.text}
-								type={field.type}
-								placeholder={field.placeholder}
-								className={style.inputStyle}
-							/>
-						)}
-					/>
-				))}
+				<Form.Input
+					name="닉네임"
+					placeholder="닉네임을 입력해주세요."
+					defaultValue={data.nickname}
+					className={style.inputStyle}
+				/>
+				<Form.Input
+					name="한줄 소개"
+					placeholder="한줄 소개를 입력해주세요."
+					defaultValue={data.introduce}
+					className={style.inputStyle}
+				/>
+				<Form.Input
+					name="만 나이"
+					type="number"
+					placeholder="만 나이를 입력해주세요."
+					defaultValue={data.age.toString()}
+					className={style.inputStyle}
+				/>
 			</section>
+
 			<Form.Button
-				name="저장"
 				type="submit"
-				onClick={handleClick}
+				// onClick={handleClick}
 				variant="dark"
+				text="저장"
 			/>
 		</Form>
 	);

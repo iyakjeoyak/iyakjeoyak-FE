@@ -7,25 +7,21 @@ interface StarRatingProps {
 	size?: number;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({
+const StarRating = ({
 	totalStars = 5,
 	filledStars,
 	size = 15,
-}) => {
-	const stars = Array.from({ length: totalStars }, (_, index) => {
-		const isHalfStar = filledStars - index === 0.5;
-		const isFilledStar = index < filledStars;
+}: StarRatingProps) => {
+	const fullStarsCount = Math.floor(filledStars); // 꽉 채워진 별 개수
+	const halffilledStar = filledStars % 1 >= 0.5; // 반 별 존재여부
+	const emptyStarsCount =
+		totalStars - fullStarsCount - (halffilledStar ? 1 : 0);
 
-		return isFilledStar ? (
-			isHalfStar ? (
-				<FaStarHalfAlt key={index} size={size} />
-			) : (
-				<FaStar key={index} size={size} />
-			)
-		) : (
-			<FaRegStar key={index} size={size} />
-		);
-	});
+	const fullStars = Array(fullStarsCount).fill(<FaStar size={size} />);
+	const halfStars = halffilledStar ? [<FaStarHalfAlt size={size} />] : [];
+	const emptyStars = Array(emptyStarsCount).fill(<FaRegStar size={size} />);
+
+	const stars = [...fullStars, ...halfStars, ...emptyStars];
 
 	return (
 		<div className={style.starRatingContainer}>

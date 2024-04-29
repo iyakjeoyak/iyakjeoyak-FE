@@ -1,16 +1,9 @@
 import TagCommon from "@/components/Tag";
 import { Link } from "react-router-dom";
 import styles from "@/pages/fame/styles/FameBottom.module.scss";
-import profile from "/images/no_profile_image.jpg?url";
+import { users } from "./usersData";
 
 export function FameBottom() {
-	const users = [
-		{ id: 1, nickname: "유저1", blog: "/", profileImg: profile },
-		{ id: 2, nickname: "유저2", blog: "/", profileImg: profile },
-		{ id: 3, nickname: "유저3", blog: "/", profileImg: profile },
-		{ id: 4, nickname: "유저4", blog: "/", profileImg: profile },
-		{ id: 5, nickname: "유저5", blog: "/", profileImg: profile },
-	];
 	return (
 		<ul className={styles.container}>
 			{users.map((user) => (

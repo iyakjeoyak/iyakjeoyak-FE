@@ -117,3 +117,37 @@
 	@include responsive-font-size(vars.$small-font-size);
 	font-weight: 500;
 }
+
+/* flex */
+
+$flex-map: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  center: center,
+);
+
+@function _get-flex-value($key) {
+  @return map-get($flex-map, $key);
+}
+
+@mixin flexbox($js: center, $ai: center) {
+  display: flex;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($js);
+}
+
+@mixin inline-flexbox($js: center, $ai: center) {
+  display: inline-flex;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($js);
+}
+
+@mixin column-flexbox($js: center, $ai: center) {
+  display: flex;
+  flex-direction: column;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($js);
+}

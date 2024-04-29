@@ -14,10 +14,13 @@ export const routerpaths: PathNameType = {
 	SEARCH: "/search",
 	DETAILIDPAGE: "/detail/:id",
 	LOGIN: "/login",
+	KAKAOLOGIN: "/auth/kakao",
+	GOOGLELOGIN: "/auth/google",
 	SIGNUP: "/signup",
 	FAME: "/fame",
 	USERINFO: "/userinfo",
 	POINTHISTORY: "/userinfo/point",
 	REVIEWHISTORY: "/userinfo/review",
 	SUPPLEMENTHISTORY: "/userinfo/user-supplement",
+	NOTFOUND: "/notfound",
 };

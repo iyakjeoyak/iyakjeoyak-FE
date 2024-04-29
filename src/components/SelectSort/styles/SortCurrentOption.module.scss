@@ -1,0 +1,7 @@
+@use "@styles/mixin" as mixins;
+
+.container {
+	display: flex;
+	align-items: center;
+	@include mixins.m-big;
+}
