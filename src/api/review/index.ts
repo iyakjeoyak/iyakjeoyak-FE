@@ -1,3 +1,5 @@
+import postReview, { PostReviewBody } from "./postReview";
+
 import getReviewById from "./getReviewById";
 import getReviewsByMedicineId from "./getReviewsByMedicineId";
 import { queryOptions } from "@tanstack/react-query";
@@ -20,7 +22,12 @@ const reviewQueryOptions = {
     queryOptions({
      queryKey:['review', 'reviews', reviewId],
      queryFn: ()=>getReviewById({reviewId}), 
-  })
+  }),
+  postReview: ({body}:{body: PostReviewBody}) =>
+    queryOptions({
+      queryKey: ['review', 'postReview'],
+      queryFn: () => postReview({body}),
+    }),
 }
    
 

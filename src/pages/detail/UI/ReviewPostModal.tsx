@@ -1,19 +1,28 @@
 import medicineReviewPostValidation, {
-	MedicineReviewPostBodyType,
 	initialMedicineReviewPostBody,
 } from "../utils/medicineReviewPostValidation";
+import postReview, { PostReviewBody } from "@/api/review/postReview";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import ectQueryOptions from '@/api/etc'
+import medicineQueryOptions from "@/api/medicine";
+import { queryClient } from "@/main";
 import styles from "../styles/ReviewPostModal.module.scss";
-import { useQuery } from "@tanstack/react-query";
+import useGetIdByLocation from "../hooks/useGetIdByLocation";
 
 export default function ReviewPostModal() {
-
  const {data: tags} = useQuery(ectQueryOptions.getCategories())
+ 
+ const medicineId = useGetIdByLocation();
 
-	const onSubmit = (data: MedicineReviewPostBodyType) => {
+ const { mutate } = useMutation({
+  mutationFn:postReview, 
+  onSuccess: ()=>queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId: 1}))});
+
+	const onSubmit = (data: PostReviewBody) => {
+    mutate({body: {...data, medicineId}})
 		console.log(data);
 	};
 
@@ -28,12 +37,13 @@ export default function ReviewPostModal() {
 					pageDefaultValues={initialMedicineReviewPostBody}
 					onSubmit={onSubmit}
 				>
-					<Form.Input<MedicineReviewPostBodyType>
+					<Form.Input<PostReviewBody>
 						name="title"
 						title="리뷰 제목"
 						placeholder="리뷰 제목을 입력해주세요"
 					/>
-					<Form.TagBoard title="태그 선택" tags={ tags ?? []} />
+          <Form.StarRating/>
+					<Form.TagBoard title="태그 선택" tags={ tags ?? []} name="tagList"/>
 					<Form.Textarea
 						name="content"
 						title="후기 작성"

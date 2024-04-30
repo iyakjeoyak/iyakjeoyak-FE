@@ -1,11 +1,12 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import medicineQueryOptions from "@/api/medicine";
 import styles from "./index.module.scss";
+import useGetIdByLocation from "./hooks/useGetIdByLocation";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 const TAPS = [
@@ -24,9 +25,7 @@ export default function DetailMedicineById() {
 
 	const currentTapValue = useGetURLSearch("tap");
 
-  const location = useLocation();
-  
-  const id = Number(location.pathname.split('/')[2]);
+  const id = useGetIdByLocation()
   
   const {data: {
     id: medicineId, 

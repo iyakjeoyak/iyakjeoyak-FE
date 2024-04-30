@@ -10,14 +10,15 @@ import {
 
 import { Button } from "./Button";
 import { DevTool } from "@hookform/devtools";
+import { ImgInput } from "@/components/Form/ImgInput";
 import { Input } from "./Input";
 import { RadioButton } from "./RadioButton";
+import StarRating from "./StarRating";
 import TagBoard from "./TagBoard";
 import TagButton from "./TagButton";
 import { Textarea } from "./Textarea";
 import styles from "./index.module.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ImgInput } from "@/components/Form/ImgInput";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
@@ -63,3 +64,4 @@ Form.TagButton = TagButton;
 Form.TagBoard = TagBoard;
 Form.RadioButton = RadioButton;
 Form.Textarea = Textarea;
+Form.StarRating = StarRating;
