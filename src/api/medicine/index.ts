@@ -6,7 +6,7 @@ const medicineQueryOptions = {
     getMedicines: ({page, size}:{page:number, size:number}) => 
      queryOptions({
       queryKey:['medicine', 'medicines'],
-      queryFn: ()=>getMedicines({page, size}),
+      queryFn: ()=>getMedicines(page, size),
       initialData:{
         data: [],
         number: 0,
