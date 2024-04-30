@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import {
-	SignUpFormType,
+SignUpFormType,
 	signUpDefault,
 	signupValidation,
 } from "../utils/signupValidation";
@@ -11,31 +11,21 @@ import Container from "@/components/Form/Container";
 import { useMutation } from "@tanstack/react-query";
 import postSignUp from "@/api/post/postSignUp";
 
-export function SignUpI() {
-	return (
-		// 로그인 유효성 검사
-		<Form validationSchema={signupValidation} pageDefaultValues={signUpDefault}>
-			<SignUpForm />
-		</Form>
-	);
-}
-
 export function SignUpForm() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
 
-	const onSubmit = (data: SignUpFormType) => {
-		const firstFile = data.profileImage?.[0];
+  const onSubmit = (data: SignUpFormType) => {
 		const updatedData = {
 			...data,
-			imageUrl: firstFile,
-			// userRoleList: [0], 1로 설정해서 추가하기
+			userRoleList: [1], // 백엔드에서 추가 요구하신 필드 값
 		};
+    
 		console.log(updatedData);
 
-		mutate(updatedData, {
+		mutate(data, {
 			onSuccess: () => {
 				alert("회원가입이 완료되었습니다.");
 				navigate("/login");
@@ -92,13 +82,13 @@ export function SignUpForm() {
 				placeholder="나이를 입력해주세요."
 				type="number"
 			/>
-			<Container title="성별" name="gender">
+			<Container title="건강 고민" name="userHashtagList">
 				<div className={`${styles.tagWrap}`}>
 					{tagData.map((tags) => (
 						<Form.TagButton
 							key={tags.id}
 							text={tags.name}
-							name="tag"
+							name="userHashtagList"
 							value={tags.id}
 						/>
 					))}
