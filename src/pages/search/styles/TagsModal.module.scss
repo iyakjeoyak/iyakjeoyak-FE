@@ -1,17 +1,18 @@
 .container {
-	background-color: white;
+  background-color: white;
 
-	padding: 20px;
-	margin: 20px;
+  padding: 20px;
+  margin: 20px;
 
-	position: absolute;
-	top: 20px;
-	border-radius: 20px;
-	.title {
-	}
-	.tags-container {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-	}
+  position: absolute;
+  top: 20px;
+  border-radius: 20px;
+
+  .title {}
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
