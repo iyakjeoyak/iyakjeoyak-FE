@@ -45,14 +45,10 @@ export const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<ErrorBoundary FallbackComponent={Error}>
-			<Suspense fallback={<Loading />}>
 				<QueryClientProvider client={queryClient}>
             <App />
 					<ToastContainer />
 					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</QueryClientProvider>
-			</Suspense>
-		</ErrorBoundary>
 	</React.StrictMode>,
 );
