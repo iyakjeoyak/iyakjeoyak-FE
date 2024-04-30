@@ -1,4 +1,5 @@
 import styles from "../styles/SelectedKeywordTagsList.module.scss";
+import { useEffect } from "react";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useNavigate } from "react-router-dom";
 
@@ -7,12 +8,13 @@ export default function SelectedKeywordTagsList() {
 	// props 전달 필요없이 외부랑 URL로 props 상태 공유
 	// 뒤로가기를 이렇게 해도 되나?
 	const currentSearchKeywordValue = useGetURLSearch("keyword");
+	const currentSearchTagNameValue = useGetURLSearch("tag-name");
 
-	if (!currentSearchKeywordValue) return null;
+	if (!currentSearchKeywordValue && !currentSearchTagNameValue) return null;
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.tag}>
+			{currentSearchKeywordValue && <div className={styles.tag}>
 				{currentSearchKeywordValue}
 				<span
 					onClick={() => {
@@ -21,7 +23,17 @@ export default function SelectedKeywordTagsList() {
 				>
 					X
 				</span>
-			</div>
+			</div>}
+			{currentSearchTagNameValue && <div className={styles.tag}>
+				{currentSearchTagNameValue}
+				<span
+					onClick={() => {
+						navigate("/search");
+					}}
+				>
+					X
+				</span>
+			</div>}
 		</div>
 	);
 }

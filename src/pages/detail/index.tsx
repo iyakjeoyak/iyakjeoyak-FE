@@ -33,6 +33,7 @@ export default function DetailMedicineById() {
     bssh_NM: brand, 
     prdlst_NM: name, 
     heartCount, 
+    hashtags,
     ntk_MTHD: howToEat, 
     indiv_RAWMTRL_NM: ingredient, 
     primary_FNCLTY: describe, 
@@ -47,7 +48,7 @@ export default function DetailMedicineById() {
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard name={name} brand={brand} grade={grade} heartCount={heartCount} reviewCount={reviewCount} />
+				<MedicineCard name={name} brand={brand} hashtags={hashtags}grade={grade} heartCount={heartCount} reviewCount={reviewCount} />
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
 					{currentTapValue === "review" ? <ReviewBoard medicineId={medicineId} /> : <InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}

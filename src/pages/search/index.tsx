@@ -1,30 +1,12 @@
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
-import { TAPS_QUERIES } from "@/constants/TAPS";
-import TapBar from "@/components/TapBar";
+import TagsModal from "./UI/TagsModal";
 import { useNavigate } from "react-router-dom";
-
-const TAPS = [
-	{
-		label: "전체",
-		value: TAPS_QUERIES.ALL,
-	},
-	{
-		label: "기능별",
-		value: TAPS_QUERIES.FEATURE,
-	},
-	{
-		label: "성능별",
-		value: TAPS_QUERIES.FUNCTION,
-	},
-];
+import { useState } from "react";
 
 export default function MedicineSearch() {
+  const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
 	const navigate = useNavigate();
-
-	const handleTapClick = (tapValue: string) => {
-		navigate(`/search?tap=${tapValue}`);
-	};
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
@@ -36,19 +18,24 @@ export default function MedicineSearch() {
 		return result;
 	};
   
+  const toggleIsTagsModalOpen = () =>{
+    setIsTagsModalOpen((prev)=>!prev)
+  }
 	return (
+    <>
+    {isTagsModalOpen && <TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>}
 		<section>
 			<SearchBar>
 				<SearchBar.KeywordInput
 					placeholder="검색어를 입력해주세요"
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
-				/>
+          />
 				<SearchBar.SearchResultList />
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
-			<TapBar taps={TAPS} onClick={handleTapClick} />
-			<MedicineCardList />
+			<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>
 		</section>
+  </>
 	);
 }
