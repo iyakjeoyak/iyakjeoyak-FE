@@ -68,6 +68,7 @@ export default function ReviewBoard({medicineId}:{medicineId: number}) {
   const {data:{data:reviews} }
   = useQuery(reviewQueryOptions.getReviewsByMedicineId({queryParams}))
 
+
 	return (
 		<>
 			<SelectSort
