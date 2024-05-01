@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-
+. "${0%/*}/h"
 
 FORBIDDEN_HTTPS_URL="<https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team01/thistthat.git>"
 FORBIDDEN_SSH_URL="git@kdt-gitlab.elice.io:cloud_track/class_01/web_project3/team01/thistthat.git"

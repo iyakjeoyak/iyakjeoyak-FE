@@ -1,14 +1,16 @@
 import { PathButton } from "@/components/PathButton/PathButton";
-import LoginForm from "./UI/LoginForm";
 import { useLocation } from "react-router-dom";
+import Login from "./UI/Login";
 
-export default function Login() {
+function LoginPage() {
 	const location = useLocation();
 	const paths = [location.pathname];
 	return (
 		<section>
 			<PathButton paths={paths} />
-			<LoginForm />
+			<Login />
 		</section>
 	);
 }
+
+export default LoginPage;
