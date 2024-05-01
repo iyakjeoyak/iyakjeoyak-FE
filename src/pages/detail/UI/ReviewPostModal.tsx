@@ -44,6 +44,7 @@ export default function ReviewPostModal() {
 					/>
           <Form.StarRating/>
 					<Form.TagBoard title="태그 선택" tags={ tags ?? []} name="tagList"/>
+          <Form.ImgsInput />
 					<Form.Textarea
 						name="content"
 						title="후기 작성"

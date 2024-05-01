@@ -17,8 +17,9 @@ export default function ReviewBoard({medicineId}:{medicineId: number}) {
 		setCurrentSortValue(sortValue);
 	};
 
-  const {data: {data: reviews} }
+  const {data:{data:reviews} }
   = useQuery(reviewQueryOptions.getReviewsByMedicineId({medicineId: medicineId, page: 1, size: 6}))
+
 
 	return (
 		<>

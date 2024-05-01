@@ -11,6 +11,7 @@ import {
 import { Button } from "./Button";
 import { DevTool } from "@hookform/devtools";
 import { ImgInput } from "@/components/Form/ImgInput";
+import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
 import { RadioButton } from "./RadioButton";
 import StarRating from "./StarRating";
@@ -65,3 +66,4 @@ Form.TagBoard = TagBoard;
 Form.RadioButton = RadioButton;
 Form.Textarea = Textarea;
 Form.StarRating = StarRating;
+Form.ImgsInput = ImgsInput;
