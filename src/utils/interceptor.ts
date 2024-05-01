@@ -37,6 +37,11 @@ export const rejectInterceptor = (
 		response: { status, data },
 	} = error;
 	const authData: AuthResponse = data as AuthResponse;
+	// 상태 코드가 400이면서 메시지가 존재할 경우
+	if (status === 400 && authData.message) {
+    showToast({ type: "error", message: authData.message });
+    console.error("error", data);
+	}
 
 	// 토큰 만료 시
 

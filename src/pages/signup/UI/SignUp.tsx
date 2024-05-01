@@ -11,7 +11,7 @@ import Container from "@/components/Form/Container";
 import { useMutation } from "@tanstack/react-query";
 import postSignUp from "@/api/post/postSignUp";
 
-export function SignUpForm() {
+export function SignUp() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
@@ -25,7 +25,7 @@ export function SignUpForm() {
     
 		console.log(updatedData);
 
-		mutate(data, {
+		mutate(updatedData, {
 			onSuccess: () => {
 				alert("회원가입이 완료되었습니다.");
 				navigate("/login");
@@ -70,9 +70,9 @@ export function SignUpForm() {
 			/>
 			<Container title="성별" name="gender">
 				<div className={`${styles.genderBox}`}>
-					<Form.RadioButton name="gender" text="남성" value="남성" />
-					<Form.RadioButton name="gender" text="여성" value="여성" />
-					<Form.RadioButton name="gender" text="비공개" value="비공개" />
+					<Form.RadioButton name="gender" text="남성" value="MALE" />
+					<Form.RadioButton name="gender" text="여성" value="FEMALE" />
+					<Form.RadioButton name="gender" text="비공개" value="SECRET" />
 				</div>
 			</Container>
 

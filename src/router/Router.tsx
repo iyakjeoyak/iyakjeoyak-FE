@@ -10,11 +10,12 @@ import {
 import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";
 import Layout from "@/components/Layout";
-import Login from "@pages/login";
+
 import MainPage from "@pages/main";
 import MedicineSearch from "@/pages/search";
 import OnBoarding from "@/pages/onboarding";
-import SignUp from "@/pages/signup";
+import LoginPage from "@/pages/login";
+import SignUpPage from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
 import { routerpaths } from "@/utils/pathName";
 import { KakaoLogin } from "@/pages/login/UI/KakaoLogin";
@@ -35,10 +36,10 @@ function Router() {
 						path={routerpaths.DETAILIDPAGE}
 						element={<DetailMedicineById />}
 					/>
-					<Route path={routerpaths.LOGIN} element={<Login />} />
+					<Route path={routerpaths.LOGIN} element={<LoginPage />} />
 					<Route path={routerpaths.KAKAOLOGIN} element={<KakaoLogin />} />
 					<Route path={routerpaths.GOOGLELOGIN} element={<GoogleLogin />} />
-					<Route path={routerpaths.SIGNUP} element={<SignUp />} />
+					<Route path={routerpaths.SIGNUP} element={<SignUpPage />} />
 					<Route path={routerpaths.FAME} element={<Fame />} />
 					<Route path={routerpaths.USERINFO} element={<UserInfo />} />
 					<Route path={routerpaths.POINTHISTORY} element={<PointHistory />} />

@@ -14,7 +14,7 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import styles from "../styles/LoginForm.module.scss";
 import { setAccessToken } from "@/utils/getToken";
 
-export default function LoginForm() {
+export default function Login() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
