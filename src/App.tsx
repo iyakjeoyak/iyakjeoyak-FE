@@ -1,10 +1,11 @@
 import "@styles/_reset.scss";
 import "@styles/global.scss";
 
-import Router from "./router/Router";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/Router";
 
 function App() {
-	return <Router />;
+	return <RouterProvider router={router} />
 }
 
 export default App;
