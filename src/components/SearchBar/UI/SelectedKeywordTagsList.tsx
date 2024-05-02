@@ -1,5 +1,4 @@
 import styles from "../styles/SelectedKeywordTagsList.module.scss";
-import { useEffect } from "react";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useNavigate } from "react-router-dom";
 

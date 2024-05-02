@@ -98,6 +98,7 @@ const getMedicinesByQuery = async ({
 };
 
 export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen: ()=>void}) {
+  let currentPage = 0;
   const navigate = useNavigate();
   const { search } = useLocation();
   const bottom = useRef<HTMLDivElement>(null);
@@ -142,6 +143,7 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
   const handleTapClick = (tapValue: string) => {
     if (tapValue === 'all') {
       navigate(`/search?tap=${tapValue}`)
+      queryClient.resetQueries({queryKey:['medicine', 'medicines']});
       return;
     }
     toggleIsTagsModalOpen();
