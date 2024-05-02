@@ -11,11 +11,11 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 		svgrPlugin(),
-		visualizer({
-			open: true,
-			gzipSize: true,
-			brotliSize: true,
-		}),
+		// visualizer({
+		// 	open: true,
+		// 	gzipSize: true,
+		// 	brotliSize: true,
+		// }),
 	],
 	css: {
 		modules: {
@@ -50,7 +50,7 @@ export default defineConfig({
 		// 빌드할 라이브러리에 대한 설정
 		lib: {
 			// 라이브러리의 진입점
-			entry: path.resolve(__dirname, "src/index.tsx"),
+			entry: path.resolve(__dirname, "src/main.tsx"),
 			// 라이브러리 이름
 			name: "index",
 			fileName: "index",
