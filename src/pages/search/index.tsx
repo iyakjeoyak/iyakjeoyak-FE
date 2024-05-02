@@ -1,6 +1,7 @@
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
+import { queryClient } from "@/main";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -20,6 +21,8 @@ export default function MedicineSearch() {
   
   const toggleIsTagsModalOpen = () =>{
     setIsTagsModalOpen((prev)=>!prev)
+    // 모달이 닫힐때만 데이터를 비워줌
+    if (isTagsModalOpen) queryClient.resetQueries({queryKey:['medicine', 'medicines']});
   }
 	return (
     <>

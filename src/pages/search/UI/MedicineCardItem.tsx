@@ -26,7 +26,7 @@ export default function MedicineCardItem({medicineItem}:{medicineItem:MedicineIt
 					</div>
 				</div>
 				<div className={styles.tags}>
-					{hashtags.slice(0, 3).map((tag)=><TagCommon text={tag.name} size="medium" backgroundColor="green" />)}
+					{hashtags.slice(0, 3).map((tag)=><TagCommon key={tag.id} text={tag.name} size="medium" backgroundColor="green" />)}
 				</div>
 			</div>
 		</div>

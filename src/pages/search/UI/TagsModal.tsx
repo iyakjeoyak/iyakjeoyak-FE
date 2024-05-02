@@ -20,7 +20,7 @@ export default function TagsModal({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen
       <div>태그 선택</div>
       <div className={styles['tags-container']}>
         {tags.map((tag)=><Tag key={tag.id} text={tag.name} onClick={()=>{
-          navigate(`${location.pathname}${location.search}&tag=${tag.id}&tag-name=${tag.name}`)}}/>)}
+          navigate(`${location.pathname}${location.search}&tag=${tag.id}&tagname=${tag.name}`)}}/>)}
       </div>
     </div>
   </div>

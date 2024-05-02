@@ -1,3 +1,4 @@
+import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 import { FaShare } from "react-icons/fa";
@@ -48,14 +49,10 @@ export default function MedicineCard({hashtags, name, brand, isBookMark, heartCo
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
 					<div className={styles.brand}>{brand}</div>
-					<div className={styles.name}>
-            <div>{name}</div>
-            <IoMdHeart />
-            <div>{heartCount}</div>
-            </div>
+					<div className={styles.name}>{name}</div>
 				</div>
 				<div className={styles["sub-info"]}>
-					<StarRating filledStars={grade} />
+					<StarRating filledStars={grade ?? 0} />
 					<span>({reviewCount}개)</span>
 				</div>
 				<div className={styles.tags}>
@@ -64,6 +61,11 @@ export default function MedicineCard({hashtags, name, brand, isBookMark, heartCo
 				</div>
 			</div>
 			<div className={styles.buttons}>
+        <IconTag
+					icon={isBookMark ? <FaBookmark />: <FaRegBookmark />}
+					text="보관하기"
+					onClick={handleLikeClick}
+				/>
 				<IconTag
 					icon={isBookMark ? <IoMdHeart />: <IoMdHeartEmpty />}
 					text="관심 등록"
