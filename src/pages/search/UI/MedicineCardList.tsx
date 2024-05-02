@@ -12,6 +12,7 @@ import axios from "@/api/axiosConfig";
 import qs from 'qs';
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCardList.module.scss";
+import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useObserver } from "@/hooks/useObserver";
 

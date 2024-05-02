@@ -49,7 +49,11 @@ export default function MedicineCard({hashtags, name, brand, isBookMark, grade, 
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
 					<div className={styles.brand}>{brand}</div>
-					<div className={styles.name}>{name}</div>
+					<div className={styles.name}>
+            <div>{name}</div>
+            <IoMdHeart />
+            <div>{heartCount}</div>
+            </div>
 				</div>
 				<div className={styles["sub-info"]}>
 					<StarRating filledStars={grade ?? 0} />

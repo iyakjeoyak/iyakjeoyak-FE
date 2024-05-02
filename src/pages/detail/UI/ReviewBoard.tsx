@@ -69,13 +69,14 @@ export default function ReviewBoard({medicineId}:{medicineId: number}) {
   = useQuery(reviewQueryOptions.getReviewsByMedicineId({queryParams}))
 
 
+  console.log(currentSortValue)
 	return (
 		<>
 			<SelectSort
 				currentSort={currentSort}
 				handleCurrentSort={handleCurrentSort}
 			>
-				<SelectSort.SortCurrentOption />
+				<SelectSort.SortCurrentOption valueToLabel={valueToLabel} />
 				<SelectSort.SortOptionList>
 					{REVIEW_SORT_OPTIONS.map((sort) => (
 						<SelectSort.SortOption
