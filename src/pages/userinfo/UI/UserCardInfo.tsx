@@ -6,7 +6,7 @@ export interface UserCardInfoProps {
 	dosage?: string;
 	dueDate?: string;
 	memo?: string;
-	effect?: string;
+	effect?: string[];
 }
 
 const UserCardInfo = ({
@@ -22,14 +22,16 @@ const UserCardInfo = ({
 			{dosage && <div className={style.cardTitle}>{dosage}</div>}
 			{dueDate && <time className={style.cardDate}>{dueDate} 까지</time>}
 			{memo && <p className={style.cardMemo}>{memo}</p>}
-			{effect && (
-				<TagCommon
-					text={effect}
-					backgroundColor="green"
-					size="small"
-					className={style.cardTag}
-				/>
-			)}
+			{effect &&
+				effect.map((effectItem, index) => (
+					<TagCommon
+						key={index}
+						text={effectItem}
+						backgroundColor="green"
+						size="small"
+						className={style.cardTag}
+					/>
+				))}
 		</div>
 	);
 };

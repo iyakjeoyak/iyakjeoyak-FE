@@ -77,11 +77,12 @@ export interface PointData {
 }
 
 export interface SupplementInfo {
+	mySupplementId: number;
 	name: string;
-	dosage: string;
 	dueDate: string;
-	effect: string[];
-	memo: string;
+	dosage?: string;
+	effect?: string[];
+	memo?: string;
 	img?: string;
 }
 
@@ -90,9 +91,11 @@ export interface SupplementRecordData {
 }
 
 export interface LikedSupplement {
+	likedItemId: number;
 	itemName: string;
-	effect: string[];
+	likedEffect: string[];
 	liked: boolean;
+	img: string;
 }
 
 export interface LikeRecordData {
