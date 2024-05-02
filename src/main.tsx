@@ -50,7 +50,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<QueryClientProvider client={queryClient}>
 					<App />
 					<ToastContainer />
-					<ReactQueryDevtools initialIsOpen={false} position="bottom" />;
+					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</QueryClientProvider>
 			</Suspense>
 		</ErrorBoundary>

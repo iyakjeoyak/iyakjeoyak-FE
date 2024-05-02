@@ -2,27 +2,25 @@ import Modal from "@/components/Modal";
 import ReviewDetailModal from "./ReviewDetailModal";
 import { ReviewItemType } from "@/types";
 import TagCommon from "@/components/Tag";
-import WriterTitle from "@/components/WriterTitle";
+import Title from "@/components/WriterTitle";
 import styles from "../styles/ReviewBoardItem.module.scss";
 
 export default function ReviewBoardItem({reviewItem}:{reviewItem: ReviewItemType}) {
 
-  const { content } = reviewItem;
+  const { id, title, star, heartCount, hashtagResult } = reviewItem;
 	
   return (
 		<Modal>
 			<Modal.Trigger
 				openElement={
 					<div className={styles.container}>
-						<WriterTitle />
+						<Title createdDate={reviewItem.createdDate} star={star} heartCount={heartCount} userId={reviewItem.createdBy.userId} nickname={reviewItem.createdBy.nickname} image={reviewItem.createdBy.image}/>
 						<div className={styles["review-container"]}>
 							<img />
 							<div className={styles["content-container"]}>
-								<p>{content}</p>
+								<p>{title}</p>
 								<div className={styles["tags"]}>
-									<TagCommon text="태그" />
-									<TagCommon text="태그" />
-									<TagCommon text="태그" />
+									{hashtagResult.slice(0,3).map((tag)=><TagCommon text={tag.name} />)}
 								</div>
 							</div>
 						</div>
@@ -30,7 +28,7 @@ export default function ReviewBoardItem({reviewItem}:{reviewItem: ReviewItemType
 				}
 			/>
 			<Modal.Content>
-				<ReviewDetailModal />
+				<ReviewDetailModal reviewId={id} />
 			</Modal.Content>
 		</Modal>
 	);

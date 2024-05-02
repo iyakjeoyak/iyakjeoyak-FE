@@ -5,6 +5,7 @@ import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import axios from "@/api/axiosConfig";
 import styles from "../styles/MedicineCardList.module.scss";
+import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useObserver } from "@/hooks/useObserver";
@@ -44,6 +45,13 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
   const navigate = useNavigate();
   const bottom = useRef<HTMLDivElement>(null);
 
+  // categoryId, hashtagId, keyword,
+  // orderField= [GRADE , HEART_COUNT , CREATED_DATE]
+  // sort= ASC , DESC
+  const  data = useGetURLSearch(['keyword','tag', 'tag-name'])
+
+  console.log(data);
+  
   const {isFetching, data:medicines, fetchNextPage}=useInfiniteQuery({
     queryKey: ['medicine', 'medicines'],
     queryFn: getMedicines,
@@ -60,6 +68,10 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
   )
 
   const handleTapClick = (tapValue: string) => {
+    if (tapValue === 'all') {
+      navigate(`/search?tap=${tapValue}`)
+      return;
+    }
     toggleIsTagsModalOpen();
 		navigate(`/search?tap=${tapValue}`);
 	};

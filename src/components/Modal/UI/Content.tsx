@@ -33,6 +33,6 @@ export default function Content({
 					{children}
 				</m.div>
 			</div>
-		// </LazyMotion>
+		</LazyMotion>
 	);
 }

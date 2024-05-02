@@ -1,9 +1,10 @@
-import getImgPreview from "@/utils/getImgPreview";
-import { useRef } from "react";
-import { FiPlusCircle } from "react-icons/fi";
-import Container from "../Container";
-import styles from "@/components/Form/ImgInput/index.module.scss";
 import { useController, useFormContext } from "react-hook-form";
+
+import Container from "../Container";
+import { FiPlusCircle } from "react-icons/fi";
+import getImgPreview from "@/utils/getImgPreview";
+import styles from "@/components/Form/ImgInput/index.module.scss";
+import { useRef } from "react";
 
 interface ImgInput {
 	name: string;

@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { TAPS_QUERIES } from '@/constants/TAPS';
 import Tag from '@/components/Tag';
 import ectQueryOptions from '@/api/etc'
 import styles from '../styles/TagsModal.module.scss';
+import useGetURLSearch from '@/hooks/useGetURLSearch';
 import { useQuery } from '@tanstack/react-query';
 
 export default function TagsModal({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen:()=>void}){
-  const {data: tags} = useQuery(ectQueryOptions.getCategories())
+  const tap = useGetURLSearch('tap');
+  const {data: tags} = useQuery(tap === TAPS_QUERIES.FEATURE ? ectQueryOptions.getCategories(): ectQueryOptions.getHashtags())
   
   const navigate = useNavigate();
   const location = useLocation();

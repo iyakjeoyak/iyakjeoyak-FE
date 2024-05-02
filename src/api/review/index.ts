@@ -22,6 +22,17 @@ const reviewQueryOptions = {
     queryOptions({
      queryKey:['review', 'reviews', reviewId],
      queryFn: ()=>getReviewById({reviewId}), 
+     initialData: { 
+      id: 0,
+      title: '',
+      content: '',
+      createdBy: { userId: 0, nickname: '', image: null},
+      createdDate: '',
+      hashtagResult: [{id: 0, name: ''}],
+      heartCount: 0,
+      star: 0,
+      modifiedDate: '',
+    }
   }),
   postReview: ({body}:{body: PostReviewBody}) =>
     queryOptions({

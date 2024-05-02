@@ -32,22 +32,24 @@ export interface MedicineDetailItemType extends MedicineItemType {
 	primary_FNCLTY: string; // 추천 대상 or 기타 설명
 	indiv_RAWMTRL_NM: string; // 함량 성분
 	ntk_MTHD: string; // 복용 방법 & 시간
+  isBookMark: boolean;  // 북마크 중인가
+  isHeart: boolean; // 좋아요 중인가
+  reviewList: string[] 
 }
 
-interface ReviewItemType {
-	userName: string; // 작성자
-	userId: number; // 작성자 id
-	date: Date; // 작성 날짜
-	star: number; // 별점
-	imgUrl: string; // 이미지URL
-	description: string; // 리뷰 설명
-	tags: string[]; // 태그 모음
+export interface ReviewWriterType {
+  userId: number,
+  nickname: string,
+  image: null,
 }
-
 export interface ReviewItemType {
-	id: number,
+  id: number,
   title: string,
   content: string,
-  star: number, // 평점
-  heartCount: number, // 이 리뷰 좋아요 수
-  }
+  star: number,
+  heartCount: number,
+  createdBy: ReviewWriterType;
+  createdDate: string,
+  modifiedDate: string,
+  hashtagResult: TagType[]
+}

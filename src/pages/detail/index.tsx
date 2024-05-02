@@ -37,7 +37,8 @@ export default function DetailMedicineById() {
     ntk_MTHD: howToEat, 
     indiv_RAWMTRL_NM: ingredient, 
     primary_FNCLTY: describe, 
-    reviewCount
+    isBookMark,
+    reviewList,
   }} 
   = useQuery(medicineQueryOptions.getMedicineById({medicineId: id}))
 
@@ -48,7 +49,7 @@ export default function DetailMedicineById() {
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard name={name} brand={brand} hashtags={hashtags}grade={grade} heartCount={heartCount} reviewCount={reviewCount} />
+				<MedicineCard name={name} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags} grade={grade} heartCount={heartCount} />
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
 					{currentTapValue === "review" ? <ReviewBoard medicineId={medicineId} /> : <InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}

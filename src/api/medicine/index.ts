@@ -31,7 +31,11 @@ const medicineQueryOptions = {
       reviewCount:0, 
       primary_FNCLTY: '',
       indiv_RAWMTRL_NM:'',
-      ntk_MTHD:''}
+      ntk_MTHD:'',
+      isBookMark: false,
+      isHeart: false,
+      reviewList: []
+    }
   })
 }
    

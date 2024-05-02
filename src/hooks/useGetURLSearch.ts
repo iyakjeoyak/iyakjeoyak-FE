@@ -1,12 +1,18 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
-const useGetURLSearch = (key: string) => {
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
+const useGetURLSearch = (key: string | string[]) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-	const value = searchParams.get(key);
-
-	return value;
+  if (typeof key === 'string') {
+    return searchParams.get(key);
+  } else {
+    const values: { [key: string]: string | null } = {};
+    key.forEach(k => {
+      values[k] = searchParams.get(k);
+    });
+    return values;
+  }
 };
 
 export default useGetURLSearch;

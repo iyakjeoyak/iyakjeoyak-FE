@@ -18,10 +18,11 @@ interface MedicineCardProps {
   heartCount: number;
   reviewCount: number;
   grade: number;
-  hashtags: Array<{id: number, name: string}>
+  hashtags: Array<{id: number, name: string}>;
+  isBookMark:boolean;
 }
 
-export default function MedicineCard({hashtags, name, brand, heartCount, grade, reviewCount}:MedicineCardProps) {
+export default function MedicineCard({hashtags, name, brand, isBookMark, heartCount, grade, reviewCount}:MedicineCardProps) {
   const medicineId = useGetIdByLocation();
 
   const { mutate } = useMutation({
@@ -47,7 +48,11 @@ export default function MedicineCard({hashtags, name, brand, heartCount, grade, 
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
 					<div className={styles.brand}>{brand}</div>
-					<div className={styles.name}>{name}</div>
+					<div className={styles.name}>
+            <div>{name}</div>
+            <IoMdHeart />
+            <div>{heartCount}</div>
+            </div>
 				</div>
 				<div className={styles["sub-info"]}>
 					<StarRating filledStars={grade} />
@@ -55,12 +60,12 @@ export default function MedicineCard({hashtags, name, brand, heartCount, grade, 
 				</div>
 				<div className={styles.tags}>
 					<Tag text="피로개선" backgroundColor="green" />
-				{hashtags.slice(0, 2).map((tag)=>	<Tag key={tag.id} text={tag.name} backgroundColor="green" />)}
+				  {hashtags.slice(0, 2).map((tag)=>	<Tag key={tag.id} text={tag.name} backgroundColor="green" />)}
 				</div>
 			</div>
 			<div className={styles.buttons}>
 				<IconTag
-					icon={heartCount === 0 ? <IoMdHeartEmpty /> : <IoMdHeart />}
+					icon={isBookMark ? <IoMdHeart />: <IoMdHeartEmpty />}
 					text="관심 등록"
 					onClick={handleLikeClick}
 				/>
