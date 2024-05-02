@@ -1,5 +1,6 @@
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import style from "./index.module.scss";
+import { useEffect, useState } from "react";
 
 interface StarRatingProps {
 	totalStars?: number;
@@ -7,26 +8,39 @@ interface StarRatingProps {
 	size?: number;
 }
 
-const getStarRating = (filledStars: number, totalStars: number, size: number) => {
+const getStarRating = (
+	filledStars: number,
+	totalStars: number,
+	size: number,
+) => {
 	const fullStarsCount = Math.floor(filledStars); // 꽉 채워진 별 개수
 	const halffilledStar = filledStars % 1 >= 0.5; // 반 별 존재 여부
-	const emptyStarsCount = totalStars - fullStarsCount - (halffilledStar ? 1 : 0);
-  
-	const fullStars = Array(fullStarsCount).fill(<FaStar size={size} />);
-	const halfStars = halffilledStar ? [<FaStarHalfAlt size={size} />] : [];
-	const emptyStars = Array(emptyStarsCount).fill(<FaRegStar size={size} />);
-  
-	return [...fullStars, ...halfStars, ...emptyStars];
-  };
+	const emptyStarsCount =
+		totalStars - fullStarsCount - (halffilledStar ? 1 : 0);
 
+	const fullStars = Array.from({ length: fullStarsCount }, (_, i) => (
+		<FaStar key={`full_${i}`} size={size} />
+	));
+	const halfStars = halffilledStar
+		? [<FaStarHalfAlt key="half_0" size={size} />]
+		: [];
+	const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
+		<FaRegStar key={`empty_${i}`} size={size} />
+	));
+
+	return [...fullStars, ...halfStars, ...emptyStars];
+};
 
 const StarRating = ({
 	totalStars = 5,
 	filledStars,
 	size = 15,
 }: StarRatingProps) => {
+	const [stars, setStars] = useState<JSX.Element[]>([]);
 
-	const stars = getStarRating(filledStars, totalStars, size)
+	useEffect(() => {
+		setStars(getStarRating(filledStars, totalStars, size));
+	}, [filledStars]);
 
 	return (
 		<div className={style.starRatingContainer}>

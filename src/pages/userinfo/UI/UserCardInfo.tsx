@@ -2,26 +2,29 @@ import TagCommon from "@/components/Tag";
 import style from "../style/commoncardbox.module.scss";
 
 export interface UserCardInfoProps {
-	title?: string;
-	date?: string;
+	name?: string;
+	dosage?: string;
+	dueDate?: string;
 	memo?: string;
-	tagText?: string;
+	effect?: string;
 }
 
-const UserCardInfo: React.FC<UserCardInfoProps> = ({
-	title,
-	date,
+const UserCardInfo = ({
+	name,
+	dueDate,
+	dosage,
 	memo,
-	tagText,
-}) => {
+	effect,
+}: UserCardInfoProps) => {
 	return (
 		<div className={style.cardContent}>
-			{title && <div className={style.cardTitle}>{title}</div>}
-			{date && <time className={style.cardDate}>{date} 까지</time>}
+			{name && <div className={style.cardTitle}>{name}</div>}
+			{dosage && <div className={style.cardTitle}>{dosage}</div>}
+			{dueDate && <time className={style.cardDate}>{dueDate} 까지</time>}
 			{memo && <p className={style.cardMemo}>{memo}</p>}
-			{tagText && (
+			{effect && (
 				<TagCommon
-					text={tagText}
+					text={effect}
 					backgroundColor="green"
 					size="small"
 					className={style.cardTag}

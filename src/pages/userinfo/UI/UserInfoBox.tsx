@@ -20,11 +20,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 				<div className={style.profileInfo}>
 					<div className={style.nameArea}>
 						<div className={style.nickname}>{userData.nickname}</div>
-						<TagCommon
-							text="허준"
-							size="small"
-							backgroundColor="lightgreen"
-						></TagCommon>
+						<TagCommon text="허준" size="small" backgroundColor="lightgreen" />
 					</div>
 					<div className={style.userIntroduce}> 자기소개글</div>
 					<Modal>

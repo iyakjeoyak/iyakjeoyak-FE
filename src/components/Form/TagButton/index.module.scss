@@ -1,78 +1,76 @@
-@use "@styles/mixin"as mixins;
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 @import "@/styles/global.scss";
 
 @mixin tag-base {
-  box-sizing: border-box;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  padding: 0.1rem 0.1rem;
-  border: 1px solid $gray3;
+	box-sizing: border-box;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	padding: 0.1rem 0.1rem;
+	border: 1px solid $gray3;
 }
 
 @mixin tag-size($width, $height) {
-  width: $width * 1rem;
-  height: $height * 1rem;
+	width: $width * 1rem;
+	height: $height * 1rem;
 
-  @media (min-width: $desktop-width) {
-    width: #{$width}px;
-    height: #{$height}px;
-    font-size: 2.5rem;
-  }
+	@media (min-width: $desktop-width) {
+		width: #{$width}px;
+		height: #{$height}px;
+		font-size: 2.5rem;
+	}
 }
 
 .tag {
-  &-medium {
-    @include tag-base;
-    @include tag-size(65, 25);
-    font-size: 10rem;
-    background-color: $white;
-    color: $gray5;
+	&-medium {
+		@include tag-base;
+		@include tag-size(65, 25);
+		font-size: 10rem;
+		background-color: $white;
+		color: $gray5;
 
-    &:hover {
-      color: $point-blue;
-      border: 1px solid $point-blue;
-      cursor: pointer;
-    }
-  }
+		&:hover {
+			color: $point-blue;
+			border: 1px solid $point-blue;
+			cursor: pointer;
+		}
+	}
 
-  &-small {
-    @include tag-base;
-    @include tag-size(45, 16);
-    @include mixins.sb-small;
-    font-size: 10rem;
-    background-color: $main-green;
-    color: $white;
-    border: 1px solid $main-green;
-  }
+	&-small {
+		@include tag-base;
+		@include tag-size(45, 16);
+		@include mixins.sb-small;
+		font-size: 10rem;
+		background-color: $main-green;
+		color: $white;
+		border: 1px solid $main-green;
+	}
 }
 
 .background {
-  &-green {
-    background-color: $main-green;
-    color: $white;
-    border: 1px solid $main-green;
-  }
+	&-green {
+		background-color: $main-green;
+		color: $white;
+		border: 1px solid $main-green;
+	}
 
-  &-white {
-    background-color: $white;
-    color: $gray3;
-    border: 1px solid $gray3;
-  }
+	&-white {
+		background-color: $white;
+		color: $gray3;
+		border: 1px solid $gray3;
+	}
 
-  &-lightgreen {
-    background-color: $main-lightgreen;
-    color: $main-green;
-    border: 1px solid $main-lightgreen;
-  }
-
-
+	&-lightgreen {
+		background-color: $main-lightgreen;
+		color: $main-green;
+		border: 1px solid $main-lightgreen;
+	}
 }
 
 .selected {
-  border: 1px solid $point-blue;
-  color: $point-blue;
+	border: 1px solid $point-blue;
+	color: $point-blue;
 }

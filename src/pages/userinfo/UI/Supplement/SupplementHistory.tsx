@@ -6,6 +6,8 @@ import CommonCardBox from "../CommonCardBox";
 import style from "../../style/supplementhistory.module.scss";
 import { useState } from "react";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
+import Modal from "@/components/Modal";
+import { useModal } from "@/components/Modal/hooks/useModal";
 
 const SupplementHistory = () => {
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");

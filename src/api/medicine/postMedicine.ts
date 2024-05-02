@@ -26,10 +26,10 @@ import instance from "..";
 }
 */
 interface PostMedicineType {
-  id: number;
+	id: number;
 }
 
 export default async function getMedicines(body: PostMedicineType) {
-	const response = await instance.post(`/medicine`, {body});
+	const response = await instance.post(`/medicine`, { body });
 	return response.data;
 }

@@ -11,7 +11,6 @@ import { tagData } from "@/components/Form/TagButton/TagData";
 // import { useQuery } from "@tanstack/react-query";
 
 export default function ReviewPostModal() {
-
 	// const {data: tags} = useQuery(ectQueryOptions.getCategories())
 
 	const onSubmit = (data: MedicineReviewPostBodyType) => {

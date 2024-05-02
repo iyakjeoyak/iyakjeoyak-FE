@@ -1,8 +1,8 @@
 import instance from "..";
 
 interface HashtagsType {
-    id: number,
-    name: string,
+	id: number;
+	name: string;
 }
 
 /*

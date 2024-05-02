@@ -4,7 +4,7 @@ import axios, {
 	AxiosRequestHeaders,
 	AxiosError,
 } from "axios";
-import { getAccessToken } from "./getToken";
+import { getAccessToken, setAccessToken } from "./getToken";
 import { logout } from "./logout";
 import { showToast } from "./ToastConfig";
 
@@ -39,7 +39,6 @@ export const rejectInterceptor = (
 	const authData: AuthResponse = data as AuthResponse;
 
 	// 토큰 만료 시
-
 	if (status === 401) {
 		if (authData.message && authData.message === "만료된 토큰입니다.") {
 			// 토큰 리프레시 로직
@@ -72,7 +71,11 @@ async function handleTokenRefresh(
 
 	if (tokenRefreshResult.status === 200) {
 		const { accessToken } = tokenRefreshResult.data;
-		// 가져온 응답으로 access 갱신
+
+		// 로컬 스토리지에 access 갱신
+		setAccessToken(accessToken);
+
+		// 가져온 응답으로 헤더 갱신
 		if (config.headers) {
 			config.headers["Authorization"] = `Bearer ${accessToken}`;
 		}

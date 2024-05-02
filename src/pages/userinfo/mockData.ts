@@ -60,6 +60,7 @@ export const userMockData: UserData = {
 export const reviewMockData: ReviewData = {
 	reviews: [
 		{
+			reviewId: 1,
 			date: "2024-04-10",
 			itemName: "쏠라씨 틴틴",
 			content: "너무 좋은 제품입니다",
@@ -77,6 +78,7 @@ export const reviewMockData: ReviewData = {
 			reviewImg: [{ userImage }, { userImage }, { userImage }],
 		},
 		{
+			reviewId: 2,
 			date: "2024-04-10",
 			itemName: "쏠라씨 틴틴",
 			content: "너무 좋은 제품입니다",
@@ -94,6 +96,7 @@ export const reviewMockData: ReviewData = {
 			reviewImg: [{ userImage }, { userImage }, { userImage }],
 		},
 		{
+			reviewId: 3,
 			date: "2024-04-10",
 			itemName: "쏠라씨 틴틴",
 			content: "너무 좋은 제품입니다",

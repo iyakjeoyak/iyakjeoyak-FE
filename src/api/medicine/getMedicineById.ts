@@ -87,7 +87,13 @@ import instance from "..";
 }
 	 */
 
-export default async function getMedicineById({medicineId}:{medicineId: number}) {
-	const response = await instance.get<MedicineItemType>(`/medicine/${medicineId}`);
+export default async function getMedicineById({
+	medicineId,
+}: {
+	medicineId: number;
+}) {
+	const response = await instance.get<MedicineItemType>(
+		`/medicine/${medicineId}`,
+	);
 	return response.data;
 }

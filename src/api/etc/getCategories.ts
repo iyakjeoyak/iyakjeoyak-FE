@@ -1,8 +1,8 @@
 import instance from "..";
 
 interface CategoriesType {
-    id: number,
-    name: string,
+	id: number;
+	name: string;
 }
 
 /*
@@ -26,5 +26,3 @@ export default async function getCategories() {
 	const response = await instance.get<CategoriesType[]>(`/category`);
 	return response.data;
 }
-
-

@@ -7,6 +7,12 @@
 	"printWidth": 80,
 	"overrides": [
 		{
+			"files": "*.cjs",
+			"options": {
+				"parser": "babel"
+			}
+		},
+		{
 			"files": "*.json",
 			"options": {
 				"parser": "json"

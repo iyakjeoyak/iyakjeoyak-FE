@@ -47,6 +47,7 @@ export interface ReviewImage {
 }
 
 export interface DetailedReview {
+	reviewId: number;
 	date: string;
 	itemName: string;
 	content: string;
