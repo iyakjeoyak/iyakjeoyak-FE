@@ -1,5 +1,4 @@
 import Container from "../Container"
-import stopEvent from "@/utils/stopEvent";
 import styles from './index.module.scss';
 import useHandleImgPreview from "@/hooks/usehandleImgPreivew";
 

@@ -3,7 +3,6 @@ import {
 	ReviewHistory,
 	SupplementHistory,
 } from "@/pages/userinfo/UI";
-import { checkTokenAndRedirectToHome, checkTokenAndRedirectToLogin } from "./loaders";
 
 import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";

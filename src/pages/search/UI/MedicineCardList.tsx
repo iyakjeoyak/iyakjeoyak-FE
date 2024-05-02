@@ -82,6 +82,7 @@ const TAPS = [
 	},
 ];
 
+let currentPage = 0;
 const PAGE_SIZE = 8;
 
 const getMedicinesByQuery = async ({
@@ -98,7 +99,6 @@ const getMedicinesByQuery = async ({
 };
 
 export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen: ()=>void}) {
-  let currentPage = 0;
   const navigate = useNavigate();
   const { search } = useLocation();
   const bottom = useRef<HTMLDivElement>(null);
