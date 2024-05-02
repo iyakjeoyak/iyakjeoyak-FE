@@ -1,19 +1,20 @@
 import { motion } from "framer-motion";
 import styles from "./Nav.module.scss";
 import { useNavigate } from "react-router-dom";
+import { routerpaths } from "@/utils/pathName";
 
 const MAIN_NAVS = [
-	{ name: "홈", to: "/home" },
-	{ name: "약 조회하기", to: "/search" },
-	{ name: "명예의 전당", to: "/fame" },
-	{ name: "근처 약국", to: "#" },
-	{ name: "마이 페이지", to: "/userInfo" },
+	{ name: "홈", to: routerpaths.HOME },
+	{ name: "약 조회하기", to: routerpaths.SEARCH },
+	{ name: "명예의 전당", to: routerpaths.FAME },
+	{ name: "근처 약국", to: routerpaths.MAP },
+	{ name: "마이 페이지", to: routerpaths.USERINFO },
 ];
 
 const SUB_NAVS = [
-	{ name: "로그인", to: "/login" },
-	{ name: "회원가입", to: "/signup" },
-	{ name: "마이페이지", to: "/userInfo" },
+	{ name: "로그인", to: routerpaths.LOGIN },
+	{ name: "회원가입", to: routerpaths.SIGNUP },
+	{ name: "마이페이지", to: routerpaths.USERINFO },
 ];
 
 export default function Nav({
