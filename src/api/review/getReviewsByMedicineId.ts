@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { ReviewItemType } from "@/types";
-import instance from "..";
+import axios from "../axiosConfig";
 
 export default async function getReviewsByMedicineId({
 	medicineId,
@@ -8,7 +8,7 @@ export default async function getReviewsByMedicineId({
 	medicineId: number;
 }) {
 	try {
-		return await instance.get<{ content: ReviewItemType[] }>(
+		return await axios.get<{ content: ReviewItemType[] }>(
 			`/reviews/${medicineId}`,
 		);
 	} catch (err) {

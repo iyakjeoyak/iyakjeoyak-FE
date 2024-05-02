@@ -1,5 +1,5 @@
 import { MedicineItemType } from "@/types";
-import instance from "..";
+import axios from "../axiosConfig";
 
 /*
 {
@@ -92,8 +92,6 @@ export default async function getMedicineById({
 }: {
 	medicineId: number;
 }) {
-	const response = await instance.get<MedicineItemType>(
-		`/medicine/${medicineId}`,
-	);
+	const response = await axios.get<MedicineItemType>(`/medicine/${medicineId}`);
 	return response.data;
 }

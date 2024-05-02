@@ -1,4 +1,4 @@
-import instance from "..";
+import axios from "../axiosConfig";
 
 /*
 {
@@ -30,6 +30,6 @@ interface PostMedicineType {
 }
 
 export default async function getMedicines(body: PostMedicineType) {
-	const response = await instance.post(`/medicine`, { body });
+	const response = await axios.post(`/medicine`, { body });
 	return response.data;
 }

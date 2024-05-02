@@ -1,19 +1,19 @@
-import App from "./App.tsx";
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom/client";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
-	// MutationCache,
-	// Mutation,
 	QueryCache,
 	QueryClient,
 	QueryClientProvider,
 } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ErrorBoundary } from "react-error-boundary";
+import React, { Suspense } from "react";
+
+import App from "./App.tsx";
 import Error from "@pages/feedback/UI/Error.tsx";
+import { ErrorBoundary } from "react-error-boundary";
 import Loading from "./pages/feedback/Loading.tsx";
+import ReactDOM from "react-dom/client";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "./utils/ToastConfig.ts";
 
 const queryClient = new QueryClient({
@@ -21,7 +21,8 @@ const queryClient = new QueryClient({
 		queries: {
 			refetchOnWindowFocus: false,
 			retry: false,
-			staleTime: 5000,
+			staleTime: 0,
+      gcTime:0,
 		},
 		mutations: {},
 	},

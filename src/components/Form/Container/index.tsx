@@ -20,7 +20,7 @@ export default function Container<T>({
 	return (
 		<label className={styles.container}>
 			<div>{title}</div>
-			<div>
+			<div className={styles.errorWrap}>
 				{children}
 				<ErrorMessage
 					errors={errors}

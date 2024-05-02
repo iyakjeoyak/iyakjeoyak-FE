@@ -1,10 +1,10 @@
-import instance from "..";
+import axios from "../axiosConfig";
 
 export default async function deleteReviewById({
 	reviewId,
 }: {
 	reviewId: number;
 }) {
-	const response = await instance.delete(`/review/${reviewId}`);
+	const response = await axios.delete(`/review/${reviewId}`);
 	return response.data;
 }

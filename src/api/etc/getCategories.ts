@@ -1,4 +1,4 @@
-import instance from "..";
+import axios from "../axiosConfig";
 
 interface CategoriesType {
 	id: number;
@@ -23,6 +23,7 @@ interface CategoriesType {
 */
 
 export default async function getCategories() {
-	const response = await instance.get<CategoriesType[]>(`/category`);
+	const response = await axios.get<CategoriesType[]>(`/category`);
+  console.log(response)
 	return response.data;
 }

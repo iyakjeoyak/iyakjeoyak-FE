@@ -1,32 +1,28 @@
-import styles from "@/components/Form/ImgInput/index.module.scss";
 import getImgPreview from "@/utils/getImgPreview";
-import { useEffect, useState } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useRef } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import Container from "../Container";
+import styles from "@/components/Form/ImgInput/index.module.scss";
+import { useController, useFormContext } from "react-hook-form";
 
 interface ImgInput {
 	name: string;
 	title?: string;
 }
 export const ImgInput = ({ name, title }: ImgInput) => {
-	const { register } = useFormContext();
-	// 이미지 미리보기 URL 상태 관리
-	const [previewUrl, setPreviewUrl] = useState<string | undefined>();
+	const { control } = useFormContext();
+	const imgInputRef = useRef<HTMLInputElement>(null);
+	const handleImageClick = () => {
+		imgInputRef.current?.click();
+	};
+	const {
+		field: { value: profileImage, onChange: setProfileImage },
+	} = useController({
+		control,
+		name,
+	});
 
-	const fileList = useWatch({ name });
-	console.log("fileList", fileList);
 	// file url로 변환
-	useEffect(() => {
-		if (fileList && fileList.length > 0) {
-			const file = fileList[0];
-			if (file instanceof File) {
-				getImgPreview(file, setPreviewUrl, (prev) =>
-					console.log("이미지 첨부", prev),
-				);
-			}
-		}
-	}, [fileList]);
 
 	return (
 		<Container title={title} name={name}>
@@ -34,17 +30,26 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 				type="file"
 				accept="image/*"
 				style={{ display: "none" }}
-				{...register(name)}
+				onChange={(event) => {
+					const file = event.target.files?.[0] as File;
+					if (file) {
+						getImgPreview(file, setProfileImage, () => {});
+					}
+				}}
 				id="fileupload"
 			/>
 			<div className={styles.imgBox}>
-				<label htmlFor="fileupload" className={styles.imgLabel}>
-					{previewUrl ? "" : <FiPlusCircle />}
+				<label
+					htmlFor="fileupload"
+					className={styles.imgLabel}
+					onClick={handleImageClick}
+				>
+					{profileImage ? "" : <FiPlusCircle />}
 				</label>
 				<div className={styles.imgCon}>
-					{previewUrl && (
+					{profileImage && (
 						<img
-							src={previewUrl}
+							src={profileImage}
 							alt="사용자 프로필"
 							className={styles.userProfile}
 						/>
