@@ -4,7 +4,7 @@ import { useSelect } from "../hooks/useSelect";
 
 interface KeywordInputProps {
 	placeholder: string;
-	onChange: (keyword: string) => string[];
+	onChange: (keyword: string) => Promise<void>;
 	onClick: (keyword: string) => void;
 }
 
@@ -16,7 +16,6 @@ export default function KeywordInput({
 	const {
 		currentKeyword,
 		handleCurrentKeyword,
-		handleCurrentKeywordSearchResultList,
 	} = useSelect();
 
 	return (
@@ -25,8 +24,7 @@ export default function KeywordInput({
 				value={currentKeyword}
 				onChange={(e) => {
 					handleCurrentKeyword(e.target.value);
-					const results = onChange(e.target.value);
-					handleCurrentKeywordSearchResultList(results);
+					onChange(e.target.value);
 				}}
 				placeholder={placeholder}
 			/>

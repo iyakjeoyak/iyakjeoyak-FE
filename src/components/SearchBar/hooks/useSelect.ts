@@ -2,16 +2,12 @@ import { createContext, useContext } from "react";
 
 interface SelectContextType {
 	currentKeyword: string;
-	keywordSearchResultList: string[];
 	handleCurrentKeyword: (keyword: string) => void;
-	handleCurrentKeywordSearchResultList: (result: string[]) => void;
 }
 
 export const SelectContext = createContext<SelectContextType>({
-	keywordSearchResultList: [""],
 	currentKeyword: "",
 	handleCurrentKeyword: () => {},
-	handleCurrentKeywordSearchResultList: () => {},
 });
 
 export const useSelect = () => {

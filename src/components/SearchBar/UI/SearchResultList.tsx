@@ -3,15 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelect } from "../hooks/useSelect";
 import { useState } from "react";
 
-export default function SearchResultList() {
+export default function SearchResultList({keywordSearchResult}: {keywordSearchResult?: string[]}) {
 	const navigate = useNavigate();
 
-	const { currentKeyword, keywordSearchResultList, handleCurrentKeyword } =
+	const { currentKeyword, handleCurrentKeyword } =
 		useSelect();
 	const [currentActiveKeyword, setCurrentActiveKeyword] = useState("");
-
-	// TODO: api 요청해서 List 업데이트 가능하면 삭제예정
-	if (!currentKeyword) return null;
 
 	const handleSearchKeywordSelected = (selectedKeyword: string) => {
 		handleCurrentKeyword("");
@@ -22,9 +19,10 @@ export default function SearchResultList() {
 		setCurrentActiveKeyword(keyword);
 	};
 
+  console.log(keywordSearchResult)
 	return (
 		<div className={styles.container}>
-			{keywordSearchResultList.map((keyword) => (
+			{keywordSearchResult?.map((keyword) => (
 				<div
 					key={keyword}
 					className={`${styles.option} ${currentActiveKeyword === keyword && styles.active}`}
@@ -38,7 +36,9 @@ export default function SearchResultList() {
 						handleMouseEnter(keyword);
 					}}
 				>
-					{keyword}
+					{keyword.split(currentKeyword)[0]}
+          <span>{currentKeyword}</span>
+          {keyword.split(currentKeyword)[1]}
 				</div>
 			))}
 		</div>

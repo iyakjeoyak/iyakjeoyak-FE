@@ -28,6 +28,7 @@ const TAPS = [
 	},
 ];
 
+let currentPage = 0;
 const PAGE_SIZE = 8;
 
 const getMedicines = async ({
@@ -59,7 +60,6 @@ const getMedicines = async ({
 };
 
 export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen: ()=>void}) {
-  let currentPage = 0;
   const navigate = useNavigate();
   const bottom = useRef<HTMLDivElement>(null);
 
@@ -77,9 +77,9 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
     },
     initialPageParam: { page: 0, size: PAGE_SIZE, categoryId: tag, keyword },
     select:({pages})=>{ 
-      const returnData = pages.map((page)=>page.data).flat(); 
+      const returnData = pages?.map((page)=>page.data).flat(); 
       return returnData;
-    }
+    },
     },
   )
 

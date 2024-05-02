@@ -48,7 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 		<ErrorBoundary FallbackComponent={Error}>
 			<Suspense fallback={<Loading />}>
 				<QueryClientProvider client={queryClient}>
-					<App />
+            <App />
 					<ToastContainer />
 					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</QueryClientProvider>

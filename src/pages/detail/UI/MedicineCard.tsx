@@ -23,7 +23,7 @@ interface MedicineCardProps {
   isBookMark:boolean;
 }
 
-export default function MedicineCard({hashtags, name, brand, isBookMark, heartCount, grade, reviewCount}:MedicineCardProps) {
+export default function MedicineCard({hashtags, name, brand, isBookMark, grade, reviewCount}:MedicineCardProps) {
   const medicineId = useGetIdByLocation();
 
   const { mutate } = useMutation({

@@ -1,5 +1,6 @@
 import postReview, { PostReviewBody } from "./postReview";
 
+import getBestReview from "./getBestReview";
 import getReviewById from "./getReviewById";
 import getReviewsByMedicineId from "./getReviewsByMedicineId";
 import { queryOptions } from "@tanstack/react-query";
@@ -17,6 +18,12 @@ const reviewQueryOptions = {
         totalElement: 0,
         numberOfElement: 0
       }
+   }),
+   getBestReview: ({size}:{ size:number}) => 
+     queryOptions({
+      queryKey:['review', 'reviews', 'best'],
+      queryFn: () => getBestReview({ size }),
+      initialData: []
    }),
    getReviewById: ({reviewId}:{reviewId: number}) => 
     queryOptions({

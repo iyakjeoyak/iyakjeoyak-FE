@@ -4,6 +4,7 @@
 .container {
 	display: flex;
 	gap: 10px;
+	width: fit-content;
 
 	img {
 		background-color: $gray3;
@@ -16,7 +17,6 @@
 .input-container {
 	position: relative;
 	display: inline-block;
-	background-color: pink;
 	input[type="file"] {
 		display: none;
 		position: absolute;

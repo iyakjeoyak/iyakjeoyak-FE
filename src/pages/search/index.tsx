@@ -1,23 +1,30 @@
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
+import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
 import { queryClient } from "@/main";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function MedicineSearch() {
   const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
+  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+
 	const navigate = useNavigate();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
 	};
 
-	const handleGetAutoCompleteResults = (keyword: string) => {
-		console.log(keyword, "결과 요청");
-		const result = ["리", "리액", "리액트"];
-		return result;
+	const handleGetAutoCompleteResults = async (keyword: string) => {
+    if (keyword.length <= 0) {
+      setKeywordSearchResult([]);
+      return;
+    }
+		const response = await getAutoCompleteResult({keyword});
+		setKeywordSearchResult(response);
 	};
+
   
   const toggleIsTagsModalOpen = () =>{
     setIsTagsModalOpen((prev)=>!prev)
@@ -34,8 +41,8 @@ export default function MedicineSearch() {
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
           />
-				<SearchBar.SearchResultList />
-				<SearchBar.SelectedKeywordTagsList />
+				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
+				<SearchBar.SelectedKeywordTagsList  />
 			</SearchBar>
 			<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>
 		</section>

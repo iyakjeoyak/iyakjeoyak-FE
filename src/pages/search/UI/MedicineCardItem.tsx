@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function MedicineCardItem({medicineItem}:{medicineItem:MedicineItemType}) {
   const navigate = useNavigate();
 
-  const {id, prdlst_NM: name, grade, hashtags,reviewCount}= medicineItem;
+  const {id, prdlst_NM: name, grade, hashtags, reviewCount}= medicineItem;
 
 	return (
 		<div

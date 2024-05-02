@@ -1,10 +1,8 @@
-import { BrowserRouter, Route, Routes, createBrowserRouter, redirect } from "react-router-dom";
 import {
 	PointHistory,
 	ReviewHistory,
 	SupplementHistory,
 } from "@/pages/userinfo/UI";
-import { checkTokenAndRedirectToHome, checkTokenAndRedirectToLogin } from "./loaders";
 
 import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";
@@ -17,6 +15,7 @@ import MedicineSearch from "@/pages/search";
 import OnBoarding from "@/pages/onboarding";
 import SignUp from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
+import { createBrowserRouter } from "react-router-dom";
 import { routerpaths } from "@/utils/pathName";
 
 const router = createBrowserRouter([

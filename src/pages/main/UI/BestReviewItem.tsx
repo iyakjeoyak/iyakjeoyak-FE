@@ -1,23 +1,16 @@
+import { ReviewItemType } from "@/types";
 import TagCommon from "@/components/Tag";
 import styles from "../styles/BestReviewItem.module.scss";
 
-interface MedicineItemProps {
-	imgUrl?: string;
-	name?: string;
-	tag?: string;
-}
-
 export default function BestReviewItem({
-	name = "약 이름",
-	imgUrl = "이미지",
-	tag = "효능",
-}: MedicineItemProps) {
+	review
+}: {review: ReviewItemType}) {
 	return (
 		<div className={styles["container"]}>
-			<div className={styles.img}>{imgUrl}</div>
+			<img className={styles.img} src="https://picsum.photos/200/300" alt={review.title}/>
 			<div className={styles["content-container"]}>
-				<div>{name}</div>
-				<TagCommon text={tag} size="medium" backgroundColor={"green"} />
+				<div>{review.createdBy.nickname}</div>
+       { review?.hashtagResult[0]?.name && <TagCommon text={review.hashtagResult[0].name} size="medium" backgroundColor={"green"} />}
 			</div>
 		</div>
 	);

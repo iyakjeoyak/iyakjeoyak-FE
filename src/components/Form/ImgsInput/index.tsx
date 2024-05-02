@@ -1,11 +1,9 @@
 import Container from "../Container"
-import stopEvent from "@/utils/stopEvent";
 import styles from './index.module.scss';
-import { useRef } from "react";
 import usehandleImgPreview from "@/hooks/usehandleImgPreivew";
 
 const ImgsInput = ()=>{
-  const { handleImgChange, imgContainer, imgRef } = usehandleImgPreview();
+  const { handleImgChange, imgRef } = usehandleImgPreview();
  
 
   return (
