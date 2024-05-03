@@ -12,7 +12,6 @@ import axios from "@/api/axiosConfig";
 import qs from 'qs';
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCardList.module.scss";
-import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useObserver } from "@/hooks/useObserver";
 
@@ -82,7 +81,6 @@ const TAPS = [
 	},
 ];
 
-let currentPage = 0;
 const PAGE_SIZE = 8;
 
 const getMedicinesByQuery = async ({
@@ -143,7 +141,6 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
   const handleTapClick = (tapValue: string) => {
     if (tapValue === 'all') {
       navigate(`/search?tap=${tapValue}`)
-      queryClient.resetQueries({queryKey:['medicine', 'medicines']});
       return;
     }
     toggleIsTagsModalOpen();
