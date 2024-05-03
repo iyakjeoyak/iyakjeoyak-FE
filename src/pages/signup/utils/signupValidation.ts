@@ -1,8 +1,6 @@
 import * as yup from "yup";
-
-
 export interface SignUpFormType {
-	profileImage: File; // 프로필
+	profileImage?: File | null; // 프로필
 	username: string; // 아이디
 	password: string; // 비밀번호
 	confirmPassword: string; // 비밀번호 검사
@@ -12,7 +10,7 @@ export interface SignUpFormType {
 	userHashtagList: number[]; //태그
 }
 export const signUpDefault = {
-	profileImage: undefined,
+	profileImage: null,
 	username: "", // 아이디
 	password: "", // 비밀번호
 	confirmPassword: "", // 비밀번호 검사
@@ -23,7 +21,7 @@ export const signUpDefault = {
 };
 
 export const signupValidation = yup.object().shape({
-	profileImage: yup.mixed<File>().required("이미지를 선택해주세요."),
+	profileImage: yup.mixed<File>().nullable(),
 	username: yup
 		.string()
 		.matches(
