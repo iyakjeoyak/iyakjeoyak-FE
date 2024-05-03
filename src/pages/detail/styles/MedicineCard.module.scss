@@ -24,11 +24,14 @@
 				color: $gray6;
 			}
 			.name {
+				display: flex;
+				align-items: center;
 				@include mixins.b-regular;
 			}
 		}
 		.sub-info {
 			color: $main-yellow;
+			align-items: center;
 			@include mixins.sb-regular;
 			display: flex;
 			gap: 5px;
