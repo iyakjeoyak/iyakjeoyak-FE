@@ -53,17 +53,17 @@ export interface SortOptionType {
   }
 
 export interface SortMappingType {
-  orderField: string;
+  orderBy: string;
   sort: 'ASC' | 'DESC';
 }
 
 const SEARCHLIST_SORT_QUERIES_MAPPING: Record<SEARCHLIST_SORT_QUERIES, SortMappingType> = {
-  [SEARCHLIST_SORT_QUERIES.HIGH_GRADE]: { orderField: 'GRADE', sort: 'ASC' },
-  [SEARCHLIST_SORT_QUERIES.LOW_GRADE]: { orderField: 'GRADE', sort: 'DESC' },
-  // [SEARCHLIST_SORT_QUERIES.MOST_REVIEWED]: { orderField: 'CREATED_DATE', sort: 'DESC' },
-  // [SEARCHLIST_SORT_QUERIES.LOW_REVIEWED]: { orderField: 'CREATED_DATE', sort: 'DESC' },
-  [SEARCHLIST_SORT_QUERIES.MOST_LIKED]: { orderField: 'HEART_COUNT', sort: 'ASC' },
-  [SEARCHLIST_SORT_QUERIES.LOW_LIKED]: { orderField: 'HEART_COUNT', sort: 'DESC' }
+  [SEARCHLIST_SORT_QUERIES.HIGH_GRADE]: { orderBy: 'GRADE', sort: 'DESC' },
+  [SEARCHLIST_SORT_QUERIES.LOW_GRADE]: { orderBy: 'GRADE', sort: 'ASC' },
+  // [SEARCHLIST_SORT_QUERIES.MOST_REVIEWED]: { orderBy: 'CREATED_DATE', sort: 'DESC' },
+  // [SEARCHLIST_SORT_QUERIES.LOW_REVIEWED]: { orderBy: 'CREATED_DATE', sort: 'DESC' },
+  [SEARCHLIST_SORT_QUERIES.MOST_LIKED]: { orderBy: 'HEART_COUNT', sort: 'ASC' },
+  [SEARCHLIST_SORT_QUERIES.LOW_LIKED]: { orderBy: 'HEART_COUNT', sort: 'DESC' }
 };
 
 const TAPS = [
@@ -82,17 +82,6 @@ const TAPS = [
 ];
 
 const PAGE_SIZE = 8;
-
-const getMedicinesAll = async ({
-  pageParam 
-}: {
-  pageParam?: { queryParams: string }
-}) => {
-  const res = await axios.get<ResponsePagenation<MedicineItemType>>(
-    `/medicine${pageParam?.queryParams}`
-  );
-  return res.data;
-};
 
 const getMedicinesByQuery = async ({
   pageParam 
@@ -129,7 +118,7 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
 
   const {isFetching, data , fetchNextPage} = useInfiniteQuery({
     queryKey: ['medicine', 'medicines'],
-    queryFn: (tap === 'all' || !tap) ? getMedicinesAll : getMedicinesByQuery,
+    queryFn: getMedicinesByQuery,
     getNextPageParam: (_data) => {
       const nextPageQueryString = qs.stringify({...nextPageParams, page: _data.number}, { addQueryPrefix: true });
      

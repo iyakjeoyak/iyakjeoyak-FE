@@ -20,7 +20,7 @@ export default function PickedMedicine({medicine}: {medicine: MedicineDetailItem
 			</div>
       {/* TODO 이것만 바꿔도 될듯? */}
 			<div className={styles["item-container"]} onClick={()=>{navigate(`/detail/${id}`)}}>
-				<img src="/images/Medicine.png" alt="약 이름" />
+				<img src="/images/no_medicine_img.jpg" alt="약 이름" width={140} height={180} />
 				<div className={styles["content-container"]}>
 					<div className={styles.brand}>{brand}</div>
 					<div className={styles.name}>{name}</div>

@@ -39,15 +39,15 @@ export interface SortOptionType {
   }
 
 export interface SortMappingType {
-  orderField: string;
+  orderBy: string;
   sort: 'ASC' | 'DESC';
 }
 
 const REVIEW_SORT_QUERIES_MAPPING: Record<REVIEW_SORT_QUERIES, SortMappingType> = {
-  [REVIEW_SORT_QUERIES.OLDEST]: { orderField: 'CREATED_DATE', sort: 'ASC' },
-  [REVIEW_SORT_QUERIES.LATEST]: { orderField: 'CREATED_DATE', sort: 'DESC' },
-  [REVIEW_SORT_QUERIES.MOST_LIKED]: { orderField: 'HEART_COUNT', sort: 'ASC' },
-  [REVIEW_SORT_QUERIES.LOW_LIKED]: { orderField: 'HEART_COUNT', sort: 'DESC' }
+  [REVIEW_SORT_QUERIES.OLDEST]: { orderBy: 'CREATED_DATE', sort: 'ASC' },
+  [REVIEW_SORT_QUERIES.LATEST]: { orderBy: 'CREATED_DATE', sort: 'DESC' },
+  [REVIEW_SORT_QUERIES.MOST_LIKED]: { orderBy: 'HEART_COUNT', sort: 'ASC' },
+  [REVIEW_SORT_QUERIES.LOW_LIKED]: { orderBy: 'HEART_COUNT', sort: 'DESC' }
 };
   
 export default function ReviewBoard({medicineId}:{medicineId: number}) {

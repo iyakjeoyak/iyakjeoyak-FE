@@ -1,6 +1,6 @@
 import Container from "../Container"
 import styles from './index.module.scss';
-import useHandleImgPreview from "@/hooks/useHandleImgPreivew";
+import useHandleImgPreview from "@/hooks/usehandleImgPreivew";
 
 const ImgsInput = ()=>{
   const { handleImgChange, imgRef } = useHandleImgPreview();

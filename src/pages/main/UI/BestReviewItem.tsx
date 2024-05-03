@@ -1,15 +1,15 @@
-import { ReviewItemType } from "@/types";
+import { BestReviewItemType } from "@/api/review/getBestReview";
 import TagCommon from "@/components/Tag";
 import styles from "../styles/BestReviewItem.module.scss";
 
 export default function BestReviewItem({
 	review
-}: {review: ReviewItemType}) {
+}: {review: BestReviewItemType}) {
 	return (
 		<div className={styles["container"]}>
 			<img className={styles.img} src="https://picsum.photos/200/300" alt={review.title}/>
 			<div className={styles["content-container"]}>
-				<div>{review.createdBy.nickname}</div>
+				<div>{review.medicine.prdlst_NM}</div>
        { review?.hashtagResult[0]?.name && <TagCommon text={review.hashtagResult[0].name} size="medium" backgroundColor={"green"} />}
 			</div>
 		</div>

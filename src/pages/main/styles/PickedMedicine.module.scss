@@ -29,6 +29,9 @@
 	.item-container {
 		display: flex;
 		gap: 10px;
+    img {
+      border-radius: 15px;
+    }
 	}
 	.content-container {
 		display: flex;

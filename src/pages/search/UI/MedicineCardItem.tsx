@@ -1,4 +1,5 @@
-import { FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
+
 import { MedicineItemType } from "@/types";
 import TagCommon from "@/components/Tag";
 import styles from "../styles/MedicineCardItem.module.scss";
@@ -16,12 +17,12 @@ export default function MedicineCardItem({medicineItem}:{medicineItem:MedicineIt
 				navigate(`/detail/${id}`);
 			}}
 		>
-			<img src="/images/Medicine.png" alt="어쩌구영양제" />
+			<img src="/images/no_medicine_img.jpg" alt="어쩌구영양제" width={150} height={130}/>
 			<div className={styles["content-container"]}>
 				<div className={styles["text-container"]}>
 					<div className={styles.name}>{name}</div>
 					<div className={styles.info}>
-						<FaStar />
+						{(grade === null || grade === 0) ? <FaRegStar/> : <FaStar />}
 						{grade}({reviewCount})
 					</div>
 				</div>
