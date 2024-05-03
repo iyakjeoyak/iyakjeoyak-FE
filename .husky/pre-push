@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
-
-
+# . "${0%/*}/pre-push"
+# pnpm run test 및 pnpm run checkTs를 실행합니다
+# pnpm run test
+# pnpm run checkTs
 FORBIDDEN_HTTPS_URL="<https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team01/thistthat.git>"
 FORBIDDEN_SSH_URL="git@kdt-gitlab.elice.io:cloud_track/class_01/web_project3/team01/thistthat.git"
 FORBIDDEN_REF_MAIN="refs/heads/main"
@@ -18,6 +20,7 @@ then
     exit 0 # Forked Project 에서는 제한하지 않음
 fi
 
+
 # local_ref: 로컬 브랜치 이름
 # local_sha: 로컬 커밋 해시
 # remote_ref: 원격 저장소 브랜치 이름
@@ -26,13 +29,11 @@ if read local_ref local_sha remote_ref remote_sha
 then
   echo "현재 푸쉬하는 브랜치는 $local_ref 내부입니다."
     if [ "$remote_ref" == "$FORBIDDEN_REF_MAIN" ] || [ "$remote_ref" == "$FORBIDDEN_REF_DEV" ]
-    # remote_ref (원격 저장소 브랜치)가 FORBIDDEN_REF_MAIN 또는 FORBIDDEN_REF_DEV (금지된 "main" 또는 "dev" 브랜치)과 일치하면 다음을 실행합니다.
     then
         echo "DO NOT PUSH TO MAIN OR DEV"
         exit 1 # 금지된 ref 로 push 를 실행하면 에러
     fi
 fi
-# pnpm run test 및 pnpm run checkTs를 실행합니다
-pnpm run test
-pnpm run checkTs
+
+
 exit 0

@@ -11,9 +11,10 @@ import {
 import { handleKakaoLogin } from "../utils/getKakaoAuthUrl";
 import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import styles from "../styles/LoginForm.module.scss";
+import { setAccessToken } from "@/utils/getToken";
+import styles from "../styles/Login.module.scss";
 
-export default function LoginForm() {
+export default function Login() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
@@ -22,11 +23,11 @@ export default function LoginForm() {
 	const onSubmit = (data: LoginFormType) => {
 		mutate(data, {
 			onSuccess: (data) => {
-				const accessToken = data.data;
-				localStorage.setItem("accessToken", accessToken);
-
+        const accessToken = data.data.accessToken;
+        console.log(accessToken)
+        setAccessToken(accessToken);
 				alert("로그인이 완료되었습니다.");
-				navigate("/login");
+        // navigate("/home");
 			},
 		});
 	};
@@ -75,7 +76,7 @@ export default function LoginForm() {
 				</div>
 				<div className={styles.registerWrap}>
 					<span className="m-medium">회원이 아니신가요?</span>
-					<Link className={`${styles.register} m-medium`} to={"/register"}>
+					<Link className={`${styles.register} m-medium`} to={"/signup"}>
 						회원가입하러 가기
 					</Link>
 				</div>

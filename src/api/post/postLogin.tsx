@@ -1,6 +1,6 @@
-import instance from "..";
+import axios from "../axiosConfig";
 import { LoginFormType } from "@/pages/login/utils/loginValidation";
 
 export default function postLogin(data: LoginFormType) {
-	return instance.post("/user/login", data);
+	return axios.post("/user/login", data);
 }

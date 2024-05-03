@@ -11,7 +11,7 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"test": "jest",
-		"prepare": "husky",
+		"prepare": "chmod ug+x .husky/* && husky install /.husky",
 		"checkTs": "tsc --noEmit"
 	},
 	"dependencies": {
