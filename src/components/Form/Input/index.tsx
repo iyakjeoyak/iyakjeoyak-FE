@@ -14,6 +14,7 @@ interface InputProps<T extends GenericStringRecord<T>>
 	placeholder: string;
 	title?: string;
 	type?: string;
+	
 }
 
 export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
@@ -21,12 +22,14 @@ export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 	className,
 	placeholder,
 	title,
-	type = "text",
+  type = "text",
+  ...props
 }: InputProps<T>) => {
 	const { register } = useFormContext();
 	return (
 		<Container title={title} name={name as keyof T}>
-			<input
+      <input
+        {...props}
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록
 				placeholder={placeholder}

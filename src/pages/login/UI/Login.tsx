@@ -11,8 +11,8 @@ import {
 import { handleKakaoLogin } from "../utils/getKakaoAuthUrl";
 import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import styles from "../styles/LoginForm.module.scss";
 import { setAccessToken } from "@/utils/getToken";
+import styles from "../styles/Login.module.scss";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -23,12 +23,11 @@ export default function Login() {
 	const onSubmit = (data: LoginFormType) => {
 		mutate(data, {
 			onSuccess: (data) => {
-        const accessToken = data.data;
+        const accessToken = data.data.accessToken;
+        console.log(accessToken)
         setAccessToken(accessToken);
-				// localStorage.setItem("accessToken", accessToken);
-
 				alert("로그인이 완료되었습니다.");
-				navigate("/login");
+        // navigate("/home");
 			},
 		});
 	};
