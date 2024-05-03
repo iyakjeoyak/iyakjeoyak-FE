@@ -5,6 +5,7 @@ import { FaShare } from "react-icons/fa";
 import IconTag from "@/components/IconTag";
 import StarRating from "@/components/StarRating";
 import Tag from "@/components/Tag";
+import getMedicineSave from "@/api/medicine/postMedicineSave";
 import medicineQueryOptions from "@/api/medicine";
 import postMedicineLike from "@/api/medicine/postMedicineLike";
 import { queryClient } from "@/main";
@@ -21,17 +22,26 @@ interface MedicineCardProps {
   grade: number;
   hashtags: Array<{id: number, name: string}>;
   isBookMark:boolean;
+  isHeart: boolean;
 }
 
-export default function MedicineCard({hashtags, name, brand, isBookMark, grade, reviewCount}:MedicineCardProps) {
+export default function MedicineCard({hashtags, isHeart, name, brand, isBookMark, grade, reviewCount}:MedicineCardProps) {
   const medicineId = useGetIdByLocation();
 
-  const { mutate } = useMutation({
-    mutationFn:postMedicineLike, 
-    onSuccess: ()=>queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId}))});
+  const { mutate: likeMutate } = useMutation({
+    mutationFn: postMedicineLike, 
+    onSuccess: () => {queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId}))}});
+  
+    const { mutate: saveMutate } = useMutation({
+    mutationFn: getMedicineSave, 
+    onSuccess: () => {queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId}))}});
 
 	const handleLikeClick = () => {
-		mutate({id: medicineId})
+		likeMutate(medicineId)
+	};
+	
+  const handleSaveClick = () => {
+		saveMutate(medicineId)
 	};
 
 	const handleShareClick = () => {
@@ -64,10 +74,10 @@ export default function MedicineCard({hashtags, name, brand, isBookMark, grade, 
         <IconTag
 					icon={isBookMark ? <FaBookmark />: <FaRegBookmark />}
 					text="보관하기"
-					onClick={handleLikeClick}
+					onClick={handleSaveClick}
 				/>
 				<IconTag
-					icon={isBookMark ? <IoMdHeart />: <IoMdHeartEmpty />}
+					icon={isHeart ? <IoMdHeart />: <IoMdHeartEmpty />}
 					text="관심 등록"
 					onClick={handleLikeClick}
 				/>
