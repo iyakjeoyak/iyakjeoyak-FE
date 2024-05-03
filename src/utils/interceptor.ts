@@ -44,7 +44,6 @@ export const rejectInterceptor = (
   }
   
 	// 토큰 만료 시
-
 	if (status === 401) {
 		if (authData.message && authData.message === "만료된 토큰입니다.") {
 			// 토큰 리프레시 로직

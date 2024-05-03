@@ -49,9 +49,9 @@ export function SignUp() {
   const checkDuplicateID = () => {
     const idValue = idInputRef.current?.value
     if (idValue) {
-			console.log("아이디 중복확인", idValue);
+			console.log("이메일 중복확인", idValue);
 		} else {
-			console.log("아이디가 없습니다.");
+			console.log("이메일이 없습니다.");
 		}
   }
 	return (
@@ -64,8 +64,8 @@ export function SignUp() {
 			<div>
 				<Form.Input
 					name="username"
-					title="아이디"
-					placeholder="아이디를 입력해주세요."
+					title="이메일"
+					placeholder="이메일을 입력해주세요."
 					// ref={idInputRef}
 				/>
 				<Form.Button
