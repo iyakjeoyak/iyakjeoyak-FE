@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+import {  useState } from "react";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";

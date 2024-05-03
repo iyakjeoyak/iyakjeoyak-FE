@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { postLogin } from "@/api/post";
 import { Form } from "@/components/Form";
@@ -16,7 +16,7 @@ import styles from "../styles/Login.module.scss";
 import { AxiosResponse } from "axios";
 
 export default function Login() {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
   });

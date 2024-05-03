@@ -1,7 +1,4 @@
 import { MedicineItemType, ResponsePagenation } from "@/types";
-
-import { MedicineItemType, ResponsePagenation } from "@/types";
-
 import axios from "../axiosConfig";
 
 export default async function getMedicines(page: number, size: number) {
