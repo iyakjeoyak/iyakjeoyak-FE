@@ -10,6 +10,7 @@ module.exports = {
 		"plugin:react-hooks/recommended",
 		"plugin:storybook/recommended",
 		"plugin:style/recommended",
+		"prettier",
 	],
 	ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
 	parser: "@typescript-eslint/parser",

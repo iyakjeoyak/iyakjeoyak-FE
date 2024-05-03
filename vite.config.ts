@@ -12,6 +12,11 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 		svgrPlugin(),
+		// visualizer({
+		// 	open: true,
+		// 	gzipSize: true,
+		// 	brotliSize: true,
+		// }),
 	],
 	css: {
 		modules: {
@@ -44,8 +49,8 @@ export default defineConfig({
 
 	build: {
 		rollupOptions: {
-			input:{
-				main: path.resolve(__dirname, 'index.html'),
+			input: {
+				main: path.resolve(__dirname, "index.html"),
 			},
 		},
 	},

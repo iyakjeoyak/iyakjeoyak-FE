@@ -19,6 +19,8 @@ import UserInfo from "@/pages/userinfo";
 import { routerpaths } from "@/utils/pathName";
 import { KakaoLogin } from "@/pages/login/UI/KakaoLogin";
 import { GoogleLogin } from "@/pages/login/UI/GoogleLogin";
+import LikedItem from "@/pages/userinfo/UI/LikedItem/LikedItem";
+import PharmacyMap from "@/pages/map";
 
 function Router() {
 	return (
@@ -47,6 +49,8 @@ function Router() {
 						path={routerpaths.SUPPLEMENTHISTORY}
 						element={<SupplementHistory />}
 					/>
+					<Route path={routerpaths.LIKEDITEM} element={<LikedItem />} />
+					<Route path={routerpaths.MAP} element={<PharmacyMap />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

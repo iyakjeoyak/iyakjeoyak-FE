@@ -1,32 +1,27 @@
-@use "@styles/mixin"as mixins;
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 @import "@/styles/global.scss";
 
-
-
-
-
 .genderBox {
-  display: flex;
-  gap: 20px;
+	display: flex;
+	gap: 20px;
 
-  & label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-left: 10px;
-  }
+	& label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+		margin-left: 10px;
+	}
 }
 
-
 .tagWrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
 
-  &>span {
-    width: 20%;
-  }
+	& > span {
+		width: 20%;
+	}
 }

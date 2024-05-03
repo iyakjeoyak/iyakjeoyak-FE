@@ -1,8 +1,8 @@
 import axios from "../axiosConfig";
 
 interface HashtagsType {
-    id: number,
-    name: string,
+	id: number;
+	name: string;
 }
 
 /*

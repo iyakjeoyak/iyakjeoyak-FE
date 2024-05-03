@@ -87,7 +87,11 @@ import axios from "../axiosConfig";
 }
 	 */
 
-export default async function getMedicineById({medicineId}:{medicineId: number}) {
+export default async function getMedicineById({
+	medicineId,
+}: {
+	medicineId: number;
+}) {
 	const response = await axios.get<MedicineItemType>(`/medicine/${medicineId}`);
 	return response.data;
 }

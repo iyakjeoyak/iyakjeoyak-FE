@@ -1,8 +1,8 @@
 import axios from "../axiosConfig";
 
 interface CategoriesType {
-    id: number,
-    name: string,
+	id: number;
+	name: string;
 }
 
 /*
@@ -27,5 +27,3 @@ export default async function getCategories() {
   console.log(response)
 	return response.data;
 }
-
-

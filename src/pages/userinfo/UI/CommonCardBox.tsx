@@ -3,23 +3,27 @@ import style from "../style/commoncardbox.module.scss";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import { Button } from "@/components/Button";
 import UserCardInfo from "./UserCardInfo";
+import LikedCardInfo from "./LikedItem/LikedCardInfo";
 
 interface CardProps {
+	name?: string;
 	title?: string;
 	date?: string;
 	img?: string;
+	liked?: boolean;
 	memo?: string;
-	tagText?: string;
+	likedEffect?: string[];
+	effect?: string[];
 	form?: "slim" | "wide" | "empty";
 	onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const CommonCardBox: React.FC<CardProps> = ({
+const CommonCardBox = ({
 	img,
 	form = "slim",
 	onClick,
-	...UserCardInfoProps
-}) => {
+	...props
+}: CardProps) => {
 	const cardStyle = `${style.card} ${style[form]}`;
 
 	return (
@@ -35,7 +39,8 @@ const CommonCardBox: React.FC<CardProps> = ({
 				/>
 			)}
 
-			<UserCardInfo {...UserCardInfoProps} />
+			<UserCardInfo {...props} />
+			<LikedCardInfo {...props} likedEffect={props.likedEffect} />
 		</div>
 	);
 };
