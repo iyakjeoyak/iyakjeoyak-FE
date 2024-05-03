@@ -14,6 +14,7 @@ interface InputProps<T extends GenericStringRecord<T>>
 	placeholder: string;
 	title?: string;
 	type?: string;
+	
 }
 
 export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
