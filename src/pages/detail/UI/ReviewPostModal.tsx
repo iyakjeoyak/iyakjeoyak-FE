@@ -1,16 +1,24 @@
 import medicineReviewPostValidation, {
 	initialMedicineReviewPostBody,
 } from "../utils/medicineReviewPostValidation";
-import postReview, { PostReviewBody } from "@/api/review/postReview";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import ectQueryOptions from '@/api/etc'
 import medicineQueryOptions from "@/api/medicine";
+import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import styles from "../styles/ReviewPostModal.module.scss";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
+
+export interface PostReviewBody {
+  title: string,
+  medicineId: number,
+  tagList: number[],
+  content: string,
+  star: number,
+}
 
 export default function ReviewPostModal() {
  const {data: tags} = useQuery(ectQueryOptions.getCategories())
@@ -22,8 +30,17 @@ export default function ReviewPostModal() {
   onSuccess: ()=>queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId: 1}))});
 
 	const onSubmit = (data: PostReviewBody) => {
-    mutate({body: {...data, medicineId}})
-		console.log(data);
+    const formData = new FormData();
+
+    formData.append('reviewPayload', JSON.stringify({...data, medicineId}));
+    formData.append('imgFile', '');
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+  
+    mutate({body: formData})
+		console.log(formData);
 	};
 
 	return (

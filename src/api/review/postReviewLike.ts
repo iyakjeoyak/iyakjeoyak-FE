@@ -1,10 +1,6 @@
 import axios from "../axiosConfig";
 
-interface PostMedicineLikeType {
-  id: number;
-}
-
-export default async function postReviewLike(body: PostMedicineLikeType) {
-	const response = await axios.post(`/heart/review`, {body});
+export default async function postReviewLike(id: number) {
+	const response = await axios.post(`/heart/review/click`, {reviewId: id});
 	return response.data;
 }

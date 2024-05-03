@@ -6,6 +6,7 @@ export const initialMedicineReviewPostBody = {
 	content: "",
 	tagList: [],
   star: 0,
+  imgFile: [],
 };
 
 const medicineReviewPostValidation = yup.object().shape({
@@ -21,6 +22,7 @@ const medicineReviewPostValidation = yup.object().shape({
   .min(1, "태그를 선택하세요.")
   .required("태그를 선택하세요."),
   star: yup.number().required(),
+  imgFile: yup.array().of(yup.mixed<File>()).nullable().required(),
 });
 
 export default medicineReviewPostValidation;

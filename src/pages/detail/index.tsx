@@ -28,6 +28,7 @@ export default function DetailMedicineById() {
   const id = useGetIdByLocation()
   
   const {data: {
+    isHeart,
     id: medicineId, 
     grade,
     bssh_NM: brand, 
@@ -49,7 +50,7 @@ export default function DetailMedicineById() {
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard name={name} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags} grade={grade} heartCount={heartCount} />
+				<MedicineCard name={name} isHeart={isHeart} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags} grade={grade} heartCount={heartCount} />
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
 					{currentTapValue === "review" ? <ReviewBoard medicineId={medicineId} /> : <InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}
