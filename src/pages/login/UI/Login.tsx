@@ -13,21 +13,28 @@ import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { setAccessToken } from "@/utils/getToken";
 import styles from "../styles/Login.module.scss";
+import { AxiosResponse } from "axios";
 
 export default function Login() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
-	});
+  });
+  
+  
 
-	const onSubmit = (data: LoginFormType) => {
+  const onSubmit = (data: LoginFormType ) => {
 		mutate(data, {
-			onSuccess: (data) => {
-        const accessToken = data.data.accessToken;
-        console.log(accessToken)
-        setAccessToken(accessToken);
+			onSuccess: (data: AxiosResponse) => {
+				const accessToken = data.data;
+				// const accessToken = data.headers.get("Authorization");
+				// const accessToken = data.headers.authorization;
+				console.log(data.headers);
+				console.log(accessToken);
+
+				setAccessToken(accessToken);
 				alert("로그인이 완료되었습니다.");
-        // navigate("/home");
+				// navigate("/home");
 			},
 		});
 	};

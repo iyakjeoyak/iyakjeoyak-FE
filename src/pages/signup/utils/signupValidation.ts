@@ -24,11 +24,11 @@ export const signupValidation = yup.object().shape({
 	profileImage: yup.mixed<File>().nullable(),
 	username: yup
 		.string()
-		.matches(
-			/^[a-zA-Z0-9]{4,12}$/,
-			"아이디는 4~12자의 영문 또는 숫자만 허용됩니다.",
-		)
-		.required("아이디를 입력하세요."),
+    .matches(
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+      "이메일형식에 맞지 않습니다"
+    )
+		.required("이메일을 입력하세요."),
 	password: yup
 		.string()
 		.matches(

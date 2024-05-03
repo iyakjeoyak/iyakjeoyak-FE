@@ -1,6 +1,9 @@
-import { SignUpFormType } from "@/pages/signup/utils/signupValidation";
-import  { axiosImg } from "../axiosConfig";
+import axios from "../axiosConfig";
 
-export default async function postSignUp(data: SignUpFormType) {
-	return axiosImg.post("/user", data);
+export default async function postSignUp(data: FormData) {
+	return axios.post("/user", data, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
 }

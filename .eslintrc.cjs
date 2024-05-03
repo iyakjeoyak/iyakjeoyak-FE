@@ -88,11 +88,5 @@ module.exports = {
         ],
       },
     ],
-    "overrides": [{
-      "files": "*.cjs",
-      "options": {
-        "parser": "babel"
-      }
-    }],
   },
 };
