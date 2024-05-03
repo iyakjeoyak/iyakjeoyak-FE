@@ -10,6 +10,7 @@ interface TapBarProps {
 export default function TapBar({ taps, onClick }: TapBarProps) {
 	const currentTapValue = useGetURLSearch("tap") || taps[0].value;
 
+  console.log(currentTapValue)
 	return (
 		<div className={styles.container}>
 			{taps.map((tap) => (

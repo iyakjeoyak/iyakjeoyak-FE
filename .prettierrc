@@ -5,12 +5,12 @@
 	"trailingComma": "all",
 	"useTabs": true,
 	"printWidth": 80,
-	"overrides": [
-		{
-			"files": "*.json",
-			"options": {
-				"parser": "json"
-			}
+  "overrides": [
+    {
+        "files": "*.cjs",
+        "options": {
+            "parser": "babel"
+        }
 		}
 	]
 }

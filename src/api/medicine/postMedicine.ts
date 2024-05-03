@@ -29,7 +29,7 @@ interface PostMedicineType {
   id: number;
 }
 
-export default async function getMedicines(body: PostMedicineType) {
+export default async function postMedicine(body: PostMedicineType) {
 	const response = await axios.post(`/medicine`, {body});
 	return response.data;
 }

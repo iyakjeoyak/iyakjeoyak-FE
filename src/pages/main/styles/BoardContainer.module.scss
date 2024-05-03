@@ -5,13 +5,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-
 	.title {
 		color: $point-blue;
 		@include mixins.b-medium;
-	}
-	.item-container {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
 	}
 }

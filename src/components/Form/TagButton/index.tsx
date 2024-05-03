@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import styles from "./index.module.scss";
+import { useFormContext } from "react-hook-form";
+import { useState } from "react";
 
 interface TagButtonProps<T> {
 	name: keyof T;

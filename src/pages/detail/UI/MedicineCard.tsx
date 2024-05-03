@@ -1,27 +1,46 @@
+import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 import { FaShare } from "react-icons/fa";
 import IconTag from "@/components/IconTag";
 import StarRating from "@/components/StarRating";
-import TagCommon from "@/components/Tag";
+import Tag from "@/components/Tag";
+import medicineQueryOptions from "@/api/medicine";
+import postMedicineLike from "@/api/medicine/postMedicineLike";
+import { queryClient } from "@/main";
 import styles from "../styles/MedicineCard.module.scss";
+import { toast } from "react-toastify";
+import useGetIdByLocation from "../hooks/useGetIdByLocation";
+import { useMutation } from "@tanstack/react-query";
 
 interface MedicineCardProps {
-	// id: number;
-	heartCount?: number;
-	// star: null;
-	// reviewCount: number;
-	// bssh_NM: string;
-	// prdlst_NM: string;
+  name: string;
+  brand: string;
+  heartCount: number;
+  reviewCount: number;
+  grade: number;
+  hashtags: Array<{id: number, name: string}>;
+  isBookMark:boolean;
 }
 
-export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
+export default function MedicineCard({hashtags, name, brand, isBookMark, grade, reviewCount}:MedicineCardProps) {
+  const medicineId = useGetIdByLocation();
+
+  const { mutate } = useMutation({
+    mutationFn:postMedicineLike, 
+    onSuccess: ()=>queryClient.invalidateQueries(medicineQueryOptions.getMedicineById({medicineId}))});
+
 	const handleLikeClick = () => {
-		console.log("관심 등록");
+		mutate({id: medicineId})
 	};
 
 	const handleShareClick = () => {
-		console.log("공유하기");
+    const location = window.location.href;
+    navigator.clipboard.writeText(location).then(() => {
+      toast.success("URL이 클립보드에 복사되었습니다.",{ autoClose: 2000 });
+    }).catch(() => {
+      toast.error("URL 복사에 실패했습니다.", { autoClose: 2000 });
+    });
 	};
 
 	return (
@@ -29,21 +48,26 @@ export default function MedicineCard({ heartCount = 0 }: MedicineCardProps) {
 			<img src="/images/Medicine.png" />
 			<div className={styles["content-container"]}>
 				<div className={styles["info"]}>
-					<div className={styles.brand}>어쩌구 브랜드</div>
-					<div className={styles.name}>어쩌구 영양제</div>
+					<div className={styles.brand}>{brand}</div>
+					<div className={styles.name}>{name}</div>
 				</div>
 				<div className={styles["sub-info"]}>
-					<StarRating filledStars={3.5} />
-					<span>(311개)</span>
+					<StarRating filledStars={grade ?? 0} />
+					<span>({reviewCount}개)</span>
 				</div>
 				<div className={styles.tags}>
-					<TagCommon text="피로개선" backgroundColor="green" />
-					<TagCommon text="감기" backgroundColor="green" />
+					<Tag text="피로개선" backgroundColor="green" />
+				  {hashtags.slice(0, 2).map((tag)=>	<Tag key={tag.id} text={tag.name} backgroundColor="green" />)}
 				</div>
 			</div>
 			<div className={styles.buttons}>
+        <IconTag
+					icon={isBookMark ? <FaBookmark />: <FaRegBookmark />}
+					text="보관하기"
+					onClick={handleLikeClick}
+				/>
 				<IconTag
-					icon={heartCount === 0 ? <IoMdHeartEmpty /> : <IoMdHeart />}
+					icon={isBookMark ? <IoMdHeart />: <IoMdHeartEmpty />}
 					text="관심 등록"
 					onClick={handleLikeClick}
 				/>
