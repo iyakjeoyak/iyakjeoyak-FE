@@ -8,23 +8,15 @@ interface SearchBarRootProps {
 
 export default function SearchBarRoot({ children }: SearchBarRootProps) {
 	const [currentKeyword, setCurrentKeyword] = useState("");
-	const [keywordSearchResultList, setKeywordSearchResultList] = useState<
-		string[]
-	>(["감", "감자", "감자깡"]);
+
 
 	const handleCurrentKeyword = (keyword: string) => {
 		setCurrentKeyword(keyword);
 	};
 
-	const handleCurrentKeywordSearchResultList = (result: string[]) => {
-		setKeywordSearchResultList(result);
-	};
-
 	const value = {
 		currentKeyword,
-		keywordSearchResultList,
 		handleCurrentKeyword,
-		handleCurrentKeywordSearchResultList,
 	};
 
 	return (

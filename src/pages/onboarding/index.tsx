@@ -1,14 +1,14 @@
 import { Form } from "@/components/Form";
+import LogoIcon from "@/assets/icons/LogoIcon";
 import styles from "../onboarding/index.module.scss";
 import { useNavigate } from "react-router-dom";
-// import OnBoardingConTent from "./UI/OnBoardingConTent";
 
 function OnBoarding() {
 	const navigate = useNavigate();
 
 	return (
 		<section className={styles.container}>
-			{/* <OnBoardingConTent /> */}
+		 <LogoIcon width="100%" height="100%" fill="black"/> 
 			<Form.Button
 				text="약 조회하러가기"
 				onClick={() => navigate("/home")}
