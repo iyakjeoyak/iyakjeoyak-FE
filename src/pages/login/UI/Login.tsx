@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { postLogin } from "@/api/post";
 import { Form } from "@/components/Form";
@@ -16,25 +16,21 @@ import styles from "../styles/Login.module.scss";
 import { AxiosResponse } from "axios";
 
 export default function Login() {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
   });
   
-  
-
   const onSubmit = (data: LoginFormType ) => {
 		mutate(data, {
 			onSuccess: (data: AxiosResponse) => {
-				const accessToken = data.data;
-				// const accessToken = data.headers.get("Authorization");
-				// const accessToken = data.headers.authorization;
+				const accessToken = data.headers.authorization;
 				console.log(data.headers);
 				console.log(accessToken);
-
+console.log(document.cookie)
 				setAccessToken(accessToken);
 				alert("로그인이 완료되었습니다.");
-				// navigate("/home");
+				navigate("/home");
 			},
 		});
 	};
