@@ -2,18 +2,10 @@ import { ResponsePagenation, ReviewItemType } from "@/types";
 
 import axios from "../axiosConfig";
 
-export default async function getReviewsByMedicineId({
-	medicineId,
-  page,
-  size,
-}: {
-	medicineId: number;
-  page:number;
-  size:number;
-}) {
+export default async function getReviewsByMedicineId({queryParams}:{queryParams: string}) {
 
 		const response = await axios.get<ResponsePagenation<ReviewItemType>>(
-			`/review?page=${page}&size=${size}&medicineId=${medicineId}`,
+			`/review${(queryParams)}`,
 		);
     return response.data;
 }

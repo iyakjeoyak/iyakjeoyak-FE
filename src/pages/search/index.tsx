@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
 import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
 import { queryClient } from "@/main";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export default function MedicineSearch() {
   const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
@@ -13,7 +14,8 @@ export default function MedicineSearch() {
 	const navigate = useNavigate();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
+    navigate(`/search?keyword=${keyword}`);
+    setKeywordSearchResult([]);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
@@ -31,6 +33,7 @@ export default function MedicineSearch() {
     // 모달이 닫힐때만 데이터를 비워줌
     if (isTagsModalOpen) queryClient.resetQueries({queryKey:['medicine', 'medicines']});
   }
+  
 	return (
     <>
     {isTagsModalOpen && <TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>}

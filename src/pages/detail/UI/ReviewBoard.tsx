@@ -1,65 +1,80 @@
 import ReviewBoardItem from "./ReviewBoardItem";
 import ReviewPostModal from "./ReviewPostModal";
 import SelectSort from "@/components/SelectSort";
+import qs from 'qs';
 import reviewQueryOptions from "@/api/review";
 import styles from "../styles/ReviewBoard.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-export enum REVIEW_SORT_QUERIES  {
-  oldestReview = 'orderBy=CREATED_DATE&sort=ASC',
-  latestReview = 'orderBy=CREATED_DATE&sort=DESC',
-  mostLikedReview = 'orderBy=HEART_COUNT&sort=ASC',
-  lowLikedReview = 'orderBy=HEART_COUNT&sort=DESC'
+export const enum REVIEW_SORT_QUERIES  {
+  OLDEST = 'oldest',
+  LATEST = 'latest',
+  MOST_LIKED = 'most_liked',
+  LOW_LIKED = 'low_liked'
 }
 
-export const REVIEW_SORT_OPTIONS = [
+export const REVIEW_SORT_OPTIONS:SortOptionType[] = [
 	{
 		label: "오래된 리뷰 순",
-		value: REVIEW_SORT_QUERIES.oldestReview,
+		value: REVIEW_SORT_QUERIES.OLDEST,
 	},
 	{
 		label: "리뷰 최신 순",
-		value: REVIEW_SORT_QUERIES.latestReview,
+		value: REVIEW_SORT_QUERIES.LATEST,
 	},
 	{
 		label: "좋아요 많은 순",
-		value: REVIEW_SORT_QUERIES.mostLikedReview,
+		value: REVIEW_SORT_QUERIES.MOST_LIKED,
 	},
   {
 		label: "좋아요 적은 순",
-		value: REVIEW_SORT_QUERIES.lowLikedReview,
+		value: REVIEW_SORT_QUERIES.LOW_LIKED,
 	},
 ];
 
-const valueToLabel = {
-  'orderBy=CREATED_DATE&sort=ASC': '오래된 리뷰 순',
-  'orderBy=CREATED_DATE&sort=DESC': '리뷰 최신 순',
-  'orderBy=HEART_COUNT&sort=ASC': '좋아요 많은 순',
-  'orderBy=HEART_COUNT&sort=DESC': '좋아요 적은 순'
+export interface SortOptionType {
+    label: string,
+    value: REVIEW_SORT_QUERIES,
+  }
+
+export interface SortMappingType {
+  orderField: string;
+  sort: 'ASC' | 'DESC';
 }
 
+const REVIEW_SORT_QUERIES_MAPPING: Record<REVIEW_SORT_QUERIES, SortMappingType> = {
+  [REVIEW_SORT_QUERIES.OLDEST]: { orderField: 'CREATED_DATE', sort: 'ASC' },
+  [REVIEW_SORT_QUERIES.LATEST]: { orderField: 'CREATED_DATE', sort: 'DESC' },
+  [REVIEW_SORT_QUERIES.MOST_LIKED]: { orderField: 'HEART_COUNT', sort: 'ASC' },
+  [REVIEW_SORT_QUERIES.LOW_LIKED]: { orderField: 'HEART_COUNT', sort: 'DESC' }
+};
+  
 export default function ReviewBoard({medicineId}:{medicineId: number}) {
-	const [currentSortValue, setCurrentSortValue] = useState<string>(
-		REVIEW_SORT_QUERIES.oldestReview,
-	);
+	const [currentSort, setCurrentSort] = useState<SortOptionType>(REVIEW_SORT_OPTIONS[0]);
 
-	const handleCurrentSortValue = (sortValue: string) => {
-		setCurrentSortValue(sortValue);
+
+	const handleCurrentSort = (sortOption: SortOptionType) => {
+		setCurrentSort(sortOption);
 	};
 
+  const queryParams = qs.stringify({
+    medicineId, 
+    page: 0,
+    size: 50,  // TODO 무한 스크롤 바꾸기..바꾸겠지..
+    ...REVIEW_SORT_QUERIES_MAPPING[currentSort.value]
+  }, { addQueryPrefix: true});
+
   const {data:{data:reviews} }
-  = useQuery(reviewQueryOptions.getReviewsByMedicineId({medicineId: medicineId, page: 0, size: 6}))
+  = useQuery(reviewQueryOptions.getReviewsByMedicineId({queryParams}))
 
-
-  console.log(currentSortValue)
 	return (
 		<>
 			<SelectSort
-				currentSortValue={currentSortValue}
-				handleCurrentSortValue={handleCurrentSortValue}
+				currentSort={currentSort}
+				handleCurrentSort={handleCurrentSort}
 			>
-				<SelectSort.SortCurrentOption valueToLabel={valueToLabel} />
+				<SelectSort.SortCurrentOption />
 				<SelectSort.SortOptionList>
 					{REVIEW_SORT_OPTIONS.map((sort) => (
 						<SelectSort.SortOption

@@ -23,7 +23,7 @@ export default function KeywordInput({
 			<input
 				value={currentKeyword}
 				onChange={(e) => {
-					handleCurrentKeyword(e.target.value);
+          handleCurrentKeyword(e.target.value);
 					onChange(e.target.value);
 				}}
 				placeholder={placeholder}

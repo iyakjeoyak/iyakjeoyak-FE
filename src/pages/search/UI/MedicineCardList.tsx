@@ -1,17 +1,70 @@
 import { MedicineItemType, ResponsePagenation } from "@/types";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import BlankMyMedicineBoard from "./BlankMedicineCard";
 import Loading from "@/pages/feedback/Loading";
 import MedicineCardItem from "./MedicineCardItem";
+import SelectSort from "@/components/SelectSort";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import axios from "@/api/axiosConfig";
+import qs from 'qs';
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCardList.module.scss";
-import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { useObserver } from "@/hooks/useObserver";
-import { useRef } from "react";
+
+export const enum SEARCHLIST_SORT_QUERIES  {
+  HIGH_GRADE = 'high_star',
+  LOW_GRADE = 'low_star',
+  // MOST_REVIEWED = 'most_reviewed',
+  // LOW_REVIEWED = 'low_reviewed',
+  MOST_LIKED = 'most_liked',
+  LOW_LIKED = 'low_liked'
+}
+
+export const SEARCHLIST_SORT_OPTIONS:SortOptionType[] = [
+	{
+		label: "평점 높은 순",
+		value: SEARCHLIST_SORT_QUERIES.HIGH_GRADE,
+	},
+	{
+		label: "평점 낮은 순",
+		value: SEARCHLIST_SORT_QUERIES.LOW_GRADE,
+	},
+	// {
+	// 	label: "리뷰 많은 순",
+	// 	value: SEARCHLIST_SORT_QUERIES.MOST_REVIEWED,
+	// },
+	{
+		label: "좋아요 많은 순",
+		value: SEARCHLIST_SORT_QUERIES.MOST_LIKED,
+	},
+  {
+		label: "좋아요 적은 순",
+		value: SEARCHLIST_SORT_QUERIES.LOW_LIKED,
+	},
+];
+
+export interface SortOptionType {
+    label: string,
+    value: SEARCHLIST_SORT_QUERIES,
+  }
+
+export interface SortMappingType {
+  orderField: string;
+  sort: 'ASC' | 'DESC';
+}
+
+const SEARCHLIST_SORT_QUERIES_MAPPING: Record<SEARCHLIST_SORT_QUERIES, SortMappingType> = {
+  [SEARCHLIST_SORT_QUERIES.HIGH_GRADE]: { orderField: 'GRADE', sort: 'ASC' },
+  [SEARCHLIST_SORT_QUERIES.LOW_GRADE]: { orderField: 'GRADE', sort: 'DESC' },
+  // [SEARCHLIST_SORT_QUERIES.MOST_REVIEWED]: { orderField: 'CREATED_DATE', sort: 'DESC' },
+  // [SEARCHLIST_SORT_QUERIES.LOW_REVIEWED]: { orderField: 'CREATED_DATE', sort: 'DESC' },
+  [SEARCHLIST_SORT_QUERIES.MOST_LIKED]: { orderField: 'HEART_COUNT', sort: 'ASC' },
+  [SEARCHLIST_SORT_QUERIES.LOW_LIKED]: { orderField: 'HEART_COUNT', sort: 'DESC' }
+};
 
 const TAPS = [
 	{
@@ -28,65 +81,77 @@ const TAPS = [
 	},
 ];
 
-let currentPage = 0;
 const PAGE_SIZE = 8;
 
-const getMedicines = async ({
-  pageParam = { page: 0, size: PAGE_SIZE, categoryId: "",keyword: ""}
+const getMedicinesAll = async ({
+  pageParam 
 }: {
-  pageParam?: { page: number; size: number; categoryId: string | null; keyword: string| null }
+  pageParam?: { queryParams: string }
 }) => {
-  const { page, size, categoryId, keyword } = pageParam;
-  const params:{page: string, size: string, categoryId?: string,  keyword?: string } = {
-    page: page.toString(),
-    size: size.toString(),
-  };
-  
-  if (categoryId) {
-    params.categoryId = categoryId;
-  }
-  
-  
-  if (keyword) {
-    params.keyword = keyword;
-  }
-  
-  const queryParams = new URLSearchParams(params).toString();
-
   const res = await axios.get<ResponsePagenation<MedicineItemType>>(
-    `/medicine/query?${queryParams}`
+    `/medicine${pageParam?.queryParams}`
+  );
+  return res.data;
+};
+
+const getMedicinesByQuery = async ({
+  pageParam 
+}: {
+  pageParam?: { queryParams: string }
+}) => {
+
+  console.log(pageParam?.queryParams)
+  const res = await axios.get<ResponsePagenation<MedicineItemType>>(
+    `/medicine/query${pageParam?.queryParams}`
   );
   return res.data;
 };
 
 export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsModalOpen: ()=>void}) {
   const navigate = useNavigate();
+  const { search } = useLocation();
   const bottom = useRef<HTMLDivElement>(null);
 
-  // categoryId, hashtagId, keyword,
-  // orderField= [GRADE , HEART_COUNT , CREATED_DATE]
-  // sort= ASC , DESC   { page, size, categoryId, hashtagId, keyword }
-  const  {keyword, tag} = useGetURLSearch(['keyword','tag'])  as Record<string, string | null>
+  const [currentSort, setCurrentSort] = useState<SortOptionType>(SEARCHLIST_SORT_OPTIONS[0]);
 
-  const {isFetching, data:medicines, fetchNextPage}=useInfiniteQuery({
+	const handleCurrentSort = (sortOption: SortOptionType) => {
+    setCurrentSort(sortOption);
+	};
+
+  const queryParamsObject = qs.parse(search, { ignoreQueryPrefix: true });
+  const { tap, tagname, ...restQueryParams } = queryParamsObject;
+
+  const nextPageParams = {
+    size: PAGE_SIZE,
+    ...restQueryParams,
+    ...SEARCHLIST_SORT_QUERIES_MAPPING[currentSort.value]
+  };
+
+  const {isFetching, data , fetchNextPage} = useInfiniteQuery({
     queryKey: ['medicine', 'medicines'],
-    queryFn: getMedicines,
-    getNextPageParam: () => {
-      const nextPage = currentPage++;
-     return { page: nextPage, size: PAGE_SIZE ,categoryId: tag,  keyword };
+    queryFn: (tap === 'all' || !tap) ? getMedicinesAll : getMedicinesByQuery,
+    getNextPageParam: (_data) => {
+      const nextPageQueryString = qs.stringify({...nextPageParams, page: _data.number}, { addQueryPrefix: true });
+     
+      return { queryParams: nextPageQueryString };
     },
-    initialPageParam: { page: 0, size: PAGE_SIZE, categoryId: tag, keyword },
-    select:({pages})=>{ 
+    initialPageParam: {
+      queryParams: qs.stringify({
+        ...nextPageParams,
+        page: 0,
+      }, { addQueryPrefix: true })
+    },
+    select: ({pages}) => { 
       const returnData = pages?.map((page)=>page.data).flat(); 
-      return returnData;
-    },
+      const totalElement = pages[0].totalElement;
+      return ({medicines: returnData, totalElement });
+      },
     },
   )
 
   const handleTapClick = (tapValue: string) => {
     if (tapValue === 'all') {
       navigate(`/search?tap=${tapValue}`)
-      queryClient.resetQueries({queryKey:['medicine', 'medicines']});
       return;
     }
     toggleIsTagsModalOpen();
@@ -94,7 +159,9 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
 	};
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
-    if (entry.isIntersecting) {
+    const isLast = data?.medicines.length === data?.totalElement;
+
+    if (entry.isIntersecting && !isLast) {
      fetchNextPage();
     }
   };
@@ -104,11 +171,30 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
     onIntersect,
   });
 
+  useEffect(()=>{
+    queryClient.resetQueries({queryKey:['medicine', 'medicines']});
+  },[search, currentSort])
+
 	return (
     <article>
     <TapBar taps={TAPS} onClick={handleTapClick} />
+    <SelectSort
+				currentSort={currentSort}
+				handleCurrentSort={handleCurrentSort}
+			>
+				<SelectSort.SortCurrentOption />
+				<SelectSort.SortOptionList>
+					{SEARCHLIST_SORT_OPTIONS.map((sort) => (
+						<SelectSort.SortOption
+							key={sort.value}
+							value={sort.value}
+							label={sort.label}
+						/>
+					))}
+				</SelectSort.SortOptionList>
+			</SelectSort>
 		<div className={styles.container}>
-			{medicines?.map((medicineItem)=><MedicineCardItem key={medicineItem.id} medicineItem={medicineItem}/>)}
+			{(!data || data.medicines.length === 0) ? < BlankMyMedicineBoard/> : data.medicines.map((medicineItem)=><MedicineCardItem key={medicineItem.id} medicineItem={medicineItem}/>)}
 		  {isFetching?  <Loading/> : <div ref={bottom} />}
     </div>
     </article>

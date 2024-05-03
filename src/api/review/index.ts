@@ -6,10 +6,10 @@ import getReviewsByMedicineId from "./getReviewsByMedicineId";
 import { queryOptions } from "@tanstack/react-query";
 
 const reviewQueryOptions = {
-    getReviewsByMedicineId: ({page, size, medicineId}:{medicineId: number, page: number, size:number}) => 
+    getReviewsByMedicineId: ({queryParams}:{queryParams: string}) => 
      queryOptions({
-      queryKey:['review', 'reviews', medicineId],
-      queryFn: () => getReviewsByMedicineId({page, size, medicineId}),
+      queryKey:['review', 'reviews', queryParams],
+      queryFn: () => getReviewsByMedicineId({queryParams}),
       initialData:{
         data: [],
         number: 0,

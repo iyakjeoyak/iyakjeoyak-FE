@@ -1,10 +1,9 @@
 import Container from "../Container"
 import styles from './index.module.scss';
-import usehandleImgPreview from "@/hooks/usehandleImgPreivew";
+import useHandleImgPreview from "@/hooks/useHandleImgPreivew";
 
 const ImgsInput = ()=>{
-  const { handleImgChange, imgRef } = usehandleImgPreview();
- 
+  const { handleImgChange, imgRef } = useHandleImgPreview();
 
   return (
   <Container title="이미지 선택" name="">

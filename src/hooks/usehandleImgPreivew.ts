@@ -2,7 +2,7 @@ import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
 import stopEvent from '@/utils/stopEvent';
 
-const usehandleImgPreview = (handleAddImgsContainer?: (img: File) => void) => {
+const useHandleImgPreview = (handleAddImgsContainer?: (img: File) => void) => {
   const [imgContainer, setImgContainer] = useState<File | null>(null);
 
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -53,4 +53,4 @@ const usehandleImgPreview = (handleAddImgsContainer?: (img: File) => void) => {
   return { handleImgChange, imgContainer, imgRef };
 };
 
-export default usehandleImgPreview;
+export default useHandleImgPreview;
