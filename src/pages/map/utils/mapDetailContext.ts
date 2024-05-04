@@ -1,16 +1,22 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, MouseEvent } from "react";
 import { PharmacyDetailType } from "@/api/map/getPharmacyDetail";
 
 interface PharmacyContextType {
 	selectedPharmacy: PharmacyDetailType | null;
 	showModal: boolean;
+	toggleModal: (event: MouseEvent) => void;
 	setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+	setSelectedPharmacy: React.Dispatch<
+		React.SetStateAction<PharmacyDetailType | null>
+	>;
 }
 
-const initPharmacyContext = {
+const initPharmacyContext: PharmacyContextType = {
 	selectedPharmacy: null,
 	showModal: false,
 	setShowModal: () => {},
+	toggleModal: () => {},
+	setSelectedPharmacy: () => {},
 };
 
 export const PharmacyContext =

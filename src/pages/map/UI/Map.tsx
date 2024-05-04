@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 import MapDetail from "./MapDetail";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
-import { PharmacyProvider } from "../utils/mapDetailProvider";
+import { PharmacyProvider } from "../utils/PharmacyContext";
 import createMarker from "../utils/createMarker";
 import { loadScript } from "../utils/loadScript";
 import setDefaultMap from "../utils/setDefaultMap";
@@ -52,7 +52,7 @@ const Map = ({}) => {
 	const [selectedPharmacy, setSelectedPharmacy] =
 		useState<null | PharmacyDetailType>(null);
 	const [_, setMarkers] = useState<naver.maps.Marker[]>([]);
-	const { setShowModal, showModal } = usePharmacy();
+	const { setShowModal, showModal, toggleModal } = usePharmacy();
 	const [pharmacyData, setPharmacyData] = useState<any>();
 
 	// 맵 가져오기
@@ -77,7 +77,8 @@ const Map = ({}) => {
 
 	useEffect(() => {
 		if (selectedPharmacy) {
-			setShowModal(showModal);
+			setShowModal(true);
+			console.log(showModal, "나옴?");
 		}
 	}, [selectedPharmacy, showModal]);
 
@@ -141,7 +142,7 @@ const Map = ({}) => {
 				{ enableHighAccuracy: true },
 			);
 		}
-	}, [mapReady, map]);
+	}, [mapReady, map, showModal]);
 
 	useEffect(() => {
 		if (map) {
@@ -167,14 +168,12 @@ const Map = ({}) => {
 				updateMarkers(currentMarkers),
 			);
 		}
-	}, [map]);
+	}, [map, showModal]);
 
 	return (
 		<>
-			<PharmacyProvider>
-				<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-				{showModal && <MapDetail />}
-			</PharmacyProvider>
+			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
+			<MapDetail />
 		</>
 	);
 };
