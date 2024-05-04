@@ -13,12 +13,7 @@ export const PharmacyProvider = ({
 
 	const toggleModal = () => {
 		setShowModal((prev) => !prev);
-		console.log("모달뜨니?");
 	};
-
-	// useEffect(() => {
-	// 	console.log(showModal, "머가 뜨긴해?");
-	// }, [showModal]);
 
 	return (
 		<PharmacyContext.Provider

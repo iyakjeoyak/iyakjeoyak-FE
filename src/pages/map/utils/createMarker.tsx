@@ -44,7 +44,7 @@ export default function createMarker(
 		cursor: "pointer",
 		visible: visible,
 		icon: {
-			content: `<img src='images/map_marker_icon.png' alt='지도 마커' style='cursor: pointer; width : 40px; height : 50px;'/>`,
+			content: `<img src='images/map_marker_icon.png' alt='지도 마커' style='cursor: pointer; width : 40px; height : 40px;'/>`,
 			anchor: new naver.maps.Point(20, 25),
 		},
 	});

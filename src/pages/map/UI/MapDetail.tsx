@@ -1,23 +1,13 @@
 import style from "../styles/mapdetail.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
-import Modal from "@/components/Modal";
 import { usePharmacy } from "../utils/mapDetailContext";
-import { useEffect } from "react";
 
 const MapDetail = () => {
 	const { selectedPharmacy, showModal, toggleModal } = usePharmacy();
 
-	console.log(showModal);
-
-	// useEffect(() => {
-	// 	console.log(`MapDetail - showModal state: ${showModal}`);
-	// }, [showModal, selectedPharmacy]);
-
 	if (!selectedPharmacy || !showModal) {
 		return null;
 	}
-
-	console.log(selectedPharmacy, "이름나옴?");
 
 	return (
 		<AnimatePresence>
