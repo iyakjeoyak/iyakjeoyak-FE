@@ -1,44 +1,104 @@
 export const likedPharmacies = [
 	{
-		lat: 37.5665,
-		lng: 126.978,
-		name: "중앙약국",
-		hpid: "C23023",
+		dutyAddr: "경기도 평택시 영신로 29",
+		dutyName: "마트종로약국",
+		dutyTel1: "031-651-9631",
+		hpid: "C2104087",
+		latitude: 37.02111280167999,
+		longitude: 127.07562611735219,
+		businessHoursList: [
+			{
+				dayOfWeek: "Mon",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Tue",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Wed",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Thu",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Fri",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Sat",
+				startHour: "1030",
+				endHour: "2330",
+			},
+			{
+				dayOfWeek: "Sun",
+				startHour: "off",
+				endHour: "off",
+			},
+			{
+				dayOfWeek: "Hol",
+				startHour: "off",
+				endHour: "off",
+			},
+		],
 	},
+
+	,
 	{
-		lat: 37.5651,
-		lng: 126.985,
-		name: "서울약국",
-		hpid: "C23023",
-	},
-	{
-		lat: 37.57,
-		lng: 126.9921,
-		name: "한강약국1",
-		hpid: "C23023",
-	},
-	{
-		lat: 37.5756,
-		lng: 126.9921,
-		name: "한강약국2",
-		hpid: "C23023",
-	},
-	{
-		lat: 37.5787,
-		lng: 126.9921,
-		name: "한강약국3",
-		hpid: "C23023",
-	},
-	{
-		lat: 37.57423,
-		lng: 126.9921,
-		name: "한강약국4",
-		hpid: "C23023",
-	},
-	{
-		lat: 37.57122,
-		lng: 126.9921,
-		name: "한강약국5",
-		hpid: "C23023",
+		dutyAddr: "서울시 여러분",
+		dutyName: "아프지마약국",
+		dutyTel1: "031-651-9631",
+		hpid: "C2103087",
+		latitude: 37.05111280167999,
+		longitude: 127.17562611735219,
+		businessHoursList: [
+			{
+				dayOfWeek: "Mon",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Tue",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Wed",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Thu",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Fri",
+				startHour: "1000",
+				endHour: "2300",
+			},
+			{
+				dayOfWeek: "Sat",
+				startHour: "1030",
+				endHour: "2330",
+			},
+			{
+				dayOfWeek: "Sun",
+				startHour: "off",
+				endHour: "off",
+			},
+			{
+				dayOfWeek: "Hol",
+				startHour: "off",
+				endHour: "off",
+			},
+		],
 	},
 ];

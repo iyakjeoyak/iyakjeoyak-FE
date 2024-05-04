@@ -9,14 +9,11 @@
 // 3. 저장하기 버튼으로 post요청, 삭제로 delete 요청
 
 import { Pharmacy } from "../mapTypes";
-import getPharmacyDetail, {
-	PharmacyDetailType,
-} from "@/api/map/getPharmacyDetail";
+import getPharmacyDetail from "@/api/map/getPharmacyDetail";
 import { useEffect, useState } from "react";
 
 import MapDetail from "./MapDetail";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
-import { PharmacyProvider } from "../utils/PharmacyContext";
 import createMarker from "../utils/createMarker";
 import { loadScript } from "../utils/loadScript";
 import setDefaultMap from "../utils/setDefaultMap";
@@ -37,6 +34,8 @@ declare global {
 // 모달 상태 업데이트 처리... (바보멍청이자식)
 // 화면 이동하면 기존의 마커는 지워지게 -> 이건 나중에
 
+// 사용자 위치 받으나 안받으나 둘다 지도 잘띄워짐
+
 // 4. 관심 약국으로 추가/ 삭제 가능
 // 5. 추가된 관심 약국은 다음에 스크립트 로드 후 바로 불러와서 띄워주기
 // 6. 약국 이름으로 검색 하는 기능
@@ -44,9 +43,8 @@ declare global {
 const Map = ({}) => {
 	const [map, setMap] = useState<any>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
-	// const [selectedPharmacy, setSelectedPharmacy] =
-	// 	useState<null | PharmacyDetailType>(null);
 	const [marker, setMarkers] = useState<naver.maps.Marker[]>([]);
+	const [pharmacyData, setPharmacyData] = useState<any>();
 	const {
 		setShowModal,
 		showModal,
@@ -54,7 +52,6 @@ const Map = ({}) => {
 		selectedPharmacy,
 		setSelectedPharmacy,
 	} = usePharmacy();
-	const [pharmacyData, setPharmacyData] = useState<any>();
 
 	// 맵 가져오기
 	useEffect(() => {
