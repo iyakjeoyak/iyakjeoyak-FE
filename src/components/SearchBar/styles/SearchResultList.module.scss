@@ -8,6 +8,9 @@
 	left: 20px;
 	right: 65px;
 	z-index: 900;
+	span {
+		color: $main-red;
+	}
 	::placeholder {
 		@include mixins.b-medium;
 	}

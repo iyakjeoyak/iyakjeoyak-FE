@@ -5,21 +5,29 @@ export const KakaoLogin = () => {
 	const navigate = useNavigate();
 	const params = new URLSearchParams(window.location.search);
 	const code = params.get("code");
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 	const restApiKey = import.meta.env.VITE_KAKAO_RESTAPI_KEY;
 	const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 	useEffect(() => {
 		const getKakaoToken = async (code: string) => {
 			try {
-				const response = await fetch(
-					`https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${restApiKey}&redirect_uri=${redirectUri}&code=${code}`,
-					{
-						method: "POST",
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-						},
+				// const response = await fetch(
+				// 	`https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${restApiKey}&redirect_uri=${redirectUri}&code=${code}`,
+				// 	{
+				// 		method: "POST",
+				// 		headers: {
+				// 			"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+				// 		},
+				// 	},
+        // );
+        
+        const response = await fetch(`${baseUrl}/user/code?code=${code}`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
 					},
-				);
+				});
 				console.log("code", code);
 				console.log("response", response);
 				console.log("data", await response.json());

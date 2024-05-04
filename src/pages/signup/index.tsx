@@ -1,16 +1,17 @@
 import { PathButton } from "@/components/PathButton/PathButton";
 import { useLocation } from "react-router-dom";
-import { SignUpForm } from "./UI/SignUpForm";
+import { SignUp } from "./UI/SignUp";
 
-function SignUp() {
+
+function SignUpPage() {
 	const location = useLocation();
 	const paths = [location.pathname];
 	return (
 		<section>
 			<PathButton paths={paths} />
-			<SignUpForm />
+			<SignUp />
 		</section>
 	);
 }
 
-export default SignUp;
+export default SignUpPage;

@@ -15,6 +15,7 @@
 	padding: 15px 10px;
 	width: 110px;
 	@include mixins.m-medium;
+	z-index: $z-index-select;
 }
 
 .container > div {

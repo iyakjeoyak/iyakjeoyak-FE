@@ -4,14 +4,14 @@ import { useState } from "react";
 
 interface SortSelectRootProps {
 	children: React.ReactNode;
-	currentSortValue: string;
-	handleCurrentSortValue: (value: string) => void;
+	currentSort: any;
+	handleCurrentSort: (sortOption: any) => void;
 }
 
 export default function SortSelectRoot({
 	children,
-	currentSortValue,
-	handleCurrentSortValue,
+	currentSort,
+	handleCurrentSort,
 }: SortSelectRootProps) {
 	const [isOpenOptionList, setIsOpenOptionList] = useState(false);
 
@@ -20,9 +20,9 @@ export default function SortSelectRoot({
 	};
 
 	const value = {
-		currentSortValue,
+		currentSort,
 		isOpenOptionList,
-		handleCurrentSortValue,
+		handleCurrentSort,
 		toggleIsOpenOptionList,
 	};
 

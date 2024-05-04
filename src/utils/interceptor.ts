@@ -37,7 +37,12 @@ export const rejectInterceptor = (
 		response: { status, data },
 	} = error;
 	const authData: AuthResponse = data as AuthResponse;
-
+	
+	if (status === 400 && authData.message) {
+    showToast({ type: "error", message: authData.message });
+    console.error("error", data);
+  }
+  
 	// 토큰 만료 시
 	if (status === 401) {
 		if (authData.message && authData.message === "만료된 토큰입니다.") {

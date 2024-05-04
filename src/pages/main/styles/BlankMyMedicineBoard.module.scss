@@ -1,0 +1,28 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	display: grid;
+	grid-template-columns: 2fr 4fr;
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+	}
+	.icons {
+		display: flex;
+		gap: 5px;
+	}
+	.text {
+		@include mixins.m-medium;
+	}
+	button {
+		background-color: #d3f5e7;
+		color: $main-green;
+		border-radius: 5px;
+		padding: 5px;
+		width: 80%;
+	}
+}
