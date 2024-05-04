@@ -5,13 +5,13 @@ import {
 } from "@/pages/userinfo/UI";
 import { checkTokenAndRedirectToHome, checkTokenAndRedirectToLogin } from "./loaders";
 
-import DetailMedicineById from "@/pages/detail";
 import { Fame } from "@/pages/fame";
 import { GoogleLogin } from "@/pages/login/UI/GoogleLogin";
 import { KakaoLogin } from "@/pages/login/UI/KakaoLogin";
 import Layout from "@/components/Layout";
 import LoginPage from "@/pages/login";
 import MainPage from "@pages/main";
+import MedicineDetail from "@/pages/detail";
 import MedicineSearch from "@/pages/search";
 import OnBoarding from "@/pages/onboarding";
 import PharmacyMap from "@/pages/map";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 			{ index: true, element: <OnBoarding /> },
 			{ path: routerpaths.HOME, element: <MainPage /> },
 			{ path: routerpaths.SEARCH, element: <MedicineSearch /> },
-			{ path: routerpaths.DETAILIDPAGE, element: <DetailMedicineById /> },
+			{ path: routerpaths.DETAILIDPAGE, element: <MedicineDetail /> },
 	    { path: routerpaths.LOGIN, element: <LoginPage />, loader: checkTokenAndRedirectToHome},
 			{ path: routerpaths.KAKAOLOGIN, element: <KakaoLogin /> },
 			{ path: routerpaths.GOOGLELOGIN, element: <GoogleLogin /> },

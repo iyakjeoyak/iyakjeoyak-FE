@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { TAPS_QUERIES } from '@/constants/TAPS';
 import Tag from '@/components/Tag';
-import ectQueryOptions from '@/api/etc'
+import ectQueryOptions from '@/api/common'
 import styles from '../styles/TagsModal.module.scss';
 import useGetURLSearch from '@/hooks/useGetURLSearch';
 import { useQuery } from '@tanstack/react-query';

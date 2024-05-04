@@ -1,10 +1,10 @@
-import {  useState } from "react";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
-import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import { queryClient } from "@/main";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function MedicineSearch() {
   const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);

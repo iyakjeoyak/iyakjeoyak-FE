@@ -1,5 +1,6 @@
-import { ToastPosition, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { ToastPosition, toast } from "react-toastify";
 
 type ToastOptions = {
 	position?: ToastPosition;

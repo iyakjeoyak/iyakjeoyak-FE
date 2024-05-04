@@ -1,8 +1,10 @@
 import { createContext, useContext } from "react";
 
+import { CurrentSortType } from "../UI/SortSelectRoot";
+
 interface SelectSortContextType {
-	handleCurrentSort: (sortOption: any) => void;
-	currentSort: any;
+	handleCurrentSort: (sortOption: CurrentSortType) => void;
+	currentSort: CurrentSortType;
 	isOpenOptionList: boolean;
 	toggleIsOpenOptionList: () => void;
 }

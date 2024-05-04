@@ -1,7 +1,7 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
 
-export const useObserver = ({
+export const useIntersectionObserver = ({
   target,
   onIntersect, 
   root = null,

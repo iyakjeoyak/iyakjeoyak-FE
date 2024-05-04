@@ -32,7 +32,7 @@ const ImgsInput = ()=>{
           />
         <label htmlFor="input-file">+</label>
       </div>
-      {imgs.map((img) => <img src={img} />)}
+      {imgs.map((img, index) => <img src={img} key={index} />)}
     </div>
   </Container>)
 }

@@ -2,6 +2,7 @@ import { SelectSortContext } from "../hooks/useSelectSort";
 import styles from "../styles/SortSelectRoot.module.scss";
 import { useState } from "react";
 
+export interface CurrentSortType {label: string, value: string};
 interface SortSelectRootProps {
 	children: React.ReactNode;
 	currentSort: any;

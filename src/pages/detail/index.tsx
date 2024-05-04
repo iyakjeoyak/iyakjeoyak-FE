@@ -1,12 +1,11 @@
 import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
+import { matchPath, useLocation, useNavigate } from "react-router-dom";
 
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import medicineQueryOptions from "@/api/medicine";
 import styles from "./index.module.scss";
-import useGetIdByLocation from "./hooks/useGetIdByLocation";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 const TAPS = [
@@ -20,12 +19,17 @@ const TAPS = [
 	},
 ];
 
-export default function DetailMedicineById() {
+export default function MedicineDetail() {
 	const navigate = useNavigate();
+  const { pathname } = useLocation();
 
 	const currentTapValue = useGetURLSearch("tap");
 
-  const id = useGetIdByLocation()
+  const matchResult = matchPath('/detail/:id', pathname);
+  
+  const id = Number(matchResult?.params.id);
+
+  if (!id) return;
   
   const {data: {
     isHeart,
@@ -50,10 +54,11 @@ export default function DetailMedicineById() {
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard name={name} isHeart={isHeart} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags} grade={grade} heartCount={heartCount} />
+				<MedicineCard name={name} isHeart={isHeart} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags.slice(0, 2)} grade={grade} heartCount={heartCount} />
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
-					{currentTapValue === "review" ? <ReviewBoard medicineId={medicineId} /> : <InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}
+					{currentTapValue === TAPS_QUERIES.REVIEW && <ReviewBoard medicineId={medicineId} />} 
+          {currentTapValue === TAPS_QUERIES.INFO || currentTapValue === null &&<InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}
 				</div>
 			</section>
 		</>
