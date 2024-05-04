@@ -49,10 +49,16 @@ declare global {
 const Map = ({}) => {
 	const [map, setMap] = useState<any>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
-	const [selectedPharmacy, setSelectedPharmacy] =
-		useState<null | PharmacyDetailType>(null);
-	const [_, setMarkers] = useState<naver.maps.Marker[]>([]);
-	const { setShowModal, showModal, toggleModal } = usePharmacy();
+	// const [selectedPharmacy, setSelectedPharmacy] =
+	// 	useState<null | PharmacyDetailType>(null);
+	const [marker, setMarkers] = useState<naver.maps.Marker[]>([]);
+	const {
+		setShowModal,
+		showModal,
+		toggleModal,
+		selectedPharmacy,
+		setSelectedPharmacy,
+	} = usePharmacy();
 	const [pharmacyData, setPharmacyData] = useState<any>();
 
 	// 맵 가져오기
@@ -67,8 +73,9 @@ const Map = ({}) => {
 	const handleMarkerClick = (pharmacy: Pharmacy) => {
 		getPharmacyDetail(pharmacy.hpid)
 			.then((detailData) => {
+				// console.log(detailData);
 				setSelectedPharmacy(detailData);
-				setShowModal(true);
+				toggleModal();
 			})
 			.catch((error) => {
 				console.error("지도를 가져오는데 실패했습니다.", error);
@@ -76,9 +83,9 @@ const Map = ({}) => {
 	};
 
 	useEffect(() => {
-		if (selectedPharmacy) {
-			setShowModal(true);
+		if (selectedPharmacy && selectedPharmacy) {
 			console.log(showModal, "나옴?");
+			console.log(selectedPharmacy, "그래서 이름 나오냐고");
 		}
 	}, [selectedPharmacy, showModal]);
 
@@ -142,7 +149,7 @@ const Map = ({}) => {
 				{ enableHighAccuracy: true },
 			);
 		}
-	}, [mapReady, map, showModal]);
+	}, [mapReady, map]);
 
 	useEffect(() => {
 		if (map) {
@@ -168,12 +175,12 @@ const Map = ({}) => {
 				updateMarkers(currentMarkers),
 			);
 		}
-	}, [map, showModal]);
+	}, [map]);
 
 	return (
 		<>
 			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-			<MapDetail />
+			{showModal && selectedPharmacy && <MapDetail />}
 		</>
 	);
 };
