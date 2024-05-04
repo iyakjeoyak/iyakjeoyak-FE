@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
 			refetchOnWindowFocus: false,
 			retry: false,
 			staleTime: 0,
-      gcTime:0,
+			gcTime: 0,
 		},
 		mutations: {},
 	},
@@ -49,7 +49,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<QueryClientProvider client={queryClient}>
 					<App />
 					<ToastContainer />
-					<ReactQueryDevtools initialIsOpen={false} position="bottom" />;
+					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</QueryClientProvider>
 			</Suspense>
 		</ErrorBoundary>

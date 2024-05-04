@@ -10,15 +10,17 @@
 
 import { useEffect, useState } from "react";
 import { MapProps, Pharmacy } from "../mapTypes";
-import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import createMarker from "../utils/createMarker";
+import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import setDefaultMap from "../utils/setDefaultMap";
-import { loadScript } from "../utils/loadScript";
 import { setGelocationMap } from "../utils/setGelocationMap";
+import { loadScript } from "../utils/loadScript";
 import getPharmacyDetail, {
 	PharmacyDetailType,
 } from "@/api/map/getPharmacyDetail";
 import MapDetail from "./MapDetail";
+import { usePharmacy } from "../utils/mapDetailContext";
+import { PharmacyProvider } from "../utils/mapDetailProvider";
 
 declare global {
 	interface Window {
@@ -26,35 +28,33 @@ declare global {
 	}
 }
 
+interface Markers {
+	[key: string]: naver.maps.Marker;
+}
 // 1. 맵 스크립트 로드하기 (done)
 // 2. api 요청 시 반경 내 약국을 마커로 찍어줌 (done)
-// 3. 마커를 누르면 상세 약국 정보를 볼 수 있음 -> api 나오면 ~~~  모달로 띄워둠 (done)
+// 3. 마커를 누르면 상세 약국 정보를 볼 수 있음 -> 모달로 띄워둠 (done)
+
+// 해야할 것 & 체크할 거
 // 모달 상태 업데이트 처리...
+// 화면 이동하면 기존의 마커는 지워지게
+// 선택하면 페이지에서 정보 보여주고
+// 한번 더 누르면 모달을 띄우자!
+
 // 4. 관심 약국으로 추가/ 삭제 가능
 // 5. 추가된 관심 약국은 다음에 스크립트 로드 후 바로 불러와서 띄워주기
-// 6. 약국 주소로 검색 하는 기능
+// 6. 약국 이름으로 검색 하는 기능
+
 const Map = ({ pharmacies }: MapProps) => {
 	const [map, setMap] = useState<any>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
 	const [selectedPharmacy, setSelectedPharmacy] =
 		useState<null | PharmacyDetailType>(null);
-	const [activeMarker, setActiveMarker] = useState<null | naver.maps.Marker>(
-		null,
-	);
+	const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
+	const { setShowModal, showModal } = usePharmacy();
+	const [pharmacyData, setPharmacyData] = useState<any>();
 
-	const handleMarkerClick = async (
-		pharmacy: Pharmacy,
-		marker: naver.maps.Marker,
-	) => {
-		try {
-			const detailData = await getPharmacyDetail(pharmacy.hpid);
-			setSelectedPharmacy(detailData);
-			setActiveMarker(marker);
-		} catch (error) {
-			console.error("약국 상세 정보 조회 실패", error);
-		}
-	};
-
+	// 맵 가져오기
 	useEffect(() => {
 		const cleanup = loadScript(
 			() => setMapReady(true),
@@ -63,30 +63,50 @@ const Map = ({ pharmacies }: MapProps) => {
 		return cleanup;
 	}, []);
 
+	const handleMarkerClick = (pharmacy: Pharmacy, marker: naver.maps.Marker) => {
+		getPharmacyDetail(pharmacy.hpid)
+			.then((detailData) => {
+				setSelectedPharmacy(detailData);
+				setShowModal(true);
+			})
+			.catch((error) => {
+				console.error("지도를 가져오는데 실패했습니다.");
+			});
+	};
+
+	useEffect(() => {
+		if (selectedPharmacy) {
+			setShowModal(showModal);
+		}
+	}, [selectedPharmacy, showModal]);
+
 	useEffect(() => {
 		if (mapReady && !map) {
 			// 사용자 위치 가져오고 주변 약국 및 마커 생성
 			navigator.geolocation.getCurrentPosition(
 				async (position) => {
-					const latitude = position.coords.latitude;
-					const longitude = position.coords.longitude;
+					const { latitude, longitude } = position.coords;
 
 					await setGelocationMap(latitude, longitude, (newMap, response) => {
 						setMap(newMap);
-
-						// newMap
-						// 	.getElement()
-						// 	.addEventListener("wheel", (event) => {}, { passive: true });
+						const newMarkers: naver.maps.Marker[] = [];
+						setPharmacyData(response.data);
 						if (response.data) {
 							response.data.forEach((pharmacy: PharmacyMapType) => {
-								const pharmacyData: Pharmacy = {
+								const formatData: Pharmacy = {
 									lat: pharmacy.latitude,
 									lng: pharmacy.longitude,
 									name: pharmacy.dutyName,
 									hpid: pharmacy.hpid,
 								};
-								createMarker(pharmacyData, newMap, handleMarkerClick);
+
+								// createMarker(pharmacyData, newMap, handleMarkerClick);
+								const marker = createMarker(formatData, newMap, () =>
+									handleMarkerClick(formatData, marker),
+								);
+								newMarkers.push(marker);
 							});
+							setMarkers(newMarkers);
 						}
 					});
 				},
@@ -96,10 +116,7 @@ const Map = ({ pharmacies }: MapProps) => {
 					const defaultLng = 127.105399;
 					await setGelocationMap(defaultLat, defaultLng, (newMap, response) => {
 						setMap(newMap);
-						// newMap
-						// 	.getElement()
-						// 	.addEventListener("wheel", (event) => {}, { passive: true });
-
+						const newMarkers: naver.maps.Marker[] = [];
 						if (response.data) {
 							response.data.forEach((pharmacy: PharmacyMapType) => {
 								const pharmacyData: Pharmacy = {
@@ -108,24 +125,54 @@ const Map = ({ pharmacies }: MapProps) => {
 									name: pharmacy.dutyName,
 									hpid: pharmacy.hpid,
 								};
-
-								createMarker(pharmacyData, newMap, handleMarkerClick);
+								const marker = createMarker(
+									pharmacyData,
+									newMap,
+									handleMarkerClick,
+								);
+								newMarkers.push(marker);
 							});
+							setMarkers(newMarkers);
 						}
 					});
 				},
 				{ enableHighAccuracy: true },
 			);
 		}
-	}, [mapReady, pharmacies, map, activeMarker, selectedPharmacy]);
+	}, [mapReady, map]);
+
+	useEffect(() => {
+		if (map) {
+			const updateMarkers = (currentMarkers: naver.maps.Marker[]) => {
+				const mapBounds = map.getBounds();
+				const newMarker = currentMarkers.map((marker) => {
+					const isVisible = mapBounds.hasLatLng(marker.getPosition());
+					marker.setVisible(isVisible);
+					return marker;
+				});
+				setMarkers(newMarker);
+			};
+
+			const currentMarkers = pharmacyData.map((pharmacy: Pharmacy) =>
+				createMarker(pharmacy, map, handleMarkerClick),
+			);
+			updateMarkers(currentMarkers);
+
+			naver.maps.Event.addListener(map, "zoom_changed", () =>
+				updateMarkers(currentMarkers),
+			);
+			naver.maps.Event.addListener(map, "dragend", () =>
+				updateMarkers(currentMarkers),
+			);
+		}
+	}, [map]);
 
 	return (
 		<>
-			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-			{/* <button onClick={() => InitMap(pharmacies)}>Load My Location</button> */}
-			{selectedPharmacy && activeMarker && (
-				<MapDetail marker={activeMarker} detailData={selectedPharmacy} />
-			)}
+			<PharmacyProvider>
+				<div id="map" style={{ width: "100%", height: "80vh" }}></div>
+				{showModal && <MapDetail />}
+			</PharmacyProvider>
 		</>
 	);
 };

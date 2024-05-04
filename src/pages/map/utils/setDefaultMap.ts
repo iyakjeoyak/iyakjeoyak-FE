@@ -5,7 +5,7 @@ export default function setDefaultMap() {
 		center: new window.naver.maps.LatLng(defaultLat, defaultLng),
 		scrollWheel: true,
 		draggable: true,
-		zoom: 15,
+		zoom: 10,
 	};
 
 	const map = new window.naver.maps.Map("map", mapOptions);
