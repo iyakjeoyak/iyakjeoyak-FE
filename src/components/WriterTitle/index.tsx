@@ -1,5 +1,3 @@
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-
 import { ReviewWriterType } from "@/types";
 import StarRating from "../StarRating";
 import styles from "./index.module.scss";

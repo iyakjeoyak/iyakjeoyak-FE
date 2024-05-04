@@ -1,11 +1,11 @@
 import "@styles/global.scss";
 
+import Modal from "@/components/Modal";
+import { ReviewDetailModal } from "@/pages/detail/UI";
 import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../../style/reviewdisplay.module.scss";
-import Modal from "@/components/Modal";
 import { useModal } from "@/components/Modal/hooks/useModal";
-import { ReviewDetailModal } from "@/pages/detail/UI";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 	const { toggleModalOpen } = useModal();
@@ -43,7 +43,7 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 				}
 			/>
 			<Modal.Content>
-				<ReviewDetailModal />
+				<ReviewDetailModal reviewId={1} />
 			</Modal.Content>
 		</Modal>
 	);

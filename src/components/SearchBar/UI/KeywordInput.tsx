@@ -4,7 +4,7 @@ import { useSelect } from "../hooks/useSelect";
 
 interface KeywordInputProps {
 	placeholder: string;
-	onChange: (keyword: string) => Promise<void>;
+	onChange: (keyword: string) => Promise<void> | string[];
 	onClick: (keyword: string) => void;
 }
 

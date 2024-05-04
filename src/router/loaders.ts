@@ -1,7 +1,8 @@
+import { getAccessToken } from "@/utils/getToken";
 import { redirect } from "react-router-dom";
 
 export function checkTokenAndRedirectToHome() {
-  const token = localStorage.getItem('token');
+  const token = getAccessToken();
 
   if (token) {
     return redirect('/home');
@@ -11,10 +12,10 @@ export function checkTokenAndRedirectToHome() {
 }
 
 export function checkTokenAndRedirectToLogin() {
-  const token = localStorage.getItem('token');
+  const token = getAccessToken();
 
   if (!token) {
-    return redirect('/home');
+    return redirect('/login');
   }
   
   return null;

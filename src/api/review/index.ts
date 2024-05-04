@@ -1,8 +1,7 @@
-import postReview, { PostReviewBody } from "./postReview";
-
 import getBestReview from "./getBestReview";
 import getReviewById from "./getReviewById";
 import getReviewsByMedicineId from "./getReviewsByMedicineId";
+import postReview from "./postReview";
 import { queryOptions } from "@tanstack/react-query";
 
 const reviewQueryOptions = {
@@ -41,7 +40,7 @@ const reviewQueryOptions = {
 				modifiedDate: "",
 			},
 		}),
-	postReview: ({ body }: { body: PostReviewBody }) =>
+	postReview: ({ body }: { body: FormData }) =>
 		queryOptions({
 			queryKey: ["review", "postReview"],
 			queryFn: () => postReview({ body }),
