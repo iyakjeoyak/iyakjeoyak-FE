@@ -9,7 +9,7 @@
 // 3. 저장하기 버튼으로 post요청, 삭제로 delete 요청
 
 import { useEffect, useState } from "react";
-import { MapProps, Pharmacy } from "../mapTypes";
+import { Pharmacy } from "../mapTypes";
 import createMarker from "../utils/createMarker";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import setDefaultMap from "../utils/setDefaultMap";
@@ -28,9 +28,9 @@ declare global {
 	}
 }
 
-interface Markers {
-	[key: string]: naver.maps.Marker;
-}
+// interface Markers {
+// 	[key: string]: naver.maps.Marker;
+// }
 // 1. 맵 스크립트 로드하기 (done)
 // 2. api 요청 시 반경 내 약국을 마커로 찍어줌 (done)
 // 3. 마커를 누르면 상세 약국 정보를 볼 수 있음 -> 모달로 띄워둠 (done)
@@ -45,12 +45,12 @@ interface Markers {
 // 5. 추가된 관심 약국은 다음에 스크립트 로드 후 바로 불러와서 띄워주기
 // 6. 약국 이름으로 검색 하는 기능
 
-const Map = ({ pharmacies }: MapProps) => {
+const Map = ({}) => {
 	const [map, setMap] = useState<any>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
 	const [selectedPharmacy, setSelectedPharmacy] =
 		useState<null | PharmacyDetailType>(null);
-	const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
+	const [_, setMarkers] = useState<naver.maps.Marker[]>([]);
 	const { setShowModal, showModal } = usePharmacy();
 	const [pharmacyData, setPharmacyData] = useState<any>();
 
@@ -63,14 +63,14 @@ const Map = ({ pharmacies }: MapProps) => {
 		return cleanup;
 	}, []);
 
-	const handleMarkerClick = (pharmacy: Pharmacy, marker: naver.maps.Marker) => {
+	const handleMarkerClick = (pharmacy: Pharmacy) => {
 		getPharmacyDetail(pharmacy.hpid)
 			.then((detailData) => {
 				setSelectedPharmacy(detailData);
 				setShowModal(true);
 			})
 			.catch((error) => {
-				console.error("지도를 가져오는데 실패했습니다.");
+				console.error("지도를 가져오는데 실패했습니다.", error);
 			});
 	};
 
@@ -102,7 +102,7 @@ const Map = ({ pharmacies }: MapProps) => {
 
 								// createMarker(pharmacyData, newMap, handleMarkerClick);
 								const marker = createMarker(formatData, newMap, () =>
-									handleMarkerClick(formatData, marker),
+									handleMarkerClick(formatData),
 								);
 								newMarkers.push(marker);
 							});
@@ -111,6 +111,7 @@ const Map = ({ pharmacies }: MapProps) => {
 					});
 				},
 				async (error) => {
+					console.log(error, "위치를 가져오지 못했습니다.");
 					// 사용자 위치 못가져오면 기본 위치로 요청
 					const defaultLat = 37.3595704;
 					const defaultLng = 127.105399;

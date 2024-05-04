@@ -1,5 +1,5 @@
-@use "@styles/global"as *;
-@use "@styles/mixin"as mixins;
+@use "@styles/global" as *;
+@use "@styles/mixin" as mixins;
 @import "@styles/variables";
 @import "@/components/ModalContainer/index.module.scss";
 
@@ -25,23 +25,20 @@
 		font-size: 7rem;
 	}
 
-    & svg {
-      font-size: 14rem;
-    }
+	& svg {
+		font-size: 14rem;
+	}
+}
 
-  }
+.imgCon {
+	width: 70rem;
+	height: 70rem;
+	border-radius: 100%;
+	overflow: hidden;
+	background-color: $gray3;
 
-  .imgCon {
-    width: 70rem;
-    height: 70rem;
-    border-radius: 100%;
-    overflow: hidden;
-    background-color: $gray3;
-
-    @include mixins.responsive("tablet") {
-      width: 50rem;
-      height: 50rem;
-    }
-
-  }
+	@include mixins.responsive("tablet") {
+		width: 50rem;
+		height: 50rem;
+	}
 }
