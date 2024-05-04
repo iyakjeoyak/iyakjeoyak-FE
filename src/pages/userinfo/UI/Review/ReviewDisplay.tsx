@@ -3,8 +3,8 @@ import "@styles/global.scss";
 import { DetailedReview } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../../style/reviewdisplay.module.scss";
-import Modal from "@/components/Modal";
 import { useModal } from "@/components/Modal/hooks/useModal";
+import Modal from "@/components/Modal";
 import { ReviewDetailModal } from "@/pages/detail/UI";
 
 const ReviewDisplay = ({ review }: { review: DetailedReview }) => {

@@ -1,21 +1,22 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
+import { getAccessToken } from "@/utils/getToken";
+import { logout } from "@/utils/logout";
+import { routerpaths } from "@/utils/pathName";
 import styles from "./Nav.module.scss";
 import { useNavigate } from "react-router-dom";
-import { routerpaths } from "@/utils/pathName";
 
 const MAIN_NAVS = [
-	{ name: "홈", to: routerpaths.HOME },
-	{ name: "약 조회하기", to: routerpaths.SEARCH },
-	{ name: "명예의 전당", to: routerpaths.FAME },
-	{ name: "근처 약국", to: routerpaths.MAP },
-	{ name: "마이 페이지", to: routerpaths.USERINFO },
+	{ name: "홈", to: routerpaths.HOME, requiresToken: false },
+	{ name: "약 조회하기", to: routerpaths.SEARCH, requiresToken: false },
+	{ name: "명예의 전당", to: routerpaths.FAME, requiresToken: false },
+	{ name: "근처 약국", to: routerpaths.MAP, requiresToken: false },
 ];
 
 const SUB_NAVS = [
-	{ name: "로그인", to: routerpaths.LOGIN },
-	{ name: "회원가입", to: routerpaths.SIGNUP },
-	{ name: "마이페이지", to: routerpaths.USERINFO },
+	{ name: "로그인", to: routerpaths.LOGIN, requiresToken: false },
+	{ name: "회원가입", to: routerpaths.SIGNUP, requiresToken: false },
+	{ name: "마이페이지", to: routerpaths.USERINFO, requiresToken: true },
 ];
 
 export default function Nav({
@@ -25,6 +26,8 @@ export default function Nav({
 }) {
 	const navigator = useNavigate();
 
+  const token = getAccessToken();
+  
 	return (
     <LazyMotion features={domAnimation}>
       <m.nav
@@ -51,7 +54,12 @@ export default function Nav({
         </div>
         <div className={styles["sub-nav-container"]}>
           <div className={styles["divide"]} />
-          {SUB_NAVS.map((navItem) => (
+          {SUB_NAVS.map((navItem) => {
+            if (navItem.requiresToken && !token) return;
+            
+            if (!navItem.requiresToken && token) return;
+            
+            return (
             <m.button
               key={navItem.name}
               className={styles["sub-nav-item"]}
@@ -63,7 +71,10 @@ export default function Nav({
             >
               {navItem.name}
             </m.button>
-          ))}
+            )
+            })
+          }
+          {token && <m.button onClick={logout}  className={styles["sub-nav-item"]}>로그아웃</m.button>}
         </div>
       </m.nav>
     </LazyMotion>

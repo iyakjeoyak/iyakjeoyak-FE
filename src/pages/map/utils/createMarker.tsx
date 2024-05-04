@@ -1,4 +1,8 @@
+// import Marker from "../UI/Marker";
+
 import { Pharmacy } from "../mapTypes";
+
+// import ReactDOM from "react";
 
 // export default function createMarker(
 // 	pharmacy: Pharmacy,

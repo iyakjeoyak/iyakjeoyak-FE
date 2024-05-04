@@ -8,19 +8,20 @@
 // 2. 사용자는 지도 상의 마커를 클릭해 데이터 조회 가능
 // 3. 저장하기 버튼으로 post요청, 삭제로 delete 요청
 
-import { useEffect, useState } from "react";
 import { Pharmacy } from "../mapTypes";
-import createMarker from "../utils/createMarker";
-import { PharmacyMapType } from "@/api/map/getPharmacyData";
-import setDefaultMap from "../utils/setDefaultMap";
-import { setGelocationMap } from "../utils/setGelocationMap";
-import { loadScript } from "../utils/loadScript";
 import getPharmacyDetail, {
 	PharmacyDetailType,
 } from "@/api/map/getPharmacyDetail";
+import { useEffect, useState } from "react";
+
 import MapDetail from "./MapDetail";
-import { usePharmacy } from "../utils/mapDetailContext";
+import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import { PharmacyProvider } from "../utils/mapDetailProvider";
+import createMarker from "../utils/createMarker";
+import { loadScript } from "../utils/loadScript";
+import setDefaultMap from "../utils/setDefaultMap";
+import { setGelocationMap } from "../utils/setGelocationMap";
+import { usePharmacy } from "../utils/mapDetailContext";
 
 declare global {
 	interface Window {
