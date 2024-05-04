@@ -8,7 +8,7 @@
 // 2. 사용자는 지도 상의 마커를 클릭해 데이터 조회 가능
 // 3. 저장하기 버튼으로 post요청, 삭제로 delete 요청
 
-import { MapProps, Pharmacy } from "../mapTypes";
+import { Pharmacy } from "../mapTypes";
 import getPharmacyDetail, {
 	PharmacyDetailType,
 } from "@/api/map/getPharmacyDetail";
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 import MapDetail from "./MapDetail";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
-import { PharmacyProvider } from "../utils/mapDetailProvider";
+import { PharmacyProvider } from "../utils/PharmacyContext";
 import createMarker from "../utils/createMarker";
 import { loadScript } from "../utils/loadScript";
 import setDefaultMap from "../utils/setDefaultMap";
@@ -46,15 +46,13 @@ declare global {
 // 5. 추가된 관심 약국은 다음에 스크립트 로드 후 바로 불러와서 띄워주기
 // 6. 약국 이름으로 검색 하는 기능
 
-const Map = ({ pharmacies }: MapProps) => {
-  console.log(pharmacies);
+const Map = ({}) => {
 	const [map, setMap] = useState<any>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
 	const [selectedPharmacy, setSelectedPharmacy] =
 		useState<null | PharmacyDetailType>(null);
-	const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
-  console.log(markers);
-	const { setShowModal, showModal } = usePharmacy();
+	const [_, setMarkers] = useState<naver.maps.Marker[]>([]);
+	const { setShowModal, showModal, toggleModal } = usePharmacy();
 	const [pharmacyData, setPharmacyData] = useState<any>();
 
 	// 맵 가져오기
@@ -66,12 +64,11 @@ const Map = ({ pharmacies }: MapProps) => {
 		return cleanup;
 	}, []);
 
-	const handleMarkerClick = (pharmacy: Pharmacy, marker: naver.maps.Marker) => {
+	const handleMarkerClick = (pharmacy: Pharmacy) => {
 		getPharmacyDetail(pharmacy.hpid)
 			.then((detailData) => {
 				setSelectedPharmacy(detailData);
 				setShowModal(true);
-        console.log(marker);
 			})
 			.catch((error) => {
 				console.error("지도를 가져오는데 실패했습니다.", error);
@@ -80,7 +77,8 @@ const Map = ({ pharmacies }: MapProps) => {
 
 	useEffect(() => {
 		if (selectedPharmacy) {
-			setShowModal(showModal);
+			setShowModal(true);
+			console.log(showModal, "나옴?");
 		}
 	}, [selectedPharmacy, showModal]);
 
@@ -106,7 +104,7 @@ const Map = ({ pharmacies }: MapProps) => {
 
 								// createMarker(pharmacyData, newMap, handleMarkerClick);
 								const marker = createMarker(formatData, newMap, () =>
-									handleMarkerClick(formatData, marker),
+									handleMarkerClick(formatData),
 								);
 								newMarkers.push(marker);
 							});
@@ -114,7 +112,8 @@ const Map = ({ pharmacies }: MapProps) => {
 						}
 					});
 				},
-				async () => {
+				async (error) => {
+					console.log(error, "위치를 가져오지 못했습니다.");
 					// 사용자 위치 못가져오면 기본 위치로 요청
 					const defaultLat = 37.3595704;
 					const defaultLng = 127.105399;
@@ -143,7 +142,7 @@ const Map = ({ pharmacies }: MapProps) => {
 				{ enableHighAccuracy: true },
 			);
 		}
-	}, [mapReady, map]);
+	}, [mapReady, map, showModal]);
 
 	useEffect(() => {
 		if (map) {
@@ -169,14 +168,12 @@ const Map = ({ pharmacies }: MapProps) => {
 				updateMarkers(currentMarkers),
 			);
 		}
-	}, [map]);
+	}, [map, showModal]);
 
 	return (
 		<>
-			<PharmacyProvider>
-				<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-				{showModal && <MapDetail />}
-			</PharmacyProvider>
+			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
+			<MapDetail />
 		</>
 	);
 };

@@ -10,7 +10,9 @@ const ReviewHistory: React.FC = () => {
 	if (reviews.length > 0) {
 		return (
 			<FlexBox>
-				<ReviewDisplay reviews={reviews} />
+				{reviews.map((reviewItem) => (
+					<ReviewDisplay review={reviewItem} key={reviewItem.reviewId} />
+				))}
 			</FlexBox>
 		);
 	}

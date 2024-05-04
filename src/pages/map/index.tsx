@@ -1,8 +1,13 @@
 import { Map } from "./UI";
-import { likedPharmacies } from "./utils/pharmacyMock";
+import { PharmacyProvider } from "./utils/PharmacyContext";
+// import { likedPharmacies } from "./utils/pharmacyMock";
 
 const PharmacyMap = () => {
-	return <Map pharmacies={likedPharmacies} />;
+	return (
+		<PharmacyProvider>
+			<Map />
+		</PharmacyProvider>
+	);
 };
 
 export default PharmacyMap;

@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { SupplementInfo } from "../../userInfoType";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
+import { useState } from "react";
+import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
 
 const supplementValidationSchema = yup.object().shape({
 	name: yup.string().required("Name is required"),
@@ -29,14 +31,19 @@ const SupplementEditForm = ({
 	onSubmit,
 }: SupplementEditFormProps) => {
 	const navigate = useNavigate();
+	const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
 	};
 
-	const handleGetAutoCompleteResults = (keyword: string) => {
-		console.log(keyword, "결과 요청");
-		const result = ["리", "리액", "리액트"];
-		return result;
+	const handleGetAutoCompleteResults = async (keyword: string) => {
+		if (keyword.length <= 0) {
+			setKeywordSearchResult([]);
+			return;
+		}
+		const response = await getAutoCompleteResult({ keyword });
+		setKeywordSearchResult(response);
 	};
 
 	return (
@@ -56,7 +63,7 @@ const SupplementEditForm = ({
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
 				/>
-				<SearchBar.SearchResultList />
+				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
 
