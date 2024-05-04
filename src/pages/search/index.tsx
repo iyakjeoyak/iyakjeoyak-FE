@@ -1,54 +1,53 @@
+import {  useState } from "react";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
-import { TAPS_QUERIES } from "@/constants/TAPS";
-import TapBar from "@/components/TapBar";
+import TagsModal from "./UI/TagsModal";
+import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import { queryClient } from "@/main";
 import { useNavigate } from "react-router-dom";
 
-const TAPS = [
-	{
-		label: "전체",
-		value: TAPS_QUERIES.ALL,
-	},
-	{
-		label: "기능별",
-		value: TAPS_QUERIES.FEATURE,
-	},
-	{
-		label: "성능별",
-		value: TAPS_QUERIES.FUNCTION,
-	},
-];
-
 export default function MedicineSearch() {
+  const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
+  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+
 	const navigate = useNavigate();
 
-	const handleTapClick = (tapValue: string) => {
-		navigate(`/search?tap=${tapValue}`);
-	};
-
 	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
+    navigate(`/search?keyword=${keyword}`);
+    setKeywordSearchResult([]);
 	};
 
-	const handleGetAutoCompleteResults = (keyword: string) => {
-		console.log(keyword, "결과 요청");
-		const result = ["리", "리액", "리액트"];
-		return result;
+	const handleGetAutoCompleteResults = async (keyword: string) => {
+    if (keyword.length <= 0) {
+      setKeywordSearchResult([]);
+      return;
+    }
+		const response = await getAutoCompleteResult({keyword});
+		setKeywordSearchResult(response);
 	};
 
+  
+  const toggleIsTagsModalOpen = () =>{
+    setIsTagsModalOpen((prev)=>!prev)
+    // 모달이 닫힐때만 데이터를 비워줌
+    if (isTagsModalOpen) queryClient.resetQueries({queryKey:['medicine', 'medicines']});
+  }
+  
 	return (
+    <>
+    {isTagsModalOpen && <TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>}
 		<section>
 			<SearchBar>
 				<SearchBar.KeywordInput
 					placeholder="검색어를 입력해주세요"
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
-				/>
-				<SearchBar.SearchResultList />
-				<SearchBar.SelectedKeywordTagsList />
+          />
+				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
+				<SearchBar.SelectedKeywordTagsList  />
 			</SearchBar>
-			<TapBar taps={TAPS} onClick={handleTapClick} />
-			<MedicineCardList />
+			<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>
 		</section>
+  </>
 	);
 }

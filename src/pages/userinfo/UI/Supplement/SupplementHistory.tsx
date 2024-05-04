@@ -4,28 +4,47 @@ import { supplementRecords } from "../../mockData";
 import ListIcon from "../../assets/ListIcon";
 import CommonCardBox from "../CommonCardBox";
 import style from "../../style/supplementhistory.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
+import Modal from "@/components/Modal";
+import { SupplementInfo } from "../../userInfoType";
+import SupplementModal from "./SupplementModal";
+import SupplementEditForm from "./SupplementEditForm";
+
+const noSupplementData = {
+	mySupplementId: 0,
+	name: "",
+	dosage: "",
+	dueDate: "",
+	effect: [],
+	memo: "",
+	img: "",
+};
 
 const SupplementHistory = () => {
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
-	// const [isAddModalOpen, setIsAddModal] = useState(false);
-	// const [isEditModalOpen, setIsEditModal] = useState(false);
+	const [selectedSupplement, setSelectedSupplement] =
+		useState<SupplementInfo | null>(null);
 
-	const supplemenRecordtdata = supplementRecords.mySupplements;
+	const supplemenRecorddata = supplementRecords.mySupplements;
 	const count = supplementRecords.mySupplements.length;
 
 	const onChangeCardStyle = () => {
 		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
 	};
 
-	// const openAddModal = () => {
-	// 	setIsAddModal((prev) => !prev);
-	// };
+	const handleCardClick = (supplement: SupplementInfo) => {
+		setSelectedSupplement(supplement);
+	};
 
-	// const openEditModal = () => {
-	// 	setIsEditModal((prev) => !prev);
-	// };
+	const handleSubmmit = () => {
+		console.log("폼 제출");
+	};
+
+	console.log(selectedSupplement);
+	useEffect(() => {
+		console.log("state 변화");
+	}, [selectedSupplement]);
 
 	return (
 		<section className={style.userSupplementContainer}>
@@ -36,20 +55,39 @@ const SupplementHistory = () => {
 				onClick={onChangeCardStyle}
 				className={style.header}
 			/>
-			<div className={`${style.cardGrid} ${style[cardForm]}`}>
-				{supplemenRecordtdata.map((cardInfo, index) => (
-					<CommonCardBox
-						key={index} // 이후에 item id로 수정
-						form={cardForm}
-						// onClick={openEditModal}
-						{...cardInfo}
-					/>
-				))}
-				<CommonCardBox
-					// onClick={openAddModal}
-					form={cardForm}
+
+			<Modal>
+				<Modal.Trigger
+					openElement={
+						<div className={`${style.cardGrid} ${style[cardForm]}`}>
+							{supplemenRecorddata.map((cardInfo, mySupplementId) => (
+								<CommonCardBox
+									key={mySupplementId}
+									form={cardForm}
+									onClick={() => handleCardClick(cardInfo)}
+									{...cardInfo}
+								/>
+							))}
+						</div>
+					}
 				/>
-			</div>
+
+				<Modal.Content>
+					{selectedSupplement && (
+						<SupplementModal itemId={selectedSupplement.mySupplementId} />
+					)}
+				</Modal.Content>
+			</Modal>
+
+			<Modal>
+				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
+				<Modal.Content>
+					<SupplementEditForm
+						formInitialValues={noSupplementData}
+						onSubmit={handleSubmmit}
+					/>
+				</Modal.Content>
+			</Modal>
 		</section>
 	);
 };

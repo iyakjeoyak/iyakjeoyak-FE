@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from "react";
 import Container from "../Container";
+import { InputHTMLAttributes } from "react";
 import styles from "./index.module.scss";
 import { useFormContext } from "react-hook-form";
 
@@ -21,12 +21,14 @@ export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 	className,
 	placeholder,
 	title,
-	type = "text",
+  type = "text",
+  ...props
 }: InputProps<T>) => {
 	const { register } = useFormContext();
 	return (
 		<Container title={title} name={name as keyof T}>
-			<input
+      <input
+        {...props}
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록
 				placeholder={placeholder}

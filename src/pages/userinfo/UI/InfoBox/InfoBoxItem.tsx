@@ -12,7 +12,7 @@ function InfoBoxItem({ items }: ItemProps): JSX.Element {
 	}
 	return (
 		<div>
-			{items.map((item, index) => (
+			{items.slice(0, 3).map((item, index) => (
 				<div key={index} className={style.sectionBox}>
 					{"date" in item && (
 						<div className={style.sectionName}>{item.date}</div>

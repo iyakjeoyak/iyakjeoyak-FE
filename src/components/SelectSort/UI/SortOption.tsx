@@ -6,11 +6,12 @@ interface SortOptionProps {
 }
 
 export default function SortOption({ label, value }: SortOptionProps) {
-	const { handleCurrentSortValue, toggleIsOpenOptionList } = useSelectSort();
+	const { handleCurrentSort, toggleIsOpenOptionList } = useSelectSort();
+  
 	return (
 		<div
 			onClick={() => {
-				handleCurrentSortValue(value);
+				handleCurrentSort({label, value});
 				toggleIsOpenOptionList();
 			}}
 		>

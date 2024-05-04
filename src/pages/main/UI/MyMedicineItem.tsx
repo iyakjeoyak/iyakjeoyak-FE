@@ -1,8 +1,27 @@
+// import { MedicineItemType } from "@/types";
+
 import { calculateDday } from "../utils";
 import styles from "../styles/MyMedicineItem.module.scss";
 import { useState } from "react";
 
-export default function MyMedicineItem() {
+// interface MyMedicineItem extends MedicineItemType{
+interface MyMedicineItem {
+  isBlank?: boolean;
+}
+
+export default function MyMedicineItem({isBlank = false}:MyMedicineItem) {
+  if (isBlank){
+    return 	<div
+    className={styles.container}
+  >
+    <div className={styles.top}></div>
+    <div className={styles.bottom}>
+      <div className={styles.name}></div>
+      <div className={styles.feature}></div>
+    </div>
+  </div>
+  }
+  
 	const [isItemHovered, setIsItemHovered] = useState(false);
 
 	const today = new Date();
@@ -22,6 +41,7 @@ export default function MyMedicineItem() {
 			</div>
 		);
 	}
+ 
 	return (
 		<div
 			className={styles.container}

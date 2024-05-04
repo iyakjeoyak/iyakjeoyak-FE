@@ -1,20 +1,11 @@
-import { AxiosError } from "axios";
-import { ReviewItemType } from "@/types";
+import { ResponsePagenation, ReviewItemType } from "@/types";
+
 import axios from "../axiosConfig";
 
-export default async function getReviewsByMedicineId({
-	medicineId,
-}: {
-	medicineId: number;
-}) {
-	try {
-		return await axios.get<{ content: ReviewItemType[] }>(
-			`/reviews/${medicineId}`,
+export default async function getReviewsByMedicineId({queryParams}:{queryParams: string}) {
+
+		const response = await axios.get<ResponsePagenation<ReviewItemType>>(
+			`/review${(queryParams)}`,
 		);
-	} catch (err) {
-		if (err instanceof AxiosError) {
-			console.error(err);
-			return err.response;
-		}
-	}
+    return response.data;
 }

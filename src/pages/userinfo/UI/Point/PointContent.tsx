@@ -6,7 +6,7 @@ interface UserPointInfoProps {
 	onNavigate: () => void;
 }
 
-const PointContent: React.FC<UserPointInfoProps> = ({ points, onNavigate }) => {
+const PointContent = ({ points, onNavigate }: UserPointInfoProps) => {
 	return (
 		<section className={style.myPageContent}>
 			<section className={style.pointSection}>

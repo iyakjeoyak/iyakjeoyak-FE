@@ -1,20 +1,27 @@
-import { BestReviewBoard, MyMedicineBoard, PickedMedicine } from "./UI";
+import { BestReviewBoard, MyMedicineBoard } from "./UI";
 
+import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
+import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Main() {
 	const navigate = useNavigate();
+  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
 	};
 
-	const handleGetAutoCompleteResults = (keyword: string) => {
-		console.log(keyword, "결과 요청");
-		const result = ["리", "리액", "리액트"];
-		return result;
+	const handleGetAutoCompleteResults = async (keyword: string) => {
+    if (keyword.length <= 0) {
+      setKeywordSearchResult([]);
+      return;
+    }
+		const response = await getAutoCompleteResult({keyword});
+		setKeywordSearchResult(response);
 	};
 
 	return (
@@ -25,11 +32,11 @@ export default function Main() {
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
 				/>
-				<SearchBar.SearchResultList />
+				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
 			</SearchBar>
 			<MyMedicineBoard />
 			<BestReviewBoard />
-			<PickedMedicine />
+			<PickedMedicineBoard/>
 		</section>
 	);
 }

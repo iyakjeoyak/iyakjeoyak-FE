@@ -1,13 +1,22 @@
+import BlankMyMedicineBoard from "./BlankMyMedicineBoard";
 import BoardContainer from "./BoardConatiner";
 import MyMedicineItem from "./MyMedicineItem";
 
 export default function MyMedicineBoard() {
-	return (
+	const num = [];
+
+  return (
 		<BoardContainer title="나의 영양제">
-			<MyMedicineItem />
-			<MyMedicineItem />
-			<MyMedicineItem />
-			<MyMedicineItem />
+		{num.length !==0 ? <div style={{
+		display: "grid",
+		gridTemplateColumns: "repeat(4, 1fr)"
+	}}>
+      <MyMedicineItem />
+      <MyMedicineItem/>
+      <MyMedicineItem/>
+      <MyMedicineItem/>
+      </div>
+      :	<BlankMyMedicineBoard/>}
 		</BoardContainer>
 	);
 }

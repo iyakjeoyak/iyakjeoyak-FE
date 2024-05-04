@@ -1,12 +1,12 @@
 {
-    "editor.formatOnSave": false,
-    "[javascript]": {
-      "editor.formatOnSave": true
-    },
-    "[scss]": {
-      "editor.formatOnSave": true
-    },
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    }
-  }
+	"editor.formatOnSave": false,
+	"[javascript]": {
+		"editor.formatOnSave": true
+	},
+	"[scss]": {
+		"editor.formatOnSave": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	}
+}

@@ -5,11 +5,15 @@ module.exports = {
 		es2020: true,
 	},
 	extends: [
+		"standard-with-typescript",
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:react-hooks/recommended",
 		"plugin:storybook/recommended",
 		"plugin:style/recommended",
+		"plugin:import/recommended",
+		"plugin:import/typescript",
+		"prettier",
 	],
 	ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
 	parser: "@typescript-eslint/parser",
@@ -87,5 +91,8 @@ module.exports = {
 				],
 			},
 		],
+	},
+	settings: {
+		react: { version: "^18.2.0" },
 	},
 };

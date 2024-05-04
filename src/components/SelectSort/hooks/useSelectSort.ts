@@ -1,15 +1,17 @@
 import { createContext, useContext } from "react";
 
 interface SelectSortContextType {
-	handleCurrentSortValue: (value: string) => void;
-	currentSortValue: string;
+	handleCurrentSort: (sortOption: any) => void;
+	currentSort: any;
 	isOpenOptionList: boolean;
 	toggleIsOpenOptionList: () => void;
 }
 
+// TODO: ReviewBoard보다 먼저 선언되기 때문에 타입선언 불가능 => 제너릭으로 해야할듯?
+
 export const SelectSortContext = createContext<SelectSortContextType>({
-	handleCurrentSortValue: () => {},
-	currentSortValue: "",
+	handleCurrentSort: () => {},
+	currentSort: {label: '', value: ''},
 	isOpenOptionList: false,
 	toggleIsOpenOptionList: () => {},
 });
