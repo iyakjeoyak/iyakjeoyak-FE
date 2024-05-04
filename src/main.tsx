@@ -16,13 +16,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 import { showToast } from "./utils/ToastConfig.ts";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			refetchOnWindowFocus: false,
 			retry: false,
 			staleTime: 0,
-      gcTime:0,
+			gcTime: 0,
 		},
 		mutations: {},
 	},
@@ -42,14 +42,15 @@ const queryClient = new QueryClient({
 	// }),
 });
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<ErrorBoundary FallbackComponent={Error}>
 			<Suspense fallback={<Loading />}>
 				<QueryClientProvider client={queryClient}>
-					<App />
+            <App />
 					<ToastContainer />
-					<ReactQueryDevtools initialIsOpen={false} position="bottom" />;
+					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</QueryClientProvider>
 			</Suspense>
 		</ErrorBoundary>

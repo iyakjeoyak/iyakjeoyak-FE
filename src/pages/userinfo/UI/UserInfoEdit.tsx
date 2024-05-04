@@ -63,6 +63,7 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 						}
 					}}
 				/>
+
 				<ImageWithDefault
 					src={profileImage}
 					defaultSrc={defaultImage}

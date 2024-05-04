@@ -1,35 +1,34 @@
 import * as yup from "yup";
-
 export interface SignUpFormType {
-	profileImage: FileList; // 프로필
+	profileImage?: File | null; // 프로필
 	username: string; // 아이디
 	password: string; // 비밀번호
 	confirmPassword: string; // 비밀번호 검사
 	nickname: string; // 닉네임
 	gender: string; // 성별
 	age: number; // 나이
-	tag: number[]; //태그
+	userHashtagList: number[]; //태그
 }
 export const signUpDefault = {
-	profileImage: undefined,
+	profileImage: null,
 	username: "", // 아이디
 	password: "", // 비밀번호
 	confirmPassword: "", // 비밀번호 검사
 	nickname: "", // 닉네임
 	gender: "", // 성별
 	age: 0, // 나이
-	tag: [], //태그
+	userHashtagList: [], //태그
 };
 
 export const signupValidation = yup.object().shape({
-	profileImage: yup.mixed<FileList>().required("이미지를 선택해주세요."),
+	profileImage: yup.mixed<File>().nullable(),
 	username: yup
 		.string()
-		.matches(
-			/^[a-zA-Z0-9]{4,12}$/,
-			"아이디는 4~12자의 영문 또는 숫자만 허용됩니다.",
-		)
-		.required("아이디를 입력하세요."),
+    .matches(
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+      "이메일형식에 맞지 않습니다"
+    )
+		.required("이메일을 입력하세요."),
 	password: yup
 		.string()
 		.matches(
@@ -53,7 +52,7 @@ export const signupValidation = yup.object().shape({
 		.integer("나이를 정수로 입력하세요.")
 		.positive("나이는 양수여야 합니다.")
 		.required("나이를 입력하세요."),
-	tag: yup
+	userHashtagList: yup
 		.array()
 		.of(yup.number().required())
 		.min(1, "태그를 선택하세요.")

@@ -26,10 +26,10 @@ import axios from "../axiosConfig";
 }
 */
 interface PostMedicineType {
-  id: number;
+	id: number;
 }
 
-export default async function getMedicines(body: PostMedicineType) {
-	const response = await axios.post(`/medicine`, {body});
+export default async function postMedicine(body: PostMedicineType) {
+	const response = await axios.post(`/medicine`, { body });
 	return response.data;
 }

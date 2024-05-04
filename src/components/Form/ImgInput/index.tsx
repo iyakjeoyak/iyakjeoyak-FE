@@ -1,9 +1,11 @@
-import getImgPreview from "@/utils/getImgPreview";
-import { useRef } from "react";
-import { FiPlusCircle } from "react-icons/fi";
-import Container from "../Container";
-import styles from "@/components/Form/ImgInput/index.module.scss";
 import { useController, useFormContext } from "react-hook-form";
+
+import Container from "../Container";
+import { FiPlusCircle } from "react-icons/fi";
+import getImgPreview from "@/utils/getImgPreview";
+import { useRef, useState } from "react";
+import styles from "@/components/Form/ImgInput/index.module.scss";
+
 
 interface ImgInput {
 	name: string;
@@ -11,19 +13,20 @@ interface ImgInput {
 }
 export const ImgInput = ({ name, title }: ImgInput) => {
 	const { control } = useFormContext();
-	const imgInputRef = useRef<HTMLInputElement>(null);
+  const imgInputRef = useRef<HTMLInputElement>(null);
+  const [profileImage, setProfileImage] = useState<string | undefined>(
+		
+	);
 	const handleImageClick = () => {
 		imgInputRef.current?.click();
 	};
 	const {
-		field: { value: profileImage, onChange: setProfileImage },
+		field: {  onChange: setProfileImageData },
 	} = useController({
 		control,
 		name,
 	});
-
 	// file url로 변환
-
 	return (
 		<Container title={title} name={name}>
 			<input
@@ -31,9 +34,9 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 				accept="image/*"
 				style={{ display: "none" }}
 				onChange={(event) => {
-					const file = event.target.files?.[0] as File;
+          const file = event.target.files?.[0] as File;
 					if (file) {
-						getImgPreview(file, setProfileImage, () => {});
+						getImgPreview(file, setProfileImage, setProfileImageData);
 					}
 				}}
 				id="fileupload"

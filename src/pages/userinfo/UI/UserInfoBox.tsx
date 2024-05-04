@@ -4,11 +4,16 @@ import { UserData } from "../userInfoType";
 import TagCommon from "@/components/Tag";
 import UserInfoEdit from "../UI/UserInfoEdit";
 import Modal from "@/components/Modal";
+import HeartIcon from "@/assets/icons/HeartIcon";
+import { useNavigate } from "react-router-dom";
+import { routerpaths } from "@/utils/pathName";
 export interface UserInfoBoxProps {
 	userData: UserData;
 }
 
 const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
+	const navigate = useNavigate();
+
 	return (
 		<section className={style.mypageContainer}>
 			<div className={style.profileSection}>
@@ -20,11 +25,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 				<div className={style.profileInfo}>
 					<div className={style.nameArea}>
 						<div className={style.nickname}>{userData.nickname}</div>
-						<TagCommon
-							text="허준"
-							size="small"
-							backgroundColor="lightgreen"
-						></TagCommon>
+						<TagCommon text="허준" size="small" backgroundColor="lightgreen" />
 					</div>
 					<div className={style.userIntroduce}> 자기소개글</div>
 					<Modal>
@@ -41,6 +42,13 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 							</div>
 						</Modal.Content>
 					</Modal>
+					<div
+						className={style.userLikedSupplement}
+						onClick={() => navigate(routerpaths.LIKEDITEM)}
+					>
+						<HeartIcon />
+						관심 영양제
+					</div>
 				</div>
 			</div>
 		</section>

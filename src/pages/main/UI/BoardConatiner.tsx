@@ -12,7 +12,7 @@ export default function BoardContainer({
 	return (
 		<article className={styles.container}>
 			<div className={styles["title"]}>{title}</div>
-			<div className={styles["item-container"]}>{children}</div>
+	    {children}
 		</article>
 	);
 }

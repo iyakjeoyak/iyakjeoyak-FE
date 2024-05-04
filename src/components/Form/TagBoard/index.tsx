@@ -5,14 +5,15 @@ import styles from "./index.module.scss";
 interface TagBoardProps {
 	title: string;
 	tags: Array<{ id: number; name: string }>;
+  name: string;
 }
 
-export default function TagBoard({ title, tags }: TagBoardProps) {
+export default function TagBoard({ title, name, tags }: TagBoardProps) {
 	return (
-		<Container title={title} name="tag">
+		<Container title={title} name={name}>
 			<div className={styles.container}>
 				{tags.map((tags) => (
-					<TagButton key={tags.id} text={tags.name} name="tag" />
+					<TagButton key={tags.id} text={tags.name} name={name} value={tags.id} />
 				))}
 			</div>
 		</Container>
