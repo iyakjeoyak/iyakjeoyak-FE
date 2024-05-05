@@ -13,7 +13,7 @@ import qs from 'qs';
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCardList.module.scss";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useObserver } from "@/hooks/useObserver";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export const enum SEARCHLIST_SORT_QUERIES  {
   HIGH_GRADE = 'high_star',
@@ -155,7 +155,7 @@ export default function MedicineCardList({toggleIsTagsModalOpen}:{toggleIsTagsMo
     }
   };
   
-  useObserver({
+  useIntersectionObserver({
     target: bottom,
     onIntersect,
   });

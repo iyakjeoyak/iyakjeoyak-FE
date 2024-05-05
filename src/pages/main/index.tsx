@@ -2,7 +2,7 @@ import { BestReviewBoard, MyMedicineBoard } from "./UI";
 
 import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
-import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -16,10 +16,11 @@ export default function Main() {
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-    if (keyword.length <= 0) {
+    if (keyword.length <= 2) {
       setKeywordSearchResult([]);
       return;
     }
+
 		const response = await getAutoCompleteResult({keyword});
 		setKeywordSearchResult(response);
 	};

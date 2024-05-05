@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
-import ectQueryOptions from "@/api/etc";
+import ectQueryOptions from "@/api/common";
 import medicineQueryOptions from "@/api/medicine";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";

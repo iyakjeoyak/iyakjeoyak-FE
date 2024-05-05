@@ -3,25 +3,25 @@ import getCategories from "./getCategories";
 import getHashtags from "./getHashtags";
 import { queryOptions } from "@tanstack/react-query";
 
-const etcQueryOptions = {
+const commonQueryOptions = {
 	getHashtags: () =>
 		queryOptions({
-			queryKey: ["etc", "categories"],
+			queryKey: ["hashtags"],
 			queryFn: getHashtags,
 			initialData: [],
 		}),
 	getCategories: () =>
 		queryOptions({
-			queryKey: ["etc", "categories"],
+			queryKey: ["categories"],
 			queryFn: () => getCategories(),
 			initialData: [],
 		}),
 	getAutoCompleteResult: ({ keyword }: { keyword: string }) =>
 		queryOptions({
-			queryKey: ["etc", "auto-complete", keyword],
+			queryKey: ["auto-complete", keyword],
 			queryFn: () => getAutoCompleteResult({ keyword }),
 			initialData: [],
 		}),
 };
 
-export default etcQueryOptions;
+export default commonQueryOptions;

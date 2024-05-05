@@ -1,6 +1,7 @@
-import styles from "./index.module.scss";
-import { getButtonClasses, ButtonStyles } from "@/utils/getButtonClasses";
+import { ButtonStyles, getButtonClasses } from "@/utils/getButtonClasses";
 import { Sizes, Variant } from "@/types/styleType";
+
+import styles from "./index.module.scss";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: JSX.Element;
@@ -19,6 +20,7 @@ export const Button = ({
 	size = "m",
 	className,
 	children,
+  ...props
 }: ButtonProps) => {
 	const buttonClasses = getButtonClasses(styles as ButtonStyles, {
 		variant,
@@ -30,6 +32,7 @@ export const Button = ({
 			className={`${buttonClasses} ${className}`}
 			type={type}
 			onClick={onClick}
+      {...props}
 		>
 			{icon}
 			{children}

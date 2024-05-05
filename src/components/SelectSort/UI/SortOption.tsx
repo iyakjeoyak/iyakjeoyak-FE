@@ -1,11 +1,7 @@
+import { CurrentSortType } from "./SortSelectRoot";
 import { useSelectSort } from "../hooks/useSelectSort";
 
-interface SortOptionProps {
-	value: string;
-	label: string;
-}
-
-export default function SortOption({ label, value }: SortOptionProps) {
+export default function SortOption({ label, value }: CurrentSortType ) {
 	const { handleCurrentSort, toggleIsOpenOptionList } = useSelectSort();
   
 	return (

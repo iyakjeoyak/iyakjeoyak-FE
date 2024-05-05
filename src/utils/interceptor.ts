@@ -1,10 +1,11 @@
 import axios, {
-	InternalAxiosRequestConfig,
-	AxiosResponse,
-	AxiosRequestHeaders,
 	AxiosError,
+	AxiosRequestHeaders,
+	AxiosResponse,
+	InternalAxiosRequestConfig,
 } from "axios";
 import { getAccessToken, setAccessToken } from "./getToken";
+
 import { logout } from "./logout";
 import { showToast } from "./ToastConfig";
 
@@ -36,13 +37,9 @@ export const rejectInterceptor = (
 	const {
 		response: { status, data },
 	} = error;
+
 	const authData: AuthResponse = data as AuthResponse;
 	
-	if (status === 400 && authData.message) {
-    showToast({ type: "error", message: authData.message });
-    console.error("error", data);
-  }
-  
 	// 토큰 만료 시
 	if (status === 401) {
 		if (authData.message && authData.message === "만료된 토큰입니다.") {
@@ -59,8 +56,12 @@ export const rejectInterceptor = (
 		}
 	}
 
+  if (status === 400 && authData.message) {
+    showToast({ type: "error", message: authData.message[0] });
+  }
+  
 	if (authData.message) {
-		showToast({ type: "error", message: authData.message });
+		showToast({ type: "error", message: authData.message[0] });
 	}
 
 	return Promise.reject(error);
@@ -73,7 +74,6 @@ async function handleTokenRefresh(
 
 	// 리프레시 만료되었는지 확인
 	const tokenRefreshResult = await axios.get("/refresh-token");
-
 	if (tokenRefreshResult.status === 200) {
 		const { accessToken } = tokenRefreshResult.data;
 
