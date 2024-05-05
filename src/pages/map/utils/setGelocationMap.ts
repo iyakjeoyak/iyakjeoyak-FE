@@ -21,7 +21,6 @@ export const setGelocationMap = async (
 			longitude.toString(),
 			15,
 		);
-		// onDataLoaded(newMap, initialResponse);
 
 		//추가된 부분
 		if (initialResponse && initialResponse.data) {
@@ -32,9 +31,7 @@ export const setGelocationMap = async (
 
 		let dragTimeout: NodeJS.Timeout | undefined;
 
-		// 드래그 멈추면 다시 약국 찾아줌
-		// 드래그 할때마다 요청이 들어가는데
-		// 멈춘지 한 2초 되면 요청이 들어가게 할까?
+		// 드래그 멈추면 1초 뒤 다시 약국 찾아줌
 		naver.maps.Event.addListener(newMap, "dragend", async function () {
 			const newCenter = newMap.getCenter();
 
@@ -54,7 +51,7 @@ export const setGelocationMap = async (
 				} else {
 					console.log("드래그 후 약국 데이터를 찾을 수 없습니다.");
 				}
-			}, 2000);
+			}, 1000);
 		});
 	} else {
 		console.log("맵을 찾을 수 없습니다.");

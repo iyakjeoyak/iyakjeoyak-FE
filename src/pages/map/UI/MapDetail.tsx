@@ -1,30 +1,38 @@
 import style from "../styles/mapdetail.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePharmacy } from "../utils/mapDetailContext";
+import { useMapContext } from "../utils/mapDetailContext";
 import { Button } from "@/components/Button";
 import HeartIcon from "@/assets/icons/HeartIcon";
-// import postLikedPharmacy from "@/api/map/postLikedPharmacy";
+import postLikedPharmacy from "@/api/map/postLikedPharmacy";
 import { hourListType } from "../mapTypes";
 import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
+import { useState } from "react";
 
 const MapDetail = () => {
-	const {
-		selectedPharmacy,
-		showModal,
-		toggleModal,
-		toggleLike,
-		isLikeClicked,
-	} = usePharmacy();
-	if (!selectedPharmacy || !showModal) {
+	const { detailData, setDetailData } = useMapContext();
+	const [isLiked, setIsLiked] = useState(detailData?.liked);
+
+	if (!detailData) {
 		return null;
 	}
 
+	const handleClose = () => {
+		if (detailData && detailData.liked == !isLiked) {
+			postLikedPharmacy({ ...detailData, liked: isLiked });
+			setDetailData(undefined);
+		}
+	};
+
+	const toggleLike = () => {
+		setIsLiked((prev) => !prev);
+	};
+
 	return (
 		<AnimatePresence>
-			{showModal && (
+			{detailData && (
 				<motion.div
 					className={style.container}
-					onClick={toggleModal}
+					onClick={handleClose}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
@@ -38,14 +46,14 @@ const MapDetail = () => {
 						exit={{ y: 50 }}
 						transition={{ duration: 0.3 }}
 					>
-						<div className={style.text}>{selectedPharmacy.dutyName}</div>
+						<div className={style.text}>{detailData.dutyName}</div>
 						<Button
 							className={style.text}
 							variant="greentransparent"
 							size="xs"
 							onClick={toggleLike}
 							icon={
-								isLikeClicked ? (
+								isLiked ? (
 									<HeartFilledIcon width={15} height={15} />
 								) : (
 									<HeartIcon width={15} height={15} />
@@ -53,12 +61,10 @@ const MapDetail = () => {
 							}
 						/>
 
-						<div className={style.text}>주소 {selectedPharmacy.dutyAddr}</div>
+						<div className={style.text}>주소 {detailData.dutyAddr}</div>
+						<div className={style.text}>전화번호 {detailData.dutyTel1}</div>
 						<div className={style.text}>
-							전화번호 {selectedPharmacy.dutyTel1}
-						</div>
-						<div className={style.text}>
-							{selectedPharmacy.businessHoursList?.map((hour: hourListType) => (
+							{detailData.businessHoursList?.map((hour: hourListType) => (
 								<div key={hour.dayOfWeek} className={style.timeBox}>
 									<div className={style.timeElement}>
 										{" "}

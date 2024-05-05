@@ -19,6 +19,7 @@ export interface PharmacyDetailType {
 	dutyAddr: string;
 	dutyName: string;
 	dutyTel1: string;
+	liked?: boolean;
 	hpid: string;
 	latitude: number;
 	longitude: number;

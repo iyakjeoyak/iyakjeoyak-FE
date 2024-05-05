@@ -9,7 +9,7 @@ import { SupplementInfo } from "../../userInfoType";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
 import { useState } from "react";
-import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 
 const supplementValidationSchema = yup.object().shape({
 	name: yup.string().required("Name is required"),

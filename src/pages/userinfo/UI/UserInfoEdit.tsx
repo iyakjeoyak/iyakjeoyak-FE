@@ -4,7 +4,7 @@ import { UserData } from "../userInfoType";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
 import getImgPreview from "@/utils/getImgPreview";
-import ImageWithDefault from "@/utils/ImageWithDefault";
+import ImageWithDefault from "@/components/ImageWithDefault";
 
 const userInfoSchema = yup
 	.object({

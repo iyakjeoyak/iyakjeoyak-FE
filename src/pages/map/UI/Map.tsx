@@ -1,38 +1,17 @@
-// 서버
-// 1. 클라이언트로 위치와 검색 반경을 받음
-// 2. 지도 api와 공공 데이터 api 호출해 약국 데이터 호출
-// 3. 조회된 데이터를 필터링 및 가공 후 클라이언트로 응답
-
-// 프론트
-// 1. 서버에서 받은 데이터를 마커로 표시
-// 2. 사용자는 지도 상의 마커를 클릭해 데이터 조회 가능
-// 3. 저장하기 버튼으로 post요청, 삭제로 delete 요청
-
+import { useState } from "react";
 import { Pharmacy } from "../mapTypes";
 import getPharmacyDetail from "@/api/map/getPharmacyDetail";
-import { useEffect, useState } from "react";
-
-import MapDetail from "./MapDetail";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
-import createMarker from "../utils/createMarker";
-import { loadScript } from "../utils/loadScript";
-import setDefaultMap from "../utils/setDefaultMap";
-import { setGelocationMap } from "../utils/setGelocationMap";
-import { usePharmacy } from "../utils/mapDetailContext";
-
-declare global {
-	interface Window {
-		naver: any;
-	}
-}
+import { useMapContext } from "../utils/mapDetailContext";
+import { useDisplayMap, useInitMap, useUpdateMarkers } from "../hooks";
+import { showToast } from "@/utils/ToastConfig";
 
 // 1. 맵 스크립트 로드하기 (done)
 // 2. api 요청 시 반경 내 약국을 마커로 찍어줌 (done)
 // 3. 마커를 누르면 상세 약국 정보를 볼 수 있음 -> 모달로 띄워둠 (done)
 
 // 해야할 것 & 체크할 거
-// 모달 상태 업데이트 처리... (바보멍청이자식)
-// 화면 이동하면 기존의 마커는 지워지게 -> 이건 나중에
+// 화면 이동하면 기존의 마커는 지워지게 -> useUpdateMarkers 되는지 확인해보기
 
 // 사용자 위치 받으나 안받으나 둘다 지도 잘띄워짐
 
@@ -41,129 +20,39 @@ declare global {
 // 6. 약국 이름으로 검색 하는 기능
 
 const Map = ({}) => {
-	const [map, setMap] = useState<any>(null);
+	const [map, setMap] = useState<naver.maps.Map | null>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
-	const [marker, setMarkers] = useState<naver.maps.Marker[]>([]);
-	const [pharmacyData, setPharmacyData] = useState<any>();
-	const {
-		setShowModal,
-		showModal,
-		toggleModal,
-		selectedPharmacy,
-		setSelectedPharmacy,
-	} = usePharmacy();
-
-	// 맵 가져오기
-	useEffect(() => {
-		const cleanup = loadScript(
-			() => setMapReady(true),
-			() => setDefaultMap(),
-		);
-		return cleanup;
-	}, []);
-
-	const handleMarkerClick = (pharmacy: Pharmacy) => {
-		getPharmacyDetail(pharmacy.hpid)
-			.then((detailData) => {
-				setSelectedPharmacy(detailData);
-				toggleModal();
-			})
-			.catch((error) => {
-				console.error("지도를 가져오는데 실패했습니다.", error);
-			});
+	const [pharmacyData, setPharmacyData] = useState<PharmacyMapType[] | null>(
+		null,
+	);
+	const [marker, setMarker] = useState<naver.maps.Marker[] | null>(null);
+	const { setDetailData } = useMapContext();
+	const handleMarkerClick = async (pharmacy: Pharmacy) => {
+		try {
+			const pharmacyDetail = await getPharmacyDetail(pharmacy.hpid);
+			setDetailData(pharmacyDetail);
+		} catch (error) {
+			showToast({ type: "error", message: "지도를 가져오는데 실패했습니다." });
+		}
 	};
 
-	useEffect(() => {
-		if (mapReady && !map) {
-			// 사용자 위치 가져오고 주변 약국 및 마커 생성
-			navigator.geolocation.getCurrentPosition(
-				async (position) => {
-					const { latitude, longitude } = position.coords;
-
-					await setGelocationMap(latitude, longitude, (newMap, response) => {
-						setMap(newMap);
-						const newMarkers: naver.maps.Marker[] = [];
-						setPharmacyData(response.data);
-						if (response.data) {
-							response.data.forEach((pharmacy: PharmacyMapType) => {
-								const formatData: Pharmacy = {
-									lat: pharmacy.latitude,
-									lng: pharmacy.longitude,
-									name: pharmacy.dutyName,
-									hpid: pharmacy.hpid,
-								};
-
-								// createMarker(pharmacyData, newMap, handleMarkerClick);
-								const marker = createMarker(formatData, newMap, () =>
-									handleMarkerClick(formatData),
-								);
-								newMarkers.push(marker);
-							});
-							setMarkers(newMarkers);
-						}
-					});
-				},
-				async (error) => {
-					// 사용자 위치 못가져오면 기본 위치로 요청
-					const defaultLat = 37.54674009217038;
-					const defaultLng = 127.06623265762651;
-					await setGelocationMap(defaultLat, defaultLng, (newMap, response) => {
-						setMap(newMap);
-						const newMarkers: naver.maps.Marker[] = [];
-						setPharmacyData(response.data);
-
-						if (response.data) {
-							response.data.forEach((pharmacy: PharmacyMapType) => {
-								const formatData: Pharmacy = {
-									lat: pharmacy.latitude,
-									lng: pharmacy.longitude,
-									name: pharmacy.dutyName,
-									hpid: pharmacy.hpid,
-								};
-								const marker = createMarker(formatData, newMap, () =>
-									handleMarkerClick(formatData),
-								);
-								newMarkers.push(marker);
-							});
-							setMarkers(newMarkers);
-						}
-					});
-				},
-				{ enableHighAccuracy: true },
-			);
-		}
-	}, [mapReady, map]);
-
-	useEffect(() => {
-		if (map) {
-			const updateMarkers = (currentMarkers: naver.maps.Marker[]) => {
-				const mapBounds = map.getBounds();
-				const newMarker = currentMarkers.map((marker) => {
-					const isVisible = mapBounds.hasLatLng(marker.getPosition());
-					marker.setVisible(isVisible);
-					return marker;
-				});
-				setMarkers(newMarker);
-			};
-
-			const currentMarkers = pharmacyData.map((pharmacy: Pharmacy) =>
-				createMarker(pharmacy, map, handleMarkerClick),
-			);
-			updateMarkers(currentMarkers);
-
-			naver.maps.Event.addListener(map, "zoom_changed", () =>
-				updateMarkers(currentMarkers),
-			);
-			naver.maps.Event.addListener(map, "dragend", () =>
-				updateMarkers(currentMarkers),
-			);
-		}
-	}, [map]);
+	// 맵 초기 설정
+	useInitMap({ setMapReady });
+	// 맵 보여주기
+	useDisplayMap({
+		mapReady,
+		map,
+		setMap,
+		setMarker,
+		setPharmacyData,
+		handleMarkerClick,
+	});
+	// 마커 업데이트
+	useUpdateMarkers({ map, pharmacyData, marker });
 
 	return (
 		<>
 			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-			{showModal && selectedPharmacy && <MapDetail />}
 		</>
 	);
 };

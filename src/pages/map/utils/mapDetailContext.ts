@@ -1,36 +1,28 @@
-import { createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { PharmacyDetailType } from "@pages/map/mapTypes";
 
-interface PharmacyContextType {
-	selectedPharmacy: PharmacyDetailType | null;
-	showModal: boolean;
-	toggleModal: () => void;
-	toggleLike: () => void;
-	setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-	setSelectedPharmacy: React.Dispatch<
-		React.SetStateAction<PharmacyDetailType | null>
+interface MapContextType {
+	// selectedPharmacy: PharmacyDetailType | null;
+	// showModal: boolean;
+	// toggleModal: () => void;
+	// toggleLike: () => void;
+	// setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+	// setSelectedPharmacy: React.Dispatch<
+	// 	React.SetStateAction<PharmacyDetailType | null>
+	// >;
+	// isLikeClicked: boolean;
+	// setIsLikeCliked: React.Dispatch<React.SetStateAction<boolean>>;
+	detailData?: PharmacyDetailType;
+	setDetailData: React.Dispatch<
+		React.SetStateAction<PharmacyDetailType | undefined>
 	>;
-	isLikeClicked: boolean;
-	setIsLikeCliked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const initPharmacyContext: PharmacyContextType = {
-	selectedPharmacy: null,
-	showModal: false,
-	setShowModal: () => {},
-	toggleModal: () => {},
-	toggleLike: () => {},
-	setSelectedPharmacy: () => {},
-	isLikeClicked: false,
-	setIsLikeCliked: () => {},
-};
+export const MapContext = createContext<MapContextType | null>(null);
 
-export const PharmacyContext =
-	createContext<PharmacyContextType>(initPharmacyContext);
-
-export const usePharmacy = () => {
-	const context = useContext(PharmacyContext);
-
+export const useMapContext = () => {
+	const context = useContext(MapContext);
+	// 주스탠드로 context랑 같이 사용할 수 있음
 	if (!context) {
 		throw new Error("지도 조회 컨텍스트 에러");
 	}
