@@ -17,7 +17,7 @@
 		gap: 5px;
 		align-items: center;
 		.name {
-			@include mixins.sb-big;
+			@include mixins.sb-small;
 		}
 	}
 }

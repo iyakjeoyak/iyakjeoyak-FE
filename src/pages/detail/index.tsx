@@ -21,31 +21,32 @@ const TAPS = [
 
 export default function MedicineDetail() {
 	const navigate = useNavigate();
-  const { pathname } = useLocation();
+	const { pathname } = useLocation();
 
 	const currentTapValue = useGetURLSearch("tap");
 
-  const matchResult = matchPath('/detail/:id', pathname);
-  
-  const id = Number(matchResult?.params.id);
+	const matchResult = matchPath("/detail/:id", pathname);
 
-  if (!id) return;
-  
-  const {data: {
-    isHeart,
-    id: medicineId, 
-    grade,
-    bssh_NM: brand, 
-    prdlst_NM: name, 
-    heartCount, 
-    hashtags,
-    ntk_MTHD: howToEat, 
-    indiv_RAWMTRL_NM: ingredient, 
-    primary_FNCLTY: describe, 
-    isBookMark,
-    reviewList,
-  }} 
-  = useQuery(medicineQueryOptions.getMedicineById({medicineId: id}))
+	const id = Number(matchResult?.params.id);
+
+	if (!id) return;
+
+	const {
+		data: {
+			isHeart,
+			id: medicineId,
+			grade,
+			bssh_NM: brand,
+			prdlst_NM: name,
+			heartCount,
+			hashtags,
+			ntk_MTHD: howToEat,
+			indiv_RAWMTRL_NM: ingredient,
+			primary_FNCLTY: describe,
+			isBookMark,
+			reviewList,
+		},
+	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId: id }));
 
 	const handleTapClick = (tapValue: string) => {
 		navigate(`/detail/${medicineId}?tap=${tapValue}`);
@@ -54,11 +55,29 @@ export default function MedicineDetail() {
 	return (
 		<>
 			<section className={styles.container}>
-				<MedicineCard name={name} isHeart={isHeart} isBookMark={isBookMark} reviewCount={reviewList.length} brand={brand} hashtags={hashtags.slice(0, 2)} grade={grade} heartCount={heartCount} />
+				<MedicineCard
+					name={name}
+					isHeart={isHeart}
+					isBookMark={isBookMark}
+					reviewCount={reviewList.length}
+					brand={brand}
+					hashtags={hashtags.slice(0, 2)}
+					grade={grade}
+					heartCount={heartCount}
+				/>
 				<div className={styles.board}>
 					<TapBar taps={TAPS} onClick={handleTapClick} />
-					{currentTapValue === TAPS_QUERIES.REVIEW && <ReviewBoard medicineId={medicineId} />} 
-          {currentTapValue === TAPS_QUERIES.INFO || currentTapValue === null &&<InfoBoard howToEat={howToEat} ingredient={ingredient} describe={describe}/>}
+					{currentTapValue === TAPS_QUERIES.REVIEW && (
+						<ReviewBoard medicineId={medicineId} />
+					)}
+					{(currentTapValue === TAPS_QUERIES.INFO ||
+						currentTapValue === null) && (
+						<InfoBoard
+							howToEat={howToEat}
+							ingredient={ingredient}
+							describe={describe}
+						/>
+					)}
 				</div>
 			</section>
 		</>

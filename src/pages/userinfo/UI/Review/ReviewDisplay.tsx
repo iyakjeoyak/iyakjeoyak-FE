@@ -5,13 +5,18 @@ import { ReviewDetailModal } from "@/pages/detail/UI";
 import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../../style/reviewdisplay.module.scss";
-import { useModal } from "@/components/Modal/hooks/useModal";
+import useOpen from "@/hooks/useOpen";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
-	const { toggleModalOpen } = useModal();
+	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
 
 	return (
-		<Modal>
+		<Modal
+			isOpen={isOpen}
+			onClose={onClose}
+			toggleOpen={toggleOpen}
+			onOpen={onOpen}
+		>
 			<Modal.Trigger
 				openElement={
 					<div className={style.reviewContainer}>
@@ -19,7 +24,7 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 							<div
 								key={review.reviewId}
 								className={style.reviewBox}
-								onClick={toggleModalOpen}
+								onClick={toggleOpen}
 							>
 								<div className={style.reviewHeadArea}>
 									<div className={style.supplementName}>{review.itemName}</div>

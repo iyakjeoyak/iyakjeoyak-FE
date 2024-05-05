@@ -1,6 +1,6 @@
-import style from "../styles/mapdetail.module.scss";
-import { motion } from "framer-motion";
 import Modal from "@/components/Modal";
+import { motion } from "framer-motion";
+import style from "../styles/mapdetail.module.scss";
 import { usePharmacy } from "../utils/mapDetailContext";
 
 const MapDetail = () => {

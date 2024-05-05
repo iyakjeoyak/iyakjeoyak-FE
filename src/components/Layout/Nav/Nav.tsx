@@ -26,57 +26,60 @@ export default function Nav({
 }) {
 	const navigator = useNavigate();
 
-  const token = getAccessToken();
-  
+	const token = getAccessToken();
+
 	return (
-    <LazyMotion features={domAnimation}>
-      <m.nav
-        onClick={toggleIsOpenNav}
-        initial={{ opacity: 1, x: "100%" }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: "-100%" }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className={styles["main-nav-container"]}>
-          {MAIN_NAVS.map((navItem) => (
-            <m.button
-              key={navItem.name}
-              className={styles["main-nav-item"]}
-              onClick={() => {
-                navigator(navItem.to);
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {navItem.name}
-            </m.button>
-          ))}
-        </div>
-        <div className={styles["sub-nav-container"]}>
-          <div className={styles["divide"]} />
-          {SUB_NAVS.map((navItem) => {
-            if (navItem.requiresToken && !token) return;
-            
-            if (!navItem.requiresToken && token) return;
-            
-            return (
-            <m.button
-              key={navItem.name}
-              className={styles["sub-nav-item"]}
-              onClick={() => {
-                navigator(navItem.to);
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {navItem.name}
-            </m.button>
-            )
-            })
-          }
-          {token && <m.button onClick={logout}  className={styles["sub-nav-item"]}>로그아웃</m.button>}
-        </div>
-      </m.nav>
-    </LazyMotion>
+		<LazyMotion features={domAnimation}>
+			<m.nav
+				onClick={toggleIsOpenNav}
+				initial={{ opacity: 1, x: "100%" }}
+				animate={{ opacity: 1, x: 0 }}
+				exit={{ opacity: 0, x: "-100%" }}
+				transition={{ duration: 0.3 }}
+			>
+				<div className={styles["main-nav-container"]}>
+					{MAIN_NAVS.map((navItem) => (
+						<m.button
+							key={navItem.name}
+							className={styles["main-nav-item"]}
+							onClick={() => {
+								navigator(navItem.to);
+							}}
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
+						>
+							{navItem.name}
+						</m.button>
+					))}
+				</div>
+				<div className={styles["sub-nav-container"]}>
+					<div className={styles["divide"]} />
+					{SUB_NAVS.map((navItem) => {
+						if (navItem.requiresToken && !token) return;
+
+						if (!navItem.requiresToken && token) return;
+
+						return (
+							<m.button
+								key={navItem.name}
+								className={styles["sub-nav-item"]}
+								onClick={() => {
+									navigator(navItem.to);
+								}}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
+							>
+								{navItem.name}
+							</m.button>
+						);
+					})}
+					{token && (
+						<m.button onClick={logout} className={styles["sub-nav-item"]}>
+							로그아웃
+						</m.button>
+					)}
+				</div>
+			</m.nav>
+		</LazyMotion>
 	);
 }

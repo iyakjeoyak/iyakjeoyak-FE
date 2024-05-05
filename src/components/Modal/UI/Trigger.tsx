@@ -5,7 +5,6 @@ interface TriggerProps {
 }
 
 export default function Trigger({ openElement }: TriggerProps) {
-	const { toggleModalOpen } = useModal();
-
-	return <div onClick={toggleModalOpen}>{openElement}</div>;
+	const { onOpen } = useModal();
+	return <div onClick={onOpen}>{openElement}</div>;
 }

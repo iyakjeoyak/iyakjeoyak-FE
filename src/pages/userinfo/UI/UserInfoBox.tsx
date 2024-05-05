@@ -1,18 +1,21 @@
-import style from "../index.module.scss";
-import modalStyle from "@/components/ModalContainer/index.module.scss";
-import { UserData } from "../userInfoType";
-import TagCommon from "@/components/Tag";
-import UserInfoEdit from "../UI/UserInfoEdit";
-import Modal from "@/components/Modal";
 import HeartIcon from "@/assets/icons/HeartIcon";
-import { useNavigate } from "react-router-dom";
+import Modal from "@/components/Modal";
+import TagCommon from "@/components/Tag";
+import { UserData } from "../userInfoType";
+import UserInfoEdit from "../UI/UserInfoEdit";
+import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
+import style from "../index.module.scss";
+import { useNavigate } from "react-router-dom";
+import useOpen from "@/hooks/useOpen";
+
 export interface UserInfoBoxProps {
 	userData: UserData;
 }
 
 const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 	const navigate = useNavigate();
+	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
 
 	return (
 		<section className={style.mypageContainer}>
@@ -28,7 +31,12 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 						<TagCommon text="허준" size="small" backgroundColor="lightgreen" />
 					</div>
 					<div className={style.userIntroduce}> 자기소개글</div>
-					<Modal>
+					<Modal
+						isOpen={isOpen}
+						onClose={onClose}
+						toggleOpen={toggleOpen}
+						onOpen={onOpen}
+					>
 						<Modal.Trigger
 							openElement={
 								<div className={style.editprofile}>프로필 수정하기</div>

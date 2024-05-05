@@ -1,4 +1,4 @@
-import { BestReviewBoard, MyMedicineBoard } from "./UI";
+import { BestReviewBoard, CuratingBoard, MyMedicineBoard } from "./UI";
 
 import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
@@ -9,19 +9,19 @@ import { useState } from "react";
 
 export default function Main() {
 	const navigate = useNavigate();
-  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-    if (keyword.length <= 2) {
-      setKeywordSearchResult([]);
-      return;
-    }
+		if (keyword.length < 2) {
+			setKeywordSearchResult([]);
+			return;
+		}
 
-		const response = await getAutoCompleteResult({keyword});
+		const response = await getAutoCompleteResult({ keyword });
 		setKeywordSearchResult(response);
 	};
 
@@ -37,7 +37,8 @@ export default function Main() {
 			</SearchBar>
 			<MyMedicineBoard />
 			<BestReviewBoard />
-			<PickedMedicineBoard/>
+			<CuratingBoard />
+			<PickedMedicineBoard />
 		</section>
 	);
 }

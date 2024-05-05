@@ -1,5 +1,7 @@
-import style from "../../index.module.scss";
 import { ReviewType, SupplementType } from "../../userInfoType";
+
+import isZero from "@/utils/isZero";
+import style from "../../index.module.scss";
 
 type InfoItem = ReviewType | SupplementType;
 
@@ -7,7 +9,7 @@ export interface ItemProps {
 	items: InfoItem[];
 }
 function InfoBoxItem({ items }: ItemProps): JSX.Element {
-	if (items.length === 0) {
+	if (isZero(items.length)) {
 		return <div className={style.sectionBox}>작성된 정보가 없습니다.</div>;
 	}
 	return (
