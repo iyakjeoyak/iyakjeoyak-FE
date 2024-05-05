@@ -16,10 +16,11 @@ export default function Main() {
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-    if (keyword.length <= 0) {
+    if (keyword.length <= 2) {
       setKeywordSearchResult([]);
       return;
     }
+
 		const response = await getAutoCompleteResult({keyword});
 		setKeywordSearchResult(response);
 	};

@@ -4,12 +4,12 @@ import { useController, useFormContext } from 'react-hook-form';
 import Container from '../Container';
 import styles from './index.module.scss';
 
-enum StarRatingKey {
-  FIRST = 1,
-  SECOND = 2,
-  THIRD = 3,
-  FOURTH = 4,
-  FIFTH = 5
+const StarRatingKey = {
+  FIRST: 1,
+  SECOND: 2,
+  THIRD: 3,
+  FOURTH: 4,
+  FIFTH: 5
 }
 
 const StarRating = ({ name = "star" }) => {

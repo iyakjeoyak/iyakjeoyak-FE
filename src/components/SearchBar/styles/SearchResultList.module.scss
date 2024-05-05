@@ -2,27 +2,31 @@
 @import "@/styles/variables.scss";
 
 .container {
-	background-color: $gray0;
+	background-color: $white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	position: absolute;
 	top: 50px;
 	left: 20px;
 	right: 65px;
 	z-index: 900;
-	span {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  span {
 		color: $main-red;
 	}
 	::placeholder {
 		@include mixins.b-medium;
 	}
 	.current {
-		@include mixins.b-medium;
+		@include mixins.m-medium;
 		color: $main-red;
 	}
 	.option {
 		&.active {
-			background-color: $gray5;
+			background-color: $gray0;
 			color: $main-red;
 		}
-		@include mixins.b-medium;
+		@include mixins.m-big;
+    padding: 5px;
 	}
 }

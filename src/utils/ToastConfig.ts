@@ -12,28 +12,28 @@ type ToastOptions = {
 	progress?: number;
 };
 
-interface ToastProps {
+interface ToastProps extends ToastOptions {
 	type: "success" | "error" | "info";
 	message?: string;
 }
 
 // showToast('type', message)로 토스트 메시지 띄움
-export const showToast = ({ type, message }: ToastProps) => {
+export const showToast = ({ type, message, ...props }: ToastProps) => {
 	const toastOptions: ToastOptions = {
 		position: "top-center",
 		autoClose: 2000,
-		hideProgressBar: true,
+		hideProgressBar: false,
 		closeOnClick: true,
 		pauseOnHover: true,
-		draggable: true,
-		progress: 10,
+		// draggable: true,
+		// progress: 10,
 	};
 
 	if (type === "success") {
-		toast.success(message, toastOptions);
+		toast.success(message, { ...toastOptions, ...props });
 	}
 	if (type === "error") {
-		toast.error(message, toastOptions);
+		toast.error(message, { ...toastOptions, ...props });
 	}
 	if (type === "info") {
 		toast.info(message, { ...toastOptions, icon: false });

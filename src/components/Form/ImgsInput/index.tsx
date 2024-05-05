@@ -1,7 +1,10 @@
 import Container from "../Container"
+import { showToast } from "@/utils/ToastConfig";
 import styles from './index.module.scss';
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
+
+const MAX_IMG_LENGTH = 4;
 
 const ImgsInput = ()=>{
   const { setValue, } = useFormContext();
@@ -10,13 +13,18 @@ const ImgsInput = ()=>{
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
-
+    
+    if (files.length > MAX_IMG_LENGTH) {
+      showToast({type: "error", message: '파일은 최대 4개 업로드할 수 있습니다.'})
+      setImgs([]);
+      return;
+    }
+    
     const fileList: File[] = Array.from(files);
     const fileStrings: string[] = fileList.map(file => URL.createObjectURL(file));
     setImgs(prevImgs => [...prevImgs, ...fileStrings]);
 
     setValue("imgFile", fileList);
-    console.log(fileList[0])
   };
   
   return (
