@@ -23,7 +23,7 @@ build:
 deploy:
   stage: deploy
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script:
+  script: 
     - aws s3 sync dist/ s3://thistthat/
   only:
     - feat/pipeline_check
