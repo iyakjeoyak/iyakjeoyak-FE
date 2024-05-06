@@ -12,7 +12,6 @@ build:
     paths:
       - node_modules/
   script:
-    - npm install -g pnpm
     - pnpm install
     - pnpm run build
   artifacts:
