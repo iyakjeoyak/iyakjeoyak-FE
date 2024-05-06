@@ -8,11 +8,13 @@ import GridIcon from "@/pages/userinfo/assets/GridIcon";
 import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import SupplementEditForm from "./SupplementEditForm";
-import { SupplementInfo } from "../../userInfoType";
+import { ShortSupplementProps, SupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
 import { supplementRecords } from "../../mockData";
 import useOpen from "@/hooks/useOpen";
+import { showToast } from "@/utils/ToastConfig";
+import getUserSupplement from "@/api/useInfo/getUserSupplement";
 
 const noSupplementData = {
 	mySupplementId: 0,
@@ -37,9 +39,26 @@ const SupplementHistory = () => {
 		onOpen: onOpenEditSupplement,
 		toggleOpen: toggleOpenEditSupplement,
 	} = useOpen();
+
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+	const [supplementData, setSupplmentData] =
+		useState<ShortSupplementProps | null>(null);
 	const [selectedSupplement, setSelectedSupplement] =
 		useState<SupplementInfo | null>(null);
+
+	useEffect(() => {
+		const fetchSupplement = async () => {
+			try {
+				const userSupplement = await getUserSupplement({ page: 0, size: 10 });
+				set;
+			} catch (error) {
+				showToast({
+					type: "error",
+					message: "내 영양제 데이터를 가져오는 중 오류가 발생했습니다.",
+				});
+			}
+		};
+	});
 
 	const supplemenRecorddata = supplementRecords.mySupplements;
 	const count = supplementRecords.mySupplements.length;
@@ -56,7 +75,6 @@ const SupplementHistory = () => {
 		console.log("폼 제출");
 	};
 
-	console.log(selectedSupplement);
 	useEffect(() => {
 		console.log("state 변화");
 	}, [selectedSupplement]);

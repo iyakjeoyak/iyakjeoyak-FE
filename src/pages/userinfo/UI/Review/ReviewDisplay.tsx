@@ -22,24 +22,28 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 					<div className={style.reviewContainer}>
 						{reviews.map((review) => (
 							<div
-								key={review.reviewId}
+								key={review.id}
 								className={style.reviewBox}
 								onClick={toggleOpen}
 							>
 								<div className={style.reviewHeadArea}>
-									<div className={style.supplementName}>{review.itemName}</div>
+									<div className={style.supplementName}>
+										{review.medicine.prodlst_NM}
+									</div>
 									<StarRating filledStars={4.5} size={20} />
 								</div>
 								<div className={style.reviewContents}>
 									<img
-										src={review.reviewImg[0].userImage}
+										src={review.imageResult?.[0].fullPath}
 										alt="유저 제품 후기 사진"
 										className={style.reviewImg}
 									/>
 
 									<div className={style.reviewTextBox}>
 										<div className={style.reviewText}>{review.content}</div>
-										<div className={style.reviewDate}>{review.date} </div>
+										<div className={style.reviewDate}>
+											{review.createdDate}{" "}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -49,7 +53,7 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 			/>
 			{reviews.map((review) => (
 				<Modal.Content>
-					<ReviewDetailModal reviewId={review.reviewId} />
+					<ReviewDetailModal reviewId={review.id} />
 				</Modal.Content>
 			))}
 		</Modal>

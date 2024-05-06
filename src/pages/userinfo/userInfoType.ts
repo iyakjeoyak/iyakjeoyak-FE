@@ -46,20 +46,50 @@ export interface ReviewImage {
 	userImage: string;
 }
 
+export interface Medicine {
+	id: number;
+	prodlst_NM: string;
+}
+
+export interface CreateBy {
+	userId: number;
+	nickname?: "string";
+	image?: {
+		id: number;
+		fullPath: "string";
+	};
+}
+
+export interface tagResult {
+	id: number;
+	name: string;
+}
+
+export interface imageResult {
+	id: number;
+	fullPath: string;
+}
 export interface DetailedReview {
-	reviewId: number;
-	date: string;
-	itemName: string;
+	id: number;
+	title: string;
 	content: string;
-	category: string;
-	reviewLike: number;
-	rating: number;
-	reviewTag: ReviewTag[];
-	reviewImg: ReviewImage[];
+	star: number;
+	heartCount: number;
+	medicine: Medicine;
+	createdBy: CreateBy;
+	modifiedDate: string;
+	createdDate: string;
+	hashtagResult?: tagResult[];
+	imageResult: imageResult[];
 }
 
 export interface ReviewData {
-	reviews: DetailedReview[];
+	data: DetailedReview[];
+	number: number;
+	numberOfElement: number;
+	size: number;
+	totalElement: number;
+	totalPages: number;
 }
 
 export interface ReviewDisplayProps {
@@ -71,11 +101,36 @@ export interface ShortPointHistory {
 	category: string;
 }
 
-export interface PointData {
-	pointHistory: ShortPointHistory[];
-	reviewMockData: ReviewData;
+export interface PointProps {
+	id: number;
+	domain: string;
+	changeValue: number;
+	pointSum: number;
 }
 
+export interface PointData {
+	data: PointProps[];
+	number: number;
+	size: number;
+	totalPages: number;
+	totalElement: number;
+	numberofElement: number;
+}
+
+export interface ShortSupplementInfo {
+	id: number;
+	medicineName: string;
+	expirationDate: string;
+}
+
+export interface ShortSupplementProps {
+	data: ShortSupplementInfo;
+	number: number;
+	size: number;
+	totalPages: number;
+	totalElement: number;
+	numberOfElement: number;
+}
 export interface SupplementInfo {
 	mySupplementId: number;
 	name: string;
