@@ -1,0 +1,29 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+      prefix: pnpm
+    paths:
+      - node_modules/
+  script:
+    - pnpm install
+    - pnpm run build
+  artifacts:
+    paths:
+      - dist/
+  only:
+    - feat/pipeline_check
+    
+deploy:
+  stage: deloy
+  script:
+    - aws s3 sync dist/ s3://thistthat/
+  only:
+    - feat/pipeline_check
+  when: manual
