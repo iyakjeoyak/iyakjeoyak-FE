@@ -1,39 +1,37 @@
+@use "@styles/global"as *;
+@import "@styles/variables";
+
 .contaier {
-	display: flex;
-	flex-wrap: wrap;
+  .wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-	.circle {
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 20px;
-	}
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+  }
 
-	& > li:nth-child(1) {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
+  .gold {
+    background-color: #ffd700;
+  }
 
-	& > li:nth-child(2) {
-		margin-top: 50px;
-		width: 100%;
-		display: flex;
-		justify-content: space-around;
-	}
+  .silver {
+    background-color: #c0c0c0;
+  }
 
-	.gold {
-		background-color: #ffd700;
-	}
-
-	.silver {
-		background-color: #c0c0c0;
-	}
-
-	.bronze {
-		background-color: #cd7f32;
-	}
+  .bronze {
+    background-color: #cd7f32;
+  }
 }
