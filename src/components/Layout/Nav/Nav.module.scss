@@ -7,16 +7,16 @@ nav {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: 180px;
+	width: 300px;
 	padding: 20px;
 	z-index: $z-index-nav;
 	@media (min-width: $tablet-width) and (max-width: $desktop-width) {
-		width: 240px;
+		width: 270px;
 		padding: 30px;
 	}
 
 	@media (min-width: $desktop-width) {
-		width: 180px;
+		width: 220px;
 		padding: 20px;
 	}
 }
@@ -29,7 +29,7 @@ nav {
 	align-items: start;
 	gap: 15px;
 	.main-nav-item {
-		@include mixins.sb-large;
+		@include mixins.b-medium;
 		color: $white;
 	}
 	@media (min-width: $tablet-width) {
@@ -55,7 +55,7 @@ nav {
 	align-items: start;
 	gap: 15px;
 	.sub-nav-item {
-		@include mixins.sb-medium;
+		@include mixins.b-medium;
 		color: $white;
 	}
 	@media (min-width: $tablet-width) {

@@ -14,12 +14,12 @@ export default function Content({
 	className,
 	...props
 }: ContentProps) {
-	const { isModalOpen, toggleModalOpen } = useModal();
-	if (!isModalOpen) return null;
+	const { isOpen, toggleOpen } = useModal();
+	if (!isOpen) return null;
 
 	return (
 		<LazyMotion features={domAnimation}>
-			<div className="background" onClick={toggleModalOpen}>
+			<div className="background" onClick={toggleOpen}>
 				<m.div
 					{...props}
 					className={`${styles.container} ${className}`}

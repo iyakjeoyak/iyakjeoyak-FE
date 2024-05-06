@@ -40,7 +40,12 @@ export interface MedicineDetailItemType extends MedicineItemType {
 export interface ReviewWriterType {
 	userId: number;
 	nickname: string;
-	image: null;
+	image: ImageType;
+}
+
+export interface ImageType {
+	id: number;
+	fullPath: string;
 }
 export interface ReviewItemType {
 	id: number;
@@ -52,4 +57,5 @@ export interface ReviewItemType {
 	createdDate: string;
 	modifiedDate: string;
 	hashtagResult: TagType[];
+	imageResult: ImageType[];
 }

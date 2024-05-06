@@ -3,7 +3,7 @@
 
 .container {
 	width: 70px;
-	height: 150px;
+	height: 180px;
 	position: relative;
 	border-radius: 50%;
 	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.2);
@@ -37,16 +37,21 @@
 		flex-direction: column;
 		gap: 7px;
 		.name {
-			@include mixins.b-small;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			@include mixins.sb-small;
 		}
 		.feature {
 			@include mixins.sb-small;
 		}
 	}
+	.dday {
+		visibility: hidden;
+	}
 }
 
 .container {
-	border-radius: 50px;
 	&.hover {
 		display: flex;
 		justify-content: center;
@@ -54,5 +59,15 @@
 		background-color: $point-blue;
 		color: $white;
 		@include mixins.b-small;
+		border-radius: 50%;
+		.top {
+			visibility: hidden;
+		}
+		.bottom {
+			visibility: hidden;
+		}
+		.dday {
+			visibility: visible;
+		}
 	}
 }

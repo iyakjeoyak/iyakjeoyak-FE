@@ -1,15 +1,18 @@
 import "@styles/global.scss";
-import CommonHeaderBox from "../CommonHeaderBox";
-import { supplementRecords } from "../../mockData";
-import ListIcon from "../../assets/ListIcon";
-import CommonCardBox from "../CommonCardBox";
-import style from "../../style/supplementhistory.module.scss";
+
 import { useEffect, useState } from "react";
+
+import CommonCardBox from "../CommonCardBox";
+import CommonHeaderBox from "../CommonHeaderBox";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
+import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
+import SupplementEditForm from "./SupplementEditForm";
 import { SupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
-import SupplementEditForm from "./SupplementEditForm";
+import style from "../../style/supplementhistory.module.scss";
+import { supplementRecords } from "../../mockData";
+import useOpen from "@/hooks/useOpen";
 
 const noSupplementData = {
 	mySupplementId: 0,
@@ -22,6 +25,18 @@ const noSupplementData = {
 };
 
 const SupplementHistory = () => {
+	const {
+		isOpen: isOpenSupplement,
+		onClose: onCloseSupplement,
+		onOpen: onOpenSupplement,
+		toggleOpen: toggleOpenSupplement,
+	} = useOpen();
+	const {
+		isOpen: isOpenEditSupplement,
+		onClose: onCloseEditSupplement,
+		onOpen: onOpenEditSupplement,
+		toggleOpen: toggleOpenEditSupplement,
+	} = useOpen();
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
 	const [selectedSupplement, setSelectedSupplement] =
 		useState<SupplementInfo | null>(null);
@@ -56,7 +71,12 @@ const SupplementHistory = () => {
 				className={style.header}
 			/>
 
-			<Modal>
+			<Modal
+				isOpen={isOpenSupplement}
+				onClose={onCloseSupplement}
+				toggleOpen={toggleOpenSupplement}
+				onOpen={onOpenSupplement}
+			>
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
@@ -79,7 +99,12 @@ const SupplementHistory = () => {
 				</Modal.Content>
 			</Modal>
 
-			<Modal>
+			<Modal
+				isOpen={isOpenEditSupplement}
+				onClose={onCloseEditSupplement}
+				toggleOpen={toggleOpenEditSupplement}
+				onOpen={onOpenEditSupplement}
+			>
 				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
 				<Modal.Content>
 					<SupplementEditForm

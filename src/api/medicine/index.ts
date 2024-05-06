@@ -44,6 +44,11 @@ const medicineQueryOptions = {
 			queryFn: () => getMdPickedMedicines(),
 			initialData: [],
 		}),
+	getMyMedicines: () =>
+		queryOptions({
+			queryKey: ["myMedicines", "main"],
+			queryFn: () => getMedicines(0, 4),
+		}),
 };
 
 export default medicineQueryOptions;

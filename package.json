@@ -15,7 +15,7 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"test": "jest",
-		"prepare": "chmod ug+x .husky/* && husky install /.husky",
+		"prepare": "husky install /.husky",
 		"checkTs": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -23,10 +23,12 @@
 		"@hookform/resolvers": "^3.3.4",
 		"@tanstack/react-query": "^5.31.0",
 		"@tanstack/react-query-devtools": "^5.31.0",
+		"@types/lodash-es": "^4.17.12",
 		"@types/qs": "^6.9.15",
 		"axios": "^1.6.8",
 		"framer-motion": "^11.0.28",
 		"lodash": "^4.17.21",
+		"lodash-es": "^4.17.21",
 		"qs": "^6.12.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",

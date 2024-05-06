@@ -1,47 +1,57 @@
 import "@styles/global.scss";
-
-import { DetailedReview } from "../../userInfoType";
+// import { DetailedReview } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../../style/reviewdisplay.module.scss";
-import { useModal } from "@/components/Modal/hooks/useModal";
+import useOpen from "@/hooks/useOpen";
 import Modal from "@/components/Modal";
+import { ReviewDisplayProps } from "../../userInfoType";
 import { ReviewDetailModal } from "@/pages/detail/UI";
 
-const ReviewDisplay = ({ review }: { review: DetailedReview }) => {
-	const { toggleModalOpen } = useModal();
+const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
+	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+
 	return (
-		<Modal>
+		<Modal
+			isOpen={isOpen}
+			onClose={onClose}
+			toggleOpen={toggleOpen}
+			onOpen={onOpen}
+		>
 			<Modal.Trigger
 				openElement={
 					<div className={style.reviewContainer}>
-						<div
-							key={review.reviewId}
-							className={style.reviewBox}
-							onClick={toggleModalOpen}
-						>
-							<div className={style.reviewHeadArea}>
-								<div className={style.supplementName}>{review.itemName}</div>
-								<StarRating filledStars={4.5} size={20} />
-							</div>
-							<div className={style.reviewContents}>
-								<img
-									src={review.reviewImg[0].userImage}
-									alt="유저 제품 후기 사진"
-									className={style.reviewImg}
-								/>
+						{reviews.map((review) => (
+							<div
+								key={review.reviewId}
+								className={style.reviewBox}
+								onClick={toggleOpen}
+							>
+								<div className={style.reviewHeadArea}>
+									<div className={style.supplementName}>{review.itemName}</div>
+									<StarRating filledStars={4.5} size={20} />
+								</div>
+								<div className={style.reviewContents}>
+									<img
+										src={review.reviewImg[0].userImage}
+										alt="유저 제품 후기 사진"
+										className={style.reviewImg}
+									/>
 
-								<div className={style.reviewTextBox}>
-									<div className={style.reviewText}>{review.content}</div>
-									<div className={style.reviewDate}>{review.date} </div>
+									<div className={style.reviewTextBox}>
+										<div className={style.reviewText}>{review.content}</div>
+										<div className={style.reviewDate}>{review.date} </div>
+									</div>
 								</div>
 							</div>
-						</div>
+						))}
 					</div>
 				}
 			/>
-			<Modal.Content>
-				<ReviewDetailModal reviewId={review.reviewId} />
-			</Modal.Content>
+			{reviews.map((review) => (
+				<Modal.Content>
+					<ReviewDetailModal reviewId={review.reviewId} />
+				</Modal.Content>
+			))}
 		</Modal>
 	);
 };

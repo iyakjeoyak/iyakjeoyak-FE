@@ -22,7 +22,7 @@ export const useSelectSort = () => {
 	const context = useContext(SelectSortContext);
 
 	if (!context) {
-		throw new Error("<SelectSort />의 context를 벗어남");
+		throw new Error("SelectSort 의 context를 벗어남");
 	}
 
 	return context;
