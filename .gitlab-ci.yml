@@ -21,7 +21,7 @@ build:
     - feat/pipeline_check
     
 deploy:
-  stage: deloy
+  stage: deploy
   script:
     - aws s3 sync dist/ s3://thistthat/
   only:
