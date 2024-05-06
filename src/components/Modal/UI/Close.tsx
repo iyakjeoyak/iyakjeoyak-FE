@@ -1,7 +1,7 @@
 import { useModal } from "../hooks/useModal";
 
 export default function Close() {
-  const { toggleModalOpen } = useModal();
+	const { toggleOpen } = useModal();
 
-	return <button onClick={toggleModalOpen}>닫기</button>;
+	return <button onClick={toggleOpen}>닫기</button>;
 }

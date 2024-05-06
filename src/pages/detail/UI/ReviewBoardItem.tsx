@@ -8,7 +8,6 @@ import Title from "@/components/WriterTitle";
 import isZero from "@/utils/isZero";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
-import shuffleArray from "@/utils/shuffleArray";
 import stopEvent from "@/utils/stopEvent";
 import styles from "../styles/ReviewBoardItem.module.scss";
 import { useMutation } from "@tanstack/react-query";
@@ -71,7 +70,7 @@ export default function ReviewBoardItem({
 								<p>{title}</p>
 								<div className={styles["tags"]}>
 									{hashtagResult.slice(0, 4).map((tag) => (
-										<TagCommon text={tag.name} />
+										<TagCommon key={tag.id} text={tag.name} />
 									))}
 								</div>
 							</div>

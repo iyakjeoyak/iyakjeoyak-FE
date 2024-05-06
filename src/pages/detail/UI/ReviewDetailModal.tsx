@@ -54,7 +54,9 @@ export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
 			/>
 			{hashtagResult.length !== 0 && (
 				<div className={styles.tags}>
-					{hashtagResult?.map((tag) => <TagCommon text={tag.name} />)}
+					{hashtagResult?.map((tag) => (
+						<TagCommon key={tag.id} text={tag.name} />
+					))}
 				</div>
 			)}
 			<div>{content}</div>

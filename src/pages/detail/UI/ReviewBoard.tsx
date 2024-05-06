@@ -51,8 +51,8 @@ const REVIEW_SORT_QUERIES_MAPPING: Record<
 > = {
 	[REVIEW_SORT_QUERIES.OLDEST]: { orderBy: "CREATED_DATE", sort: "ASC" },
 	[REVIEW_SORT_QUERIES.LATEST]: { orderBy: "CREATED_DATE", sort: "DESC" },
-	[REVIEW_SORT_QUERIES.MOST_LIKED]: { orderBy: "HEART_COUNT", sort: "ASC" },
-	[REVIEW_SORT_QUERIES.LOW_LIKED]: { orderBy: "HEART_COUNT", sort: "DESC" },
+	[REVIEW_SORT_QUERIES.MOST_LIKED]: { orderBy: "HEART_COUNT", sort: "DESC" },
+	[REVIEW_SORT_QUERIES.LOW_LIKED]: { orderBy: "HEART_COUNT", sort: "ASC" },
 };
 
 export default function ReviewBoard({ medicineId }: { medicineId: number }) {
@@ -98,7 +98,9 @@ export default function ReviewBoard({ medicineId }: { medicineId: number }) {
 			<div className={styles["container"]}>
 				<div className={styles["reviews-container"]}>
 					{isZero(reviews.length) ? (
-						<BlankBox text="작성된 리뷰가 없습니다" />
+						<div style={{ marginTop: "250px" }}>
+							<BlankBox text="작성된 리뷰가 없습니다" />
+						</div>
 					) : (
 						reviews.map((reviewItem) => (
 							<ReviewBoardItem key={reviewItem.id} reviewItem={reviewItem} />

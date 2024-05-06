@@ -13,7 +13,14 @@ export default function MedicineCardItem({
 }) {
 	const navigate = useNavigate();
 
-	const { id, prdlst_NM: name, grade, hashtags, reviewCount } = medicineItem;
+	const {
+		id,
+		prdlst_NM: name,
+		grade,
+		hashtags,
+		reviewCount,
+		image,
+	} = medicineItem;
 
 	return (
 		<div
@@ -22,12 +29,16 @@ export default function MedicineCardItem({
 				navigate(`/detail/${id}`);
 			}}
 		>
-			<img
-				src="/images/no_medicine_img.jpg"
-				alt="어쩌구영양제"
-				width={150}
-				height={130}
-			/>
+			{image?.fullPath ? (
+				<img src={image.fullPath} alt="어쩌구영양제" width={150} height={130} />
+			) : (
+				<img
+					src="/images/no_medicine_img.jpg"
+					alt="어쩌구영양제"
+					width={150}
+					height={130}
+				/>
+			)}
 			<div className={styles["content-container"]}>
 				<div className={styles["text-container"]}>
 					<div className={styles.name}>{name}</div>

@@ -8,6 +8,7 @@
 	border-radius: 50%;
 	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.2);
 	margin: auto;
+	cursor: pointer;
 	.top {
 		display: flex;
 		justify-content: center;
@@ -61,13 +62,11 @@
 		@include mixins.b-small;
 		border-radius: 50%;
 		.top {
-			visibility: hidden;
-		}
-		.bottom {
-			visibility: hidden;
+			background-color: $point-blue;
 		}
 		.dday {
 			visibility: visible;
+			position: absolute;
 		}
 	}
 }

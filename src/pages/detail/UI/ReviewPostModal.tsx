@@ -7,7 +7,6 @@ import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import ectQueryOptions from "@/api/common";
 import { getAccessToken } from "@/utils/getToken";
-import medicineQueryOptions from "@/api/medicine";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import styles from "../styles/ReviewPostModal.module.scss";
