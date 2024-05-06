@@ -10,7 +10,7 @@ function OnBoarding() {
 		<section className={styles.container}>
 			<OnBoardingConTent />
 			<Form.Button
-				text="약 조회하러가기"
+				text="약 조회하러가기!@#!@#!@#@!#!@#"
 				onClick={() => navigate("/home")}
 				type="button"
 				variant="dark"
