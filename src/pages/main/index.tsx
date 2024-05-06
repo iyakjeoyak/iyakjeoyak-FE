@@ -7,9 +7,16 @@ import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+export interface KeywordResultItemType {
+	id: number;
+	name: string;
+}
+
 export default function Main() {
 	const navigate = useNavigate();
-	const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<
+		KeywordResultItemType[]
+	>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
@@ -26,7 +33,7 @@ export default function Main() {
 	};
 
 	return (
-		<section className={styles.container}>
+		<section className={styles.container} style={{ paddingBottom: "220px" }}>
 			<SearchBar>
 				<SearchBar.KeywordInput
 					placeholder="검색어를 입력해주세요"

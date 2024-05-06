@@ -1,3 +1,4 @@
+import { KeywordResultItemType } from "../main";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
@@ -8,7 +9,9 @@ import { useState } from "react";
 
 export default function MedicineSearch() {
 	const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
-	const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<
+		KeywordResultItemType[]
+	>([]);
 
 	const navigate = useNavigate();
 

@@ -61,13 +61,11 @@
 		@include mixins.b-small;
 		border-radius: 50%;
 		.top {
-			visibility: hidden;
-		}
-		.bottom {
-			visibility: hidden;
+			background-color: $point-blue;
 		}
 		.dday {
 			visibility: visible;
+			position: absolute;
 		}
 	}
 }

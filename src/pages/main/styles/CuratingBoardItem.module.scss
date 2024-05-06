@@ -4,6 +4,8 @@
 .container {
 	display: flex;
 	gap: 20px;
+	position: relative;
+	width: 100%;
 	img {
 		background-color: $point-blue;
 	}
@@ -11,5 +13,24 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
+	}
+}
+
+.blank-conatiner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	position: relative;
+	div {
+		top: 15px;
+	}
+	button {
+		margin-top: 90px;
+		background-color: #d3f5e7;
+		color: $main-green;
+		border-radius: 5px;
+		padding: 5px;
+		width: 80%;
 	}
 }

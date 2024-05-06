@@ -7,7 +7,7 @@ import { useState } from "react";
 
 // interface MyMedicineItem extends MedicineItemType{
 interface MyMedicineItem {
-	medicine: MedicineItemType;
+	medicine?: MedicineItemType;
 	isBlank?: boolean;
 }
 
@@ -40,21 +40,23 @@ export default function MyMedicineItem({
 			onMouseLeave={() => setIsItemHovered(false)}
 		>
 			<div className={styles.top}>
-				<img
-					src="/images/no_medicine_img.jpg"
-					alt="약 이름"
-					width={50}
-					height={60}
-				/>
+				{!isItemHovered && (
+					<img
+						src={medicine?.image?.fullPath ?? "/images/no_medicine_img.jpg"}
+						alt="약 이름"
+						width={50}
+						height={60}
+					/>
+				)}
 			</div>
 			<div className={styles.bottom}>
-				<div className={styles.name}>
-					{splittedName.map((name) => (
-						<div>{name}</div>
-					))}
-				</div>
+				{!isItemHovered && (
+					<div className={styles.name}>
+						{splittedName?.map((name) => <div>{name}</div>)}
+					</div>
+				)}
 			</div>
-			<div className={styles.dday}>D-{dday}</div>
+			{isItemHovered && <div className={styles.dday}>D-{dday}</div>}
 		</div>
 	);
 }

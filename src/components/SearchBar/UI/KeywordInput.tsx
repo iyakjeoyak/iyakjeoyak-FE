@@ -13,24 +13,21 @@ export default function KeywordInput({
 	onChange,
 	onClick,
 }: KeywordInputProps) {
-	const {
-		currentKeyword,
-		handleCurrentKeyword,
-	} = useSelect();
+	const { currentKeyword, handleCurrentKeyword } = useSelect();
 
 	return (
 		<div className={styles.container}>
 			<input
-				value={currentKeyword}
+				value={currentKeyword.name}
 				onChange={(e) => {
-          handleCurrentKeyword(e.target.value);
+					handleCurrentKeyword({ id: 0, name: e.target.value });
 					onChange(e.target.value);
 				}}
 				placeholder={placeholder}
 			/>
 			<button
 				onClick={() => {
-					onClick(currentKeyword);
+					onClick(currentKeyword.name);
 				}}
 			>
 				<IoSearch />

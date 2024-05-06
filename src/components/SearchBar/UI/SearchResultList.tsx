@@ -1,44 +1,50 @@
+import { KeywordResultItemType } from "@/pages/main";
 import styles from "../styles/SearchResultList.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelect } from "../hooks/useSelect";
 import { useState } from "react";
 
-export default function SearchResultList({keywordSearchResult}: {keywordSearchResult?: string[]}) {
+export default function SearchResultList({
+	keywordSearchResult,
+}: {
+	keywordSearchResult?: KeywordResultItemType[];
+}) {
 	const navigate = useNavigate();
 
-	const { currentKeyword, handleCurrentKeyword } =
-		useSelect();
-	const [currentActiveKeyword, setCurrentActiveKeyword] = useState("");
+	const { currentKeyword, handleCurrentKeyword } = useSelect();
+	const [currentActiveKeyword, setCurrentActiveKeyword] =
+		useState<KeywordResultItemType>({ id: 0, name: "" });
 
-	const handleSearchKeywordSelected = (selectedKeyword: string) => {
-		handleCurrentKeyword("");
-		navigate(`/search?keyword=${selectedKeyword}`);
+	const handleSearchKeywordSelected = (
+		selectedKeyword: KeywordResultItemType,
+	) => {
+		handleCurrentKeyword({ id: 0, name: "" });
+		navigate(`/search?keyword=${selectedKeyword.name}`);
 	};
 
-	const handleMouseEnter = (keyword: string) => {
+	const handleMouseEnter = (keyword: KeywordResultItemType) => {
 		setCurrentActiveKeyword(keyword);
 	};
 
-  console.log(keywordSearchResult)
 	return (
 		<div className={styles.container}>
 			{keywordSearchResult?.map((keyword) => (
 				<div
-					key={keyword}
-					className={`${styles.option} ${currentActiveKeyword === keyword && styles.active}`}
+					key={keyword.id}
+					className={`${styles.option} ${currentActiveKeyword.id === keyword.id && styles.active}`}
 					onClick={() => {
 						handleSearchKeywordSelected(currentActiveKeyword);
 					}}
 					onMouseOut={() => {
-						handleMouseEnter("");
+						handleMouseEnter({ id: 0, name: "" });
 					}}
 					onMouseEnter={() => {
 						handleMouseEnter(keyword);
 					}}
 				>
-					{keyword.split(currentKeyword)[0]}
-          <span>{currentKeyword}</span>
-          {keyword.split(currentKeyword)[1]}
+					{keyword.name.split(currentKeyword.name)[0]}
+					<span>{currentKeyword.name}</span>
+					{keyword.name.split(currentKeyword.name)[1]}
 				</div>
 			))}
 		</div>

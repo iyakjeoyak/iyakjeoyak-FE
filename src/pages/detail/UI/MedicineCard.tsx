@@ -11,7 +11,6 @@ import medicineQueryOptions from "@/api/medicine";
 import postMedicineLike from "@/api/medicine/postMedicineLike";
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCard.module.scss";
-import { toast } from "react-toastify";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
 import { useMutation } from "@tanstack/react-query";
 

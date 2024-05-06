@@ -36,6 +36,7 @@ const medicineQueryOptions = {
 				isBookMark: false,
 				isHeart: false,
 				reviewList: [],
+				image: { id: 0, fullPath: "" },
 			},
 		}),
 	getMdPickedMedicines: () =>

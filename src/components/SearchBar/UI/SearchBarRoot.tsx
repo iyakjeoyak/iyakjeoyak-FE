@@ -6,11 +6,18 @@ interface SearchBarRootProps {
 	children: React.ReactNode;
 }
 
+export interface KeywordResultItemType {
+	id: number;
+	name: string;
+}
+
 export default function SearchBarRoot({ children }: SearchBarRootProps) {
-	const [currentKeyword, setCurrentKeyword] = useState("");
+	const [currentKeyword, setCurrentKeyword] = useState<KeywordResultItemType>({
+		id: 0,
+		name: "",
+	});
 
-
-	const handleCurrentKeyword = (keyword: string) => {
+	const handleCurrentKeyword = (keyword: KeywordResultItemType) => {
 		setCurrentKeyword(keyword);
 	};
 
