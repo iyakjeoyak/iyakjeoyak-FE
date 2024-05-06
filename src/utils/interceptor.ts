@@ -1,13 +1,13 @@
-import axios, {
+import {
 	AxiosError,
 	AxiosRequestHeaders,
 	AxiosResponse,
 	InternalAxiosRequestConfig,
 } from "axios";
-import { getAccessToken, setAccessToken } from "./getToken";
-
+import { getAccessToken, getRefreshToken, setAccessToken } from "./getToken";
 import { logout } from "./logout";
 import { showToast } from "./ToastConfig";
+import axios from "@/api/axiosConfig";
 
 interface AuthResponse {
 	accessToken?: string;
@@ -44,18 +44,20 @@ export const rejectInterceptor = (
 
 	// 토큰 만료 시
 	if (status === 401) {
-		if (authData.message && authData.message === "만료된 토큰입니다.") {
-			// 토큰 리프레시 로직
-			return handleTokenRefresh(error.config);
-		} else {
-			// 로그아웃 처리
-			logout();
-			showToast({
-				type: "error",
-				message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
-			});
-			return Promise.reject(error);
-		}
+		// if (authData.message && authData.message === "만료된 토큰입니다.") {
+		// 	// 토큰 리프레시 로직
+		// 	return handleTokenRefresh(error.config);
+		// } else {
+		// 	// 로그아웃 처리
+		// 	// logout();
+		// 	showToast({
+		// 		type: "error",
+		// 		message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
+		// 	});
+		// 	console.log("401");
+		// 	return Promise.reject(error);
+		// }
+		return handleTokenRefresh(error.config);
 	}
 
 	if (status === 400 && authData.message) {
@@ -84,44 +86,43 @@ async function handleTokenRefresh(
 	try {
 		// 리프레시 만료되었는지 확인
 		// /user/createAccessByRefresh
-		const tokenRefreshResult = await axios.post(
-			"/user/createAccessByRefresh",
-			{},
-			{
-				withCredentials: true,
-			},
-		);
-		if (tokenRefreshResult.status === 200) {
-			const accessToken = tokenRefreshResult.headers["authorization"];
+		const refreshToken = getRefreshToken();
+		if (refreshToken) {
+			const tokenRefreshResult = await axios.post(
+				"/user/createAccessByRefresh",
+				{ refreshToken: refreshToken },
+			);
+			if (tokenRefreshResult.status === 200) {
+				const accessToken = tokenRefreshResult.headers["authorization"];
+				console.log("accessToken", accessToken);
+				if (!accessToken) {
+					showToast({
+						type: "error",
+						message: "새 액세스 토큰을 받아오는 데 실패했습니다.",
+					});
+					logout();
+				}
 
-			if (!accessToken) {
+				// 로컬 스토리지에 access 갱신
+				// const token = accessToken.startsWith("Bearer ");
+				setAccessToken(accessToken);
+
+				// 가져온 응답으로 헤더 갱신
+				if (config.headers) {
+					config.headers["Authorization"] = `Bearer ${accessToken}`;
+				}
+				return axios(config);
+			} else {
+				logout();
 				showToast({
 					type: "error",
-					message: "새 액세스 토큰을 받아오는 데 실패했습니다.",
+					message: "세션 만료. 다시 로그인 해주세요.",
 				});
-				logout();
+				return Promise.reject(new Error("토큰 갱신에 실패했습니다."));
 			}
-
-			// 로컬 스토리지에 access 갱신
-			const token = accessToken.startsWith("Bearer ");
-			console.log(token);
-			setAccessToken(token.slice(7));
-
-			// 가져온 응답으로 헤더 갱신
-			if (config.headers) {
-				config.headers["Authorization"] = `Bearer ${accessToken}`;
-			}
-			return axios(config);
-		} else {
-			logout();
-			showToast({
-				type: "error",
-				message: "세션 만료. 다시 로그인 해주세요.",
-			});
-			return Promise.reject(new Error("토큰 갱신에 실패했습니다."));
 		}
 	} catch (error) {
-		logout();
+		// logout();
 		showToast({
 			type: "error",
 			message: "세션 만료. 다시 로그인 해주세요.",

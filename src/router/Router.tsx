@@ -22,6 +22,7 @@ import SignUpPage from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
 import { createBrowserRouter } from "react-router-dom";
 import { routerpaths } from "@/utils/pathName";
+import { SignUpTest } from "@/pages/signupTest/UI/SignUpTest";
 // import LikedItem from "@/pages/userinfo/UI/LikedItem/LikedItem";
 
 const router = createBrowserRouter([
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
 				element: <SignUpPage />,
 				loader: checkTokenAndRedirectToHome,
 			},
+			{ path: routerpaths.SIGNUPTEST, element: <SignUpTest /> },
 			{ path: routerpaths.FAME, element: <Fame /> },
 			{
 				path: routerpaths.USERINFO,

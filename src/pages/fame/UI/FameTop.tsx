@@ -10,6 +10,7 @@ import CrownSvg from "@/assets/icons/Crown";
 import { fameQueryOptions } from "@/api/fame";
 import styles from "@/pages/fame/styles/FameTop.module.scss";
 import { useQuery } from "@tanstack/react-query";
+import styles from "@/pages/fame/styles/FameTop.module.scss";
 
 export function FameTop() {
 	const { data: fames } = useQuery(fameQueryOptions.getFame());
