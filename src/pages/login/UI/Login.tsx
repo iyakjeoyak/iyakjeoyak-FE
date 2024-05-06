@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { postLogin } from "@/api/post";
+import { postLogin } from "@/api/user";
 import { Form } from "@/components/Form";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -13,7 +13,8 @@ import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { setAccessToken } from "@/utils/getToken";
 import styles from "../styles/Login.module.scss";
-import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import PATHS from "@/constants/PATHS";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -23,14 +24,14 @@ export default function Login() {
   
   const onSubmit = (data: LoginFormType ) => {
 		mutate(data, {
-			onSuccess: (data: AxiosResponse) => {
+			onSuccess: (data) => {
 				const accessToken = data.headers.authorization;
-				console.log(data.headers);
-				console.log(accessToken);
-console.log(document.cookie)
 				setAccessToken(accessToken);
-				alert("로그인이 완료되었습니다.");
+				toast.success("로그인이 완료되었습니다.", { autoClose: 2000 });
 				navigate("/home");
+			},
+			onError: () => {
+				toast.error("로그인에 실패하였습니다.", { autoClose: 2000 });
 			},
 		});
 	};
@@ -79,7 +80,7 @@ console.log(document.cookie)
 				</div>
 				<div className={styles.registerWrap}>
 					<span className="m-medium">회원이 아니신가요?</span>
-					<Link className={`${styles.register} m-medium`} to={"/signup"}>
+					<Link className={`${styles.register} m-medium`} to={`${PATHS.signup}`}>
 						회원가입하러 가기
 					</Link>
 				</div>
