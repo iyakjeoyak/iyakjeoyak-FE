@@ -24,7 +24,6 @@ export default function Main() {
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
 		if (keyword.length < 2) {
-			setKeywordSearchResult([]);
 			return;
 		}
 

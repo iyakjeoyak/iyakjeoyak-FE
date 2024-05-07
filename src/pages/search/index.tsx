@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { KeywordResultItemType } from "../main";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
 import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import { queryClient } from "@/main";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export default function MedicineSearch() {
 	const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
@@ -14,15 +15,14 @@ export default function MedicineSearch() {
 	>([]);
 
 	const navigate = useNavigate();
+	const { search } = useLocation();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
-		setKeywordSearchResult([]);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
 		if (keyword.length <= 2) {
-			setKeywordSearchResult([]);
 			return;
 		}
 		const response = await getAutoCompleteResult({ keyword });
@@ -36,6 +36,9 @@ export default function MedicineSearch() {
 			queryClient.resetQueries({ queryKey: ["medicine", "medicines"] });
 	};
 
+	useEffect(() => {
+		setKeywordSearchResult([]);
+	}, [search]);
 	return (
 		<>
 			{isTagsModalOpen && (

@@ -18,6 +18,7 @@ export default function KeywordInput({
 	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter" && currentKeyword.name.length > 2) {
 			onClick(currentKeyword.name);
+			handleCurrentKeyword({ id: 0, name: "" });
 		}
 	};
 
@@ -35,6 +36,7 @@ export default function KeywordInput({
 			<button
 				onClick={() => {
 					onClick(currentKeyword.name);
+					handleCurrentKeyword({ id: 0, name: "" });
 				}}
 			>
 				<IoSearch />

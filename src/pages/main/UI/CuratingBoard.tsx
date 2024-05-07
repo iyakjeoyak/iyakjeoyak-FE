@@ -8,7 +8,6 @@ const CuratingBoard = () => {
 		medicineQueryOptions.getUserRecommendMedicines(),
 	);
 
-	console.log(medicines);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>맞춤 영양제 큐레이팅</div>
