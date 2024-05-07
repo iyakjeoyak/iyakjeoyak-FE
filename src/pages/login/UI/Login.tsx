@@ -20,9 +20,9 @@ export default function Login() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postLogin,
-  });
-  
-  const onSubmit = (data: LoginFormType ) => {
+	});
+
+	const onSubmit = (data: LoginFormType) => {
 		mutate(data, {
 			onSuccess: (data) => {
 				const accessToken = data.headers.authorization;
@@ -35,7 +35,6 @@ export default function Login() {
 			},
 		});
 	};
-
 	return (
 		<Form
 			validationSchema={loginValidation}
@@ -80,7 +79,10 @@ export default function Login() {
 				</div>
 				<div className={styles.registerWrap}>
 					<span className="m-medium">회원이 아니신가요?</span>
-					<Link className={`${styles.register} m-medium`} to={`${PATHS.signup}`}>
+					<Link
+						className={`${styles.register} m-medium`}
+						to={`${PATHS.signup}`}
+					>
 						회원가입하러 가기
 					</Link>
 				</div>
