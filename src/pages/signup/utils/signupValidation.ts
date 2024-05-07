@@ -19,17 +19,25 @@ export const signUpDefault = {
 	age: 0, // 나이
 	userHashtagList: [], //태그
 };
+
+// 이메일 도메인 확인 유틸리티 함수
+const isAllowedDomain = (email: string, allowedDomains: string[]) => {
+	const domain = email.split("@")[1];
+	return allowedDomains.some((allowedDomain) => domain === allowedDomain);
+};
+// 허용된 이메일 도메인 목록
+const allowedDomains = ["naver.com", "gmail.com", "kakao.com"];
 const emailCheckRegex =
-  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  
+	/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
 export const signupValidation = yup.object().shape({
 	profileImage: yup.mixed<File>().nullable(),
 	username: yup
 		.string()
-    .matches(
-      emailCheckRegex,
-      "이메일형식에 맞지 않습니다"
-    )
+		.matches(emailCheckRegex, "이메일형식에 맞지 않습니다")
+		.test("allowedDomain", "지원되는 도메인의 이메일을 사용하세요", (value) =>
+			value ? isAllowedDomain(value, allowedDomains) : true,
+		)
 		.required("이메일을 입력하세요."),
 	password: yup
 		.string()

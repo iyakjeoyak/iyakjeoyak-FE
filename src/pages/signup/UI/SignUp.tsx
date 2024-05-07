@@ -5,19 +5,19 @@ import {
 	signupValidation,
 } from "../utils/signupValidation";
 import { Form } from "@/components/Form";
-import { tagData } from "../../../components/Form/TagButton/TagData";
 import Container from "@/components/Form/Container";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import postSignUp from "@/api/user/postSignUp";
 import styles from "@/pages/signup/styles/SignUp.module.scss";
+import commonQueryOptions from "@/api/common";
 
 export function SignUp() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
-
+	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
 	const onSubmit = (data: SignUpFormType) => {
 		const { profileImage, ...jsonData } = data;
 
@@ -32,7 +32,6 @@ export function SignUp() {
 			new Blob([JSON.stringify(userJoinPayload)], { type: "application/json" }),
 		);
 		formData.append("imgFile", profileImage || "");
-
 		mutate(formData, {
 			onSuccess: () => {
 				toast.success("회원가입이 완료되었습니다.", { autoClose: 2000 });
@@ -90,18 +89,13 @@ export function SignUp() {
 				placeholder="나이를 입력해주세요."
 				type="number"
 			/>
-			<Container title="건강 고민" name="userHashtagList">
-				<div className={`${styles.tagWrap}`}>
-					{tagData.map((tags) => (
-						<Form.TagButton
-							key={tags.id}
-							text={tags.name}
-							name="userHashtagList"
-							value={tags.id}
-						/>
-					))}
-				</div>
-			</Container>
+
+			<Form.TagBoard
+				title="건강 고민"
+				name="userHashtagList"
+				tags={tags ?? []}
+			/>
+
 			<Form.Button text="확인" type="submit" variant="dark" />
 		</Form>
 	);

@@ -1,28 +1,48 @@
 @import "@/styles/variables.scss";
 
 .container {
-	margin-top: 80px;
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 
-	.wrap {
-		background-color: #f6f6f6;
-		border-radius: 20px;
-		display: flex;
-		gap: 20px;
-		padding: 20px;
+  .wrap {
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
 
-		.text {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-		}
+    .profileImage {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-		& > img {
-			width: 40px;
-			height: 40px;
-			border-radius: 50px;
-		}
-	}
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .usernameTag {
+        display: flex;
+        gap: 10px;
+      }
+
+      .tagWrap {
+        display: flex;
+        gap: 10px;
+      }
+    }
+
+    &>img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+    }
+  }
 }
