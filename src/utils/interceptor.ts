@@ -39,7 +39,7 @@ export const rejectInterceptor = (
 	} = error;
 
 	const authData: AuthResponse = data as AuthResponse;
-	
+
 	// 토큰 만료 시
 	if (status === 401) {
 		if (authData.message && authData.message === "만료된 토큰입니다.") {
@@ -56,10 +56,10 @@ export const rejectInterceptor = (
 		}
 	}
 
-  if (status === 400 && authData.message) {
-    showToast({ type: "error", message: authData.message[0] });
-  }
-  
+	if (status === 400 && authData.message) {
+		showToast({ type: "error", message: authData.message[0] });
+	}
+
 	if (authData.message) {
 		showToast({ type: "error", message: authData.message[0] });
 	}
@@ -69,24 +69,60 @@ export const rejectInterceptor = (
 
 async function handleTokenRefresh(
 	config: InternalAxiosRequestConfig | undefined,
-): Promise<AxiosResponse> {
-	if (!config) throw new Error("토큰 갱신을 위한 설정이 없습니다.");
-
-	// 리프레시 만료되었는지 확인
-	const tokenRefreshResult = await axios.get("/refresh-token");
-	if (tokenRefreshResult.status === 200) {
-		const { accessToken } = tokenRefreshResult.data;
-
-		// 로컬 스토리지에 access 갱신
-		setAccessToken(accessToken);
-
-		// 가져온 응답으로 헤더 갱신
-		if (config.headers) {
-			config.headers["Authorization"] = `Bearer ${accessToken}`;
-		}
-		return axios(config);
-	} else {
+): Promise<AxiosResponse | void> {
+	if (!config) {
 		logout();
-		throw new Error("토큰 갱신에 실패했습니다.");
+		showToast({
+			type: "error",
+			message: "토큰 갱신을 위한 설정이 없습니다.",
+		});
+		throw new Error("토큰 갱신을 위한 설정이 없습니다.");
+	}
+
+	try {
+		// 리프레시 만료되었는지 확인
+		// /user/createAccessByRefresh
+		const tokenRefreshResult = await axios.post(
+			"/user/createAccessByRefresh",
+			{},
+			{
+				withCredentials: true,
+			},
+		);
+		if (tokenRefreshResult.status === 200) {
+			const accessToken = tokenRefreshResult.headers["authorization"];
+
+			if (!accessToken) {
+				showToast({
+					type: "error",
+					message: "새 액세스 토큰을 받아오는 데 실패했습니다.",
+				});
+				logout();
+			}
+
+			// 로컬 스토리지에 access 갱신
+			const token = accessToken.startsWith("Bearer ");
+			console.log(token);
+			setAccessToken(token.slice(7));
+
+			// 가져온 응답으로 헤더 갱신
+			if (config.headers) {
+				config.headers["Authorization"] = `Bearer ${accessToken}`;
+			}
+			return axios(config);
+		} else {
+			logout();
+			showToast({
+				type: "error",
+				message: "세션 만료. 다시 로그인 해주세요.",
+			});
+			return Promise.reject(new Error("토큰 갱신에 실패했습니다."));
+		}
+	} catch (error) {
+		logout();
+		showToast({
+			type: "error",
+			message: "세션 만료. 다시 로그인 해주세요.",
+		});
 	}
 }

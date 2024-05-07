@@ -9,14 +9,20 @@ const likedItem = likedData.likedSupplement;
 const LikedItem = () => {
 	const navigate = useNavigate();
 	return (
-		<section>
+		<section className={style.likedSection}>
 			<CommonHeaderBox
 				titleText="관심 영양제"
 				count={likedItem.length}
 				className={style.header}
 			/>
 
-			<div className={`${style.cardGrid}}`}>
+			<div
+				style={{
+					display: "grid",
+					gridTemplateColumns: "repeat(2, 1fr)",
+					marginTop: "20rem",
+				}}
+			>
 				{likedItem.map((cardInfo, likedItemId) => (
 					<CommonCardBox
 						key={likedItemId}

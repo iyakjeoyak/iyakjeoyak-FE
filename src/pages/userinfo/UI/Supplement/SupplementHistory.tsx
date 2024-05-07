@@ -50,7 +50,8 @@ const SupplementHistory = () => {
 		const fetchSupplement = async () => {
 			try {
 				const userSupplement = await getUserSupplement({ page: 0, size: 10 });
-				set;
+				setSupplmentData(userSupplement);
+				console.log(userSupplement);
 			} catch (error) {
 				showToast({
 					type: "error",
@@ -58,7 +59,8 @@ const SupplementHistory = () => {
 				});
 			}
 		};
-	});
+		fetchSupplement();
+	}, []);
 
 	const supplemenRecorddata = supplementRecords.mySupplements;
 	const count = supplementRecords.mySupplements.length;
@@ -98,7 +100,7 @@ const SupplementHistory = () => {
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplemenRecorddata.map((cardInfo, mySupplementId) => (
+							{supplementData?.map((cardInfo, mySupplementId) => (
 								<CommonCardBox
 									key={mySupplementId}
 									form={cardForm}

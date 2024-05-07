@@ -6,6 +6,7 @@ import useOpen from "@/hooks/useOpen";
 import Modal from "@/components/Modal";
 import { ReviewDisplayProps } from "../../userInfoType";
 import { ReviewDetailModal } from "@/pages/detail/UI";
+import formatDate from "@/utils/formatDate";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
@@ -42,7 +43,7 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 									<div className={style.reviewTextBox}>
 										<div className={style.reviewText}>{review.content}</div>
 										<div className={style.reviewDate}>
-											{review.createdDate}{" "}
+											{formatDate(review.createdDate)}{" "}
 										</div>
 									</div>
 								</div>

@@ -1,18 +1,22 @@
 export interface ReviewType {
-	date: string;
-	history?: string;
+	id: number;
+	title: string;
+	content: string;
+	star: number;
+	createDate: string;
+	modifiedDate: string;
 }
 
+export interface SupplementType {
+	id: number;
+	medicineName: string;
+	grade: string;
+	expirationDate: string;
+}
 export interface ReviewDetail {
 	date: string;
 	content: string;
 	rating: number;
-}
-
-export interface SupplementType {
-	name: string;
-	frequency?: string;
-	rating?: number;
 }
 
 export interface SupplementDetail {
@@ -22,17 +26,29 @@ export interface SupplementDetail {
 	effect: string;
 }
 
-export interface UserData {
+export interface UserResult {
+	userId: number;
+	username: string;
 	gender: string;
 	age: number;
-	nickname: string;
-	email: string;
-	introduce: string;
-	interests: string[];
-	profileImage: string;
-	points: number;
-	latestReviews: ReviewType[];
-	favoriteSupplements: SupplementType[];
+	point?: number;
+	introduce?: string;
+	hashtagList: tagResult[];
+	image?: imageResult;
+}
+
+export interface UserEdit {
+	username: string;
+	gender: string;
+	age: number;
+	introduce?: string;
+	hashtagList: tagResult[];
+	image?: imageEdit;
+}
+export interface UserData {
+	userResult: UserResult;
+	latestReviews?: ReviewType[];
+	favoriteSupplements?: SupplementType[];
 }
 
 export interface ReviewTag {
@@ -68,6 +84,11 @@ export interface tagResult {
 export interface imageResult {
 	id: number;
 	fullPath: string;
+}
+
+export interface imageEdit {
+	id: number;
+	fullPath?: string | File | null;
 }
 export interface DetailedReview {
 	id: number;

@@ -1,7 +1,7 @@
 import HeartIcon from "@/assets/icons/HeartIcon";
 import Modal from "@/components/Modal";
 import TagCommon from "@/components/Tag";
-import { UserData } from "../userInfoType";
+import { UserData, UserResult } from "../userInfoType";
 import UserInfoEdit from "../UI/UserInfoEdit";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useOpen from "@/hooks/useOpen";
 
 export interface UserInfoBoxProps {
-	userData: UserData;
+	userData: UserResult;
 }
 
 const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
@@ -19,43 +19,55 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 
 	return (
 		<section className={style.mypageContainer}>
-			<div className={style.profileSection}>
-				<img
-					className={style.profilePic}
-					src={userData.profileImage}
-					alt="Profile"
-				/>
-				<div className={style.profileInfo}>
-					<div className={style.nameArea}>
-						<div className={style.nickname}>{userData.nickname}</div>
-						<TagCommon text="허준" size="small" backgroundColor="lightgreen" />
+			<div className={style.profileflexSection}>
+				<div className={style.profileSection}>
+					<img
+						className={style.profilePic}
+						src={userData.image?.fullPath}
+						alt="Profile"
+					/>
+					<div className={style.profileInfo}>
+						<div className={style.nameArea}>
+							<div className={style.nickname}>{userData.username}</div>
+							<TagCommon
+								text="허준"
+								size="small"
+								backgroundColor="lightgreen"
+							/>
+						</div>
+						<div className={style.userIntroduce}>
+							{" "}
+							한 줄 소개를 입력해주세요
+						</div>
+						<Modal
+							isOpen={isOpen}
+							onClose={onClose}
+							toggleOpen={toggleOpen}
+							onOpen={onOpen}
+						>
+							<Modal.Trigger
+								openElement={
+									<div className={style.editprofile}>프로필 수정하기</div>
+								}
+							/>
+							<Modal.Content>
+								<div
+									className={`${style.profileEditModal} ${modalStyle.container} `}
+								>
+									<UserInfoEdit data={userData} />
+								</div>
+							</Modal.Content>
+						</Modal>
 					</div>
-					<div className={style.userIntroduce}> 자기소개글</div>
-					<Modal
-						isOpen={isOpen}
-						onClose={onClose}
-						toggleOpen={toggleOpen}
-						onOpen={onOpen}
-					>
-						<Modal.Trigger
-							openElement={
-								<div className={style.editprofile}>프로필 수정하기</div>
-							}
-						/>
-						<Modal.Content>
-							<div
-								className={` ${modalStyle.container} ${style.profileEditModal}`}
-							>
-								<UserInfoEdit data={userData} />
-							</div>
-						</Modal.Content>
-					</Modal>
-					<div
-						className={style.userLikedSupplement}
-						onClick={() => navigate(routerpaths.LIKEDITEM)}
-					>
-						<HeartIcon />
-						관심 영양제
+				</div>
+				<div
+					className={style.userLikedSupplement}
+					onClick={() => navigate(routerpaths.LIKEDITEM)}
+				>
+					<div className={style.flexBox} />
+					<div className={style.buttonBox}>
+						<HeartIcon width={15} height={15} />
+						<div className={style.likedData}>관심 영양제</div>
 					</div>
 				</div>
 			</div>

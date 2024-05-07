@@ -9,6 +9,11 @@
 	background-color: $white;
 	flex: 1;
 
+	.profileflexSection {
+		display: flex;
+		justify-content: space-between;
+	}
+
 	.profileSection {
 		display: flex;
 		flex-direction: row;
@@ -49,10 +54,17 @@
 				margin-top: 6rem;
 			}
 			.profileEditModal {
-				height: 640rem;
+				height: 600rem;
 				border-top-left-radius: 0px;
 				border-top-right-radius: 0px;
 				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow-y: auto;
+
+				-ms-overflow-style: none;
+				scrollbar-width: none;
 			}
 
 			.editprofile {
@@ -60,6 +72,28 @@
 				color: $black;
 				cursor: pointer;
 			}
+		}
+	}
+
+	.userLikedSupplement {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		width: 95rem;
+		color: $gray6;
+		.flexBox {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 45rem;
+		}
+		.buttonBox {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+		}
+		.likedData {
+			@include mixins.sb-regular;
 		}
 	}
 
@@ -149,9 +183,14 @@
 	padding: 4rem 8rem;
 
 	.sectionName {
+		width: 300rem;
 		@include mixins.sb-medium;
 	}
 	.sectionReviewBox {
+		width: 200rem;
+		justify-content: flex-end;
+		text-align: right;
+		text-overflow: ellipsis;
 		@include mixins.m-medium;
 	}
 

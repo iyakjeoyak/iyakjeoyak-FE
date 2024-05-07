@@ -1,12 +1,7 @@
 import InfoBox from "../InfoBox";
-
-export interface Review {
-	date: string;
-	history?: string;
-}
-
+import { ReviewType } from "../../userInfoType";
 interface ReviewProps {
-	review: Review[];
+	review?: ReviewType[];
 }
 
 const Review = ({ review }: ReviewProps) => {
