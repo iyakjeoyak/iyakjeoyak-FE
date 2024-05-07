@@ -1,20 +1,29 @@
 import * as _ from "lodash";
 
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { FaShare } from "react-icons/fa";
 import IconTag from "@/components/IconTag";
+import { IoMdHeart } from "react-icons/io";
+import ReviewPostModal from "./ReviewPostModal";
 import TagCommon from "@/components/Tag";
 import WriterTitle from "@/components/WriterTitle";
 import copyToClipboard from "@/utils/copyToClipboard";
-import isZero from "@/utils/isZero";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
 import styles from "../styles/ReviewDetailModal.module.scss";
+import { useState } from "react";
 
-export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
+export default function ReviewDetailModal({
+	handleOpenConfirmDelete,
+	reviewId,
+}: {
+	handleOpenConfirmDelete: () => void;
+	reviewId: number;
+}) {
+	const [isEditing, setIsEditing] = useState(false);
+
 	const {
 		data: {
 			content,
@@ -23,8 +32,8 @@ export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
 			imageResult,
 			createdDate,
 			hashtagResult,
-			heartCount,
 			star,
+			isOwner,
 		},
 	} = useQuery(reviewQueryOptions.getReviewById({ reviewId }));
 
@@ -41,12 +50,12 @@ export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
 		likeMutate(reviewId);
 	};
 
+	if (isEditing) {
+		return <ReviewPostModal isEditing reviewId={reviewId} />;
+	}
+
 	return (
 		<article className={styles.container}>
-			<button className={styles.heart} onClick={handleLikeClick}>
-				{isZero(heartCount) ? <IoMdHeartEmpty /> : <IoMdHeart />}
-				{heartCount}
-			</button>
 			<h2>{title}</h2>
 			<WriterTitle
 				userId={createdBy.userId}
@@ -68,30 +77,47 @@ export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
 					<img src={img.fullPath} alt="리뷰 이미지" />
 				))}
 			</div>
-			<div className={styles["button-container"]}>
-				<div className={styles.left}>
-					<IconTag
-						icon={<IoMdHeart />}
-						text="도움돼요"
-						onClick={handleLikeClick}
-					/>
+			{!isOwner && (
+				<div className={styles["icons-container"]}>
+					<div className={styles.left}>
+						<IconTag
+							icon={<IoMdHeart />}
+							text="도움돼요"
+							onClick={handleLikeClick}
+						/>
+						<IconTag
+							icon={<FaShare />}
+							text="공유하기"
+							onClick={() => {
+								const location = window.location.href;
+								copyToClipboard(location);
+							}}
+						/>
+					</div>
 					<IconTag
 						icon={<FaShare />}
-						text="공유하기"
+						text="신고하기"
 						onClick={() => {
-							const location = window.location.href;
-							copyToClipboard(location);
+							console.log("얍");
 						}}
 					/>
 				</div>
-				<IconTag
-					icon={<FaShare />}
-					text="신고하기"
-					onClick={() => {
-						console.log("얍");
-					}}
-				/>
-			</div>
+			)}
+			{isOwner && (
+				<div className={styles["buttons-container"]}>
+					<button className={styles.delete} onClick={handleOpenConfirmDelete}>
+						삭제
+					</button>
+					<button
+						className={styles.edit}
+						onClick={() => {
+							setIsEditing(true);
+						}}
+					>
+						편집
+					</button>
+				</div>
+			)}
 		</article>
 	);
 }

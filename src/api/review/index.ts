@@ -38,6 +38,7 @@ const reviewQueryOptions = {
 				star: 0,
 				modifiedDate: "",
 				imageResult: [],
+				isOwner: false,
 			},
 		}),
 };

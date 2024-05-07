@@ -9,7 +9,6 @@ import {
 } from "react-hook-form";
 
 import { Button } from "./Button";
-import { DevTool } from "@hookform/devtools";
 import { ImgInput } from "@/components/Form/ImgInput";
 import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
@@ -20,6 +19,8 @@ import TagButton from "./TagButton";
 import { Textarea } from "./Textarea";
 import styles from "./index.module.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+// import { DevTool } from "@hookform/devtools";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
