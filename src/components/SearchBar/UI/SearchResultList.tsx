@@ -11,6 +11,7 @@ export default function SearchResultList({
 }) {
 	const navigate = useNavigate();
 
+	const [activeKeywordIndex, setActiveKeywordIndex] = useState<number>(-1);
 	const { currentKeyword, handleCurrentKeyword } = useSelect();
 	const [currentActiveKeyword, setCurrentActiveKeyword] =
 		useState<KeywordResultItemType>({ id: 0, name: "" });
@@ -24,6 +25,21 @@ export default function SearchResultList({
 
 	const handleMouseEnter = (keyword: KeywordResultItemType) => {
 		setCurrentActiveKeyword(keyword);
+	};
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (!keywordSearchResult) return;
+		if (event.key === "ArrowDown") {
+			setActiveKeywordIndex((prevIndex) =>
+				Math.min(prevIndex + 1, keywordSearchResult.length - 1),
+			);
+		} else if (event.key === "ArrowUp") {
+			setActiveKeywordIndex((prevIndex) => Math.max(prevIndex - 1, -1));
+		} else if (event.key === "Enter") {
+			if (activeKeywordIndex !== -1) {
+				handleSearchKeywordSelected(keywordSearchResult[activeKeywordIndex]);
+			}
+		}
 	};
 
 	return (
@@ -41,6 +57,7 @@ export default function SearchResultList({
 					onMouseEnter={() => {
 						handleMouseEnter(keyword);
 					}}
+					onKeyDown={handleKeyDown}
 				>
 					{keyword.name.split(currentKeyword.name)[0]}
 					<span>{currentKeyword.name}</span>

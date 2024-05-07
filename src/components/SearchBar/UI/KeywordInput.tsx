@@ -15,6 +15,12 @@ export default function KeywordInput({
 }: KeywordInputProps) {
 	const { currentKeyword, handleCurrentKeyword } = useSelect();
 
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter" && currentKeyword.name.length > 2) {
+			onClick(currentKeyword.name);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<input
@@ -24,6 +30,7 @@ export default function KeywordInput({
 					onChange(e.target.value);
 				}}
 				placeholder={placeholder}
+				onKeyDown={handleKeyPress}
 			/>
 			<button
 				onClick={() => {

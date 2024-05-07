@@ -15,7 +15,7 @@ const PickedMedicineBoard = () => {
 				medicines
 					?.slice(0, 1)
 					.map((medicine) => (
-						<PickedMedicine key={medicine.id} medicine={medicine} />
+						<PickedMedicine key={medicine.ranking} medicine={medicine} />
 					))}
 		</div>
 	);

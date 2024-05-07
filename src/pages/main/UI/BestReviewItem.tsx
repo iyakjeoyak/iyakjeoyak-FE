@@ -19,7 +19,9 @@ export default function BestReviewItem({
 		>
 			<img
 				className={styles.img}
-				src="https://picsum.photos/200/300"
+				src={
+					review?.imageResult[0]?.fullPath ?? "https://picsum.photos/200/300"
+				}
 				alt={review.title}
 			/>
 			<div className={styles["content-container"]}>

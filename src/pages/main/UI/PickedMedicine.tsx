@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function PickedMedicine({
 	medicine,
 }: {
-	medicine: MedicineDetailItemType;
+	medicine: { ranking: number; medicine: MedicineDetailItemType };
 }) {
 	const navigate = useNavigate();
 
@@ -19,7 +19,8 @@ export default function PickedMedicine({
 		grade,
 		reviewCount,
 		bssh_NM: brand,
-	} = medicine;
+		image,
+	} = medicine.medicine;
 
 	return (
 		<article className={styles.container}>
@@ -37,7 +38,7 @@ export default function PickedMedicine({
 				}}
 			>
 				<img
-					src="/images/no_medicine_img.jpg"
+					src={image?.fullPath ?? "/images/no_medicine_img.jpg"}
 					alt="약 이름"
 					width={140}
 					height={180}
