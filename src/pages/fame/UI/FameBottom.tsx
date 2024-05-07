@@ -1,5 +1,4 @@
 import TagCommon from "@/components/Tag";
-import { Link } from "react-router-dom";
 import styles from "@/pages/fame/styles/FameBottom.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { fameQueryOptions } from "@/api/fame";
@@ -22,14 +21,23 @@ export function FameBottom() {
 						}}
 					></div>
 					<div className={styles.text}>
-						<div>{user.username}</div>
-						<Link to={user.blog}>블로그</Link>
+						<div className={styles.usernameTag}>
+							<div>{user.nickname}</div>
+							{index === 0 && (
+								<TagCommon text="허준" size="small" backgroundColor="green" />
+							)}
+						</div>
+
+						{/* <div className={styles.tagWrap}>
+							{user.hashtagList.map((hashtag: any) => (
+								<TagCommon
+									key={hashtag.id}
+									text={hashtag.name}
+									backgroundColor="white"
+								></TagCommon>
+							))}
+						</div> */}
 					</div>
-					{index === 0 && (
-						<Link to="">
-							<TagCommon text="허준" size="small" backgroundColor="green" />
-						</Link>
-					)}
 				</li>
 			))}
 		</ul>

@@ -12,9 +12,9 @@ import { handleKakaoLogin } from "../utils/getKakaoAuthUrl";
 import { handleGoogleLogin } from "../utils/getGoogleAuthUrl";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { setAccessToken } from "@/utils/getToken";
-import styles from "../styles/Login.module.scss";
 import { toast } from "react-toastify";
 import PATHS from "@/constants/PATHS";
+import styles from "../styles/Login.module.scss";
 
 export default function Login() {
 	const navigate = useNavigate();
