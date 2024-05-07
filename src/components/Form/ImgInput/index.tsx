@@ -5,7 +5,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import getImgPreview from "@/utils/getImgPreview";
 import { useRef, useState } from "react";
 import styles from "@/components/Form/ImgInput/index.module.scss";
-import ImageWithDefault from "@/utils/ImageWithDefault";
+import ImageWithDefault from "@/components/ImageWithDefault";
 
 interface ImgInput {
 	name: string;

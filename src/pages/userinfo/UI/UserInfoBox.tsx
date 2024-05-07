@@ -1,7 +1,7 @@
 import HeartIcon from "@/assets/icons/HeartIcon";
 import Modal from "@/components/Modal";
 import TagCommon from "@/components/Tag";
-import { UserData, UserResult } from "../userInfoType";
+import { UserResult } from "../userInfoType";
 import UserInfoEdit from "../UI/UserInfoEdit";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
@@ -28,7 +28,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 					/>
 					<div className={style.profileInfo}>
 						<div className={style.nameArea}>
-							<div className={style.nickname}>{userData.username}</div>
+							<div className={style.nickname}>{userData.nickname}</div>
 							<TagCommon
 								text="허준"
 								size="small"
@@ -36,8 +36,9 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 							/>
 						</div>
 						<div className={style.userIntroduce}>
-							{" "}
-							한 줄 소개를 입력해주세요
+							{userData.introduce
+								? userData.introduce
+								: "한 줄 소개를 입력해주세요"}
 						</div>
 						<Modal
 							isOpen={isOpen}
@@ -54,15 +55,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 								<div
 									className={`${style.profileEditModal} ${modalStyle.container} `}
 								>
-									<UserInfoEdit
-										data={{
-											...userData,
-											nickname: userData.username,
-											hashtagResultList: userData.hashtagList?.map(
-												(tag) => tag.id,
-											),
-										}}
-									/>
+									<UserInfoEdit data={userData} />
 								</div>
 							</Modal.Content>
 						</Modal>

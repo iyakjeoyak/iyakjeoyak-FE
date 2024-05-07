@@ -32,7 +32,7 @@ export interface tagResult {
 }
 export interface UserResult {
 	userId: number;
-	username: string;
+	nickname: string;
 	gender: string;
 	age: number;
 	point?: number;
@@ -42,7 +42,7 @@ export interface UserResult {
 }
 
 export interface UserEdit {
-	username: string;
+	nickname: string;
 	gender: string;
 	age: number;
 	introduce?: string;

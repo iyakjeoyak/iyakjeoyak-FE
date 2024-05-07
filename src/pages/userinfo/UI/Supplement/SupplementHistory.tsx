@@ -3,15 +3,14 @@ import "@styles/global.scss";
 import { useEffect, useState } from "react";
 
 import CommonCardBox from "../CommonCardBox";
-import CommonHeaderBox from "../CommonHeaderBox";
-import GridIcon from "@/pages/userinfo/assets/GridIcon";
-import ListIcon from "../../assets/ListIcon";
+// import CommonHeaderBox from "../CommonHeaderBox";
+// import GridIcon from "@/pages/userinfo/assets/GridIcon";
+// import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import SupplementEditForm from "./SupplementEditForm";
-import { ShortSupplementInfo, SupplementInfo } from "../../userInfoType";
+import { ShortSupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
-import { supplementRecords } from "../../mockData";
 import useOpen from "@/hooks/useOpen";
 import { showToast } from "@/utils/ToastConfig";
 import getUserSupplement from "@/api/useInfo/getUserSupplement";
@@ -40,7 +39,8 @@ const SupplementHistory = () => {
 		toggleOpen: toggleOpenEditSupplement,
 	} = useOpen();
 
-	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+	// const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+	const [cardForm, _] = useState<"slim" | "wide">("slim");
 	const [supplementData, setSupplmentData] = useState<
 		ShortSupplementInfo[] | null
 	>(null);
@@ -64,11 +64,11 @@ const SupplementHistory = () => {
 	}, []);
 
 	// const supplemenRecorddata = supplementRecords.mySupplements;
-	const count = supplementRecords.mySupplements.length;
+	// const count = supplementRecords.mySupplements.length;
 
-	const onChangeCardStyle = () => {
-		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
-	};
+	// const onChangeCardStyle = () => {
+	// 	setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
+	// };
 
 	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
@@ -84,13 +84,13 @@ const SupplementHistory = () => {
 
 	return (
 		<section className={style.userSupplementContainer}>
-			<CommonHeaderBox
+			{/* <CommonHeaderBox
 				titleText="복용 중인 영양제"
-				count={count}
+				// count={count}
 				Icon={cardForm === "slim" ? ListIcon : GridIcon}
 				onClick={onChangeCardStyle}
 				className={style.header}
-			/>
+			/> */}
 
 			<Modal
 				isOpen={isOpenSupplement}

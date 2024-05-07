@@ -5,8 +5,8 @@ import { SupplementInfo } from "../../userInfoType";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
 import { useState } from "react";
-import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
-import { queryClient } from "@/main";
+// import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+// import { queryClient } from "@/main";
 
 const supplementValidationSchema = yup.object().shape({
 	name: yup.string().required("Name is required"),
@@ -28,8 +28,8 @@ const SupplementEditForm = ({
 	onSubmit,
 }: SupplementEditFormProps) => {
 	const navigate = useNavigate();
-	const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
-	const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	// const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
+	const [_, setKeywordSearchResult] = useState<string[]>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
@@ -41,8 +41,8 @@ const SupplementEditForm = ({
 			setKeywordSearchResult([]);
 			return;
 		}
-		const response = await getAutoCompleteResult({ keyword });
-		setKeywordSearchResult(response);
+		// const response = await getAutoCompleteResult({ keyword });
+		// setKeywordSearchResult(response);
 	};
 
 	// const toggleIsTagsModalOpen = () => {
@@ -68,7 +68,7 @@ const SupplementEditForm = ({
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
 				/>
-				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
+				{/* <SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} /> */}
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
 

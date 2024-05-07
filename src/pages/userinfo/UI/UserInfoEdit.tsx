@@ -1,22 +1,12 @@
-import { useRef, useState } from "react";
 import style from "../style/userinfoedit.module.scss";
-import { UserData, UserResult } from "../userInfoType";
+import { UserResult } from "../userInfoType";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
-import Container from "@/components/Form/Container";
-import { tagData } from "@/components/Form/TagButton/TagData";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { showToast } from "@/utils/ToastConfig";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
 import transformSubmmit from "../utils/transformSubmmit";
-
-const imageSchema = yup
-	.object()
-	.shape({
-		id: yup.number().required(),
-		fullPath: yup.mixed().required(),
-	})
-	.default({ id: 0, fullPath: "images/no_profile_image.png" });
+import commonQueryOptions from "@/api/common";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -39,31 +29,31 @@ const userInfoSchema = yup.object().shape({
 		.integer("나이를 정수로 입력하세요.")
 		.positive("나이는 양수여야 합니다.")
 		.required("나이를 입력하세요."),
-	image: imageSchema,
+
+	imgFile: yup.mixed<File>().nullable(),
 
 	hashtagResultList: yup
 		.array()
 		.of(yup.number().required())
-		.required()
 		.min(1, "태그를 선택하세요.")
-		.default(() => [])
-		.notRequired(),
+		.required("태그 선택하시든가"),
 });
 
 interface MyPageEditProps {
-	data: UserEdit;
+	data: UserResult;
 }
 interface imageEdit {
 	id: number;
 	fullPath: File;
 }
+
 export interface UserSubmmit {
 	nickname: string;
 	gender: string;
 	age: number;
 	introduce?: string;
 	hashtagResultList: number[];
-	imageFile: imageEdit;
+	imgFile: File | null;
 }
 
 export interface UserEdit {
@@ -80,24 +70,18 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 		mutationFn: patchUserInfo,
 	});
 
-	const onSubmit = (data: UserSubmmit) => {
-		const { imageFile, hashtagResultList, ...jsonData } = data;
+	const submmitData = transformSubmmit(data);
 
+	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+
+	const onSubmit = (submmitData: UserSubmmit) => {
+		const { imgFile, ...jsonData } = submmitData;
+		console.log(imgFile);
 		// const userSumbmmitData = transformSubmmit(data)
-
-		if (hashtagResultList) {
-			data.hashtagResultList = [];
-		}
-
-		const imageToSubmit =
-			data.imageFile && data.imageFile.fullPath
-				? data.imageFile
-				: { id: 0, fullPath: "images/no_profile_image.png" };
 
 		const formData = new FormData();
 		const userEditPayload = {
 			...jsonData,
-			image: imageToSubmit,
 		};
 
 		formData.append(
@@ -105,11 +89,9 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 			new Blob([JSON.stringify(userEditPayload)], { type: "application/json" }),
 		);
 
-		if (imageFile.fullPath instanceof File) {
-			formData.append("imageFile", imageFile.fullPath);
-		}
+		formData.append("imgFile", imgFile || "");
 
-		console.log("formdata", formData);
+		console.log("formdata", formData.get("imageFile"));
 
 		mutate(formData, {
 			onSuccess: () => {
@@ -127,26 +109,26 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 	return (
 		<Form
 			validationSchema={userInfoSchema}
-			pageDefaultValues={data}
+			pageDefaultValues={submmitData}
 			onSubmit={onSubmit}
 			className={style.mypageEditContainer}
 		>
 			<section className={style.profilePicEdit}>
-				<Form.ImgInput name="image" title="내 프로필" />
+				<Form.ImgInput name="imgFile" title="내 프로필" />
 			</section>
 			<section className={style.profileInfoEdit}>
 				<Form.Input
 					name="nickname"
 					title="닉네임"
 					placeholder="닉네임을 입력해주세요."
-					defaultValue={data.nickname}
+					defaultValue={submmitData.nickname}
 					className={style.inputStyle}
 				/>
 				<Form.Input
 					name="introduce"
 					title="한줄 소개"
 					placeholder="한줄 소개를 입력해주세요."
-					defaultValue={data.introduce}
+					defaultValue={submmitData.introduce}
 					className={style.inputStylse}
 				/>
 
@@ -162,24 +144,16 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 					title="만 나이"
 					type="number"
 					placeholder="만 나이를 입력해주세요."
-					defaultValue={data.age}
+					defaultValue={submmitData.age}
 					className={style.inputStyle}
 				/>
 			</section>
 
-			<Container title="건강 고민" name="hashtagList">
-				<div className={`${style.tagWrap}`}>
-					{tagData.map((tags) => (
-						<Form.TagButton
-							key={tags.id}
-							text={tags.name}
-							name="hashtagList"
-							value={tags.id}
-						/>
-					))}
-				</div>
-			</Container>
-
+			<Form.TagBoard
+				title="태그 리스트"
+				tags={tags ?? []}
+				name="hashtagResultList"
+			/>
 			<Form.Button type="submit" variant="dark" text="저장" />
 			<button onClick={() => mutate(new FormData())}>테스트 호출</button>
 		</Form>

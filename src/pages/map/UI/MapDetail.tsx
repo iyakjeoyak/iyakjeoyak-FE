@@ -95,7 +95,10 @@ const MapDetail = () => {
 							<div key={hour.dayOfWeek} className={style.timeBox}>
 								<div className={style.timeElement}>
 									{" "}
-									{dayOfWeekMap[hour.dayOfWeek]} 요일
+									{
+										dayOfWeekMap[hour.dayOfWeek as keyof typeof dayOfWeekMap]
+									}{" "}
+									요일
 								</div>
 								<div className={style.timeElement}>
 									{" "}

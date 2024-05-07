@@ -2,33 +2,33 @@ import { LazyMotion, m, AnimatePresence, domMax } from "framer-motion";
 import { useState } from "react";
 import style from "../styles/likedpharmacy.module.scss";
 import stopEvent from "@/utils/stopEvent";
-import getLikedPharmacy from "@/api/map/getLikedPharmacy";
-import { showToast } from "@/utils/ToastConfig";
-import { useMutation } from "@tanstack/react-query";
+// import getLikedPharmacy from "@/api/map/getLikedPharmacy";
+// import { showToast } from "@/utils/ToastConfig";
+// import { useMutation } from "@tanstack/react-query";
 import { PharmacyDetailType } from "../mapTypes";
 
 const LikedPharmacy = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [likedData, setLikedData] = useState<PharmacyDetailType[]>([]);
+	const [likedData, _] = useState<PharmacyDetailType[]>([]);
 
-	const { mutate } = useMutation({
-		mutationFn: ({ page, size }: { page: number; size: number }) =>
-			getLikedPharmacy(page, size),
-		onSuccess: (data) => {
-			setLikedData(data);
-			console.log(likedData);
-		},
-		onError: () => {
-			showToast({
-				type: "error",
-				message: "저장된 약국 정보를 가져오는데 실패했습니다.",
-			});
-		},
-	});
+	// const { mutate } = useMutation({
+	// 	mutationFn: ({ page, size }: { page: number; size: number }) =>
+	// 		getLikedPharmacy(page, size),
+	// 	onSuccess: (data) => {
+	// 		setLikedData(data);
+	// 		console.log(likedData);
+	// 	},
+	// 	onError: () => {
+	// 		showToast({
+	// 			type: "error",
+	// 			message: "저장된 약국 정보를 가져오는데 실패했습니다.",
+	// 		});
+	// 	},
+	// });
 
-	const likedPharmacyData = (page: number, size: number) => {
-		mutate({ page, size });
-	};
+	// const likedPharmacyData = (page: number, size: number) => {
+	// 	mutate({ page, size });
+	// };
 
 	return (
 		<>
@@ -48,7 +48,7 @@ const LikedPharmacy = () => {
 							exit={{ y: "30%" }}
 							drag="y"
 							dragConstraints={{ top: 30, bottom: 0 }}
-							onDragEnd={(evet, info) => {
+							onDragEnd={(_, info) => {
 								if (info.offset.y > 40) {
 									setIsOpen(false);
 								} else {

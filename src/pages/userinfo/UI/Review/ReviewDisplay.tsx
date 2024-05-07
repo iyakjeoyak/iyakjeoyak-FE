@@ -29,7 +29,7 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 							>
 								<div className={style.reviewHeadArea}>
 									<div className={style.supplementName}>
-										{review.medicine.prodlst_NM}
+										{review.medicine.prdlst_NM}
 									</div>
 									<StarRating filledStars={4.5} size={20} />
 								</div>

@@ -9,7 +9,6 @@ import {
 } from "react-hook-form";
 
 import { Button } from "./Button";
-import { DevTool } from "@hookform/devtools";
 import { ImgInput } from "@/components/Form/ImgInput";
 import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
@@ -23,7 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
-	validationSchema: yup.ObjectSchema<T>; // 폼 유효성 검사 스키마
+	validationSchema: yup.ObjectSchema<T>;
 	pageDefaultValues: DefaultValues<T>;
 	className?: string;
 	onSubmit?: (data: T) => void;
@@ -41,8 +40,6 @@ export const Form = <T extends FieldValues>({
 		resolver: yupResolver(validationSchema) as unknown as Resolver<T>, // yup 스키마를 해결하는 resolver 설정
 		defaultValues: pageDefaultValues,
 	});
-
-	console.log("yup", methods.formState.errors);
 
 	if (!onSubmit) {
 		return <FormProvider {...methods}>{children}</FormProvider>;
