@@ -25,6 +25,7 @@ export interface MedicineItemType {
 	grade: number; // 리뷰 평점
 	hashtags: TagType[]; // 해시 태그 모음
 	reviewCount: number; // 후기 수
+	image: ImageType;
 }
 
 export interface MedicineDetailItemType extends MedicineItemType {

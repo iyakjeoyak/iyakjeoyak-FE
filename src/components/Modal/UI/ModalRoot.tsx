@@ -1,5 +1,4 @@
 import { ModalContext } from "../hooks/useModal";
-import { useState } from "react";
 
 interface ModalRootProps {
 	isOpen: boolean;

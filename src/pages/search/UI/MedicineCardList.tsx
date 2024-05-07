@@ -9,7 +9,6 @@ import SelectSort from "@/components/SelectSort";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import axios from "@/api/axiosConfig";
-import isZero from "@/utils/isZero";
 import qs from "qs";
 import { queryClient } from "@/main";
 import styles from "../styles/MedicineCardList.module.scss";
@@ -92,7 +91,6 @@ const getMedicinesByQuery = async ({
 }: {
 	pageParam?: { queryParams: string };
 }) => {
-	console.log(pageParam?.queryParams);
 	const res = await axios.get<ResponsePagenation<MedicineItemType>>(
 		`/medicine/query${pageParam?.queryParams}`,
 	);
@@ -130,7 +128,7 @@ export default function MedicineCardList({
 		queryFn: getMedicinesByQuery,
 		getNextPageParam: (_data) => {
 			const nextPageQueryString = qs.stringify(
-				{ ...nextPageParams, page: _data.number },
+				{ ...nextPageParams, page: _data.number + 1 },
 				{ addQueryPrefix: true },
 			);
 
@@ -197,17 +195,32 @@ export default function MedicineCardList({
 				</SelectSort.SortOptionList>
 			</SelectSort>
 			<div className={styles.container}>
-				{!data || isZero(data.medicines.length) ? (
-					<BlankBox text="검색된 영양제가 없습니다" />
-				) : (
-					data.medicines.map((medicineItem) => (
-						<MedicineCardItem
-							key={medicineItem.id}
-							medicineItem={medicineItem}
-						/>
-					))
+				{!isFetching && data && data?.medicines.length === 0 && (
+					<div style={{ paddingTop: "200px" }}>
+						<BlankBox text="검색된 영양제가 없습니다" />
+					</div>
 				)}
-				{isFetching ? <Loading /> : <div ref={bottom} />}
+				{data &&
+					data.medicines.length !== 0 &&
+					// TODO ${medicineItem.id}${data?.medicines.length}도 same key 경고, index밖에 없나? 초기화해서 괜찮나? 근데 생각해보니까 뒤로 쌓여서 index는 유지되겠넹
+					data.medicines.map((medicineItem, index) => (
+						<MedicineCardItem key={index} medicineItem={medicineItem} />
+					))}
+				{isFetching ? (
+					<div
+						style={{
+							paddingTop: "170px",
+							position: "relative",
+							width: "100%",
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<Loading />
+					</div>
+				) : (
+					<div ref={bottom} />
+				)}
 			</div>
 		</article>
 	);

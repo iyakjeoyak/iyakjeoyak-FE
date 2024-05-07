@@ -62,15 +62,6 @@ export const rejectInterceptor = (
 		showToast({ type: "error", message: authData.message[0] });
 	}
 
-	if (
-		status === 403 &&
-		authData.message &&
-		authData.detail === "USER_NOT_FOUND"
-	) {
-		logout();
-		showToast({ type: "error", message: authData.message[0] });
-	}
-
 	if (authData.message) {
 		showToast({ type: "error", message: authData.message[0] });
 	}

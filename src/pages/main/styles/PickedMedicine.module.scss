@@ -2,19 +2,20 @@
 @import "@styles/variables.scss";
 
 .container {
-	// position: absolute;
-	// bottom: 0;
-	// right: 0;
-	// left: 0;
-	// border-top-left-radius: 20px;
-	// border-top-right-radius: 20px;
-	position: relative;
-	border-radius: 20px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	// position: relative;
+	// border-radius: 20px;
 	background-color: $main-lightgreen;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 	padding: 20px;
+	cursor: pointer;
 	.title-container {
 		display: flex;
 		align-items: center;

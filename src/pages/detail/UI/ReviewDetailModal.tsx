@@ -3,8 +3,11 @@ import * as _ from "lodash";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
+import { FaShare } from "react-icons/fa";
+import IconTag from "@/components/IconTag";
 import TagCommon from "@/components/Tag";
 import WriterTitle from "@/components/WriterTitle";
+import copyToClipboard from "@/utils/copyToClipboard";
 import isZero from "@/utils/isZero";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
@@ -54,11 +57,41 @@ export default function ReviewDetailModal({ reviewId }: { reviewId: number }) {
 			/>
 			{hashtagResult.length !== 0 && (
 				<div className={styles.tags}>
-					{hashtagResult?.map((tag) => <TagCommon text={tag.name} />)}
+					{hashtagResult?.map((tag) => (
+						<TagCommon key={tag.id} text={tag.name} />
+					))}
 				</div>
 			)}
-			<div>{content}</div>
-			{imageResult?.map((img) => <img src={img.fullPath} alt="리뷰 이미지" />)}
+			<div className={styles.content}>{content}</div>
+			<div className={styles.images}>
+				{imageResult?.map((img) => (
+					<img src={img.fullPath} alt="리뷰 이미지" />
+				))}
+			</div>
+			<div className={styles["button-container"]}>
+				<div className={styles.left}>
+					<IconTag
+						icon={<IoMdHeart />}
+						text="도움돼요"
+						onClick={handleLikeClick}
+					/>
+					<IconTag
+						icon={<FaShare />}
+						text="공유하기"
+						onClick={() => {
+							const location = window.location.href;
+							copyToClipboard(location);
+						}}
+					/>
+				</div>
+				<IconTag
+					icon={<FaShare />}
+					text="신고하기"
+					onClick={() => {
+						console.log("얍");
+					}}
+				/>
+			</div>
 		</article>
 	);
 }
