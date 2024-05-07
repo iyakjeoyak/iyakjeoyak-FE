@@ -3,11 +3,11 @@ import { FC, SVGProps } from "react";
 const HeartFilledIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
-			className="w-6 h-6 text-gray-800 dark:text-white"
+			className="text-gray-800 dark:text-white"
 			aria-hidden="true"
 			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
+			width={props.width}
+			height={props.height}
 			fill="currentColor"
 			viewBox="0 0 24 24"
 			{...props}

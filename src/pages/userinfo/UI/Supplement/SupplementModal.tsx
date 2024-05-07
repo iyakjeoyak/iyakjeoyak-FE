@@ -1,7 +1,7 @@
 import SupplementDetailView from "./SupplementDetail";
 import SupplementEditForm from "./SupplementEditForm";
 import { SupplementInfo } from "../../userInfoType";
-import { supplementRecords as data } from "../../mockData";
+import { supplementRecords as data } from "../../utils/mockData";
 import { useState } from "react";
 
 interface SupplementDetailModalProps {

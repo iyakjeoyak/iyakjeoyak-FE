@@ -24,7 +24,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
-	validationSchema: yup.ObjectSchema<T>; // 폼 유효성 검사 스키마
+	validationSchema: yup.ObjectSchema<T>;
 	pageDefaultValues: DefaultValues<T>;
 	className?: string;
 	onSubmit?: (data: T) => void;
@@ -46,6 +46,7 @@ export const Form = <T extends FieldValues>({
 	if (!onSubmit) {
 		return <FormProvider {...methods}>{children}</FormProvider>;
 	}
+	console.log("먼데");
 	return (
 		<FormProvider {...methods}>
 			<form

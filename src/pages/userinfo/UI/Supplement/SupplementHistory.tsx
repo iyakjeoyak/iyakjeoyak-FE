@@ -3,16 +3,17 @@ import "@styles/global.scss";
 import { useEffect, useState } from "react";
 
 import CommonCardBox from "../CommonCardBox";
-import CommonHeaderBox from "../CommonHeaderBox";
-import GridIcon from "@/pages/userinfo/assets/GridIcon";
-import ListIcon from "../../assets/ListIcon";
+// import CommonHeaderBox from "../CommonHeaderBox";
+// import GridIcon from "@/pages/userinfo/assets/GridIcon";
+// import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import SupplementEditForm from "./SupplementEditForm";
-import { SupplementInfo } from "../../userInfoType";
+import { ShortSupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
-import { supplementRecords } from "../../mockData";
 import useOpen from "@/hooks/useOpen";
+import { showToast } from "@/utils/ToastConfig";
+import getUserSupplement from "@/api/useInfo/getUserSupplement";
 
 const noSupplementData = {
 	mySupplementId: 0,
@@ -37,18 +38,39 @@ const SupplementHistory = () => {
 		onOpen: onOpenEditSupplement,
 		toggleOpen: toggleOpenEditSupplement,
 	} = useOpen();
-	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+
+	// const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+	const [cardForm, _] = useState<"slim" | "wide">("slim");
+	const [supplementData, setSupplmentData] = useState<
+		ShortSupplementInfo[] | null
+	>(null);
 	const [selectedSupplement, setSelectedSupplement] =
-		useState<SupplementInfo | null>(null);
+		useState<ShortSupplementInfo | null>(null);
 
-	const supplemenRecorddata = supplementRecords.mySupplements;
-	const count = supplementRecords.mySupplements.length;
+	useEffect(() => {
+		const fetchSupplement = async () => {
+			try {
+				const userSupplement = await getUserSupplement({ page: 0, size: 10 });
+				setSupplmentData(userSupplement.data);
+				console.log(userSupplement);
+			} catch (error) {
+				showToast({
+					type: "error",
+					message: "내 영양제 데이터를 가져오는 중 오류가 발생했습니다.",
+				});
+			}
+		};
+		fetchSupplement();
+	}, []);
 
-	const onChangeCardStyle = () => {
-		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
-	};
+	// const supplemenRecorddata = supplementRecords.mySupplements;
+	// const count = supplementRecords.mySupplements.length;
 
-	const handleCardClick = (supplement: SupplementInfo) => {
+	// const onChangeCardStyle = () => {
+	// 	setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
+	// };
+
+	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
 	};
 
@@ -56,20 +78,19 @@ const SupplementHistory = () => {
 		console.log("폼 제출");
 	};
 
-	console.log(selectedSupplement);
 	useEffect(() => {
 		console.log("state 변화");
 	}, [selectedSupplement]);
 
 	return (
 		<section className={style.userSupplementContainer}>
-			<CommonHeaderBox
+			{/* <CommonHeaderBox
 				titleText="복용 중인 영양제"
-				count={count}
+				// count={count}
 				Icon={cardForm === "slim" ? ListIcon : GridIcon}
 				onClick={onChangeCardStyle}
 				className={style.header}
-			/>
+			/> */}
 
 			<Modal
 				isOpen={isOpenSupplement}
@@ -80,21 +101,22 @@ const SupplementHistory = () => {
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplemenRecorddata.map((cardInfo, mySupplementId) => (
-								<CommonCardBox
-									key={mySupplementId}
-									form={cardForm}
-									onClick={() => handleCardClick(cardInfo)}
-									{...cardInfo}
-								/>
-							))}
+							{supplementData &&
+								supplementData?.map((cardInfo, mySupplementId) => (
+									<CommonCardBox
+										key={mySupplementId}
+										form={cardForm}
+										onClick={() => handleCardClick(cardInfo)}
+										{...cardInfo}
+									/>
+								))}
 						</div>
 					}
 				/>
 
 				<Modal.Content>
 					{selectedSupplement && (
-						<SupplementModal itemId={selectedSupplement.mySupplementId} />
+						<SupplementModal itemId={selectedSupplement.id} />
 					)}
 				</Modal.Content>
 			</Modal>

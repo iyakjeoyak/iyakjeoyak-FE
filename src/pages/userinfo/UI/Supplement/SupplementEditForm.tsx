@@ -1,13 +1,12 @@
-// 앨범과 리스트로 볼 수 있는 내 영양제 부분
-// item 클릭하면 모달 띄워주는데
-// data가 없으면 영양제 추가 모달로, 있으면 데이터 넣어서 보여주기
-// 데이터 있으면 edit 버튼을 누르면 수정될 수 있게
 import { Form } from "@/components/Form";
 import SearchBar from "@/components/SearchBar";
 import { useNavigate } from "react-router-dom";
 import { SupplementInfo } from "../../userInfoType";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
+import { useState } from "react";
+// import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+// import { queryClient } from "@/main";
 
 const supplementValidationSchema = yup.object().shape({
 	name: yup.string().required("Name is required"),
@@ -29,15 +28,28 @@ const SupplementEditForm = ({
 	onSubmit,
 }: SupplementEditFormProps) => {
 	const navigate = useNavigate();
+	// const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
+	const [_, setKeywordSearchResult] = useState<string[]>([]);
+
 	const handleKeywordCompletedClick = (keyword: string) => {
 		navigate(`/search?keyword=${keyword}`);
+		setKeywordSearchResult([]);
 	};
 
-	const handleGetAutoCompleteResults = (keyword: string) => {
-		console.log(keyword, "결과 요청");
-		const result = ["리", "리액", "리액트"];
-		return result;
+	const handleGetAutoCompleteResults = async (keyword: string) => {
+		if (keyword.length <= 2) {
+			setKeywordSearchResult([]);
+			return;
+		}
+		// const response = await getAutoCompleteResult({ keyword });
+		// setKeywordSearchResult(response);
 	};
+
+	// const toggleIsTagsModalOpen = () => {
+	// 	setIsTagsModalOpen((prev) => !prev);
+	// 	if (isTagsModalOpen)
+	// 		queryClient.resetQueries({ queryKey: ["medicine", "medicines"] });
+	// };
 
 	return (
 		<Form
@@ -56,7 +68,7 @@ const SupplementEditForm = ({
 					onClick={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
 				/>
-				<SearchBar.SearchResultList />
+				{/* <SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} /> */}
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
 

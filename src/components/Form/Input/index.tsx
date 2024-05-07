@@ -13,7 +13,7 @@ interface InputProps<T extends GenericStringRecord<T>>
 	className?: string;
 	placeholder: string;
 	title?: string;
-  type?: string;
+	type?: string;
 }
 
 export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
@@ -21,11 +21,11 @@ export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 	className,
 	placeholder,
 	title,
-  type = "text",
-  ...props
+	type = "text",
+	...props
 }: InputProps<T>) => {
-  const { register } = useFormContext();
- 
+	const { register } = useFormContext();
+
 	return (
 		<Container title={title} name={name as keyof T}>
 			<input
@@ -34,7 +34,7 @@ export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 				{...register(name as string)} // 입력 필드를 useForm으로 등록
 				placeholder={placeholder}
 				type={type}
-      />
+			/>
 		</Container>
 	);
 };

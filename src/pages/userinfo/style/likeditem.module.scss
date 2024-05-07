@@ -1,0 +1,29 @@
+.likedSection {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.header {
+	padding-left: 10rem;
+}
+
+.cardContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding-top: 10rem;
+}
+
+.cardTitle {
+	margin-bottom: 5px;
+}
+
+.cardTagBox {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+}
