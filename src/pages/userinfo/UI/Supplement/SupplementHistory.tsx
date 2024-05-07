@@ -8,7 +8,7 @@ import GridIcon from "@/pages/userinfo/assets/GridIcon";
 import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import SupplementEditForm from "./SupplementEditForm";
-import { ShortSupplementProps, SupplementInfo } from "../../userInfoType";
+import { ShortSupplementInfo, SupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
 import { supplementRecords } from "../../mockData";
@@ -41,16 +41,17 @@ const SupplementHistory = () => {
 	} = useOpen();
 
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
-	const [supplementData, setSupplmentData] =
-		useState<ShortSupplementProps | null>(null);
+	const [supplementData, setSupplmentData] = useState<
+		ShortSupplementInfo[] | null
+	>(null);
 	const [selectedSupplement, setSelectedSupplement] =
-		useState<SupplementInfo | null>(null);
+		useState<ShortSupplementInfo | null>(null);
 
 	useEffect(() => {
 		const fetchSupplement = async () => {
 			try {
 				const userSupplement = await getUserSupplement({ page: 0, size: 10 });
-				setSupplmentData(userSupplement);
+				setSupplmentData(userSupplement.data);
 				console.log(userSupplement);
 			} catch (error) {
 				showToast({
@@ -62,14 +63,14 @@ const SupplementHistory = () => {
 		fetchSupplement();
 	}, []);
 
-	const supplemenRecorddata = supplementRecords.mySupplements;
+	// const supplemenRecorddata = supplementRecords.mySupplements;
 	const count = supplementRecords.mySupplements.length;
 
 	const onChangeCardStyle = () => {
 		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
 	};
 
-	const handleCardClick = (supplement: SupplementInfo) => {
+	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
 	};
 
@@ -100,21 +101,22 @@ const SupplementHistory = () => {
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplementData?.map((cardInfo, mySupplementId) => (
-								<CommonCardBox
-									key={mySupplementId}
-									form={cardForm}
-									onClick={() => handleCardClick(cardInfo)}
-									{...cardInfo}
-								/>
-							))}
+							{supplementData &&
+								supplementData?.map((cardInfo, mySupplementId) => (
+									<CommonCardBox
+										key={mySupplementId}
+										form={cardForm}
+										onClick={() => handleCardClick(cardInfo)}
+										{...cardInfo}
+									/>
+								))}
 						</div>
 					}
 				/>
 
 				<Modal.Content>
 					{selectedSupplement && (
-						<SupplementModal itemId={selectedSupplement.mySupplementId} />
+						<SupplementModal itemId={selectedSupplement.id} />
 					)}
 				</Modal.Content>
 			</Modal>

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import style from "../style/userinfoedit.module.scss";
-import { UserData, UserEdit, UserResult } from "../userInfoType";
+import { UserData, UserResult } from "../userInfoType";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
 import Container from "@/components/Form/Container";
@@ -8,22 +8,18 @@ import { tagData } from "@/components/Form/TagButton/TagData";
 import { useMutation } from "@tanstack/react-query";
 import { showToast } from "@/utils/ToastConfig";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
-
-// const tagResultSchema = yup.object().shape({
-// 	id: yup.number().required(),
-// 	name: yup.string().required(),
-// });
+import transformSubmmit from "../utils/transformSubmmit";
 
 const imageSchema = yup
 	.object()
 	.shape({
-		id: yup.number().nullable(),
-		fullPath: yup.mixed().nullable().notRequired(),
+		id: yup.number().required(),
+		fullPath: yup.mixed().required(),
 	})
-	.nullable();
+	.default({ id: 0, fullPath: "images/no_profile_image.png" });
 
 const userInfoSchema = yup.object().shape({
-	username: yup
+	nickname: yup
 		.string()
 		.required("닉네임을 입력하세요.")
 		.min(5, "닉네임은 5자리 이상이어야합니다."),
@@ -44,26 +40,38 @@ const userInfoSchema = yup.object().shape({
 		.positive("나이는 양수여야 합니다.")
 		.required("나이를 입력하세요."),
 	image: imageSchema,
-	hashtagList: yup.array().of(yup.number()).min(1, "태그를 선택하세요."),
+
+	hashtagResultList: yup
+		.array()
+		.of(yup.number().required())
+		.required()
+		.min(1, "태그를 선택하세요.")
+		.default(() => [])
+		.notRequired(),
 });
 
 interface MyPageEditProps {
-	data: UserSubmmit;
+	data: UserEdit;
 }
 interface imageEdit {
-	id?: number;
-	fullPath?: string | File | null;
+	id: number;
+	fullPath: File;
 }
-interface tagResult {
-	id?: number;
-	name?: string;
-}
-interface UserSubmmit {
-	username: string;
+export interface UserSubmmit {
+	nickname: string;
 	gender: string;
 	age: number;
 	introduce?: string;
-	hashtagList: number[];
+	hashtagResultList: number[];
+	imageFile: imageEdit;
+}
+
+export interface UserEdit {
+	nickname: string;
+	gender: string;
+	age: number;
+	introduce?: string;
+	hashtagResultList?: number[];
 	image?: imageEdit;
 }
 
@@ -72,30 +80,42 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 		mutationFn: patchUserInfo,
 	});
 
-	const onSubmit = (data: UserEdit) => {
-		const { image, ...jsonData } = data;
-		console.log("에러나나");
+	const onSubmit = (data: UserSubmmit) => {
+		const { imageFile, hashtagResultList, ...jsonData } = data;
+
+		// const userSumbmmitData = transformSubmmit(data)
+
+		if (hashtagResultList) {
+			data.hashtagResultList = [];
+		}
+
+		const imageToSubmit =
+			data.imageFile && data.imageFile.fullPath
+				? data.imageFile
+				: { id: 0, fullPath: "images/no_profile_image.png" };
 
 		const formData = new FormData();
 		const userEditPayload = {
 			...jsonData,
+			image: imageToSubmit,
 		};
+
 		formData.append(
-			"userJoinPayload",
+			"userEditPayload",
 			new Blob([JSON.stringify(userEditPayload)], { type: "application/json" }),
 		);
-		if (image instanceof File) {
-			formData.append("imgFile", image);
+
+		if (imageFile.fullPath instanceof File) {
+			formData.append("imageFile", imageFile.fullPath);
 		}
 
 		console.log("formdata", formData);
+
 		mutate(formData, {
 			onSuccess: () => {
-				console.log("ajsep");
 				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
 			},
 			onError: () => {
-				console.log("먼데ㄱ");
 				showToast({
 					type: "error",
 					message: "유저 정보가 정상적으로 수정되지 않았습니다.",
@@ -103,8 +123,6 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 			},
 		});
 	};
-
-	// const defaultImage = "/images/no_profile_image.jpg?url";
 
 	return (
 		<Form
@@ -114,14 +132,14 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 			className={style.mypageEditContainer}
 		>
 			<section className={style.profilePicEdit}>
-				<Form.ImgInput name="porfileImage" title="내 프로필" />
+				<Form.ImgInput name="image" title="내 프로필" />
 			</section>
 			<section className={style.profileInfoEdit}>
 				<Form.Input
-					name="username"
+					name="nickname"
 					title="닉네임"
 					placeholder="닉네임을 입력해주세요."
-					defaultValue={data.username}
+					defaultValue={data.nickname}
 					className={style.inputStyle}
 				/>
 				<Form.Input
@@ -151,7 +169,7 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 
 			<Container title="건강 고민" name="hashtagList">
 				<div className={`${style.tagWrap}`}>
-					{tagData?.map((tags) => (
+					{tagData.map((tags) => (
 						<Form.TagButton
 							key={tags.id}
 							text={tags.name}

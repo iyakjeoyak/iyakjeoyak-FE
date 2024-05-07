@@ -22,7 +22,7 @@ const TagCommon: React.FC<TagCommonProps> = ({
 
 	return (
 		<span
-			className={`${className} ${sizeClass} ${backgroundClass}`}
+			className={` ${sizeClass} ${backgroundClass}${className}`}
 			onClick={onClick}
 			style={style}
 		>

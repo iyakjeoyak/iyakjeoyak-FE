@@ -54,7 +54,15 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 								<div
 									className={`${style.profileEditModal} ${modalStyle.container} `}
 								>
-									<UserInfoEdit data={userData} />
+									<UserInfoEdit
+										data={{
+											...userData,
+											nickname: userData.username,
+											hashtagResultList: userData.hashtagList?.map(
+												(tag) => tag.id,
+											),
+										}}
+									/>
 								</div>
 							</Modal.Content>
 						</Modal>

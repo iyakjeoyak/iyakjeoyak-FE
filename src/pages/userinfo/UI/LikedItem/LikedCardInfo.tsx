@@ -10,23 +10,24 @@ export interface LikedItemProps {
 }
 
 const LikedCardInfo = ({ itemName, likedEffect, liked }: LikedItemProps) => {
-	console.log(likedEffect);
 	return (
 		<div className={style.cardContent}>
 			<div className={style.cardTitle}>
 				{itemName && <div className={style.cardTitle}>{itemName}</div>}
-				{liked && <HeartIcon />}
+				{liked && <HeartIcon width={15} height={15} />}
 			</div>
-			{likedEffect &&
-				likedEffect.map((effectItem, index) => (
-					<TagCommon
-						key={index}
-						text={effectItem}
-						backgroundColor="green"
-						size="small"
-						className={style.cardTag}
-					/>
-				))}
+			<div className={style.cardTagBox}>
+				{likedEffect &&
+					likedEffect.map((effectItem, index) => (
+						<TagCommon
+							key={index}
+							text={effectItem}
+							backgroundColor="green"
+							size="small"
+							className={style.cardTag}
+						/>
+					))}
+			</div>
 		</div>
 	);
 };

@@ -9,7 +9,7 @@ export default async function getUserSupplement({
 	page: number;
 }) {
 	const response = await axios.get<ShortSupplementProps>(
-		`/storage?${page}&size=${size}`,
+		`/storage?page=${page}&size=${size}`,
 	);
 	return response.data;
 }

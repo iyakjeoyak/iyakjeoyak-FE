@@ -13,6 +13,8 @@ interface AuthResponse {
 	accessToken?: string;
 	refreshToken?: string;
 	message?: string;
+	detail?: string;
+	code?: string;
 }
 
 export const requestInterceptor = (config: InternalAxiosRequestConfig) => {
@@ -57,6 +59,15 @@ export const rejectInterceptor = (
 	}
 
 	if (status === 400 && authData.message) {
+		showToast({ type: "error", message: authData.message[0] });
+	}
+
+	if (
+		status === 403 &&
+		authData.message &&
+		authData.detail === "USER_NOT_FOUND"
+	) {
+		logout();
 		showToast({ type: "error", message: authData.message[0] });
 	}
 

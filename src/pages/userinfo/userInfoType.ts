@@ -26,6 +26,10 @@ export interface SupplementDetail {
 	effect: string;
 }
 
+export interface tagResult {
+	id: number;
+	name: string;
+}
 export interface UserResult {
 	userId: number;
 	username: string;
@@ -33,7 +37,7 @@ export interface UserResult {
 	age: number;
 	point?: number;
 	introduce?: string;
-	hashtagList: tagResult[];
+	hashtagList?: tagResult[];
 	image?: imageResult;
 }
 
@@ -64,7 +68,7 @@ export interface ReviewImage {
 
 export interface Medicine {
 	id: number;
-	prodlst_NM: string;
+	prdlst_NM: string;
 }
 
 export interface CreateBy {
@@ -74,11 +78,6 @@ export interface CreateBy {
 		id: number;
 		fullPath: "string";
 	};
-}
-
-export interface tagResult {
-	id: number;
-	name: string;
 }
 
 export interface imageResult {
@@ -98,8 +97,8 @@ export interface DetailedReview {
 	heartCount: number;
 	medicine: Medicine;
 	createdBy: CreateBy;
-	modifiedDate: string;
 	createdDate: string;
+	modifiedDate: string;
 	hashtagResult?: tagResult[];
 	imageResult: imageResult[];
 }
@@ -125,11 +124,11 @@ export interface ShortPointHistory {
 export interface PointProps {
 	id: number;
 	domain: string;
-	changeValue: number;
+	changedValue: number;
 	pointSum: number;
 }
 
-export interface PointData {
+export interface pointResult {
 	data: PointProps[];
 	number: number;
 	size: number;
@@ -138,14 +137,20 @@ export interface PointData {
 	numberofElement: number;
 }
 
+export interface PointData {
+	point: number;
+	pageResult: pointResult;
+}
+
 export interface ShortSupplementInfo {
 	id: number;
 	medicineName: string;
+	grade: string;
 	expirationDate: string;
 }
 
 export interface ShortSupplementProps {
-	data: ShortSupplementInfo;
+	data: ShortSupplementInfo[];
 	number: number;
 	size: number;
 	totalPages: number;

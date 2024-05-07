@@ -7,10 +7,14 @@
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	font-weight: bold;
 	padding: 0.1rem 0.1rem;
 	border: 1px solid $gray3;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 @mixin tag-size($width, $height) {
@@ -32,6 +36,8 @@
 		background-color: $white;
 		color: $gray5;
 
+		padding-left: 10rem;
+
 		&:hover {
 			color: $point-blue;
 		}
@@ -45,6 +51,8 @@
 		background-color: $main-green;
 		color: $white;
 		border: 1px solid $main-green;
+
+		padding-left: 5rem;
 	}
 }
 

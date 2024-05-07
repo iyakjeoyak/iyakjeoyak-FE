@@ -21,6 +21,7 @@ const LikedItem = () => {
 					display: "grid",
 					gridTemplateColumns: "repeat(2, 1fr)",
 					marginTop: "20rem",
+					gap: "10rem",
 				}}
 			>
 				{likedItem.map((cardInfo, likedItemId) => (
