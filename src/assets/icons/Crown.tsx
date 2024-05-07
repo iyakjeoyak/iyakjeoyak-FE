@@ -2,8 +2,6 @@ import { FC, SVGProps } from "react";
 const CrownSvg: FC<SVGProps<SVGSVGElement>> = (props, fill) => {
 	return (
 		<svg
-			width="221"
-			height="170"
 			viewBox="0 0 221 170"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

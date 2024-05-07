@@ -2,6 +2,8 @@
 @import "@styles/variables";
 
 .contaier {
+  height: 300px;
+
   .wrap {
     position: relative;
     display: flex;
@@ -9,29 +11,52 @@
     justify-content: center;
   }
 
-  .circle {
+  .crown {
     position: absolute;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+  }
+
+  .userImageWrap {
+    position: relative;
     width: 120px;
     height: 120px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -30%);
+    border-radius: 50%;
+    transform: translate(0, 30%);
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      width: 120px;
+      height: 120px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+
+
+    .gold {
+      color: #ffd700;
+    }
+
+    .silver {
+      color: #c0c0c0
+    }
+
+    .bronze {
+      color: #cd7f32;
+    }
+
+    img {
+      position: absolute;
+      width: 100%;
+    }
   }
 
-  .gold {
-    background-color: #ffd700;
-  }
-
-  .silver {
-    background-color: #c0c0c0;
-  }
-
-  .bronze {
-    background-color: #cd7f32;
-  }
 }

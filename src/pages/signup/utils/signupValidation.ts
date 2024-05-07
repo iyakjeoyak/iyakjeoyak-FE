@@ -20,16 +20,13 @@ export const signUpDefault = {
 	userHashtagList: [], //태그
 };
 const emailCheckRegex =
-  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  
+	/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
 export const signupValidation = yup.object().shape({
 	profileImage: yup.mixed<File>().nullable(),
 	username: yup
 		.string()
-    .matches(
-      emailCheckRegex,
-      "이메일형식에 맞지 않습니다"
-    )
+		.matches(emailCheckRegex, "이메일형식에 맞지 않습니다")
 		.required("이메일을 입력하세요."),
 	password: yup
 		.string()

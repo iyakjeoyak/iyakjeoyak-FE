@@ -6,8 +6,13 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import CrownSvg from "@/assets/icons/Crown";
 import styles from "@/pages/fame/styles/FameTop.module.scss";
+import { fameQueryOptions } from "@/api/fame";
+import { useQuery } from "@tanstack/react-query";
 
 export function FameTop() {
+	const { data: fames } = useQuery(fameQueryOptions.getFame());
+	const topUsers = [...fames].sort((a, b) => b.point - a.point);
+
 	return (
 		<Swiper
 			className={styles.contaier}
@@ -19,18 +24,42 @@ export function FameTop() {
 			autoplay={{ delay: 3000 }}
 			modules={[Pagination, Navigation]}
 		>
-			<SwiperSlide className={`${styles.wrap}`}>
-				<div className={`${styles.circle} ${styles.gold} `}></div>
-				<CrownSvg fill="#ffd700" />
-			</SwiperSlide>
-			<SwiperSlide className={`${styles.wrap}`}>
-				<div className={`${styles.circle} ${styles.silver} `}></div>
-				<CrownSvg fill="#c0c0c0" />
-			</SwiperSlide>
-			<SwiperSlide className={`${styles.wrap}`}>
-				<div className={`${styles.circle} ${styles.bronze} `}></div>
-				<CrownSvg fill="#cd7f32" />
-			</SwiperSlide>
+			{topUsers.slice(0, 3).map((user, index) => (
+				<SwiperSlide
+					key={`${user.userId}-${index}`}
+					className={`${styles.wrap}`}
+				>
+					<CrownSvg
+						fill={index === 0 ? "#ffd700" : index === 1 ? "#c0c0c0" : "#cd7f32"}
+						width="300"
+						className={styles.crown}
+					/>
+					<div
+						className={styles.userImageWrap}
+						style={{
+							background:
+								index === 0 ? "#ffd700" : index === 1 ? "#c0c0c0" : "#cd7f32",
+						}}
+					>
+						<div
+							className={`${styles.circle} ${
+								index === 0
+									? styles.gold
+									: index === 1
+										? styles.silver
+										: styles.bronze
+							}`}
+							style={{
+								backgroundImage: `url(${
+									user.image
+										? user.image.fullPath
+										: "/public/images/FameUser.png"
+								})`,
+							}}
+						></div>
+					</div>
+				</SwiperSlide>
+			))}
 		</Swiper>
 	);
 }
