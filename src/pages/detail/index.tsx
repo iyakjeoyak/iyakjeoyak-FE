@@ -33,6 +33,7 @@ export default function MedicineDetail() {
 
 	const {
 		data: {
+			image,
 			isHeart,
 			id: medicineId,
 			grade,
@@ -44,7 +45,7 @@ export default function MedicineDetail() {
 			indiv_RAWMTRL_NM: ingredient,
 			primary_FNCLTY: describe,
 			isBookMark,
-			reviewList,
+			reviewCount,
 		},
 	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId: id }));
 
@@ -52,14 +53,16 @@ export default function MedicineDetail() {
 		navigate(`/detail/${medicineId}?tap=${tapValue}`);
 	};
 
+	console.log();
 	return (
 		<>
 			<section className={styles.container}>
 				<MedicineCard
+					image={image}
 					name={name}
 					isHeart={isHeart}
 					isBookMark={isBookMark}
-					reviewCount={reviewList.length}
+					reviewCount={reviewCount}
 					brand={brand}
 					hashtags={hashtags.slice(0, 2)}
 					grade={grade}

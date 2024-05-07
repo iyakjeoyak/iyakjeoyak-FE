@@ -54,7 +54,12 @@ export default function PickedMedicine({
 					</div>
 					<div className={styles.tags}>
 						{hashtags.map((tag) => (
-							<TagCommon text={tag.name} size="small" backgroundColor="green" />
+							<TagCommon
+								text={tag.name}
+								key={tag.id}
+								size="small"
+								backgroundColor="green"
+							/>
 						))}
 					</div>
 				</div>

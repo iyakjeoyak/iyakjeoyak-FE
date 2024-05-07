@@ -3,8 +3,14 @@
 .container {
 	display: flex;
 	flex-direction: column;
-  position: relative;
+	position: relative;
 	gap: 15px;
+	.content {
+		border: 1px solid $gray3;
+		min-height: 100px;
+		padding: 10px;
+		border-radius: 10px;
+	}
 	.tags {
 		background-color: $gray0;
 		display: flex;
@@ -12,9 +18,17 @@
 		padding: 10px;
 		border-radius: 10px;
 	}
-  .heart {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  } 
+}
+
+.images {
+	display: flex;
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	.left {
+		display: flex;
+		gap: 15px;
+	}
 }

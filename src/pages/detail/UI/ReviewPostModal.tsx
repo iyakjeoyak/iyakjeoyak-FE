@@ -82,7 +82,14 @@ export default function ReviewPostModal() {
 			<Modal.Content>
 				<Form
 					validationSchema={medicineReviewPostValidation}
-					pageDefaultValues={initialMedicineReviewPostBody}
+					pageDefaultValues={{
+						title: "안녕하세요",
+						medicineId: 5,
+						content: "안녕하세요",
+						tagList: [1, 5, 4],
+						star: 4,
+						imgFile: [],
+					}}
 					onSubmit={onSubmit}
 				>
 					<Form.Input<PostReviewBody>

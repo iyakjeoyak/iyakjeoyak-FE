@@ -202,11 +202,9 @@ export default function MedicineCardList({
 				)}
 				{data &&
 					data.medicines.length !== 0 &&
-					data.medicines.map((medicineItem) => (
-						<MedicineCardItem
-							key={medicineItem.id}
-							medicineItem={medicineItem}
-						/>
+					// TODO ${medicineItem.id}${data?.medicines.length}도 same key 경고, index밖에 없나? 초기화해서 괜찮나? 근데 생각해보니까 뒤로 쌓여서 index는 유지되겠넹
+					data.medicines.map((medicineItem, index) => (
+						<MedicineCardItem key={index} medicineItem={medicineItem} />
 					))}
 				{isFetching ? (
 					<div

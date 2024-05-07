@@ -52,7 +52,7 @@ export default function MyMedicineItem({
 			<div className={styles.bottom}>
 				{!isItemHovered && (
 					<div className={styles.name}>
-						{splittedName?.map((name) => <div>{name}</div>)}
+						{splittedName?.map((name) => <div key={name}>{name}</div>)}
 					</div>
 				)}
 			</div>

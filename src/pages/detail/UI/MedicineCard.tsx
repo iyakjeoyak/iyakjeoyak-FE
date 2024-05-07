@@ -4,6 +4,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { FaShare } from "react-icons/fa";
 import { FiAlertTriangle } from "react-icons/fi";
 import IconTag from "@/components/IconTag";
+import { ImageType } from "@/types";
 import PopupModal from "@/components/PopupModal";
 import StarRating from "@/components/StarRating";
 import Tag from "@/components/Tag";
@@ -28,6 +29,7 @@ interface MedicineCardProps {
 	hashtags: Array<{ id: number; name: string }>;
 	isBookMark: boolean;
 	isHeart: boolean;
+	image: ImageType;
 }
 
 export default function MedicineCard({
@@ -37,6 +39,7 @@ export default function MedicineCard({
 	brand,
 	isBookMark,
 	grade,
+	image,
 	reviewCount,
 }: MedicineCardProps) {
 	const navigate = useNavigate();
@@ -101,7 +104,10 @@ export default function MedicineCard({
 				/>
 			)}
 			<div className={styles.container}>
-				<img src="/images/Medicine.png" />
+				<img
+					src={image?.fullPath ?? "/images/no_medicine_img.jpg"}
+					width="120px"
+				/>
 				<div className={styles["content-container"]}>
 					<div className={styles["info"]}>
 						<div className={styles.brand}>{brand}</div>

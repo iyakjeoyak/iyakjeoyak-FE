@@ -1,5 +1,6 @@
 import { BestReviewItemType } from "@/api/review/getBestReview";
 import TagCommon from "@/components/Tag";
+import logo_gray from "@assets/images/logo_gray.png";
 import styles from "../styles/BestReviewItem.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -19,9 +20,7 @@ export default function BestReviewItem({
 		>
 			<img
 				className={styles.img}
-				src={
-					review?.imageResult[0]?.fullPath ?? "https://picsum.photos/200/300"
-				}
+				src={review?.imageResult[0]?.fullPath ?? logo_gray}
 				alt={review.title}
 			/>
 			<div className={styles["content-container"]}>
