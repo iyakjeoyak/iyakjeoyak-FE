@@ -1,6 +1,5 @@
 import { FaStar } from "react-icons/fa";
 import { MedicineDetailItemType } from "@/types";
-import { SwiperSlide } from "swiper/react";
 import TagCommon from "@/components/Tag";
 import styles from "../styles/PickedMedicine.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -21,13 +20,14 @@ export default function PickedMedicine({
 		bssh_NM: brand,
 		image,
 	} = medicine.medicine;
-	/*
-onClick={() => {
-					navigate(`/detail/${id}`);
-				}}
-*/
+
 	return (
-		<div className={styles["item-container"]}>
+		<div
+			className={styles["item-container"]}
+			onClick={() => {
+				navigate(`/detail/${id}`);
+			}}
+		>
 			<img
 				src={image?.fullPath ?? "/images/no_medicine_img.jpg"}
 				alt="약 이름"
