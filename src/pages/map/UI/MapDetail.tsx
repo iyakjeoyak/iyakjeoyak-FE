@@ -7,6 +7,7 @@ import postLikedPharmacy from "@/api/map/postLikedPharmacy";
 import { hourListType } from "../mapTypes";
 import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
 import { useEffect, useState } from "react";
+import { formatHour } from "../utils/formatHour";
 
 const dayOfWeekMap = {
 	Mon: "월요일",
@@ -83,28 +84,36 @@ const MapDetail = () => {
 
 					<div className={style.detailBox}>
 						<div className={style.boxHead}>주소</div>
-						<div>{detailData.dutyAddr}</div>
+						<div className={style.boxText}>{detailData.dutyAddr}</div>
 					</div>
 					<div className={style.detailBox}>
 						<div className={style.boxHead}>전화번호</div>
-						<div>{detailData.dutyTel1}</div>
+						<div className={style.boxText}>{detailData.dutyTel1}</div>
 					</div>
 
-					<div className={style.text}>
+					<div className={style.timeBox}>
+						<div className={style.timeHeader}>운영시간</div>
 						{detailData.businessHoursList?.map((hour: hourListType) => (
-							<div key={hour.dayOfWeek} className={style.timeBox}>
+							<div key={hour.dayOfWeek} className={style.timeCotainer}>
 								<div className={style.timeElement}>
 									{" "}
 									{
 										dayOfWeekMap[hour.dayOfWeek as keyof typeof dayOfWeekMap]
 									}{" "}
-									요일
 								</div>
-								<div className={style.timeElement}>
-									{" "}
-									시간 : {hour.startHour}{" "}
+								&nbsp; &nbsp;
+								<div
+									className={style.timeElement}
+									style={
+										hour.startHour === "off" && hour.endHour === "off"
+											? { color: "red", fontWeight: 700 }
+											: {}
+									}
+								>
+									{hour.startHour === "off" && hour.endHour === "off"
+										? "휴무일"
+										: `${formatHour(hour.startHour)} - ${formatHour(hour.endHour)}`}
 								</div>
-								<div className={style.timeElement}> - {hour.endHour} </div>
 							</div>
 						))}
 					</div>
