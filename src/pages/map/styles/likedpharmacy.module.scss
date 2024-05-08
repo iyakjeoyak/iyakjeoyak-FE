@@ -23,6 +23,12 @@
 	border-radius: 18px 18px 0 0;
 	padding: 20px;
 	pointer-events: auto;
+
+	@include mixins.responsive("desktop") {
+		max-width: 480px;
+		position: absolute;
+		bottom: 0;
+	}
 }
 
 .headerBox {
@@ -37,6 +43,11 @@
 	background-color: $main-gray;
 	border-radius: 15px 15px;
 	color: $black;
+
+	@include mixins.responsive("desktop") {
+		max-width: 50px;
+		height: 5px;
+	}
 }
 
 .headerTitle {
