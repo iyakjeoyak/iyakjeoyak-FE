@@ -14,10 +14,10 @@ const SupplementDetail = ({
 		supplementData && (
 			<div>
 				<img src={supplementData.img} alt="영양제 이미지" />
-				<div>{supplementData.name}</div>
+				<div>{supplementData.medicineName}</div>
 				<div>
 					<div>유통기한</div>
-					<div>{supplementData.dueDate}</div>
+					<div>{supplementData.expirationDate}</div>
 				</div>
 				<div>
 					<div>한줄 메모</div>

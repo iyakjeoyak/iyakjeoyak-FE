@@ -10,8 +10,7 @@
 		justify-content: space-between;
 		width: 97%;
 		@include mixins.b-medium;
-		padding-top: 15rem;
-		padding-bottom: 20rem;
+		padding: 15rem 0 12rem 0;
 	}
 	.pointHistoryList {
 		min-width: 46px;

@@ -1,6 +1,6 @@
 import SupplementDetailView from "./SupplementDetail";
 import SupplementEditForm from "./SupplementEditForm";
-import { SupplementInfo } from "../../userInfoType";
+import { SupplementSubmmitInfo } from "../../userInfoType";
 import { supplementRecords as data } from "../../utils/mockData";
 import { useState } from "react";
 
@@ -9,23 +9,21 @@ interface SupplementDetailModalProps {
 }
 
 export interface SupplementFormValues {
-	mySupplementId?: number;
-	name?: string;
-	dueDate?: string;
-	dosage?: string;
-	effect?: string[];
+	medicineId?: number;
+	medicineName?: string;
+	expirationDate?: string;
 	memo?: string;
-	img?: string;
+	image?: string;
+	// dosage?: string;
+	// effect?: string[];
 }
 
-const formInitialValues: SupplementInfo = {
-	mySupplementId: 0,
-	name: "",
-	dosage: "",
-	dueDate: "",
-	effect: [],
+const formInitialValues: SupplementSubmmitInfo = {
+	medicineId: 0,
+	medicineName: "",
+	expirationDate: "",
 	memo: "",
-	img: undefined,
+	image: "",
 };
 
 const SupplementModal = ({ itemId }: SupplementDetailModalProps) => {
@@ -40,12 +38,6 @@ const SupplementModal = ({ itemId }: SupplementDetailModalProps) => {
 		setIsEditing(true);
 	};
 
-	const onSubmit = (data: SupplementInfo) => {
-		console.log("폼제출", data);
-		setSupplementData(data);
-		setIsEditing(false);
-	};
-
 	return (
 		<article>
 			{!isEditing ? (
@@ -56,11 +48,10 @@ const SupplementModal = ({ itemId }: SupplementDetailModalProps) => {
 			) : (
 				<SupplementEditForm
 					formInitialValues={
-						supplementData?.mySupplementId === 0
+						supplementData?.medicineId === 0
 							? formInitialValues
 							: supplementData
 					}
-					onSubmit={onSubmit}
 				/>
 			)}
 		</article>

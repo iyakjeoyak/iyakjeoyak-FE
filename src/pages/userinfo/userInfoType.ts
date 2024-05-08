@@ -157,19 +157,17 @@ export interface ShortSupplementProps {
 	totalElement: number;
 	numberOfElement: number;
 }
-export interface SupplementInfo {
-	mySupplementId: number;
-	name: string;
-	dueDate: string;
-	dosage?: string;
-	effect?: string[];
+export interface SupplementSubmmitInfo {
+	medicineId: number;
+	medicineName: string;
+	expirationDate: string;
 	memo?: string;
-	img?: string;
+	image?: string;
 }
 
-export interface SupplementRecordData {
-	mySupplements: SupplementInfo[];
-}
+// export interface SupplementRecordData {
+// 	mySupplements: SupplementInfo[];
+// }
 
 export interface LikedSupplement {
 	likedItemId: number;

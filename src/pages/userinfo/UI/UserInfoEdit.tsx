@@ -35,8 +35,8 @@ const userInfoSchema = yup.object().shape({
 	hashtagResultList: yup
 		.array()
 		.of(yup.number().required())
-		.min(1, "태그를 선택하세요.")
-		.required("태그 선택하시든가"),
+		.min(2, "태그를 2개 이상 선택해주세요")
+		.required("태그 선택하세요."),
 });
 
 interface MyPageEditProps {

@@ -1,6 +1,6 @@
 import TagCommon from "@/components/Tag";
-import HeartIcon from "@/assets/icons/HeartIcon";
 import style from "../../style/likeditem.module.scss";
+import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
 
 export interface LikedItemProps {
 	likedItemId?: number;
@@ -14,7 +14,7 @@ const LikedCardInfo = ({ itemName, likedEffect, liked }: LikedItemProps) => {
 		<div className={style.cardContent}>
 			<div className={style.cardTitle}>
 				{itemName && <div className={style.cardTitle}>{itemName}</div>}
-				{liked && <HeartIcon width={15} height={15} />}
+				{liked && <HeartFilledIcon width={15} height={15} />}
 			</div>
 			<div className={style.cardTagBox}>
 				{likedEffect &&

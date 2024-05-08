@@ -8,6 +8,11 @@ import { showToast } from "@/utils/ToastConfig";
 import { PathButton } from "@/components/PathButton/PathButton";
 import { useLocation } from "react-router-dom";
 
+const mapPointDomain = {
+	HEART: "좋아요로 포인트 획득",
+	REVIEW: "리뷰 작성으로 포인트 획득",
+};
+
 const PointHistory = () => {
 	const [pointData, setPointData] = useState<PointProps[] | null>(null);
 	const [pointSum, setPointSum] = useState<PointData | null>(null);
@@ -35,10 +40,17 @@ const PointHistory = () => {
 	const renderPointItems = pointData
 		? pointData.map((points, index) => (
 				<div key={index} className={style.pointItem}>
-					<div className={style.description}>{points.domain}</div>
+					{index + 1}
+					<div className={style.description}>
+						{mapPointDomain[points.domain as keyof typeof mapPointDomain]}
+					</div>
 					<div className={style.pointBox}>
-						<div className={style.description}> 포인트 이력</div>
-						<div className={style.description}>{points.changedValue}</div>
+						<div className={style.description}>
+							{" "}
+							{points.changedValue >= 0
+								? `+${points.changedValue}`
+								: `-${Math.abs(points.changedValue)}`}{" "}
+						</div>
 					</div>
 				</div>
 			))
@@ -49,7 +61,7 @@ const PointHistory = () => {
 			<PathButton paths={paths} />
 			<div className={style.pointTitleBox}>
 				<div className={style.pointTitle}>포인트 합계</div>
-				<div className={style.pointTitle}>{pointSum?.point}</div>
+				<div className={style.pointTitle}>{pointSum?.point} point</div>
 			</div>
 
 			<div className={style.pointHistoryList}>{renderPointItems}</div>

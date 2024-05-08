@@ -20,24 +20,35 @@ interface CardProps {
 
 const CommonCardBox = ({
 	img,
+	name,
 	form = "slim",
 	onClick,
 	...props
 }: CardProps) => {
 	const cardStyle = `${style.card} ${style[form]}`;
 
-	return (
-		<div className={cardStyle} onClick={onClick}>
-			{img ? (
-				<img src={img} className={style.cardImage} />
-			) : (
+	const renderCardContent = () => {
+		if (name && img) {
+			return <img src={img} className={style.cardImage} />;
+		} else if (name) {
+			return (
+				<img src={`/images/no_medicine_img.jpg`} className={style.cardImage} />
+			);
+		} else {
+			return (
 				<Button
 					icon={<PlusIcon />}
 					onClick={() => console.log("모냐")}
 					variant="greentransparent"
 					size="l"
 				/>
-			)}
+			);
+		}
+	};
+
+	return (
+		<div className={cardStyle} onClick={onClick}>
+			{renderCardContent()}
 
 			<UserCardInfo {...props} />
 			<LikedCardInfo {...props} likedEffect={props.likedEffect} />

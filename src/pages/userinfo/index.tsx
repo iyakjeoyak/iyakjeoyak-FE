@@ -26,7 +26,6 @@ const UserInfo = () => {
 				setUserData(userInfo?.userResult);
 				setLatestReviews(userInfo?.latestReviews);
 				setFavoriteSupplements(userInfo?.favoriteSupplements);
-				console.log(userData);
 			} catch (error) {
 				showToast({
 					type: "error",
