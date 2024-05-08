@@ -1,5 +1,6 @@
 import BlankBox from "@/components/BlankBox";
 import { MedicineItemType } from "@/types";
+import SpeechBubbleIcon from "@/assets/icons/SpeechBubbleIcon";
 import TagCommon from "@/components/Tag";
 import { getAccessToken } from "@/utils/getToken";
 import styles from "../styles/CuratingBoardItem.module.scss";
@@ -35,10 +36,14 @@ const CuratingBoardItem = ({ medicine }: { medicine: MedicineItemType }) => {
 						<img
 							src={medicine?.image?.fullPath ?? "/images/no_medicine_img.jpg"}
 							alt="약 이름"
-							width={100}
-							height={130}
+							width={110}
+							height={120}
 						/>
-						<div>이 제품은 어때요?</div>
+						<SpeechBubbleIcon
+							className={styles.speech}
+							color="#23cc87"
+							text="이 제품은 어때요?"
+						/>
 					</div>
 					<div className={styles["content-container"]}>
 						<div>{medicine.prdlst_NM}</div>

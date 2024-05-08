@@ -9,6 +9,7 @@ import {
 } from "react-hook-form";
 
 import { Button } from "./Button";
+import { DevTool } from "@hookform/devtools";
 import { ImgInput } from "@/components/Form/ImgInput";
 import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
@@ -19,8 +20,6 @@ import TagButton from "./TagButton";
 import { Textarea } from "./Textarea";
 import styles from "./index.module.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-// import { DevTool } from "@hookform/devtools";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
@@ -46,7 +45,7 @@ export const Form = <T extends FieldValues>({
 	if (!onSubmit) {
 		return <FormProvider {...methods}>{children}</FormProvider>;
 	}
-	console.log("먼데");
+
 	return (
 		<FormProvider {...methods}>
 			<form
@@ -54,7 +53,7 @@ export const Form = <T extends FieldValues>({
 				onSubmit={methods.handleSubmit(onSubmit)}
 			>
 				{children}
-				{/* <DevTool control={methods.control} /> */}
+				<DevTool control={methods.control} />
 			</form>
 		</FormProvider>
 	); // 하위 컴포넌트에 useForm에서 생성된 메소드들을 제공하는 FormProvider 반환

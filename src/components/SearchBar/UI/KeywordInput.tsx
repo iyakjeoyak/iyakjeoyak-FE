@@ -15,12 +15,12 @@ export default function KeywordInput({
 }: KeywordInputProps) {
 	const { currentKeyword, handleCurrentKeyword } = useSelect();
 
-	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === "Enter" && currentKeyword.name.length > 2) {
-			onClick(currentKeyword.name);
-			handleCurrentKeyword({ id: 0, name: "" });
-		}
-	};
+	// const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	// 	if (event.key === "Enter" && currentKeyword.name.length > 2) {
+	// 		onClick(currentKeyword.name);
+	// 		handleCurrentKeyword({ id: 0, name: "" });
+	// 	}
+	// };
 
 	return (
 		<div className={styles.container}>
@@ -31,7 +31,6 @@ export default function KeywordInput({
 					onChange(e.target.value);
 				}}
 				placeholder={placeholder}
-				onKeyDown={handleKeyPress}
 			/>
 			<button
 				onClick={() => {

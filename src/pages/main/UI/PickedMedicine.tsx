@@ -1,6 +1,6 @@
-import ElementIcon from "@assets/icons/Element";
 import { FaStar } from "react-icons/fa";
 import { MedicineDetailItemType } from "@/types";
+import { SwiperSlide } from "swiper/react";
 import TagCommon from "@/components/Tag";
 import styles from "../styles/PickedMedicine.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -21,47 +21,37 @@ export default function PickedMedicine({
 		bssh_NM: brand,
 		image,
 	} = medicine.medicine;
-
-	return (
-		<article className={styles.container}>
-			<div className={styles["title-container"]}>
-				<ElementIcon width={20} height={20} />
-				<div className={styles.title}>
-					MD's <span>pick</span>
-				</div>
-			</div>
-			{/* TODO 이것만 바꿔도 될듯? */}
-			<div
-				className={styles["item-container"]}
-				onClick={() => {
+	/*
+onClick={() => {
 					navigate(`/detail/${id}`);
 				}}
-			>
-				<img
-					src={image?.fullPath ?? "/images/no_medicine_img.jpg"}
-					alt="약 이름"
-					width={140}
-					height={180}
-				/>
-				<div className={styles["content-container"]}>
-					<div className={styles.brand}>{brand}</div>
-					<div className={styles.name}>{name}</div>
-					<div className={styles.star}>
-						<FaStar />
-						<span>
-							{grade} ({reviewCount}개)
-						</span>
-					</div>
-					<div className={styles.tags}>
-						{hashtags.map((tag) => (
-							<TagCommon
-								text={tag.name}
-								key={tag.id}
-								size="small"
-								backgroundColor="green"
-							/>
-						))}
-					</div>
+*/
+	return (
+		<div className={styles["item-container"]}>
+			<img
+				src={image?.fullPath ?? "/images/no_medicine_img.jpg"}
+				alt="약 이름"
+				width={140}
+				height={180}
+			/>
+			<div className={styles["content-container"]}>
+				<div className={styles.brand}>{brand}</div>
+				<div className={styles.name}>{name}</div>
+				<div className={styles.star}>
+					<FaStar />
+					<span>
+						{grade} ({reviewCount}개)
+					</span>
+				</div>
+				<div className={styles.tags}>
+					{hashtags.map((tag) => (
+						<TagCommon
+							text={tag.name}
+							key={tag.id}
+							size="small"
+							backgroundColor="green"
+						/>
+					))}
 				</div>
 			</div>
 			<img
@@ -69,6 +59,6 @@ export default function PickedMedicine({
 				src="/images/TwoHands.png"
 				alt="장식 이미지"
 			/>
-		</article>
+		</div>
 	);
 }

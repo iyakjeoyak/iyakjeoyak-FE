@@ -1,12 +1,14 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import CrownSvg from "@/assets/icons/Crown";
-import styles from "@/pages/fame/styles/FameTop.module.scss";
 import { fameQueryOptions } from "@/api/fame";
+import styles from "@/pages/fame/styles/FameTop.module.scss";
 import { useQuery } from "@tanstack/react-query";
 
 export function FameTop() {

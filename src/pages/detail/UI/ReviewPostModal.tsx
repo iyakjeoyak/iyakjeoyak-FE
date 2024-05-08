@@ -1,6 +1,7 @@
 import medicineReviewPostValidation, {
 	initialMedicineReviewPostBody,
 } from "../utils/medicineReviewPostValidation";
+import patchReviewById, { PatchBodyType } from "@/api/review/patchReviewById";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -8,7 +9,6 @@ import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
 import ectQueryOptions from "@/api/common";
 import { getAccessToken } from "@/utils/getToken";
-import patchReviewById from "@/api/review/patchReviewById";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
@@ -36,7 +36,12 @@ export default function ReviewPostModal({
 	if (!isLogin) return;
 
 	const initialData = reviewId
-		? useQuery(reviewQueryOptions.getReviewById({ reviewId })).data
+		? {
+				...useQuery(reviewQueryOptions.getReviewById({ reviewId })).data,
+				tagList: useQuery(
+					reviewQueryOptions.getReviewById({ reviewId }),
+				).data.hashtagResult.map((tag) => tag.id),
+			}
 		: initialMedicineReviewPostBody;
 
 	const { data: tags } = useQuery(ectQueryOptions.getHashtags());
@@ -54,7 +59,7 @@ export default function ReviewPostModal({
 	});
 
 	const { mutate: patchReviewMutation } = useMutation({
-		mutationFn: (body: FormData) =>
+		mutationFn: (body: PatchBodyType) =>
 			patchReviewById({ reviewId: reviewId as number, body }),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["reviews"] });
@@ -68,6 +73,20 @@ export default function ReviewPostModal({
 	};
 
 	const onSubmit = (data: PostReviewBody) => {
+		console.log(data);
+
+		if (reviewId) {
+			const body = {
+				title: data.title,
+				tagList: data.tagList,
+				content: data.content,
+				star: data.star,
+			};
+
+			patchReviewMutation(body);
+			return;
+		}
+
 		const formData = new FormData();
 
 		const formBody = {
@@ -88,7 +107,6 @@ export default function ReviewPostModal({
 		});
 
 		postReviewMutation({ body: formData });
-		patchReviewMutation(formData);
 	};
 
 	useEffect(() => {
