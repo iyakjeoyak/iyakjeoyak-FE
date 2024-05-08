@@ -5,9 +5,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import CrownSvg from "@/assets/icons/Crown";
-import styles from "@/pages/fame/styles/FameTop.module.scss";
 import { fameQueryOptions } from "@/api/fame";
 import { useQuery } from "@tanstack/react-query";
+import styles from "@/pages/fame/styles/FameTop.module.scss";
 
 export function FameTop() {
 	const { data: fames } = useQuery(fameQueryOptions.getFame());

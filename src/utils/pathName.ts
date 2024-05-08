@@ -17,6 +17,7 @@ export const routerpaths: PathNameType = {
 	KAKAOLOGIN: "/auth/kakao",
 	GOOGLELOGIN: "/auth/google",
 	SIGNUP: "/signup",
+	SIGNUPTEST: "/signuptest",
 	FAME: "/fame",
 	USERINFO: "/userinfo",
 	POINTHISTORY: "/userinfo/point",

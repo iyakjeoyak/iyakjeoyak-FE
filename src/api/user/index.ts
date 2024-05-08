@@ -7,13 +7,11 @@ const userQueryOption = {
 		queryOptions({
 			queryKey: ["username", username],
 			queryFn: () => getDuplicationEmail({ username }),
-			enabled: false,
 		}),
 	getDuplicationNickName: ({ nickname }: { nickname: string }) =>
 		queryOptions({
 			queryKey: ["nickname", nickname],
 			queryFn: () => getDuplicationNickName({ nickname }),
-			enabled: false,
 		}),
 	getKakaoAuthToken: ({ code }: { code: string }) =>
 		queryOptions({
@@ -27,6 +25,6 @@ const userQueryOption = {
 		}),
 };
 
-export default userQueryOption
+export default userQueryOption;
 export { default as postSignUp } from "./postSignUp";
-export { default as postLogin } from "./postLogin";;
+export { default as postLogin } from "./postLogin";
