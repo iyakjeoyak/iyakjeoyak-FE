@@ -20,7 +20,6 @@ const Map = () => {
 		try {
 			const pharmacyDetail = await getPharmacyDetail(pharmacy.hpid);
 			setDetailData(pharmacyDetail);
-			console.log(detailData);
 		} catch (error) {
 			showToast({ type: "error", message: "지도를 가져오는데 실패했습니다." });
 		}

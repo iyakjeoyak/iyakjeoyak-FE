@@ -8,6 +8,7 @@ import { hourListType } from "../mapTypes";
 import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
 import { useEffect, useState } from "react";
 import { formatHour } from "../utils/formatHour";
+import { FaLeaf } from "react-icons/fa";
 
 const dayOfWeekMap = {
 	Mon: "월요일",
@@ -21,7 +22,7 @@ const dayOfWeekMap = {
 };
 
 const MapDetail = () => {
-	const { detailData, setDetailData } = useMapContext();
+	const { detailData, setDetailData, setIsLikeChanged } = useMapContext();
 	const [isLiked, setIsLiked] = useState(detailData?.liked ?? false);
 
 	useEffect(() => {
@@ -38,10 +39,12 @@ const MapDetail = () => {
 		}
 		setDetailData(undefined);
 		setIsLiked(false);
+		setIsLikeChanged(true);
 	};
 
 	const toggleLike = () => {
 		setIsLiked((prev) => !prev);
+		setIsLikeChanged(false);
 	};
 
 	return (

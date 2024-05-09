@@ -2,16 +2,8 @@ import React, { createContext, useContext } from "react";
 import { PharmacyDetailType } from "@pages/map/mapTypes";
 
 interface MapContextType {
-	// selectedPharmacy: PharmacyDetailType | null;
-	// showModal: boolean;
-	// toggleModal: () => void;
-	// toggleLike: () => void;
-	// setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-	// setSelectedPharmacy: React.Dispatch<
-	// 	React.SetStateAction<PharmacyDetailType | null>
-	// >;
-	// isLikeClicked: boolean;
-	// setIsLikeCliked: React.Dispatch<React.SetStateAction<boolean>>;
+	isLikeChanged: boolean;
+	setIsLikeChanged: React.Dispatch<React.SetStateAction<boolean>>;
 	detailData?: PharmacyDetailType;
 	setDetailData: React.Dispatch<
 		React.SetStateAction<PharmacyDetailType | undefined>

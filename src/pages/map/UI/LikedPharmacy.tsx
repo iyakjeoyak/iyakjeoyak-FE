@@ -6,9 +6,11 @@ import getLikedPharmacy from "@/api/map/getLikedPharmacy";
 import { showToast } from "@/utils/ToastConfig";
 import { useMutation } from "@tanstack/react-query";
 import { PharmacyDetailType } from "../mapTypes";
+import { useMapContext } from "../utils/mapDetailContext";
 
 const LikedPharmacy = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const { isLikeChanged, detailData } = useMapContext();
 	const [likedData, setLikedData] = useState<PharmacyDetailType[]>([]);
 
 	const { mutate } = useMutation({
@@ -16,7 +18,6 @@ const LikedPharmacy = () => {
 			getLikedPharmacy(page, size),
 		onSuccess: (data) => {
 			setLikedData(data.data);
-			console.log(likedData);
 		},
 		onError: () => {
 			showToast({
@@ -29,6 +30,12 @@ const LikedPharmacy = () => {
 	useEffect(() => {
 		mutate({ size: 10, page: 0 });
 	}, [mutate]);
+
+	useEffect(() => {
+		if (isLikeChanged) {
+			mutate({ size: 10, page: 0 });
+		}
+	}, [isLikeChanged, detailData]);
 
 	return (
 		<>
