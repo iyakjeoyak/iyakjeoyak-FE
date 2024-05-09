@@ -1,55 +1,123 @@
 import { Form } from "@/components/Form";
 import SearchBar from "@/components/SearchBar";
-import { useNavigate } from "react-router-dom";
-import { SupplementInfo } from "../../userInfoType";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
-import { useState } from "react";
-// import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
-// import { queryClient } from "@/main";
+import { useEffect, useState } from "react";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import { KeywordResultItemType } from "@/pages/main";
+import { useMutation } from "@tanstack/react-query";
+import postUserSupplement from "@/api/useInfo/postUserSupplement";
+import { showToast } from "@/utils/ToastConfig";
+import getSearchedSupplement, {
+	SupplementProduct,
+} from "@/api/useInfo/getSearchedSupplement";
 
 const supplementValidationSchema = yup.object().shape({
-	name: yup.string().required("Name is required"),
-	dosage: yup.string().optional(),
-	dueDate: yup.string().required("Due date is required"),
-	effect: yup.array().of(yup.string().required()).optional(),
+	medicineName: yup.string().required("영양제 이름을 작성해주세요."),
+	expirationDate: yup.string().required("유통기한을 작성해주세요."),
 	memo: yup.string().optional(),
-	mySupplementId: yup.number().required(),
-	img: yup.string().url().optional(),
+	image: yup.mixed<File>().nullable(),
 });
 
 interface SupplementEditFormProps {
 	formInitialValues: SupplementFormValues;
-	onSubmit: (data: SupplementInfo) => void;
+	onClose: () => void;
 }
 
 const SupplementEditForm = ({
 	formInitialValues,
-	onSubmit,
+	onClose,
 }: SupplementEditFormProps) => {
-	const navigate = useNavigate();
-	// const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
-	const [_, setKeywordSearchResult] = useState<string[]>([]);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<
+		KeywordResultItemType[]
+	>([]);
+	const [medicineName, setMedicineName] = useState(
+		formInitialValues.medicineName,
+	);
+	const [searchData, setSearchData] = useState<SupplementProduct | null>(null);
 
-	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
-		setKeywordSearchResult([]);
+	const { mutate } = useMutation({
+		mutationFn: postUserSupplement,
+	});
+
+	useEffect(() => {}, [medicineName, searchData]);
+
+	const handleKeywordCompletedClick = async (keyword: string) => {
+		try {
+			const supplementDetails = await getSearchedSupplement(keyword);
+
+			if (supplementDetails) {
+				supplementDetails.map((supplementDetail) => {
+					setMedicineName(supplementDetail.prdlst_NM);
+
+					setSearchData(supplementDetail);
+					setKeywordSearchResult([]);
+					console.log(medicineName, "먼데1");
+					console.log(searchData, "검색한데이터나오냐고오오오");
+				});
+			} else {
+				showToast({
+					type: "error",
+					message: "검색 결과가 없습니다.",
+				});
+			}
+		} catch (error) {
+			showToast({ type: "error", message: "검색 결과를 가져오지 못했습니다." });
+		}
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-		if (keyword.length <= 2) {
+		if (keyword.length <= 1) {
 			setKeywordSearchResult([]);
 			return;
 		}
-		// const response = await getAutoCompleteResult({ keyword });
-		// setKeywordSearchResult(response);
+		const response = await getAutoCompleteResult({ keyword });
+		setKeywordSearchResult(response);
 	};
 
-	// const toggleIsTagsModalOpen = () => {
-	// 	setIsTagsModalOpen((prev) => !prev);
-	// 	if (isTagsModalOpen)
-	// 		queryClient.resetQueries({ queryKey: ["medicine", "medicines"] });
-	// };
+	const onSubmit = (storageItem: any) => {
+		const { image, ...josnData } = storageItem;
+
+		const formData = new FormData();
+
+		if (medicineName) {
+			formData.set("medicineName", medicineName);
+			console.log("formdata", formData.get("medicineName"));
+		}
+
+		if (searchData) {
+			formData.set("medicine", searchData.bssh_NM);
+		}
+
+		const userStorageCreatePayload = {
+			...josnData,
+			medicineName: medicineName,
+			medicine: searchData ? searchData.bssh_NM : null,
+			medicineId: searchData?.id,
+		};
+
+		formData.append(
+			"userStorageCreatePayload",
+			new Blob([JSON.stringify(userStorageCreatePayload)], {
+				type: "application/json",
+			}),
+		);
+
+		formData.append("image", image || "");
+
+		mutate(formData, {
+			onSuccess: () => {
+				showToast({ type: "success", message: "성공적으로 작성되었습니다." });
+				onClose();
+			},
+			onError: () => {
+				showToast({
+					type: "error",
+					message: "내 영양제 정보가 정상적으로 수정되지 않았습니다.",
+				});
+			},
+		});
+	};
 
 	return (
 		<Form
@@ -58,31 +126,36 @@ const SupplementEditForm = ({
 			validationSchema={supplementValidationSchema}
 		>
 			<div>
-				{formInitialValues.mySupplementId ? "영양제 편집" : "영양제 추가"}
+				{formInitialValues.medicineName ? "영양제 편집" : "영양제 추가"}
 			</div>
 
-			<Form.ImgInput name="supplementImage" />
+			<Form.ImgInput name="image" initialImage={searchData?.image?.fullPath} />
 			<SearchBar>
-				<SearchBar.KeywordInput
+				<SearchBar.SupplementKeywordInput
 					placeholder="검색어를 입력해주세요"
-					onClick={handleKeywordCompletedClick}
+					onSelect={handleKeywordCompletedClick}
 					onChange={handleGetAutoCompleteResults}
 				/>
-				{/* <SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} /> */}
+				<SearchBar.SupplementSearchResultList
+					keywordSearchResult={keywordSearchResult}
+					handleKeywordSelected={handleKeywordCompletedClick}
+				/>
 				<SearchBar.SelectedKeywordTagsList />
 			</SearchBar>
 
 			<Form.Input
-				name="title"
+				name="medicineName"
 				title="영양제 이름"
 				placeholder="영양제 이름을 입력하세요"
-				defaultValue={formInitialValues.name}
+				defaultValue={formInitialValues.medicineName}
+				value={medicineName}
+				onChange={(e) => setMedicineName(e.target.value)}
 			/>
 			<Form.Input
-				name="date"
+				name="expirationDate"
 				title="유통기한"
 				placeholder="유통기한을 입력하세요"
-				defaultValue={formInitialValues.dueDate}
+				defaultValue={formInitialValues.expirationDate}
 			/>
 			<Form.Input
 				name="memo"
@@ -91,7 +164,7 @@ const SupplementEditForm = ({
 				defaultValue={formInitialValues.memo}
 			/>
 			<Form.Button
-				text={formInitialValues.mySupplementId ? "수정 완료" : "저장"}
+				text={formInitialValues.medicineName ? "수정 완료" : "저장"}
 				variant="dark"
 			/>
 		</Form>

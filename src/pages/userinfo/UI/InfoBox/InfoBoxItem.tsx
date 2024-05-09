@@ -14,7 +14,6 @@ function InfoBoxItem({ items }: ItemProps): JSX.Element {
 		return <div className={style.sectionBox}>작성된 정보가 없습니다.</div>;
 	}
 
-	console.log(items);
 	return (
 		<div>
 			{items.slice(0, 3).map((item, index) => (
@@ -24,6 +23,12 @@ function InfoBoxItem({ items }: ItemProps): JSX.Element {
 							{formatDateString(item.createdDate)}
 						</div>
 					)}
+					{"expirationDate" in item &&
+						typeof item.expirationDate === "string" && (
+							<div className={style.sectionName}>
+								{formatDateString(item.expirationDate)}
+							</div>
+						)}
 					{"title" in item && (
 						<div className={style.sectionReviewBox}>
 							<div className={style.sectionText}>{item.title}</div>

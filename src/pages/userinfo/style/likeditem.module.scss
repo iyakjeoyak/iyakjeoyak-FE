@@ -13,14 +13,24 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
-	padding-top: 10rem;
 }
 
 .cardTitle {
 	margin-bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
+.cardTitleName {
+	margin-bottom: 5rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 100%;
+	padding: 0 10rem;
+	max-width: 120rem;
+}
 .cardTagBox {
 	display: flex;
 	flex-direction: row;

@@ -9,7 +9,7 @@
 	bottom: 0;
 	min-height: 100%;
 	width: 100%;
-	z-index: $z-index-modalBackground;
+	z-index: 22;
 
 	@include mixins.responsive("desktop") {
 		max-width: 480px;
@@ -18,38 +18,59 @@
 	}
 }
 
+.header {
+	display: flex;
+	align-items: center;
+	height: 30rem;
+	@include mixins.b-medium;
+}
+
 .element {
 	height: 50%;
-	width: 100%;
+	width: 90%;
 	border-radius: 10px;
 	background-color: $white;
 	position: absolute;
 	top: 25%;
-	z-index: $z-index-userInfo;
+	left: 5%;
+	transform: translateX(-100%);
+
+	z-index: 30;
+
 	padding: 15rem 15rem;
-}
-.header {
-	display: flex;
-	align-items: center;
-	@include mixins.b-medium;
+	overflow: auto;
 }
 
 .detailBox {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	width: 100%;
-
-	.boxHead {
-		@include mixins.b-regular;
-		padding-right: 10rem;
-	}
+	padding-bottom: 5rem;
+	flex-wrap: wrap;
 }
 
-.text {
-	box-shadow: 20%;
-	overflow: hidden;
+.boxHead {
+	padding-right: 10rem;
+	@include mixins.sb-medium;
 }
+.boxText {
+	overflow-wrap: break-word;
+}
+
 .timeBox {
 	display: flex;
+	flex-direction: column;
+
+	.timeHeader {
+		@include mixins.sb-medium;
+	}
+
+	.timeCotainer {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding-top: 5rem;
+	}
+	.timeElement {
+		@include mixins.m-regular;
+	}
 }

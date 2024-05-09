@@ -1,69 +1,84 @@
 import SupplementDetailView from "./SupplementDetail";
 import SupplementEditForm from "./SupplementEditForm";
-import { SupplementInfo } from "../../userInfoType";
-import { supplementRecords as data } from "../../utils/mockData";
-import { useState } from "react";
+import { SupplementSubmmitInfo } from "../../userInfoType";
+import { useEffect, useState } from "react";
+import getSupplementDetail, {
+	DetailSupplementArgs,
+} from "@/api/useInfo/getSupplementDetail";
+import { SupplementContext } from "../../utils/supplementDetailContext";
+import { showToast } from "@/utils/ToastConfig";
 
 interface SupplementDetailModalProps {
 	itemId: number;
+	onClose: () => void;
 }
 
 export interface SupplementFormValues {
-	mySupplementId?: number;
-	name?: string;
-	dueDate?: string;
-	dosage?: string;
-	effect?: string[];
+	id?: number;
+	medicineName?: string;
+	expirationDate?: string;
 	memo?: string;
-	img?: string;
+	image?: string;
 }
 
-const formInitialValues: SupplementInfo = {
-	mySupplementId: 0,
-	name: "",
-	dosage: "",
-	dueDate: "",
-	effect: [],
+const formInitialValues: SupplementSubmmitInfo = {
+	medicineId: 0,
+	medicineName: "",
+	expirationDate: "",
 	memo: "",
-	img: undefined,
+	image: "",
 };
 
-const SupplementModal = ({ itemId }: SupplementDetailModalProps) => {
-	const [supplementData, setSupplementData] = useState<SupplementFormValues>(
-		data.mySupplements[itemId - 1] || formInitialValues,
+const SupplementModal = ({ itemId, onClose }: SupplementDetailModalProps) => {
+	const [detailData, setDetailData] = useState<DetailSupplementArgs | null>(
+		null,
 	);
-
-	console.log(supplementData);
 	const [isEditing, setIsEditing] = useState(false);
 
+	useEffect(() => {
+		const fectchSupplementDetail = async () => {
+			try {
+				const detailData = await getSupplementDetail({ storageId: itemId });
+				setDetailData(detailData);
+			} catch (error) {
+				showToast({
+					type: "error",
+					message: "내 영양제 상세 데이터를 가져오는 중 오류가 발생했습니다.",
+				});
+			}
+		};
+		fectchSupplementDetail();
+	}, [itemId]);
+
 	const handleEditClick = () => {
-		setIsEditing(true);
+		setIsEditing((prev) => !prev);
 	};
 
-	const onSubmit = (data: SupplementInfo) => {
-		console.log("폼제출", data);
-		setSupplementData(data);
-		setIsEditing(false);
-	};
+	if (!detailData) return null;
 
 	return (
-		<article>
-			{!isEditing ? (
-				<SupplementDetailView
-					supplementData={supplementData}
-					onEdit={handleEditClick}
-				/>
-			) : (
-				<SupplementEditForm
-					formInitialValues={
-						supplementData?.mySupplementId === 0
-							? formInitialValues
-							: supplementData
-					}
-					onSubmit={onSubmit}
-				/>
-			)}
-		</article>
+		<SupplementContext.Provider value={{ detailData, setDetailData }}>
+			<article>
+				{!isEditing && detailData ? (
+					<SupplementDetailView
+						supplementData={detailData}
+						onEdit={handleEditClick}
+					/>
+				) : (
+					<SupplementEditForm
+						formInitialValues={
+							detailData
+								? {
+										...detailData,
+										image: detailData.image ? detailData.image.fullPath : "",
+									}
+								: formInitialValues
+						}
+						onClose={onClose}
+					/>
+				)}
+			</article>
+		</SupplementContext.Provider>
 	);
 };
 

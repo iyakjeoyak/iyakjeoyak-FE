@@ -1,5 +1,4 @@
 import style from "../style/userinfoedit.module.scss";
-import { UserResult } from "../userInfoType";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -7,6 +6,8 @@ import { showToast } from "@/utils/ToastConfig";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
 import transformSubmmit from "../utils/transformSubmmit";
 import commonQueryOptions from "@/api/common";
+import { useUserContext } from "../utils/userContext";
+import getUserInfo from "@/api/useInfo/getUserInfo";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -35,12 +36,13 @@ const userInfoSchema = yup.object().shape({
 	hashtagResultList: yup
 		.array()
 		.of(yup.number().required())
-		.min(1, "태그를 선택하세요.")
-		.required("태그 선택하시든가"),
+		.min(2, "태그를 2개 이상 선택해주세요")
+		.required("태그 선택하세요."),
 });
 
 interface MyPageEditProps {
-	data: UserResult;
+	// data: UserResult;
+	onClose: () => void;
 }
 interface imageEdit {
 	id: number;
@@ -65,10 +67,24 @@ export interface UserEdit {
 	image?: imageEdit;
 }
 
-const UserInfoEdit = ({ data }: MyPageEditProps) => {
+const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
+	const { userData: data, setUserData } = useUserContext();
+
 	const { mutate } = useMutation({
 		mutationFn: patchUserInfo,
 	});
+
+	const fetchUpdatedUserInfo = async () => {
+		const updatedUserInfo = await getUserInfo();
+		if (updatedUserInfo.userResult) {
+			setUserData(updatedUserInfo.userResult);
+		}
+	};
+
+	if (!data) {
+		showToast({ type: "error", message: "사용자 데이터가 없습니다." });
+		return null;
+	}
 
 	const submmitData = transformSubmmit(data);
 
@@ -76,8 +92,6 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 
 	const onSubmit = (submmitData: UserSubmmit) => {
 		const { imgFile, ...jsonData } = submmitData;
-		console.log(imgFile);
-		// const userSumbmmitData = transformSubmmit(data)
 
 		const formData = new FormData();
 		const userEditPayload = {
@@ -91,11 +105,11 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 
 		formData.append("imgFile", imgFile || "");
 
-		console.log("formdata", formData.get("imageFile"));
-
 		mutate(formData, {
 			onSuccess: () => {
 				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
+				fetchUpdatedUserInfo();
+				onClose();
 			},
 			onError: () => {
 				showToast({
@@ -154,8 +168,8 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 				tags={tags ?? []}
 				name="hashtagResultList"
 			/>
+
 			<Form.Button type="submit" variant="dark" text="저장" />
-			<button onClick={() => mutate(new FormData())}>테스트 호출</button>
 		</Form>
 	);
 };

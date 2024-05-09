@@ -2,33 +2,35 @@ import { LazyMotion, m, AnimatePresence, domMax } from "framer-motion";
 import { useState } from "react";
 import style from "../styles/likedpharmacy.module.scss";
 import stopEvent from "@/utils/stopEvent";
-// import getLikedPharmacy from "@/api/map/getLikedPharmacy";
-// import { showToast } from "@/utils/ToastConfig";
-// import { useMutation } from "@tanstack/react-query";
+import getLikedPharmacy from "@/api/map/getLikedPharmacy";
+import { showToast } from "@/utils/ToastConfig";
+import { useMutation } from "@tanstack/react-query";
 import { PharmacyDetailType } from "../mapTypes";
 
 const LikedPharmacy = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [likedData, _] = useState<PharmacyDetailType[]>([]);
+	const [likedData, setLikedData] = useState<PharmacyDetailType[]>([]);
 
-	// const { mutate } = useMutation({
-	// 	mutationFn: ({ page, size }: { page: number; size: number }) =>
-	// 		getLikedPharmacy(page, size),
-	// 	onSuccess: (data) => {
-	// 		setLikedData(data);
-	// 		console.log(likedData);
-	// 	},
-	// 	onError: () => {
-	// 		showToast({
-	// 			type: "error",
-	// 			message: "저장된 약국 정보를 가져오는데 실패했습니다.",
-	// 		});
-	// 	},
-	// });
+	const { mutate } = useMutation({
+		mutationFn: ({ page, size }: { page: number; size: number }) =>
+			getLikedPharmacy(page, size),
+		onSuccess: (data) => {
+			setLikedData(data.data);
+			console.log(likedData);
+		},
+		onError: () => {
+			showToast({
+				type: "error",
+				message: "저장된 약국 정보를 가져오는데 실패했습니다.",
+			});
+		},
+	});
 
-	// const likedPharmacyData = (page: number, size: number) => {
-	// 	mutate({ page, size });
-	// };
+	const likedPharmacyData = (page: number, size: number) => {
+		mutate({ page, size });
+	};
+
+	console.log(likedPharmacyData);
 
 	return (
 		<>
@@ -59,7 +61,7 @@ const LikedPharmacy = () => {
 						>
 							<div className={style.headerBox}>
 								<div className={style.header} />
-								<h2 className={style.headerTitle}>00님이 저장한 약국</h2>
+								<h2 className={style.headerTitle}>USER님이 저장한 약국</h2>
 							</div>
 							<section className={style.content}>
 								{likedData && likedData.length > 0 ? (

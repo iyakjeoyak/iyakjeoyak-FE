@@ -22,8 +22,7 @@ import SignUpPage from "@/pages/signup";
 import UserInfo from "@/pages/userinfo";
 import { createBrowserRouter } from "react-router-dom";
 import { routerpaths } from "@/utils/pathName";
-import { SignUpTest } from "@/pages/signupTest/UI/SignUpTest";
-// import LikedItem from "@/pages/userinfo/UI/LikedItem/LikedItem";
+import LikedItem from "@/pages/userinfo/UI/LikedItem/LikedItem";
 
 const router = createBrowserRouter([
 	{
@@ -47,7 +46,7 @@ const router = createBrowserRouter([
 				element: <SignUpPage />,
 				loader: checkTokenAndRedirectToHome,
 			},
-			{ path: routerpaths.SIGNUPTEST, element: <SignUpTest /> },
+			{ path: routerpaths.SIGNUPTEST, element: <SignUpPage /> },
 			{ path: routerpaths.FAME, element: <Fame /> },
 			{
 				path: routerpaths.USERINFO,
@@ -57,7 +56,7 @@ const router = createBrowserRouter([
 			{ path: routerpaths.POINTHISTORY, element: <PointHistory /> },
 			{ path: routerpaths.REVIEWHISTORY, element: <ReviewHistory /> },
 			{ path: routerpaths.SUPPLEMENTHISTORY, element: <SupplementHistory /> },
-			// { path: routerpaths.LIKEDITEM, element: <LikedItem /> },
+			{ path: routerpaths.LIKEDITEM, element: <LikedItem /> },
 			{ path: routerpaths.MAP, element: <PharmacyMap /> },
 		],
 	},

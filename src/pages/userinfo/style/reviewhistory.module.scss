@@ -2,22 +2,22 @@
 @import "@styles/global.scss";
 @import "@styles/variables.scss";
 
-// .noReviewContainer {
-// 	display: flex;
-// 	flex-direction: column;
-// 	width: 100%;
-// 	align-items: center;
+.reviewWrapper {
+	display: flex;
+	flex-direction: column;
+	padding-top: 10rem;
+}
 
-// 	.noReviewContent {
-// 		.noReviewTitle {
-// 			@include mixins.m-big;
-// 		}
-// 	}
-// }
+.reviewHeader {
+	width: 100%;
+	margin-bottom: 10rem;
+	padding-left: 15rem;
+}
 .reviewContainer {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 10rem;
 }

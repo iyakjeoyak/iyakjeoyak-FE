@@ -1,6 +1,5 @@
 import HeartIcon from "@/assets/icons/HeartIcon";
 import Modal from "@/components/Modal";
-import TagCommon from "@/components/Tag";
 import { UserResult } from "../userInfoType";
 import UserInfoEdit from "../UI/UserInfoEdit";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
@@ -8,14 +7,26 @@ import { routerpaths } from "@/utils/pathName";
 import style from "../index.module.scss";
 import { useNavigate } from "react-router-dom";
 import useOpen from "@/hooks/useOpen";
+import { useUserContext } from "../utils/userContext";
+import Loading from "@/pages/feedback/Loading";
 
 export interface UserInfoBoxProps {
 	userData: UserResult;
 }
 
-const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
+const UserInfoBox = () => {
 	const navigate = useNavigate();
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { userData } = useUserContext();
+	const {
+		isOpen,
+		onClose: onCloseEditUserData,
+		onOpen,
+		toggleOpen,
+	} = useOpen();
+
+	if (!userData) {
+		return <Loading />;
+	}
 
 	return (
 		<section className={style.mypageContainer}>
@@ -23,26 +34,26 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 				<div className={style.profileSection}>
 					<img
 						className={style.profilePic}
-						src={userData.image?.fullPath}
+						src={userData?.image?.fullPath}
 						alt="Profile"
 					/>
 					<div className={style.profileInfo}>
 						<div className={style.nameArea}>
-							<div className={style.nickname}>{userData.nickname}</div>
-							<TagCommon
+							<div className={style.nickname}>{userData?.nickname}</div>
+							{/* <TagCommon
 								text="허준"
 								size="small"
 								backgroundColor="lightgreen"
-							/>
+							/> */}
 						</div>
 						<div className={style.userIntroduce}>
-							{userData.introduce
+							{userData?.introduce
 								? userData.introduce
 								: "한 줄 소개를 입력해주세요"}
 						</div>
 						<Modal
 							isOpen={isOpen}
-							onClose={onClose}
+							onClose={onCloseEditUserData}
 							toggleOpen={toggleOpen}
 							onOpen={onOpen}
 						>
@@ -55,7 +66,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 								<div
 									className={`${style.profileEditModal} ${modalStyle.container} `}
 								>
-									<UserInfoEdit data={userData} />
+									<UserInfoEdit onClose={onCloseEditUserData} />
 								</div>
 							</Modal.Content>
 						</Modal>

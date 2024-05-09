@@ -16,7 +16,7 @@ const CommonHeaderBox: React.FC<UserCommonHeaderProps> = ({
 	className,
 }) => {
 	return (
-		<section className={`${style.container} ${className}`}>
+		<section className={`${style.container} ${className}  `}>
 			{Icon && <Icon className={style.icon} onClick={onClick} />}
 			<div className={style.title}>
 				{" "}

@@ -1,0 +1,44 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.mapBox {
+	width: 100%;
+	padding-bottom: 20px;
+}
+
+.mapContent {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	.box {
+		position: absolute;
+		align-items: center;
+		z-index: 10;
+		vertical-align: middle;
+		width: 130px;
+		background-color: $main-lightgreen;
+		border-radius: 20px 20px;
+		border: 2px solid $main-green;
+		bottom: 20px;
+		right: 10px;
+	}
+}
+
+.flexBox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icon {
+	width: 30px;
+	height: 30px;
+
+	@include mixins.responsive("desktop") {
+		max-width: 30px;
+		height: 30px;
+	}
+}
+
+.buttonText {
+}

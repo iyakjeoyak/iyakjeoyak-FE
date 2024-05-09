@@ -45,7 +45,6 @@ export const Form = <T extends FieldValues>({
 	if (!onSubmit) {
 		return <FormProvider {...methods}>{children}</FormProvider>;
 	}
-
 	return (
 		<FormProvider {...methods}>
 			<form

@@ -24,9 +24,8 @@ export function SignUp() {
 		const formData = new FormData();
 		const userJoinPayload = {
 			...jsonData,
-			userRoleList: [1], // 백엔드에서 추가 요구하신 필드 값
+			userRoleList: [1],
 		};
-		// 회원가입 데이터
 		formData.append(
 			"userJoinPayload",
 			new Blob([JSON.stringify(userJoinPayload)], { type: "application/json" }),

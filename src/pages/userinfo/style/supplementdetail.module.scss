@@ -1,0 +1,36 @@
+@use "@styles/mixin" as mixins;
+@use "@styles/variables" as *;
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-height: 500rem;
+	overflow: auto;
+	width: 100%;
+}
+
+.image {
+	width: 250rem;
+	height: 250rem;
+	padding-bottom: 10rem;
+}
+
+.title {
+	@include mixins.b-medium;
+	padding-bottom: 5rem;
+}
+
+.box {
+	display: flex;
+	justify-content: center;
+}
+
+.headTitle {
+	@include mixins.sb-large;
+	margin-right: 10rem;
+}
+
+.text {
+	padding-bottom: 5rem;
+}

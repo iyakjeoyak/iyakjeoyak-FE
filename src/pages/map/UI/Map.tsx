@@ -5,11 +5,10 @@ import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import { useMapContext } from "../utils/mapDetailContext";
 import { useDisplayMap, useInitMap, useUpdateMarkers } from "../hooks";
 import { showToast } from "@/utils/ToastConfig";
+import CurrentLocationButton from "./CurrentLocationButton";
+import style from "../styles/maproot.module.scss";
 
-// 5. 추가된 관심 약국은 다음에 스크립트 로드 후 바로 불러와서 띄워주기
-// 6. 약국 이름으로 검색 하는 기능
-
-const Map = ({}) => {
+const Map = () => {
 	const [map, setMap] = useState<naver.maps.Map | null>(null);
 	const [mapReady, setMapReady] = useState<boolean>(false);
 	const [pharmacyData, setPharmacyData] = useState<PharmacyMapType[] | null>(
@@ -42,9 +41,10 @@ const Map = ({}) => {
 	useUpdateMarkers({ map, pharmacyData, marker });
 
 	return (
-		<>
-			<div id="map" style={{ width: "100%", height: "80vh" }}></div>
-		</>
+		<div className={style.mapContent}>
+			<div id="map" style={{ width: "100%", height: "65vh" }} />
+			<CurrentLocationButton setMap={setMap} map={map} />
+		</div>
 	);
 };
 
