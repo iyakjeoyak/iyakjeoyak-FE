@@ -16,7 +16,7 @@
 		background-color: $gray0;
 		display: flex;
 		gap: 5px;
-		padding: 5px;
+		padding: 10px;
 		border-radius: 10px;
 		flex-wrap: wrap;
 	}
@@ -24,6 +24,11 @@
 
 .images {
 	display: flex;
+	gap: 5px;
+	img {
+		height: 100px;
+		width: 100px;
+	}
 }
 
 .icons-container {

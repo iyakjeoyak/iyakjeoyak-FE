@@ -1,4 +1,5 @@
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 import { MedicineItemType } from "@/types";
 import TagCommon from "@/components/Tag";
@@ -20,6 +21,7 @@ export default function MedicineCardItem({
 		hashtags,
 		reviewCount,
 		image,
+		heartCount,
 	} = medicineItem;
 
 	return (
@@ -43,8 +45,14 @@ export default function MedicineCardItem({
 				<div className={styles["text-container"]}>
 					<div className={styles.name}>{name}</div>
 					<div className={styles.info}>
-						{grade === null || isZero(grade) ? <FaRegStar /> : <FaStar />}
-						{grade}({reviewCount})
+						<div className={styles.heart}>
+							{isZero(heartCount) ? <IoMdHeartEmpty /> : <IoMdHeart />}
+							{heartCount}
+						</div>
+						<div className={styles.grade}>
+							{grade === null || isZero(grade) ? <FaRegStar /> : <FaStar />}
+							{grade}({reviewCount})
+						</div>
 					</div>
 				</div>
 				<div className={styles.tags}>

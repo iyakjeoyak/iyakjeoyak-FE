@@ -18,6 +18,9 @@
 		.description {
 			@include mixins.m-big;
 			min-height: 70px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
 		}
 		button {
 			background-color: $main-lightgreen;

@@ -1,6 +1,7 @@
-import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
-import style from "./index.module.scss";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
+import style from "./index.module.scss";
 
 interface StarRatingProps {
 	totalStars?: number;
@@ -8,15 +9,24 @@ interface StarRatingProps {
 	size?: number;
 }
 
+export function countStar(star: number, totalStars: number) {
+	const fullStarsCount = Math.floor(star); // 꽉 채워진 별 개수
+	const halffilledStar = star % 1 >= 0.5; // 반 별 존재 여부
+	const emptyStarsCount =
+		totalStars - fullStarsCount - (halffilledStar ? 1 : 0);
+
+	return { fullStarsCount, halffilledStar, emptyStarsCount };
+}
+
 const getStarRating = (
 	filledStars: number,
 	totalStars: number,
 	size: number,
 ) => {
-	const fullStarsCount = Math.floor(filledStars); // 꽉 채워진 별 개수
-	const halffilledStar = filledStars % 1 >= 0.5; // 반 별 존재 여부
-	const emptyStarsCount =
-		totalStars - fullStarsCount - (halffilledStar ? 1 : 0);
+	const { fullStarsCount, halffilledStar, emptyStarsCount } = countStar(
+		filledStars,
+		totalStars,
+	);
 
 	const fullStars = Array.from({ length: fullStarsCount }, (_, i) => (
 		<FaStar key={`full_${i}`} size={size} />

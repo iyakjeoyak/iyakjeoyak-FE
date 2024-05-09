@@ -71,12 +71,12 @@ export default function ReviewDetailModal({
 					))}
 				</div>
 			)}
-			<div className={styles.content}>{content}</div>
 			<div className={styles.images}>
 				{imageResult?.map((img) => (
-					<img src={img.fullPath} alt="리뷰 이미지" />
+					<img src={img.fullPath} key={img.id} alt="리뷰 이미지" />
 				))}
 			</div>
+			<div className={styles.content}>{content}</div>
 			{!isOwner && (
 				<div className={styles["icons-container"]}>
 					<div className={styles.left}>

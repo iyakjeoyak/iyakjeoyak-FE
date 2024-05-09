@@ -66,7 +66,7 @@ export default function ReviewBoardItem({
 						<div className={styles.container}>
 							<button className={styles.heart} onClick={handleLikeClick}>
 								{isZero(heartCount) ? <IoMdHeartEmpty /> : <IoMdHeart />}
-								{heartCount}
+								<span>{heartCount}</span>
 							</button>
 							<Title
 								createdDate={reviewItem.createdDate}
