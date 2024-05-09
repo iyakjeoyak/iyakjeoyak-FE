@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { KeywordResultItemType } from "@/pages/main";
 import styles from "../styles/SearchResultList.module.scss";
-import { useNavigate } from "react-router-dom";
 import { useSelect } from "../hooks/useSelect";
 
 export default function SupplementSearchResultList({
@@ -12,8 +11,6 @@ export default function SupplementSearchResultList({
 	keywordSearchResult?: KeywordResultItemType[];
 	handleKeywordSelected: (keyword: string) => void;
 }) {
-	const navigate = useNavigate();
-
 	const [activeKeywordIndex, setActiveKeywordIndex] = useState<number>(-1);
 	const { currentKeyword, handleCurrentKeyword } = useSelect();
 

@@ -1,6 +1,5 @@
 import "@styles/global.scss";
 
-import FlexBox from "@/styles/FlexBox";
 import ReviewDisplay from "./ReviewDisplay";
 import ReviewEmpty from "./ReviewEmpty";
 import getUserReview from "@/api/useInfo/getUserReview";

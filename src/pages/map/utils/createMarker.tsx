@@ -1,4 +1,3 @@
-import Content from "@/components/Modal/UI/Content";
 import { Pharmacy } from "../mapTypes";
 
 export default function createMarker(
@@ -28,10 +27,6 @@ export default function createMarker(
 		cursor: "pointer",
 		visible: visible,
 		icon: markerIcon,
-		// icon: {
-		// 	content: `<img src='images/map_marker_icon.png' alt='지도 마커' style='cursor: pointer; width : 40px; height : 40px;'/>`,
-		// 	anchor: new naver.maps.Point(20, 25),
-		// },
 	});
 
 	if (pharmacy.hpid) {

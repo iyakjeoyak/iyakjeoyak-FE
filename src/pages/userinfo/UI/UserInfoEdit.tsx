@@ -1,5 +1,4 @@
 import style from "../style/userinfoedit.module.scss";
-import { UserResult } from "../userInfoType";
 import { Form } from "@/components/Form";
 import * as yup from "yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -7,8 +6,6 @@ import { showToast } from "@/utils/ToastConfig";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
 import transformSubmmit from "../utils/transformSubmmit";
 import commonQueryOptions from "@/api/common";
-import useOpen from "@/hooks/useOpen";
-import { useEffect } from "react";
 import { useUserContext } from "../utils/userContext";
 import getUserInfo from "@/api/useInfo/getUserInfo";
 
