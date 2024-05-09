@@ -1,38 +1,44 @@
+import { useEffect, useState } from "react";
+
+import qs from "qs";
 import styles from "../styles/SelectedKeywordTagsList.module.scss";
-import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useNavigate } from "react-router-dom";
 
 export default function SelectedKeywordTagsList() {
 	const navigate = useNavigate();
-	// props 전달 필요없이 외부랑 URL로 props 상태 공유
-	// 뒤로가기를 이렇게 해도 되나?
-	const currentSearchKeywordValue = useGetURLSearch("keyword") as string;
-	const currentSearchTagNameValue = useGetURLSearch("tagname") as string;
 
-	if (!currentSearchKeywordValue && !currentSearchTagNameValue) return null;
+	const parsedQuery = qs.parse(window.location.href.split("?")[1], {
+		ignoreQueryPrefix: true,
+	});
+
+	const handleTagRemove = (tagKey: string) => {
+		const updatedQuery = { ...parsedQuery };
+		if (tagKey === "keyword") {
+			delete updatedQuery[tagKey];
+		}
+		if (tagKey === "name") {
+			delete updatedQuery[tagKey];
+			delete updatedQuery["categoryId"];
+			delete updatedQuery["hashtagId"];
+		}
+		const newQueryString = qs.stringify(updatedQuery, { addQueryPrefix: true });
+		navigate(newQueryString);
+	};
 
 	return (
 		<div className={styles.container}>
-			{currentSearchKeywordValue && <div className={styles.tag}>
-				{currentSearchKeywordValue}
-				<span
-					onClick={() => {
-						navigate("/search");
-					}}
-				>
-					X
-				</span>
-			</div>}
-			{currentSearchTagNameValue && <div className={styles.tag}>
-				{currentSearchTagNameValue}
-				<span
-					onClick={() => {
-						navigate("/search");
-					}}
-				>
-					X
-				</span>
-			</div>}
+			{parsedQuery.keyword && (
+				<div className={styles.tag}>
+					<span>{parsedQuery.keyword as string}</span>
+					<span onClick={() => handleTagRemove("keyword")}>X</span>
+				</div>
+			)}
+			{parsedQuery.name && (
+				<div className={styles.tag}>
+					<span>{parsedQuery.name as string}</span>
+					<span onClick={() => handleTagRemove("name")}>X</span>
+				</div>
+			)}
 		</div>
 	);
 }

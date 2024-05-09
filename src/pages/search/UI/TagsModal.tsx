@@ -2,14 +2,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import Tag from "@/components/Tag";
+import { TagType } from "@/types";
 import ectQueryOptions from "@/api/common";
+import qs from "qs";
 import styles from "../styles/TagsModal.module.scss";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useQuery } from "@tanstack/react-query";
 
 export default function TagsModal({
 	toggleIsTagsModalOpen,
+	currentTapValue,
 }: {
+	currentTapValue: string;
 	toggleIsTagsModalOpen: () => void;
 }) {
 	const tap = useGetURLSearch("tap");
@@ -22,6 +26,31 @@ export default function TagsModal({
 	const navigate = useNavigate();
 	const location = useLocation();
 
+	const handleTagClick = (tag: TagType) => {
+		let updatedQuery: { [key: string]: any };
+
+		if (tap === TAPS_QUERIES.FEATURE) {
+			updatedQuery = {
+				...qs.parse(location.search, { ignoreQueryPrefix: true }),
+				tap: currentTapValue,
+				hashtagId: tag.id,
+				name: tag.name,
+			};
+			delete updatedQuery.categoryId;
+		} else {
+			updatedQuery = {
+				...qs.parse(location.search, { ignoreQueryPrefix: true }),
+				tap: currentTapValue,
+				categoryId: tag.id,
+				name: tag.name,
+			};
+			delete updatedQuery.hashtagId;
+		}
+
+		const newQueryString = qs.stringify(updatedQuery, { addQueryPrefix: true });
+		navigate(`${location.pathname}${newQueryString}`);
+	};
+
 	return (
 		<div onClick={toggleIsTagsModalOpen} className="background">
 			<div className={styles.container}>
@@ -33,14 +62,7 @@ export default function TagsModal({
 							text={tag.name}
 							style={{ width: `${tag.name.length * 4}%`, borderRadius: "10px" }}
 							onClick={() => {
-								if (tap === TAPS_QUERIES.FEATURE) {
-									navigate(
-										`${location.pathname}${location.search}&hashtagId=${tag.id}&name=${tag.name}`,
-									);
-								}
-								navigate(
-									`${location.pathname}${location.search}&categoryId=${tag.id}&name=${tag.name}`,
-								);
+								handleTagClick(tag);
 							}}
 						/>
 					))}

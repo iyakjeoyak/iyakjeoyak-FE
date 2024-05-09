@@ -1,11 +1,10 @@
-import * as _ from "lodash";
-
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { FaShare } from "react-icons/fa";
 import IconTag from "@/components/IconTag";
 import { IoMdHeart } from "react-icons/io";
-import ReviewPostModal from "./ReviewPostModal";
+import Modal from "@/components/Modal";
+import ReviewEditModal from "./ReviewEditModal";
 import TagCommon from "@/components/Tag";
 import WriterTitle from "@/components/WriterTitle";
 import copyToClipboard from "@/utils/copyToClipboard";
@@ -13,7 +12,7 @@ import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
 import styles from "../styles/ReviewDetailModal.module.scss";
-import { useState } from "react";
+import useOpen from "@/hooks/useOpen";
 
 export default function ReviewDetailModal({
 	handleOpenConfirmDelete,
@@ -22,8 +21,7 @@ export default function ReviewDetailModal({
 	handleOpenConfirmDelete: () => void;
 	reviewId: number;
 }) {
-	const [isEditing, setIsEditing] = useState(false);
-
+	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
 	const {
 		data: {
 			content,
@@ -43,6 +41,7 @@ export default function ReviewDetailModal({
 			queryClient.invalidateQueries(
 				reviewQueryOptions.getReviewById({ reviewId }),
 			);
+			onClose();
 		},
 	});
 
@@ -50,74 +49,77 @@ export default function ReviewDetailModal({
 		likeMutate(reviewId);
 	};
 
-	if (isEditing) {
-		return <ReviewPostModal isEditing reviewId={reviewId} />;
-	}
-
 	return (
-		<article className={styles.container}>
-			<h2>{title}</h2>
-			<WriterTitle
-				userId={createdBy.userId}
-				image={createdBy.image}
-				nickname={createdBy.nickname}
-				createdDate={createdDate}
-				star={star}
-			/>
-			{hashtagResult.length !== 0 && (
-				<div className={styles.tags}>
-					{hashtagResult?.map((tag) => (
-						<TagCommon key={tag.id} text={tag.name} />
+		<>
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				toggleOpen={toggleOpen}
+				onOpen={onOpen}
+			>
+				<Modal.Content>
+					<ReviewEditModal reviewId={reviewId} onClose={onClose} />
+				</Modal.Content>
+			</Modal>
+			<article className={styles.container}>
+				<h2>{title}</h2>
+				<WriterTitle
+					userId={createdBy.userId}
+					image={createdBy.image}
+					nickname={createdBy.nickname}
+					createdDate={createdDate}
+					star={star}
+				/>
+				{hashtagResult.length !== 0 && (
+					<div className={styles.tags}>
+						{hashtagResult?.map((tag) => (
+							<TagCommon key={tag.id} text={tag.name} />
+						))}
+					</div>
+				)}
+				<div className={styles.images}>
+					{imageResult?.map((img) => (
+						<img src={img.fullPath} key={img.id} alt="리뷰 이미지" />
 					))}
 				</div>
-			)}
-			<div className={styles.images}>
-				{imageResult?.map((img) => (
-					<img src={img.fullPath} key={img.id} alt="리뷰 이미지" />
-				))}
-			</div>
-			<div className={styles.content}>{content}</div>
-			{!isOwner && (
-				<div className={styles["icons-container"]}>
-					<div className={styles.left}>
-						<IconTag
-							icon={<IoMdHeart />}
-							text="도움돼요"
-							onClick={handleLikeClick}
-						/>
+				<div className={styles.content}>{content}</div>
+				{!isOwner && (
+					<div className={styles["icons-container"]}>
+						<div className={styles.left}>
+							<IconTag
+								icon={<IoMdHeart />}
+								text="도움돼요"
+								onClick={handleLikeClick}
+							/>
+							<IconTag
+								icon={<FaShare />}
+								text="공유하기"
+								onClick={() => {
+									const location = window.location.href;
+									copyToClipboard(location);
+								}}
+							/>
+						</div>
 						<IconTag
 							icon={<FaShare />}
-							text="공유하기"
+							text="신고하기"
 							onClick={() => {
-								const location = window.location.href;
-								copyToClipboard(location);
+								console.log("얍");
 							}}
 						/>
 					</div>
-					<IconTag
-						icon={<FaShare />}
-						text="신고하기"
-						onClick={() => {
-							console.log("얍");
-						}}
-					/>
-				</div>
-			)}
-			{isOwner && (
-				<div className={styles["buttons-container"]}>
-					<button className={styles.delete} onClick={handleOpenConfirmDelete}>
-						삭제
-					</button>
-					<button
-						className={styles.edit}
-						onClick={() => {
-							setIsEditing(true);
-						}}
-					>
-						편집
-					</button>
-				</div>
-			)}
-		</article>
+				)}
+				{isOwner && (
+					<div className={styles["buttons-container"]}>
+						<button className={styles.delete} onClick={handleOpenConfirmDelete}>
+							삭제
+						</button>
+						<button className={styles.edit} onClick={onOpen}>
+							편집
+						</button>
+					</div>
+				)}
+			</article>
+		</>
 	);
 }

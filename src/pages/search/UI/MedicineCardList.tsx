@@ -99,8 +99,10 @@ const getMedicinesByQuery = async ({
 
 export default function MedicineCardList({
 	toggleIsTagsModalOpen,
+	handleCurrentTab,
 }: {
-	toggleIsTagsModalOpen: () => void;
+	toggleIsTagsModalOpen: (tapValue: string) => void;
+	handleCurrentTab: (tapValue: string) => void;
 }) {
 	const navigate = useNavigate();
 	const { search } = useLocation();
@@ -115,7 +117,7 @@ export default function MedicineCardList({
 	};
 
 	const queryParamsObject = qs.parse(search, { ignoreQueryPrefix: true });
-	const { tap, tagname, ...restQueryParams } = queryParamsObject;
+	const { tap, name, ...restQueryParams } = queryParamsObject;
 
 	const nextPageParams = {
 		size: PAGE_SIZE,
@@ -155,8 +157,8 @@ export default function MedicineCardList({
 			navigate(`/search?tap=${tapValue}`);
 			return;
 		}
-		toggleIsTagsModalOpen();
-		navigate(`/search?tap=${tapValue}`);
+		toggleIsTagsModalOpen(tapValue);
+		handleCurrentTab(tapValue);
 	};
 
 	const onIntersect: IntersectionObserverCallback = ([entry]) => {
