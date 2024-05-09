@@ -1,0 +1,15 @@
+@import "@/styles/variables.scss";
+
+// 숫자 인풋 방향키 제거
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+.element {
+	width: 100%;
+	border-radius: 20px;
+	height: 40px;
+	box-shadow: 1px 1px 10px rgba(188, 188, 188, 0.25);
+	padding: 20px;
+}

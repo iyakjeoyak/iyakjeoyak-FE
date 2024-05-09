@@ -1,17 +1,25 @@
 import Container from "@/components/ControlForm/Container";
 import { InputHTMLAttributes, forwardRef } from "react";
-import styles from "@/components/Form/Container/index.module.scss";
+import styles from "../Input/index.module.scss";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
-	placeholder: string;
+	placeholder?: string;
 	title?: string;
 	type?: string;
+	value?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
 	(
-		{ className, placeholder, title, type = "text", ...props }: InputProps,
+		{
+			className,
+			placeholder,
+			title,
+			value,
+			type = "text",
+			...props
+		}: InputProps,
 		ref,
 	) => {
 		return (
@@ -21,6 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					className={`${styles.element} ${className || ""} m-big`}
 					placeholder={placeholder}
 					type={type}
+					value={value}
 					ref={ref}
 				/>
 			</Container>
