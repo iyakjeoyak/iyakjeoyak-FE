@@ -39,6 +39,7 @@ export default function MedicineSearch() {
 	useEffect(() => {
 		setKeywordSearchResult([]);
 	}, [search]);
+
 	return (
 		<>
 			{isTagsModalOpen && (

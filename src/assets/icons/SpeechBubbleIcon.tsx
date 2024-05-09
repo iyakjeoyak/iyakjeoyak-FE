@@ -20,7 +20,7 @@ const SpeechBubbleIcon: FC<
 				<path
 					d="M115.5 23.2258C115.5 32.7661 107.766 40.5 98.2258 40.5L18.7945 40.5C8.95861 40.5 2.41779 30.3273 6.49973 21.3785L9.23026 15.3923C10.0545 13.5853 9.69091 11.4582 8.31327 10.0276C5.60675 7.21695 8.33227 2.62962 12.0949 3.66261L19.5284 5.70337C20.1285 5.86812 20.748 5.95161 21.3703 5.95161L98.2258 5.95161C107.766 5.95161 115.5 13.6855 115.5 23.2258Z"
 					stroke="#D9D9D9"
-					stroke-opacity="0.24"
+					strokeOpacity="0.24"
 				/>
 			</g>
 			<defs>
@@ -31,9 +31,9 @@ const SpeechBubbleIcon: FC<
 					width="123.235"
 					height="49.9875"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"

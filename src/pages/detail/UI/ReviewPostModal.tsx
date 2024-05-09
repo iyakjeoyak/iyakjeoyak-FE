@@ -72,15 +72,15 @@ export default function ReviewPostModal({
 		setImageFiles(imgs);
 	};
 
-	const onSubmit = (data: PostReviewBody) => {
-		console.log(data);
+	const onSubmit = ({ title, tagList, content, star }: PostReviewBody) => {
+		console.log("제출 시작");
 
 		if (reviewId) {
 			const body = {
-				title: data.title,
-				tagList: data.tagList,
-				content: data.content,
-				star: data.star,
+				title,
+				tagList,
+				content,
+				star,
 			};
 
 			patchReviewMutation(body);
@@ -90,11 +90,11 @@ export default function ReviewPostModal({
 		const formData = new FormData();
 
 		const formBody = {
-			title: data.title,
-			tagList: data.tagList,
+			title,
+			tagList,
 			medicineId,
-			content: data.content,
-			star: data.star,
+			content,
+			star,
 		};
 
 		formData.append(

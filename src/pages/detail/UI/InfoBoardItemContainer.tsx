@@ -22,11 +22,11 @@ export default function InfoBoardItemContainer({
 		<div className={styles.container}>
 			<div className={styles.title}>{title}</div>
 			<div className={styles["content-container"]}>
-				<p className={styles.description}>
+				<div className={styles.description}>
 					{textArray.map((text) => (
-						<p key={text}>{text}</p>
+						<div key={text}>{text}</div>
 					))}
-				</p>
+				</div>
 				{hasMoreBtn && <button>more</button>}
 			</div>
 		</div>
