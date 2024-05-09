@@ -3,12 +3,12 @@ import "@styles/global.scss";
 import { useEffect, useState } from "react";
 
 import CommonCardBox from "../CommonCardBox";
-// import CommonHeaderBox from "../CommonHeaderBox";
-// import GridIcon from "@/pages/userinfo/assets/GridIcon";
-// import ListIcon from "../../assets/ListIcon";
+import CommonHeaderBox from "../CommonHeaderBox";
+import GridIcon from "@/pages/userinfo/assets/GridIcon";
+import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import SupplementEditForm from "./SupplementEditForm";
-import { ShortSupplementInfo } from "../../userInfoType";
+import { ShortSupplementInfo, ShortSupplementProps } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
 import useOpen from "@/hooks/useOpen";
@@ -16,13 +16,11 @@ import { showToast } from "@/utils/ToastConfig";
 import getUserSupplement from "@/api/useInfo/getUserSupplement";
 
 const noSupplementData = {
-	mySupplementId: 0,
-	name: "",
-	dosage: "",
-	dueDate: "",
-	effect: [],
+	medicineId: 0,
+	medicineName: "",
+	expirationDate: "",
 	memo: "",
-	img: "",
+	image: "",
 };
 
 const SupplementHistory = () => {
@@ -39,20 +37,17 @@ const SupplementHistory = () => {
 		toggleOpen: toggleOpenEditSupplement,
 	} = useOpen();
 
-	// const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
-	const [cardForm, _] = useState<"slim" | "wide">("slim");
-	const [supplementData, setSupplmentData] = useState<
-		ShortSupplementInfo[] | null
-	>(null);
+	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
+	const [supplementData, setSupplmentData] =
+		useState<ShortSupplementProps | null>(null);
 	const [selectedSupplement, setSelectedSupplement] =
 		useState<ShortSupplementInfo | null>(null);
 
 	useEffect(() => {
 		const fetchSupplement = async () => {
 			try {
-				const userSupplement = await getUserSupplement({ page: 0, size: 10 });
-				setSupplmentData(userSupplement.data);
-				console.log(userSupplement);
+				const userSupplement = await getUserSupplement({ page: 0, size: 20 });
+				setSupplmentData(userSupplement);
 			} catch (error) {
 				showToast({
 					type: "error",
@@ -61,36 +56,28 @@ const SupplementHistory = () => {
 			}
 		};
 		fetchSupplement();
-	}, []);
+	}, [isOpenEditSupplement, isOpenSupplement]);
 
-	// const supplemenRecorddata = supplementRecords.mySupplements;
-	// const count = supplementRecords.mySupplements.length;
+	const count = supplementData?.totalElement;
+	const supplementInfo = supplementData?.data;
 
-	// const onChangeCardStyle = () => {
-	// 	setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
-	// };
+	const onChangeCardStyle = () => {
+		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
+	};
 
 	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
 	};
 
-	const handleSubmmit = () => {
-		console.log("폼 제출");
-	};
-
-	useEffect(() => {
-		console.log("state 변화");
-	}, [selectedSupplement]);
-
 	return (
 		<section className={style.userSupplementContainer}>
-			{/* <CommonHeaderBox
+			<CommonHeaderBox
 				titleText="복용 중인 영양제"
-				// count={count}
+				count={count ? count : 0}
 				Icon={cardForm === "slim" ? ListIcon : GridIcon}
 				onClick={onChangeCardStyle}
 				className={style.header}
-			/> */}
+			/>
 
 			<Modal
 				isOpen={isOpenSupplement}
@@ -101,11 +88,13 @@ const SupplementHistory = () => {
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplementData &&
-								supplementData?.map((cardInfo, mySupplementId) => (
+							{supplementInfo &&
+								supplementInfo?.map((cardInfo, mySupplementId) => (
 									<CommonCardBox
 										key={mySupplementId}
 										form={cardForm}
+										name={cardInfo.medicineName}
+										img={cardInfo.image?.fullPath}
 										onClick={() => handleCardClick(cardInfo)}
 										{...cardInfo}
 									/>
@@ -115,8 +104,11 @@ const SupplementHistory = () => {
 				/>
 
 				<Modal.Content>
-					{selectedSupplement && (
-						<SupplementModal itemId={selectedSupplement.id} />
+					{selectedSupplement?.medicineName && (
+						<SupplementModal
+							itemId={selectedSupplement.id}
+							onClose={onCloseSupplement}
+						/>
 					)}
 				</Modal.Content>
 			</Modal>
@@ -131,7 +123,7 @@ const SupplementHistory = () => {
 				<Modal.Content>
 					<SupplementEditForm
 						formInitialValues={noSupplementData}
-						onSubmit={handleSubmmit}
+						onClose={onCloseEditSupplement}
 					/>
 				</Modal.Content>
 			</Modal>

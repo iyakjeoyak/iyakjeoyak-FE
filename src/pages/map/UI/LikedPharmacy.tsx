@@ -15,7 +15,7 @@ const LikedPharmacy = () => {
 		mutationFn: ({ page, size }: { page: number; size: number }) =>
 			getLikedPharmacy(page, size),
 		onSuccess: (data) => {
-			setLikedData(data);
+			setLikedData(data.data);
 			console.log(likedData);
 		},
 		onError: () => {
@@ -29,6 +29,8 @@ const LikedPharmacy = () => {
 	const likedPharmacyData = (page: number, size: number) => {
 		mutate({ page, size });
 	};
+
+	console.log(likedPharmacyData);
 
 	return (
 		<>
@@ -59,7 +61,7 @@ const LikedPharmacy = () => {
 						>
 							<div className={style.headerBox}>
 								<div className={style.header} />
-								<h2 className={style.headerTitle}>00님이 저장한 약국</h2>
+								<h2 className={style.headerTitle}>USER님이 저장한 약국</h2>
 							</div>
 							<section className={style.content}>
 								{likedData && likedData.length > 0 ? (

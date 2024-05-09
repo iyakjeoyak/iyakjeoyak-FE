@@ -69,6 +69,7 @@ export interface ReviewImage {
 export interface Medicine {
 	id: number;
 	prdlst_NM: string;
+	bssh_NM: string;
 }
 
 export interface CreateBy {
@@ -78,11 +79,12 @@ export interface CreateBy {
 		id: number;
 		fullPath: "string";
 	};
+	topCount: number | null;
 }
 
 export interface imageResult {
 	id: number;
-	fullPath: string;
+	fullPath?: string;
 }
 
 export interface imageEdit {
@@ -145,8 +147,9 @@ export interface PointData {
 export interface ShortSupplementInfo {
 	id: number;
 	medicineName: string;
-	grade: string;
+	grade: number;
 	expirationDate: string;
+	image: imageResult | null;
 }
 
 export interface ShortSupplementProps {
@@ -164,10 +167,6 @@ export interface SupplementSubmmitInfo {
 	memo?: string;
 	image?: string;
 }
-
-// export interface SupplementRecordData {
-// 	mySupplements: SupplementInfo[];
-// }
 
 export interface LikedSupplement {
 	likedItemId: number;

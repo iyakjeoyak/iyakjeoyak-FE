@@ -1,8 +1,15 @@
 import axios from "../axiosConfig";
 
-interface LikedSupplementProps {
+interface MedicineId {
 	id: number;
-	medicineId: number;
+	image: string | null;
+	prdlst_NM: string;
+	bssh_NM: string;
+}
+
+export interface LikedSupplementProps {
+	id: number;
+	medicineId: MedicineId;
 }
 
 export interface LikedSupplmentArgs {
@@ -25,6 +32,5 @@ export default async function getLikedSupplement({
 		`/heart/medicine?page=${page}&size=${size}`,
 	);
 
-	console.log(response);
 	return response.data;
 }

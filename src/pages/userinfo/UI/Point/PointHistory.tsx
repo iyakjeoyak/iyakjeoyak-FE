@@ -61,7 +61,7 @@ const PointHistory = () => {
 			<PathButton paths={paths} />
 			<div className={style.pointTitleBox}>
 				<div className={style.pointTitle}>포인트 합계</div>
-				<div className={style.pointTitle}>{pointSum?.point} point</div>
+				<div className={style.pointTitleNumber}>{pointSum?.point} point</div>
 			</div>
 
 			<div className={style.pointHistoryList}>{renderPointItems}</div>

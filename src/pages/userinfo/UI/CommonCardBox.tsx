@@ -9,6 +9,9 @@ interface CardProps {
 	name?: string;
 	title?: string;
 	date?: string;
+	medicineName?: string;
+	grade?: number;
+	expirationDate?: string;
 	img?: string;
 	liked?: boolean;
 	memo?: string;
@@ -38,7 +41,7 @@ const CommonCardBox = ({
 			return (
 				<Button
 					icon={<PlusIcon />}
-					onClick={() => console.log("모냐")}
+					onClick={() => {}}
 					variant="greentransparent"
 					size="l"
 				/>

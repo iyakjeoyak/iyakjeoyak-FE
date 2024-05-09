@@ -8,21 +8,30 @@
 	.pointTitleBox {
 		display: flex;
 		justify-content: space-between;
-		width: 97%;
+		width: 100%;
 		@include mixins.b-medium;
-		padding: 15rem 0 12rem 0;
+		padding: 15rem 10rem 15rem 10rem;
+		background-color: $main-lightgreen;
+		border-radius: 15px 15px;
+		margin: 15rem 0;
 	}
+
+	.pointTitleNumber {
+		color: $main-green;
+	}
+
 	.pointHistoryList {
 		min-width: 46px;
 		.pointItem {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 10rem 15rem;
+			padding: 15rem 15rem;
 			font-size: 15rem;
 			border: 1px solid $main-gray;
 			border-radius: 10px;
 			@include mixins.m-medium;
+			margin-bottom: 10rem;
 
 			.description {
 				color: $black;

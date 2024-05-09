@@ -76,8 +76,6 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 
 	const onSubmit = (submmitData: UserSubmmit) => {
 		const { imgFile, ...jsonData } = submmitData;
-		console.log(imgFile);
-		// const userSumbmmitData = transformSubmmit(data)
 
 		const formData = new FormData();
 		const userEditPayload = {
@@ -154,8 +152,8 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 				tags={tags ?? []}
 				name="hashtagResultList"
 			/>
+
 			<Form.Button type="submit" variant="dark" text="저장" />
-			<button onClick={() => mutate(new FormData())}>테스트 호출</button>
 		</Form>
 	);
 };

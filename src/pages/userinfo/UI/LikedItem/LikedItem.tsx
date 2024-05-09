@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import getLikedSupplement from "@/api/useInfo/getLikedSupplement";
 import { showToast } from "@/utils/ToastConfig";
 import { LikedSupplmentArgs } from "@/api/useInfo/getLikedSupplement";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 const LikedItem = () => {
 	const navigate = useNavigate();
@@ -16,7 +17,6 @@ const LikedItem = () => {
 			try {
 				const likedData = await getLikedSupplement({ page: 0, size: 10 });
 				setLikedItem(likedData);
-				console.log(likedData);
 			} catch (error) {
 				showToast({
 					type: "error",

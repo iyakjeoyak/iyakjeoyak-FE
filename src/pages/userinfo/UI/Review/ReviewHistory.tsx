@@ -7,6 +7,8 @@ import getUserReview from "@/api/useInfo/getUserReview";
 import { useEffect, useState } from "react";
 import { DetailedReview } from "../../userInfoType";
 import { showToast } from "@/utils/ToastConfig";
+import CommonHeaderBox from "../CommonHeaderBox";
+import style from "../../style/reviewhistory.module.scss";
 
 const ReviewHistory = () => {
 	const [reviews, setReviews] = useState<DetailedReview[] | null>(null);
@@ -30,11 +32,16 @@ const ReviewHistory = () => {
 
 	if (reviews && reviews.length > 0) {
 		return (
-			<FlexBox>
+			<section className={style.reviewWrapper}>
+				<CommonHeaderBox
+					className={style.reviewHeader}
+					titleText="내 영양제 리뷰"
+					count={reviews && reviews?.length}
+				/>
 				{reviews.map((reviewItem) => (
 					<ReviewDisplay reviews={[reviewItem]} key={reviewItem.id} />
 				))}
-			</FlexBox>
+			</section>
 		);
 	}
 

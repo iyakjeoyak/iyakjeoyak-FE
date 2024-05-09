@@ -41,12 +41,9 @@ export const Form = <T extends FieldValues>({
 		defaultValues: pageDefaultValues,
 	});
 
-	console.log("yup", methods.formState.errors);
-
 	if (!onSubmit) {
 		return <FormProvider {...methods}>{children}</FormProvider>;
 	}
-	console.log("먼데");
 	return (
 		<FormProvider {...methods}>
 			<form

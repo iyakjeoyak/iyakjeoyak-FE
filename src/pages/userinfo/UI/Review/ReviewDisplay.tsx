@@ -1,5 +1,4 @@
 import "@styles/global.scss";
-// import { DetailedReview } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import style from "../../style/reviewdisplay.module.scss";
 import useOpen from "@/hooks/useOpen";
@@ -34,12 +33,13 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 									<StarRating filledStars={4.5} size={20} />
 								</div>
 								<div className={style.reviewContents}>
-									<img
-										src={review.imageResult?.[0].fullPath}
-										alt="유저 제품 후기 사진"
-										className={style.reviewImg}
-									/>
-
+									{review.imageResult?.length > 0 && (
+										<img
+											src={review.imageResult?.[0].fullPath}
+											alt="유저 제품 후기 사진"
+											className={style.reviewImg}
+										/>
+									)}
 									<div className={style.reviewTextBox}>
 										<div className={style.reviewText}>{review.content}</div>
 										<div className={style.reviewDate}>
