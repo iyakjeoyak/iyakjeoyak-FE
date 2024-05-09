@@ -51,7 +51,7 @@ const UserInfo = () => {
 			<section className={style.mypageContainer}>
 				<UserInfoBox />
 				<FlexBox direction="column">
-					<PointContent points={userData.point} onNavigate={goToPointDetail} />
+					<PointContent onNavigate={goToPointDetail} />
 					<Review review={latestReviews} />
 					<Supplement supplement={favoriteSupplements} />
 				</FlexBox>
