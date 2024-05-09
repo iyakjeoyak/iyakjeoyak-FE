@@ -1,59 +1,47 @@
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-SignUpFormType,
+	SignUpFormType,
 	signUpDefault,
 	signupValidation,
 } from "../utils/signupValidation";
 import { Form } from "@/components/Form";
-import { tagData } from "../../../components/Form/TagButton/TagData";
 import Container from "@/components/Form/Container";
-import { useMutation } from "@tanstack/react-query";
-import postSignUp from "@/api/post/postSignUp";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import postSignUp from "@/api/user/postSignUp";
 import styles from "@/pages/signup/styles/SignUp.module.scss";
+import commonQueryOptions from "@/api/common";
 
 export function SignUp() {
-  const idInputRef = useRef<HTMLInputElement>(null)
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
+	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+	const onSubmit = (data: SignUpFormType) => {
+		const { profileImage, ...jsonData } = data;
 
-  const onSubmit = (data: SignUpFormType) => {
-    const { profileImage, ...jsonData } = data;
-    const formData = new FormData();
-    const userJoinPayload = {
+		const formData = new FormData();
+		const userJoinPayload = {
 			...jsonData,
-			userRoleList: [1], // 백엔드에서 추가 요구하신 필드 값
+			userRoleList: [1],
 		};
-    formData.append(
+		formData.append(
 			"userJoinPayload",
 			new Blob([JSON.stringify(userJoinPayload)], { type: "application/json" }),
-    );
-    formData.append("imgFile", profileImage || "");
-    console.log(userJoinPayload);
-		console.log("userJoinPayload:", formData.get("userJoinPayload"));
-		console.log("imgFile:", formData.get("imgFile"));
-
+		);
+		formData.append("imgFile", profileImage || "");
 		mutate(formData, {
 			onSuccess: () => {
-				alert("회원가입이 완료되었습니다.");
+				toast.success("회원가입이 완료되었습니다.", { autoClose: 2000 });
 				navigate("/login");
 			},
 			onError: () => {
-				alert("회원가입에 실패하였습니다.");
+				toast.error("회원가입에 실패하였습니다.", { autoClose: 2000 });
 			},
 		});
 	};
 
-  const checkDuplicateID = () => {
-    const idValue = idInputRef.current?.value
-    if (idValue) {
-			console.log("이메일 중복확인", idValue);
-		} else {
-			console.log("이메일이 없습니다.");
-		}
-  }
 	return (
 		<Form
 			validationSchema={signupValidation}
@@ -61,20 +49,11 @@ export function SignUp() {
 			onSubmit={onSubmit}
 		>
 			<Form.ImgInput name="profileImage" />
-			<div>
-				<Form.Input
-					name="username"
-					title="이메일"
-					placeholder="이메일을 입력해주세요."
-					// ref={idInputRef}
-				/>
-				<Form.Button
-					onClick={checkDuplicateID}
-					text=" ID 중복확인"
-					type="button"
-					variant="dark"
-				/>
-			</div>
+			<Form.Input
+				name="username"
+				title="이메일"
+				placeholder="이메일을 입력해주세요."
+			/>
 
 			<Form.Input
 				name="password"
@@ -89,12 +68,12 @@ export function SignUp() {
 				placeholder="비밀번호를 입력해주세요."
 				type="password"
 			/>
-
 			<Form.Input
 				name="nickname"
 				title="닉네임"
 				placeholder="닉네임을 입력해주세요."
 			/>
+
 			<Container title="성별" name="gender">
 				<div className={`${styles.genderBox}`}>
 					<Form.RadioButton name="gender" text="남성" value="MALE" />
@@ -109,18 +88,13 @@ export function SignUp() {
 				placeholder="나이를 입력해주세요."
 				type="number"
 			/>
-			<Container title="건강 고민" name="userHashtagList">
-				<div className={`${styles.tagWrap}`}>
-					{tagData.map((tags) => (
-						<Form.TagButton
-							key={tags.id}
-							text={tags.name}
-							name="userHashtagList"
-							value={tags.id}
-						/>
-					))}
-				</div>
-			</Container>
+
+			<Form.TagBoard
+				title="건강 고민"
+				name="userHashtagList"
+				tags={tags ?? []}
+			/>
+
 			<Form.Button text="확인" type="submit" variant="dark" />
 		</Form>
 	);

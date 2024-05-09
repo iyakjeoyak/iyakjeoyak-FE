@@ -1,18 +1,20 @@
 .container {
-  background-color: white;
+	background-color: white;
 
-  padding: 20px;
-  margin: 20px;
+	padding: 30px;
+	margin: 20px;
 
-  position: absolute;
-  top: 20px;
-  border-radius: 20px;
+	position: absolute;
+	top: 20vh;
+	border-radius: 20px;
 
-  .title {}
+	.title {
+		margin-bottom: 15px;
+	}
 
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+	.tags-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+	}
 }

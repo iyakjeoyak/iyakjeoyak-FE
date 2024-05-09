@@ -1,53 +1,64 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { KeywordResultItemType } from "../main";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
-import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import { queryClient } from "@/main";
-import { useNavigate } from "react-router-dom";
 
 export default function MedicineSearch() {
-  const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
-  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<
+		KeywordResultItemType[]
+	>([]);
 
 	const navigate = useNavigate();
+	const { search } = useLocation();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
-    navigate(`/search?keyword=${keyword}`);
-    setKeywordSearchResult([]);
+		navigate(`/search?keyword=${keyword}`);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-    if (keyword.length <= 0) {
-      setKeywordSearchResult([]);
-      return;
-    }
-		const response = await getAutoCompleteResult({keyword});
+		if (keyword.length <= 2) {
+			return;
+		}
+		const response = await getAutoCompleteResult({ keyword });
 		setKeywordSearchResult(response);
 	};
 
-  
-  const toggleIsTagsModalOpen = () =>{
-    setIsTagsModalOpen((prev)=>!prev)
-    // 모달이 닫힐때만 데이터를 비워줌
-    if (isTagsModalOpen) queryClient.resetQueries({queryKey:['medicine', 'medicines']});
-  }
-  
+	const toggleIsTagsModalOpen = () => {
+		setIsTagsModalOpen((prev) => !prev);
+		// 모달이 닫힐때만 데이터를 비워줌
+		if (isTagsModalOpen)
+			queryClient.resetQueries({ queryKey: ["medicine", "medicines"] });
+	};
+
+	useEffect(() => {
+		setKeywordSearchResult([]);
+	}, [search]);
+
 	return (
-    <>
-    {isTagsModalOpen && <TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>}
-		<section>
-			<SearchBar>
-				<SearchBar.KeywordInput
-					placeholder="검색어를 입력해주세요"
-					onClick={handleKeywordCompletedClick}
-					onChange={handleGetAutoCompleteResults}
-          />
-				<SearchBar.SearchResultList keywordSearchResult={keywordSearchResult} />
-				<SearchBar.SelectedKeywordTagsList  />
-			</SearchBar>
-			<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen}/>
-		</section>
-  </>
+		<>
+			{isTagsModalOpen && (
+				<TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen} />
+			)}
+			<section>
+				<SearchBar>
+					<SearchBar.KeywordInput
+						placeholder="검색어를 입력해주세요"
+						onClick={handleKeywordCompletedClick}
+						onChange={handleGetAutoCompleteResults}
+					/>
+					<SearchBar.SearchResultList
+						keywordSearchResult={keywordSearchResult}
+					/>
+					<SearchBar.SelectedKeywordTagsList />
+				</SearchBar>
+				<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen} />
+			</section>
+		</>
 	);
 }

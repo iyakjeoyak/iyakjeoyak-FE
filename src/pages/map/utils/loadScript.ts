@@ -1,3 +1,5 @@
+import { showToast } from "@/utils/ToastConfig";
+
 export const loadScript = (callback: () => void, errorCallback: () => void) => {
 	const mapScript = document.createElement("script");
 	const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
@@ -11,7 +13,7 @@ export const loadScript = (callback: () => void, errorCallback: () => void) => {
 	};
 
 	mapScript.onerror = () => {
-		console.error("맵 로드에러");
+		showToast({ type: "error", message: "맵 로드에러" });
 		errorCallback();
 	};
 

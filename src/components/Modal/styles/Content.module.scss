@@ -12,7 +12,7 @@
 	padding: 20px;
 	padding-top: 40px;
 	min-height: 200px;
-	width: 500%;
+	width: 100%;
 	z-index: $z-index-modalContainer;
 	@include mixins.responsive("desktop") {
 		max-width: 480px;

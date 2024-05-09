@@ -13,24 +13,29 @@ export default function KeywordInput({
 	onChange,
 	onClick,
 }: KeywordInputProps) {
-	const {
-		currentKeyword,
-		handleCurrentKeyword,
-	} = useSelect();
+	const { currentKeyword, handleCurrentKeyword } = useSelect();
+
+	// const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	// 	if (event.key === "Enter" && currentKeyword.name.length > 2) {
+	// 		onClick(currentKeyword.name);
+	// 		handleCurrentKeyword({ id: 0, name: "" });
+	// 	}
+	// };
 
 	return (
 		<div className={styles.container}>
 			<input
-				value={currentKeyword}
+				value={currentKeyword.name}
 				onChange={(e) => {
-          handleCurrentKeyword(e.target.value);
+					handleCurrentKeyword({ id: 0, name: e.target.value });
 					onChange(e.target.value);
 				}}
 				placeholder={placeholder}
 			/>
 			<button
 				onClick={() => {
-					onClick(currentKeyword);
+					onClick(currentKeyword.name);
+					handleCurrentKeyword({ id: 0, name: "" });
 				}}
 			>
 				<IoSearch />

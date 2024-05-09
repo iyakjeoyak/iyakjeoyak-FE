@@ -1,13 +1,12 @@
 import getBestReview from "./getBestReview";
 import getReviewById from "./getReviewById";
 import getReviewsByMedicineId from "./getReviewsByMedicineId";
-import postReview from "./postReview";
 import { queryOptions } from "@tanstack/react-query";
 
 const reviewQueryOptions = {
 	getReviewsByMedicineId: ({ queryParams }: { queryParams: string }) =>
 		queryOptions({
-			queryKey: ["review", "reviews", queryParams],
+			queryKey: ["reviews", queryParams],
 			queryFn: () => getReviewsByMedicineId({ queryParams }),
 			initialData: {
 				data: [],
@@ -20,30 +19,27 @@ const reviewQueryOptions = {
 		}),
 	getBestReview: ({ size }: { size: number }) =>
 		queryOptions({
-			queryKey: ["review", "reviews", "best"],
+			queryKey: ["reviews", "best"],
 			queryFn: () => getBestReview({ size }),
 			initialData: [],
 		}),
 	getReviewById: ({ reviewId }: { reviewId: number }) =>
 		queryOptions({
-			queryKey: ["review", "reviews", reviewId],
+			queryKey: ["review", reviewId],
 			queryFn: () => getReviewById({ reviewId }),
 			initialData: {
 				id: 0,
 				title: "",
 				content: "",
-				createdBy: { userId: 0, nickname: "", image: null },
+				createdBy: { userId: 0, nickname: "", image: { id: 0, fullPath: "" } },
 				createdDate: "",
 				hashtagResult: [{ id: 0, name: "" }],
 				heartCount: 0,
 				star: 0,
 				modifiedDate: "",
+				imageResult: [],
+				isOwner: false,
 			},
-		}),
-	postReview: ({ body }: { body: FormData }) =>
-		queryOptions({
-			queryKey: ["review", "postReview"],
-			queryFn: () => postReview({ body }),
 		}),
 };
 

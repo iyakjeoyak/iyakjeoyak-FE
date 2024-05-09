@@ -2,7 +2,7 @@ import { SupplementType } from "../../userInfoType";
 import InfoBox from "../InfoBox";
 
 interface SupplementProps {
-	supplement: SupplementType[];
+	supplement?: SupplementType[];
 }
 
 const Supplement = ({ supplement }: SupplementProps) => {

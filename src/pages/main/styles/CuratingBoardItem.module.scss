@@ -1,0 +1,50 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
+	position: relative;
+	width: 100%;
+	cursor: pointer;
+	img {
+		background-color: $point-blue;
+	}
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.tag-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+}
+
+.blank-conatiner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	position: relative;
+	div {
+		top: 30px;
+	}
+	button {
+		margin-top: 120px;
+		background-color: #d3f5e7;
+		color: $main-green;
+		border-radius: 5px;
+		padding: 5px;
+		width: 80%;
+	}
+}
+
+.speech {
+	font-size: 14px;
+	text {
+		color: $main-green;
+	}
+}

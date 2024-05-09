@@ -2,7 +2,7 @@ import { IconType } from "react-icons";
 import classNames from "classnames";
 import styles from "./index.module.scss";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	text?: string; // 버튼 텍스트
 	icon?: IconType; // 아이콘 버튼
 	className?: string;
@@ -20,6 +20,7 @@ export const Button = ({
 	size = "default",
 	type = "submit",
 	onClick,
+  ...props
 }: ButtonProps) => {
 	const buttonClasses = classNames(styles.container, {
 		[styles.light]: variant === "light",
@@ -33,6 +34,7 @@ export const Button = ({
 			className={`${buttonClasses} m-large ${className || ""}`}
 			type={type}
 			onClick={onClick}
+      {...props}
 		>
 			{Icon && <Icon />}
 			{text}

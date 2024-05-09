@@ -1,6 +1,7 @@
 import getMdPickedMedicines from "./getMdPickedMedicines";
 import getMedicineById from "./getMedicineById";
 import getMedicines from "./getMedicines";
+import getUserRecommendMedicines from "./getUserRecommendMedcines";
 import { queryOptions } from "@tanstack/react-query";
 
 const medicineQueryOptions = {
@@ -36,6 +37,7 @@ const medicineQueryOptions = {
 				isBookMark: false,
 				isHeart: false,
 				reviewList: [],
+				image: { id: 0, fullPath: "" },
 			},
 		}),
 	getMdPickedMedicines: () =>
@@ -43,6 +45,16 @@ const medicineQueryOptions = {
 			queryKey: ["medicine", "medicines", "md"],
 			queryFn: () => getMdPickedMedicines(),
 			initialData: [],
+		}),
+	getMyMedicines: () =>
+		queryOptions({
+			queryKey: ["myMedicines", "main"],
+			queryFn: () => getMedicines(0, 4),
+		}),
+	getUserRecommendMedicines: () =>
+		queryOptions({
+			queryKey: ["medicines", "recommended"],
+			queryFn: () => getUserRecommendMedicines(4),
 		}),
 };
 

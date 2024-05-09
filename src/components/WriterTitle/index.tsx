@@ -1,29 +1,32 @@
 import { ReviewWriterType } from "@/types";
 import StarRating from "../StarRating";
+import getFullDate from "@/utils/getFullDate";
 import styles from "./index.module.scss";
 
 interface WriterTitleProps extends ReviewWriterType {
-  createdDate: string;
-  star: number;
+	createdDate: string;
+	star: number;
 }
 
-export default function WriterTitle({ nickname, star, createdDate}:WriterTitleProps) {
-	
-  const date = new Date(createdDate);
+export default function WriterTitle({
+	image,
+	nickname,
+	star,
+	createdDate,
+}: WriterTitleProps) {
+	const date = new Date(createdDate);
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return (
+	const writtenDate = getFullDate(date);
+	return (
 		<div className={styles.container}>
-			<img />
+			{image && <img src={image.fullPath} alt="프로필이미지" />}
 			<div className={styles["content-container"]}>
 				<div className={styles.star}>
 					<StarRating filledStars={star} />
 				</div>
 				<div className={styles.writer}>
-          {nickname}<span>{year}.{month}.{day}</span>
+					{nickname}
+					<span>{writtenDate}</span>
 				</div>
 			</div>
 		</div>

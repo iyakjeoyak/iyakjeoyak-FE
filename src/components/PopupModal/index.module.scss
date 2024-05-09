@@ -1,0 +1,54 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	background-color: white;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	top: 40%;
+
+	width: 300px;
+	min-height: 200px;
+
+	border-radius: 20px;
+	padding-top: 40px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+
+	height: 100%;
+	svg {
+		font-size: 50px;
+	}
+	.text {
+		@include mixins.b-regular;
+	}
+}
+
+.button-container {
+	width: 100%;
+	display: flex;
+	button {
+		width: 100%;
+		padding: 10px;
+	}
+	.cancel {
+		background-color: $gray3;
+		border-bottom-left-radius: 20px;
+	}
+	.confirm {
+		color: $white;
+		background-color: $main-green;
+		border-bottom-right-radius: 20px;
+	}
+}

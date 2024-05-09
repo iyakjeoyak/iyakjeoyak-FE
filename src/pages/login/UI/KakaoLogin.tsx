@@ -1,46 +1,26 @@
-import { useEffect } from "react";
+import userQueryOption from "@/api/user";
+import { setAccessToken, setRefreshToken } from "@/utils/getToken";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const KakaoLogin = () => {
 	const navigate = useNavigate();
 	const params = new URLSearchParams(window.location.search);
 	const code = params.get("code");
-	const baseUrl = import.meta.env.VITE_BASE_URL;
-	const restApiKey = import.meta.env.VITE_KAKAO_RESTAPI_KEY;
-	const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+	if (!code) {
+		return <>Loading</>;
+	}
 
-	useEffect(() => {
-		const getKakaoToken = async (code: string) => {
-			try {
-				// const response = await fetch(
-				// 	`https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${restApiKey}&redirect_uri=${redirectUri}&code=${code}`,
-				// 	{
-				// 		method: "POST",
-				// 		headers: {
-				// 			"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-				// 		},
-				// 	},
-        // );
-        
-        const response = await fetch(`${baseUrl}/user/code?code=${code}`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				});
-				console.log("code", code);
-				console.log("response", response);
-				console.log("data", await response.json());
-				navigate("/home");
-			} catch (error) {
-				console.error("error", error);
-			}
-		};
-		// tanstack-query 토큰구현
-		if (code) {
-			getKakaoToken(code);
-		}
-	}, [code, navigate, redirectUri, restApiKey]);
-
+	const { data } = useQuery(userQueryOption.getKakaoAuthToken({ code }));
+	if (data) {
+		const accessToken = data.headers.authorization;
+		const refreshToken = data.data;
+		setAccessToken(accessToken);
+		setRefreshToken(refreshToken);
+		toast.success("로그인이 완료되었습니다.", { autoClose: 2000 });
+		navigate("/home");
+	}
+	console.log(data);
 	return <>Loading</>;
 };

@@ -5,19 +5,24 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 13px;
+	cursor: pointer;
 	.img {
-		width: 80px;
-		height: 80px;
+		width: 90px;
+		height: 90px;
 		background-color: #d9d9d9;
 		border-radius: 20%;
 	}
 	.content-container {
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		gap: 2px;
 		align-items: center;
 		.name {
-			@include mixins.sb-big;
+			width: 100px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			@include mixins.sb-small;
 		}
 	}
 }

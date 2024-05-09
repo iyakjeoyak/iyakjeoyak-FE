@@ -1,53 +1,85 @@
-import style from "../index.module.scss";
-import modalStyle from "@/components/ModalContainer/index.module.scss";
-import { UserData } from "../userInfoType";
-import TagCommon from "@/components/Tag";
-import UserInfoEdit from "../UI/UserInfoEdit";
-import Modal from "@/components/Modal";
 import HeartIcon from "@/assets/icons/HeartIcon";
-import { useNavigate } from "react-router-dom";
+import Modal from "@/components/Modal";
+import { UserResult } from "../userInfoType";
+import UserInfoEdit from "../UI/UserInfoEdit";
+import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
+import style from "../index.module.scss";
+import { useNavigate } from "react-router-dom";
+import useOpen from "@/hooks/useOpen";
+import { useUserContext } from "../utils/userContext";
+import Loading from "@/pages/feedback/Loading";
+
 export interface UserInfoBoxProps {
-	userData: UserData;
+	userData: UserResult;
 }
 
-const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
+const UserInfoBox = () => {
 	const navigate = useNavigate();
+	const { userData } = useUserContext();
+	const {
+		isOpen,
+		onClose: onCloseEditUserData,
+		onOpen,
+		toggleOpen,
+	} = useOpen();
+
+	if (!userData) {
+		return <Loading />;
+	}
 
 	return (
 		<section className={style.mypageContainer}>
-			<div className={style.profileSection}>
-				<img
-					className={style.profilePic}
-					src={userData.profileImage}
-					alt="Profile"
-				/>
-				<div className={style.profileInfo}>
-					<div className={style.nameArea}>
-						<div className={style.nickname}>{userData.nickname}</div>
-						<TagCommon text="허준" size="small" backgroundColor="lightgreen" />
+			<div className={style.profileflexSection}>
+				<div className={style.profileSection}>
+					<img
+						className={style.profilePic}
+						src={userData?.image?.fullPath}
+						alt="Profile"
+					/>
+					<div className={style.profileInfo}>
+						<div className={style.nameArea}>
+							<div className={style.nickname}>{userData?.nickname}</div>
+							{/* <TagCommon
+								text="허준"
+								size="small"
+								backgroundColor="lightgreen"
+							/> */}
+						</div>
+						<div className={style.userIntroduce}>
+							{userData?.introduce
+								? userData.introduce
+								: "한 줄 소개를 입력해주세요"}
+						</div>
+						<Modal
+							isOpen={isOpen}
+							onClose={onCloseEditUserData}
+							toggleOpen={toggleOpen}
+							onOpen={onOpen}
+						>
+							<Modal.Trigger
+								openElement={
+									<div className={style.editprofile}>프로필 수정하기</div>
+								}
+							/>
+							<Modal.Content>
+								<div
+									className={`${style.profileEditModal} ${modalStyle.container} `}
+								>
+									<UserInfoEdit onClose={onCloseEditUserData} />
+								</div>
+							</Modal.Content>
+						</Modal>
 					</div>
-					<div className={style.userIntroduce}> 자기소개글</div>
-					<Modal>
-						<Modal.Trigger
-							openElement={
-								<div className={style.editprofile}>프로필 수정하기</div>
-							}
-						/>
-						<Modal.Content>
-							<div
-								className={` ${modalStyle.container} ${style.profileEditModal}`}
-							>
-								<UserInfoEdit data={userData} />
-							</div>
-						</Modal.Content>
-					</Modal>
-					<div
-						className={style.userLikedSupplement}
-						onClick={() => navigate(routerpaths.LIKEDITEM)}
-					>
-						<HeartIcon />
-						관심 영양제
+				</div>
+				<div
+					className={style.userLikedSupplement}
+					onClick={() => navigate(routerpaths.LIKEDITEM)}
+				>
+					<div className={style.flexBox} />
+					<div className={style.buttonBox}>
+						<HeartIcon width={15} height={15} />
+						<div className={style.likedData}>관심 영양제</div>
 					</div>
 				</div>
 			</div>

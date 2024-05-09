@@ -21,14 +21,15 @@ export const Input = <T extends Record<Extract<keyof T, string>, unknown>>({
 	className,
 	placeholder,
 	title,
-  type = "text",
-  ...props
+	type = "text",
+	...props
 }: InputProps<T>) => {
 	const { register } = useFormContext();
+
 	return (
 		<Container title={title} name={name as keyof T}>
-      <input
-        {...props}
+			<input
+				{...props}
 				className={`${styles.element} ${className || ""} m-big`}
 				{...register(name as string)} // 입력 필드를 useForm으로 등록
 				placeholder={placeholder}

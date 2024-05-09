@@ -1,32 +1,59 @@
 import CommonHeaderBox from "../CommonHeaderBox";
 import style from "../../style/likeditem.module.scss";
-import { likeRecordMockData as likedData } from "../../mockData";
 import CommonCardBox from "../CommonCardBox";
 import { useNavigate } from "react-router-dom";
-
-const likedItem = likedData.likedSupplement;
+import { useEffect, useState } from "react";
+import getLikedSupplement from "@/api/useInfo/getLikedSupplement";
+import { showToast } from "@/utils/ToastConfig";
+import { LikedSupplmentArgs } from "@/api/useInfo/getLikedSupplement";
 
 const LikedItem = () => {
 	const navigate = useNavigate();
+	const [likedItem, setLikedItem] = useState<LikedSupplmentArgs | null>(null);
+
+	useEffect(() => {
+		const fetchItems = async () => {
+			try {
+				const likedData = await getLikedSupplement({ page: 0, size: 10 });
+				setLikedItem(likedData);
+			} catch (error) {
+				showToast({
+					type: "error",
+					message: "좋아요 영양제 데이터를 가져오는 중 오류가 발생했습니다.",
+				});
+			}
+		};
+		fetchItems();
+		console.log(likedItem);
+	}, []);
+
 	return (
-		<section>
+		<section className={style.likedSection}>
 			<CommonHeaderBox
 				titleText="관심 영양제"
-				count={likedItem.length}
+				count={likedItem ? likedItem.numberOfElement : 0}
 				className={style.header}
 			/>
 
-			<div className={`${style.cardGrid}}`}>
-				{likedItem.map((cardInfo, likedItemId) => (
-					<CommonCardBox
-						key={likedItemId}
-						name={cardInfo.itemName}
-						likedEffect={cardInfo.likedEffect}
-						liked={cardInfo.liked}
-						img={cardInfo.img}
-						onClick={() => navigate(`/detail/${likedItemId}`)}
-					/>
-				))}
+			<div
+				style={{
+					display: "grid",
+					gridTemplateColumns: "repeat(2, 1fr)",
+					marginTop: "20rem",
+					gap: "10rem",
+				}}
+			>
+				{likedItem &&
+					likedItem.data.map((likedCard) => (
+						<CommonCardBox
+							key={likedCard.id}
+							likedItemName={likedCard.medicineId.prdlst_NM}
+							// likedEffect={cardInfo.likedEffect}
+							liked={true}
+							img={likedCard.medicineId.image?.fullPath}
+							onClick={() => navigate(`/detail/${likedCard.medicineId.id}`)}
+						/>
+					))}
 			</div>
 		</section>
 	);

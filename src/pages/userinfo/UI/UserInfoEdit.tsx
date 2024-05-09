@@ -1,107 +1,177 @@
-import { useRef, useState } from "react";
-import style from "../style/userinfoedit.module.scss";
-import { UserData } from "../userInfoType";
-import { Form } from "@/components/Form";
 import * as yup from "yup";
-import getImgPreview from "@/utils/getImgPreview";
-import ImageWithDefault from "@/utils/ImageWithDefault";
 
-const userInfoSchema = yup
-	.object({
-		nickname: yup
-			.string()
-			.required("아이디를 입력하세요.")
-			.min(5, "닉네임은 5자리 이상이어야합니다."),
-		introduce: yup
-			.string()
-			.required("소개를 입력해주세요.")
-			.max(20, "20자 이내로 작성해주세요."),
-		age: yup.number().required("만 나이를 입력해주세요.").min(1).max(100),
-		profileImage: yup.string().optional(),
-	})
-	.required();
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+import { Form } from "@/components/Form";
+import commonQueryOptions from "@/api/common";
+import getUserInfo from "@/api/useInfo/getUserInfo";
+import patchUserInfo from "@/api/useInfo/patchUserInfo";
+import { showToast } from "@/utils/ToastConfig";
+import style from "../style/userinfoedit.module.scss";
+import transformSubmmit from "../utils/transformSubmmit";
+import { useUserContext } from "../utils/userContext";
+
+const userInfoSchema = yup.object().shape({
+	nickname: yup
+		.string()
+		.required("닉네임을 입력하세요.")
+		.min(5, "닉네임은 5자리 이상이어야합니다."),
+	introduce: yup
+		.string()
+		.required("소개를 입력해주세요.")
+		.max(20, "20자 이내로 작성해주세요."),
+	gender: yup.string().required("성별을 선택하세요."),
+	age: yup
+		.number()
+		.transform((value) =>
+			isNaN(value) || value === null || value === undefined ? 0 : value,
+		)
+		.required("만 나이를 입력해주세요.")
+		.min(1, "나이는 1세 이상이어야 합니다.")
+		.max(100, "나이는 100세 이하여야 합니다.")
+		.integer("나이를 정수로 입력하세요.")
+		.positive("나이는 양수여야 합니다.")
+		.required("나이를 입력하세요."),
+
+	imgFile: yup.mixed<File>().nullable(),
+
+	hashtagResultList: yup
+		.array()
+		.of(yup.number().required())
+		.min(2, "태그를 2개 이상 선택해주세요")
+		.required("태그 선택하세요."),
+});
 
 interface MyPageEditProps {
-	data: UserData;
+	// data: UserResult;
+	onClose: () => void;
+}
+interface imageEdit {
+	id: number;
+	fullPath: File;
 }
 
-const UserInfoEdit = ({ data }: MyPageEditProps) => {
-	const defaultImage = "/images/no_profile_image.jpg?url";
-	const [profileImage, setProfileImage] = useState<string | undefined>(
-		data.profileImage || defaultImage,
-	);
+export interface UserSubmmit {
+	nickname: string;
+	gender: string;
+	age: number;
+	introduce?: string;
+	hashtagResultList: number[];
+	imgFile?: File | null;
+}
 
-	const imgInputRef = useRef<HTMLInputElement>(null);
+export interface UserEdit {
+	nickname: string;
+	gender: string;
+	age: number;
+	introduce?: string;
+	hashtagResultList?: number[];
+	image?: imageEdit;
+}
 
-	const handleImageClick = () => {
-		imgInputRef.current?.click();
+const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
+	const { userData: data, setUserData } = useUserContext();
+
+	const { mutate } = useMutation({
+		mutationFn: patchUserInfo,
+	});
+
+	const fetchUpdatedUserInfo = async () => {
+		const updatedUserInfo = await getUserInfo();
+		if (updatedUserInfo.userResult) {
+			setUserData(updatedUserInfo.userResult);
+		}
 	};
 
-	// const onSubmit = (data) => {
-	// 	console.log("폼 제출이랄까");
-	// };
+	if (!data) {
+		showToast({ type: "error", message: "사용자 데이터가 없습니다." });
+		return null;
+	}
+
+	const submmitData = transformSubmmit(data);
+
+	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+
+	const onSubmit = (submmitData: UserSubmmit) => {
+		const { imgFile, ...jsonData } = submmitData;
+
+		const formData = new FormData();
+		const userEditPayload = {
+			...jsonData,
+		};
+
+		formData.append(
+			"userEditPayload",
+			new Blob([JSON.stringify(userEditPayload)], { type: "application/json" }),
+		);
+
+		formData.append("imgFile", imgFile || "");
+
+		mutate(formData, {
+			onSuccess: () => {
+				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
+				fetchUpdatedUserInfo();
+				onClose();
+			},
+			onError: () => {
+				showToast({
+					type: "error",
+					message: "유저 정보가 정상적으로 수정되지 않았습니다.",
+				});
+			},
+		});
+	};
 
 	return (
 		<Form
 			validationSchema={userInfoSchema}
-			pageDefaultValues={data}
-			// onSubmit={onSubmit}
+			pageDefaultValues={submmitData}
+			onSubmit={onSubmit}
 			className={style.mypageEditContainer}
 		>
-			<div className={style.profileEditTitle}> 내 프로필</div>
-
 			<section className={style.profilePicEdit}>
-				<input
-					type="file"
-					accept="image/*"
-					style={{ display: "none" }}
-					ref={imgInputRef}
-					onChange={(event) => {
-						const file = event.target.files?.[0] as File;
-						if (file) {
-							getImgPreview(file, setProfileImage, () => {});
-						}
-					}}
-				/>
-
-				<ImageWithDefault
-					src={profileImage}
-					defaultSrc={defaultImage}
-					alt="사용자 프로필"
-					className={style.userProfile}
-					onClick={handleImageClick}
-				/>
-
-				<span className={style.imgButton}>+</span>
+				<Form.ImgInput name="imgFile" title="내 프로필" />
 			</section>
 			<section className={style.profileInfoEdit}>
 				<Form.Input
-					name="닉네임"
+					name="nickname"
+					title="닉네임"
 					placeholder="닉네임을 입력해주세요."
-					defaultValue={data.nickname}
+					defaultValue={submmitData.nickname}
 					className={style.inputStyle}
 				/>
 				<Form.Input
-					name="한줄 소개"
+					name="introduce"
+					title="한줄 소개"
 					placeholder="한줄 소개를 입력해주세요."
-					defaultValue={data.introduce}
-					className={style.inputStyle}
+					defaultValue={submmitData.introduce}
+					className={style.inputStylse}
 				/>
+
+				<div className={style.genderTitle}>성별</div>
+				<div className={`${style.genderBox}`}>
+					<Form.RadioButton name="gender" text="남성" value="MALE" />
+					<Form.RadioButton name="gender" text="여성" value="FEMALE" />
+					<Form.RadioButton name="gender" text="비공개" value="SECRET" />
+				</div>
+
 				<Form.Input
-					name="만 나이"
+					name="age"
+					title="만 나이"
 					type="number"
 					placeholder="만 나이를 입력해주세요."
-					defaultValue={data.age.toString()}
+					defaultValue={submmitData.age}
 					className={style.inputStyle}
 				/>
 			</section>
 
-			<Form.Button
-				type="submit"
-				// onClick={handleClick}
-				variant="dark"
-				text="저장"
+			<Form.TagBoard
+				title="태그 리스트"
+				tags={tags ?? []}
+				name="hashtagResultList"
 			/>
+
+			<Form.Button type="submit" variant="dark" text="저장" />
 		</Form>
 	);
 };

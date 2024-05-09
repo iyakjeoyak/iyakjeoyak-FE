@@ -3,29 +3,39 @@ import { useController, useFormContext } from "react-hook-form";
 import Container from "../Container";
 import { FiPlusCircle } from "react-icons/fi";
 import getImgPreview from "@/utils/getImgPreview";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/components/Form/ImgInput/index.module.scss";
-
+import ImageWithDefault from "@/components/ImageWithDefault";
 
 interface ImgInput {
 	name: string;
 	title?: string;
+	initialImage?: string;
 }
-export const ImgInput = ({ name, title }: ImgInput) => {
+export const ImgInput = ({ name, title, initialImage }: ImgInput) => {
+	const defaultImage = "/images/no_profile_image.jpg?url";
 	const { control } = useFormContext();
-  const imgInputRef = useRef<HTMLInputElement>(null);
-  const [profileImage, setProfileImage] = useState<string | undefined>(
-		
+	const imgInputRef = useRef<HTMLInputElement>(null);
+	const [profileImage, setProfileImage] = useState<string | undefined>(
+		initialImage || defaultImage,
 	);
+
+	useEffect(() => {
+		if (initialImage) {
+			setProfileImage(initialImage);
+		}
+	}, [initialImage]);
+
 	const handleImageClick = () => {
 		imgInputRef.current?.click();
 	};
 	const {
-		field: {  onChange: setProfileImageData },
+		field: { onChange: setProfileImageData },
 	} = useController({
 		control,
 		name,
 	});
+
 	// file url로 변환
 	return (
 		<Container title={title} name={name}>
@@ -34,7 +44,7 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 				accept="image/*"
 				style={{ display: "none" }}
 				onChange={(event) => {
-          const file = event.target.files?.[0] as File;
+					const file = event.target.files?.[0] as File;
 					if (file) {
 						getImgPreview(file, setProfileImage, setProfileImageData);
 					}
@@ -50,11 +60,19 @@ export const ImgInput = ({ name, title }: ImgInput) => {
 					{profileImage ? "" : <FiPlusCircle />}
 				</label>
 				<div className={styles.imgCon}>
-					{profileImage && (
+					{profileImage ? (
 						<img
 							src={profileImage}
 							alt="사용자 프로필"
 							className={styles.userProfile}
+						/>
+					) : (
+						<ImageWithDefault
+							src={profileImage}
+							defaultSrc={defaultImage}
+							alt="사용자 프로필"
+							className={styles.userProfile}
+							onClick={handleImageClick}
 						/>
 					)}
 				</div>

@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
+
 import { SelectSortContext } from "../hooks/useSelectSort";
 import styles from "../styles/SortSelectRoot.module.scss";
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
+export interface CurrentSortType {
+	label: string;
+	value: string;
+}
 interface SortSelectRootProps {
 	children: React.ReactNode;
 	currentSort: any;
@@ -15,6 +21,8 @@ export default function SortSelectRoot({
 }: SortSelectRootProps) {
 	const [isOpenOptionList, setIsOpenOptionList] = useState(false);
 
+	const location = useLocation();
+
 	const toggleIsOpenOptionList = () => {
 		setIsOpenOptionList((prev) => !prev);
 	};
@@ -25,6 +33,10 @@ export default function SortSelectRoot({
 		handleCurrentSort,
 		toggleIsOpenOptionList,
 	};
+
+	useEffect(() => {
+		setIsOpenOptionList(false);
+	}, [location]);
 
 	return (
 		<SelectSortContext.Provider value={value}>
