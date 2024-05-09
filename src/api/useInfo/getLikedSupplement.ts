@@ -2,7 +2,10 @@ import axios from "../axiosConfig";
 
 interface MedicineId {
 	id: number;
-	image: string | null;
+	image: {
+		id: number;
+		fullPath: string;
+	};
 	prdlst_NM: string;
 	bssh_NM: string;
 }

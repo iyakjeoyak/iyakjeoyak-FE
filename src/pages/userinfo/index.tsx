@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ReviewType, SupplementType, UserResult } from "./userInfoType";
 import { showToast } from "@/utils/ToastConfig";
 import Loading from "../feedback/Loading";
+import { userContext } from "./utils/userContext";
 
 const UserInfo = () => {
 	const navigate = useNavigate();
@@ -36,6 +37,8 @@ const UserInfo = () => {
 		fetchUserInfo();
 	}, []);
 
+	useEffect(() => {}, [userData]);
+
 	const goToPointDetail = () => {
 		navigate(`/userinfo/point`);
 	};
@@ -44,14 +47,16 @@ const UserInfo = () => {
 		return <Loading />;
 	}
 	return (
-		<section className={style.mypageContainer}>
-			<UserInfoBox userData={userData} />
-			<FlexBox direction="column">
-				<PointContent points={userData.point} onNavigate={goToPointDetail} />
-				<Review review={latestReviews} />
-				<Supplement supplement={favoriteSupplements} />
-			</FlexBox>
-		</section>
+		<userContext.Provider value={{ userData, setUserData }}>
+			<section className={style.mypageContainer}>
+				<UserInfoBox />
+				<FlexBox direction="column">
+					<PointContent points={userData.point} onNavigate={goToPointDetail} />
+					<Review review={latestReviews} />
+					<Supplement supplement={favoriteSupplements} />
+				</FlexBox>
+			</section>
+		</userContext.Provider>
 	);
 };
 

@@ -23,6 +23,12 @@ function InfoBoxItem({ items }: ItemProps): JSX.Element {
 							{formatDateString(item.createdDate)}
 						</div>
 					)}
+					{"expirationDate" in item &&
+						typeof item.expirationDate === "string" && (
+							<div className={style.sectionName}>
+								{formatDateString(item.expirationDate)}
+							</div>
+						)}
 					{"title" in item && (
 						<div className={style.sectionReviewBox}>
 							<div className={style.sectionText}>{item.title}</div>

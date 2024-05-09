@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import getLikedSupplement from "@/api/useInfo/getLikedSupplement";
 import { showToast } from "@/utils/ToastConfig";
 import { LikedSupplmentArgs } from "@/api/useInfo/getLikedSupplement";
-import { useInfiniteQuery } from "@tanstack/react-query";
 
 const LikedItem = () => {
 	const navigate = useNavigate();
@@ -25,6 +24,7 @@ const LikedItem = () => {
 			}
 		};
 		fetchItems();
+		console.log(likedItem);
 	}, []);
 
 	return (
@@ -47,11 +47,11 @@ const LikedItem = () => {
 					likedItem.data.map((likedCard) => (
 						<CommonCardBox
 							key={likedCard.id}
-							name={likedCard.medicineId.toString()}
+							likedItemName={likedCard.medicineId.prdlst_NM}
 							// likedEffect={cardInfo.likedEffect}
 							liked={true}
-							// img={cardInfo.img}
-							onClick={() => navigate(`/detail/${likedCard.medicineId}`)}
+							img={likedCard.medicineId.image?.fullPath}
+							onClick={() => navigate(`/detail/${likedCard.medicineId.id}`)}
 						/>
 					))}
 			</div>

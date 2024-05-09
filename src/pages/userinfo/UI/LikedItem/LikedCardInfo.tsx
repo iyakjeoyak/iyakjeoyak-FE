@@ -7,13 +7,14 @@ export interface LikedItemProps {
 	itemName?: string;
 	likedEffect?: string[];
 	liked?: boolean;
+	name?: string;
 }
 
 const LikedCardInfo = ({ itemName, likedEffect, liked }: LikedItemProps) => {
 	return (
 		<div className={style.cardContent}>
 			<div className={style.cardTitle}>
-				{itemName && <div className={style.cardTitle}>{itemName}</div>}
+				{itemName && <div className={style.cardTitleName}>{itemName}</div>}
 				{liked && <HeartFilledIcon width={15} height={15} />}
 			</div>
 			<div className={style.cardTagBox}>

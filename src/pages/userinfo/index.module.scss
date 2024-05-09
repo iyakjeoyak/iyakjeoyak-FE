@@ -174,7 +174,6 @@
 .sectionBox {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 
 	border: 0.5px solid $gray3;
 	border-radius: 10px;
@@ -198,8 +197,10 @@
 		display: flex;
 		align-items: center;
 		@include mixins.m-medium;
+		width: 200rem;
 
 		.sectionText {
+			margin-right: 15rem;
 		}
 		.sectionRate {
 		}

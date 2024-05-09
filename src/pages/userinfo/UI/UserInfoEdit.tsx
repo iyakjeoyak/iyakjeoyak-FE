@@ -7,6 +7,10 @@ import { showToast } from "@/utils/ToastConfig";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
 import transformSubmmit from "../utils/transformSubmmit";
 import commonQueryOptions from "@/api/common";
+import useOpen from "@/hooks/useOpen";
+import { useEffect } from "react";
+import { useUserContext } from "../utils/userContext";
+import getUserInfo from "@/api/useInfo/getUserInfo";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -40,7 +44,8 @@ const userInfoSchema = yup.object().shape({
 });
 
 interface MyPageEditProps {
-	data: UserResult;
+	// data: UserResult;
+	onClose: () => void;
 }
 interface imageEdit {
 	id: number;
@@ -65,10 +70,24 @@ export interface UserEdit {
 	image?: imageEdit;
 }
 
-const UserInfoEdit = ({ data }: MyPageEditProps) => {
+const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
+	const { userData: data, setUserData } = useUserContext();
+
 	const { mutate } = useMutation({
 		mutationFn: patchUserInfo,
 	});
+
+	const fetchUpdatedUserInfo = async () => {
+		const updatedUserInfo = await getUserInfo();
+		if (updatedUserInfo.userResult) {
+			setUserData(updatedUserInfo.userResult);
+		}
+	};
+
+	if (!data) {
+		showToast({ type: "error", message: "사용자 데이터가 없습니다." });
+		return null;
+	}
 
 	const submmitData = transformSubmmit(data);
 
@@ -89,11 +108,11 @@ const UserInfoEdit = ({ data }: MyPageEditProps) => {
 
 		formData.append("imgFile", imgFile || "");
 
-		console.log("formdata", formData.get("imageFile"));
-
 		mutate(formData, {
 			onSuccess: () => {
 				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
+				fetchUpdatedUserInfo();
+				onClose();
 			},
 			onError: () => {
 				showToast({

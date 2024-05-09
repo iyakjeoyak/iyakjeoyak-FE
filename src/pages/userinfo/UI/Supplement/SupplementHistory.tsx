@@ -93,7 +93,7 @@ const SupplementHistory = () => {
 									<CommonCardBox
 										key={mySupplementId}
 										form={cardForm}
-										name={cardInfo.medicineName}
+										medicineNames={cardInfo.medicineName}
 										img={cardInfo.image?.fullPath}
 										onClick={() => handleCardClick(cardInfo)}
 										{...cardInfo}

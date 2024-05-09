@@ -6,10 +6,10 @@ import UserCardInfo from "./UserCardInfo";
 import LikedCardInfo from "./LikedItem/LikedCardInfo";
 
 interface CardProps {
-	name?: string;
+	likedItemName?: string;
 	title?: string;
 	date?: string;
-	medicineName?: string;
+	medicineNames?: string;
 	grade?: number;
 	expirationDate?: string;
 	img?: string;
@@ -23,7 +23,8 @@ interface CardProps {
 
 const CommonCardBox = ({
 	img,
-	name,
+	likedItemName,
+	medicineNames,
 	form = "slim",
 	onClick,
 	...props
@@ -31,9 +32,9 @@ const CommonCardBox = ({
 	const cardStyle = `${style.card} ${style[form]}`;
 
 	const renderCardContent = () => {
-		if (name && img) {
+		if ((likedItemName && img) || (medicineNames && img)) {
 			return <img src={img} className={style.cardImage} />;
-		} else if (name) {
+		} else if (likedItemName || medicineNames) {
 			return (
 				<img src={`/images/no_medicine_img.jpg`} className={style.cardImage} />
 			);
@@ -54,7 +55,7 @@ const CommonCardBox = ({
 			{renderCardContent()}
 
 			<UserCardInfo {...props} />
-			<LikedCardInfo {...props} likedEffect={props.likedEffect} />
+			<LikedCardInfo {...props} itemName={likedItemName} />
 		</div>
 	);
 };
