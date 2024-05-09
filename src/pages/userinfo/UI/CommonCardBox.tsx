@@ -54,7 +54,7 @@ const CommonCardBox = ({
 		<div className={cardStyle} onClick={onClick}>
 			{renderCardContent()}
 
-			<UserCardInfo {...props} />
+			<UserCardInfo {...props} medicineNames={medicineNames} />
 			<LikedCardInfo {...props} itemName={likedItemName} />
 		</div>
 	);

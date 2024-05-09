@@ -89,9 +89,9 @@ const SupplementHistory = () => {
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
 							{supplementInfo &&
-								supplementInfo?.map((cardInfo, mySupplementId) => (
+								supplementInfo?.map((cardInfo) => (
 									<CommonCardBox
-										key={mySupplementId}
+										key={cardInfo.id}
 										form={cardForm}
 										medicineNames={cardInfo.medicineName}
 										img={cardInfo.image?.fullPath}
