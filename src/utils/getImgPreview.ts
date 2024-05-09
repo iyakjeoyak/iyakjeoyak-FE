@@ -1,7 +1,7 @@
 const getImgPreview = (
 	previewImgFile: File,
 	setProfileImage: React.Dispatch<React.SetStateAction<string | undefined>>,
-	callback: (file: File | string) => void,
+	callback: (file: File) => void,
 ) => {
 	const reader = new FileReader();
 

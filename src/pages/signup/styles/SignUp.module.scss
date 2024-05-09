@@ -2,6 +2,36 @@
 @import "@/styles/variables.scss";
 @import "@/styles/global.scss";
 
+.checkWrap {
+  .checkFlex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    button {
+      width: 30%;
+      height: 40px;
+    }
+
+    label {
+      width: 65%;
+    }
+  }
+
+
+}
+
+.error {
+  border: 1px solid #23cc87;
+
+}
+
+p {
+  margin-top: 10px;
+  text-align: right;
+  color: #23cc87;
+}
+
 .genderBox {
   display: flex;
   gap: 20px;
@@ -12,16 +42,5 @@
     justify-content: center;
     gap: 5px;
     margin-left: 10px;
-  }
-}
-
-.tagWrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-
-  &>span {
-    width: 20%;
   }
 }

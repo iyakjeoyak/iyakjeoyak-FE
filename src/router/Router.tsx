@@ -46,7 +46,6 @@ const router = createBrowserRouter([
 				element: <SignUpPage />,
 				loader: checkTokenAndRedirectToHome,
 			},
-			{ path: routerpaths.SIGNUPTEST, element: <SignUpPage /> },
 			{ path: routerpaths.FAME, element: <Fame /> },
 			{
 				path: routerpaths.USERINFO,
