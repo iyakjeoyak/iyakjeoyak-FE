@@ -112,6 +112,7 @@ const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
 				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
 				fetchUpdatedUserInfo();
 				onClose();
+				console.log(data);
 			},
 			onError: () => {
 				showToast({
@@ -130,7 +131,11 @@ const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
 			className={style.mypageEditContainer}
 		>
 			<section className={style.profilePicEdit}>
-				<Form.ImgInput name="imgFile" title="내 프로필" />
+				<Form.ImgInput
+					name="imgFile"
+					title="내 프로필"
+					initialImage={data.image?.fullPath}
+				/>
 			</section>
 			<section className={style.profileInfoEdit}>
 				<Form.Input
