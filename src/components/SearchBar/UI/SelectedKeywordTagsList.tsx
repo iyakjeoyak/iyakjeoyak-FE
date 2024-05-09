@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import qs from "qs";
 import styles from "../styles/SelectedKeywordTagsList.module.scss";
 import { useNavigate } from "react-router-dom";

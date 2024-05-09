@@ -5,15 +5,12 @@ import { useState } from "react";
 
 // interface MyMedicineItem extends MedicineItemType{
 interface MyMedicineItem {
-	medicine: ShortSupplementInfo;
+	medicine?: ShortSupplementInfo;
 	isBlank?: boolean;
 }
 
-export default function MyMedicineItem({
-	medicine,
-	isBlank = false,
-}: MyMedicineItem) {
-	if (isBlank) {
+export default function MyMedicineItem({ medicine }: MyMedicineItem) {
+	if (!medicine) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.top}></div>
