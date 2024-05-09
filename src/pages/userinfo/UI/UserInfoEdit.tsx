@@ -1,13 +1,15 @@
-import style from "../style/userinfoedit.module.scss";
-import { Form } from "@/components/Form";
 import * as yup from "yup";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { showToast } from "@/utils/ToastConfig";
-import patchUserInfo from "@/api/useInfo/patchUserInfo";
-import transformSubmmit from "../utils/transformSubmmit";
+
+import { Form } from "@/components/Form";
 import commonQueryOptions from "@/api/common";
-import { useUserContext } from "../utils/userContext";
 import getUserInfo from "@/api/useInfo/getUserInfo";
+import patchUserInfo from "@/api/useInfo/patchUserInfo";
+import { showToast } from "@/utils/ToastConfig";
+import style from "../style/userinfoedit.module.scss";
+import transformSubmmit from "../utils/transformSubmmit";
+import { useUserContext } from "../utils/userContext";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -55,7 +57,7 @@ export interface UserSubmmit {
 	age: number;
 	introduce?: string;
 	hashtagResultList: number[];
-	imgFile: File | null;
+	imgFile?: File | null;
 }
 
 export interface UserEdit {
