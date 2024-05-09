@@ -15,7 +15,7 @@ export default function BestReviewItem({
 		<div
 			className={styles["container"]}
 			onClick={() => {
-				navigate(`/detail/${review.id}?tap=review`);
+				navigate(`/detail/${review.medicine.id}?tap=review`);
 			}}
 		>
 			<img

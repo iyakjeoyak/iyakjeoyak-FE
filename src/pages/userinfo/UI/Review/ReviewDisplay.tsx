@@ -1,11 +1,14 @@
 import "@styles/global.scss";
+
+import Modal from "@/components/Modal";
+import { ReviewDetailModal } from "@/pages/detail/UI";
+import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
+import formatDate from "@/utils/formatDate";
 import style from "../../style/reviewdisplay.module.scss";
 import useOpen from "@/hooks/useOpen";
-import Modal from "@/components/Modal";
-import { ReviewDisplayProps } from "../../userInfoType";
-import { ReviewDetailModal } from "@/pages/detail/UI";
-import formatDate from "@/utils/formatDate";
+
+// import { DetailedReview } from "../../userInfoType";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
@@ -54,7 +57,10 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 			/>
 			{reviews.map((review) => (
 				<Modal.Content>
-					<ReviewDetailModal reviewId={review.id} />
+					<ReviewDetailModal
+						handleOpenConfirmDelete={onClose}
+						reviewId={review.id}
+					/>
 				</Modal.Content>
 			))}
 		</Modal>

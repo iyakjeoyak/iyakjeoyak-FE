@@ -1,15 +1,21 @@
 @use "@styles/mixin" as mixins;
 @import "@styles/variables.scss";
 
+.wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .container {
 	position: absolute;
-	bottom: 0;
 	right: 0;
 	left: 0;
+	bottom: 0;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
-	// position: relative;
-	// border-radius: 20px;
+	min-height: 250px;
 	background-color: $main-lightgreen;
 	display: flex;
 	flex-direction: column;
@@ -29,46 +35,50 @@
 			color: $main-green;
 		}
 	}
-	.item-container {
-		display: flex;
-		gap: 10px;
-		img {
-			border-radius: 15px;
-		}
+}
+
+.item-container {
+	position: relative;
+	display: flex;
+	gap: 10px;
+	img {
+		border-radius: 15px;
 	}
-	.content-container {
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	.brand {
+		@include mixins.b-small;
+		color: $gray6;
+	}
+	.name {
+		@include mixins.b-regular;
+		color: $black;
+	}
+	.star {
+		@include mixins.b-medium;
+		color: $main-yellow;
 		display: flex;
-		flex-direction: column;
+		align-items: center;
 		gap: 5px;
-		.brand {
+		span {
 			@include mixins.b-small;
 			color: $gray6;
 		}
-		.name {
-			@include mixins.b-regular;
-			color: $black;
-		}
-		.star {
-			@include mixins.b-medium;
-			color: $main-yellow;
-			display: flex;
-			align-items: center;
-			gap: 5px;
-			span {
-				@include mixins.b-small;
-				color: $gray6;
-			}
-		}
-		.tags {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 5px;
-		}
 	}
-	.handle {
-		width: 200px;
-		position: absolute;
-		bottom: 0;
-		right: 0;
+	.tags {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 5px;
 	}
+}
+
+.handle {
+	width: 200px;
+	position: absolute;
+	bottom: -20px;
+	right: -20px;
 }

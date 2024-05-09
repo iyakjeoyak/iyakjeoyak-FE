@@ -12,9 +12,10 @@ import Error from "@pages/feedback/UI/Error.tsx";
 import { ErrorBoundary } from "react-error-boundary";
 import Loading from "./pages/feedback/Loading.tsx";
 import ReactDOM from "react-dom/client";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 import { showToast } from "./utils/ToastConfig.ts";
+
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const queryClient = new QueryClient({
 	defaultOptions: {
@@ -49,7 +50,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<QueryClientProvider client={queryClient}>
 					<App />
 					<ToastContainer />
-					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
+					{/* <ReactQueryDevtools initialIsOpen={false} position="bottom" /> */}
 				</QueryClientProvider>
 			</Suspense>
 		</ErrorBoundary>

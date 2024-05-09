@@ -8,7 +8,9 @@
 	background-color: $main-green;
 	color: white;
 	position: fixed;
-	width: 400px;
+	right: 50%;
+	transform: translateX(50%);
+	width: 450px;
 	bottom: 40px;
 }
 

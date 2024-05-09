@@ -59,4 +59,5 @@ export interface ReviewItemType {
 	modifiedDate: string;
 	hashtagResult: TagType[];
 	imageResult: ImageType[];
+	isOwner: boolean;
 }

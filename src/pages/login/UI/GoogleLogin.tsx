@@ -1,5 +1,5 @@
 import userQueryOption from "@/api/user";
-import { setAccessToken } from "@/utils/getToken";
+import { setAccessToken, setRefreshToken } from "@/utils/getToken";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,10 +13,11 @@ export const GoogleLogin = () => {
 	}
 
 	const { data } = useQuery(userQueryOption.getGoogleAuthToken({ code }));
-	console.log(data);
 	if (data) {
 		const accessToken = data.headers.authorization;
+		const refreshToken = data.data;
 		setAccessToken(accessToken);
+		setRefreshToken(refreshToken);
 		toast.success("로그인이 완료되었습니다.", { autoClose: 2000 });
 		navigate("/home");
 	}

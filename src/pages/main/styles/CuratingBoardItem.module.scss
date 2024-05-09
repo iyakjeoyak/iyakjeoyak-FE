@@ -2,8 +2,9 @@
 @import "@styles/variables.scss";
 
 .container {
-	display: flex;
-	gap: 20px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
 	position: relative;
 	width: 100%;
 	cursor: pointer;
@@ -29,14 +30,21 @@
 	width: 100%;
 	position: relative;
 	div {
-		top: 15px;
+		top: 30px;
 	}
 	button {
-		margin-top: 90px;
+		margin-top: 120px;
 		background-color: #d3f5e7;
 		color: $main-green;
 		border-radius: 5px;
 		padding: 5px;
 		width: 80%;
+	}
+}
+
+.speech {
+	font-size: 14px;
+	text {
+		color: $main-green;
 	}
 }

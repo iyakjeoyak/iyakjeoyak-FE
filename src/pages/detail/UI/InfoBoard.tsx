@@ -13,15 +13,12 @@ export default function InfoBoard({
 }: InfoBoardProps) {
 	return (
 		<article className={styles.conatiner}>
-			<InfoBoardItemContainer title="👍 이런 분에게 추천합니다!">
-				{describe}
-			</InfoBoardItemContainer>
-			<InfoBoardItemContainer title="💊 함량 성분">
-				{ingredient}
-			</InfoBoardItemContainer>
-			<InfoBoardItemContainer title="🕛 복용 방법 & 시간">
-				{howToEat}
-			</InfoBoardItemContainer>
+			<InfoBoardItemContainer
+				title="👍 이런 분에게 추천합니다!"
+				text={describe}
+			/>
+			<InfoBoardItemContainer title="💊 함량 성분" text={ingredient} />
+			<InfoBoardItemContainer title="🕛 복용 방법 & 시간" text={howToEat} />
 		</article>
 	);
 }

@@ -1,3 +1,4 @@
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 
 .container {
@@ -14,21 +15,45 @@
 	.tags {
 		background-color: $gray0;
 		display: flex;
-		gap: 15px;
+		gap: 5px;
 		padding: 10px;
 		border-radius: 10px;
+		flex-wrap: wrap;
 	}
 }
 
 .images {
 	display: flex;
+	gap: 5px;
+	img {
+		height: 100px;
+		width: 100px;
+	}
 }
 
-.button-container {
+.icons-container {
 	display: flex;
 	justify-content: space-between;
 	.left {
 		display: flex;
 		gap: 15px;
+	}
+}
+
+.buttons-container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
+	button {
+		padding: 15px;
+		border-radius: 10px;
+		color: $white;
+		@include mixins.b-small;
+	}
+	.edit {
+		background-color: $main-green;
+	}
+	.delete {
+		background-color: $gray3;
 	}
 }
