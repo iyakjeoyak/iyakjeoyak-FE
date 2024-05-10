@@ -53,7 +53,6 @@ export default function MedicineDetail() {
 		navigate(`/detail/${medicineId}?tap=${tapValue}`);
 	};
 
-	console.log();
 	return (
 		<>
 			<section className={styles.container}>

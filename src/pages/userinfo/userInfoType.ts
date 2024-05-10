@@ -136,7 +136,7 @@ export interface pointResult {
 	size: number;
 	totalPages: number;
 	totalElement: number;
-	numberofElement: number;
+	numberOfElement: number;
 }
 
 export interface PointData {

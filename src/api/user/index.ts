@@ -28,3 +28,5 @@ const userQueryOption = {
 export default userQueryOption;
 export { default as postSignUp } from "./postSignUp";
 export { default as postLogin } from "./postLogin";
+export { default as postMailVerify } from "./postMailVerify";
+export { default as postMailSendVerify } from "./postMailSendVerify";

@@ -25,11 +25,11 @@ export interface LikedSupplmentArgs {
 }
 
 export default async function getLikedSupplement({
-	size,
 	page,
+	size,
 }: {
-	size: number;
 	page: number;
+	size: number;
 }) {
 	const response = await axios.get<LikedSupplmentArgs>(
 		`/heart/medicine?page=${page}&size=${size}`,

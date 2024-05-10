@@ -26,7 +26,7 @@ export default function MyMedicineBoard() {
 	const {
 		data: { data: medicines },
 	} = useQuery({
-		...userInfoQueryOptions.getUserSupplement({ page: 0, size: 4 }),
+		...userInfoQueryOptions.getUserSupplementMain({ page: 0, size: 4 }),
 	});
 
 	return (

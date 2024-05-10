@@ -26,7 +26,6 @@ const PointHistory = () => {
 				const userPoints = await getUserPoints({ page: 0, size: 10 });
 				setPointData(userPoints.pageResult.data);
 				setPointSum(userPoints);
-				console.log();
 			} catch (error) {
 				showToast({
 					type: "error",

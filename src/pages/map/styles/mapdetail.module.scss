@@ -9,7 +9,7 @@
 	bottom: 0;
 	min-height: 100%;
 	width: 100%;
-	z-index: 22;
+	z-index: 1000000;
 
 	@include mixins.responsive("desktop") {
 		max-width: 480px;
@@ -35,7 +35,7 @@
 	left: 5%;
 	transform: translateX(-100%);
 
-	z-index: 30;
+	z-index: 10000000;
 
 	padding: 15rem 15rem;
 	overflow: auto;

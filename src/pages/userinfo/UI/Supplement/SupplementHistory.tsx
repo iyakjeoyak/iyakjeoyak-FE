@@ -1,18 +1,18 @@
 import "@styles/global.scss";
 
 import { useEffect, useState } from "react";
-
 import CommonCardBox from "../CommonCardBox";
 import CommonHeaderBox from "../CommonHeaderBox";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
 import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
-import SupplementEditForm from "./SupplementEditForm";
-import { ShortSupplementInfo, ShortSupplementProps } from "../../userInfoType";
+import { ShortSupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
 import style from "../../style/supplementhistory.module.scss";
 import useOpen from "@/hooks/useOpen";
-import { showToast } from "@/utils/ToastConfig";
+import SupplementAddForm from "./SupplementAddForm";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import useIntersect from "@/hooks/useIntersect";
 import getUserSupplement from "@/api/useInfo/getUserSupplement";
 
 const noSupplementData = {
@@ -38,28 +38,50 @@ const SupplementHistory = () => {
 	} = useOpen();
 
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
-	const [supplementData, setSupplmentData] =
-		useState<ShortSupplementProps | null>(null);
 	const [selectedSupplement, setSelectedSupplement] =
 		useState<ShortSupplementInfo | null>(null);
 
-	useEffect(() => {
-		const fetchSupplement = async () => {
-			try {
-				const userSupplement = await getUserSupplement({ page: 0, size: 20 });
-				setSupplmentData(userSupplement);
-			} catch (error) {
-				showToast({
-					type: "error",
-					message: "내 영양제 데이터를 가져오는 중 오류가 발생했습니다.",
-				});
-			}
-		};
-		fetchSupplement();
-	}, [isOpenEditSupplement, isOpenSupplement]);
+	const { data, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery(
+		{
+			queryKey: ["userInfo", "storage"],
+			// page : number로 넘어가면
+			queryFn: ({ pageParam = { page: 0 } }) => {
+				return getUserSupplement(pageParam);
+			},
+			getNextPageParam: (lastPage) => {
+				if (lastPage.number + 1 < lastPage.totalPages) {
+					return { page: lastPage.number + 1 };
+				}
+				return undefined;
+			},
 
-	const count = supplementData?.totalElement;
-	const supplementInfo = supplementData?.data;
+			initialPageParam: { page: 0 },
+			// 여기도 number로 받아야함
+			// 으으으ㅡ... 그래도 했다..
+			select: ({ pages }) => {
+				const returnData = pages?.map((page) => page.data).flat();
+				const totalElement = pages[0].totalElement;
+				const totalPages = pages[0].totalPages;
+				return { supplementData: returnData, totalElement, totalPages };
+			},
+		},
+	);
+
+	const { ref } = useIntersect({
+		root: null,
+		rootMargin: "0px",
+		threshold: 0.1,
+		onIntersect: ([entry]) => {
+			if (entry.isIntersecting && !isFetchingNextPage) {
+				fetchNextPage();
+			}
+		},
+	});
+
+	const isLastPage = data?.totalElement === data?.supplementData.length;
+
+	const count = data?.totalElement;
+	const supplementInfo = data?.supplementData;
 
 	const onChangeCardStyle = () => {
 		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
@@ -68,6 +90,10 @@ const SupplementHistory = () => {
 	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
 	};
+
+	useEffect(() => {
+		refetch(); // addForm에서 날린 invalidatequeries쿼리로 ui 업데이트가 안됨 resetqueries로는 됨 ?
+	}, [data]);
 
 	return (
 		<section className={style.userSupplementContainer}>
@@ -89,9 +115,9 @@ const SupplementHistory = () => {
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
 							{supplementInfo &&
-								supplementInfo?.map((cardInfo, mySupplementId) => (
+								supplementInfo?.map((cardInfo) => (
 									<CommonCardBox
-										key={mySupplementId}
+										key={cardInfo.id}
 										form={cardForm}
 										medicineNames={cardInfo.medicineName}
 										img={cardInfo.image?.fullPath}
@@ -121,12 +147,19 @@ const SupplementHistory = () => {
 			>
 				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
 				<Modal.Content>
-					<SupplementEditForm
+					<SupplementAddForm
 						formInitialValues={noSupplementData}
 						onClose={onCloseEditSupplement}
 					/>
 				</Modal.Content>
 			</Modal>
+
+			<div ref={ref} style={{ height: 20 }}>
+				{" "}
+				{!isLastPage && isFetchingNextPage && (
+					<p>영양제 정보를 불러오는 중입니다</p>
+				)}
+			</div>
 		</section>
 	);
 };

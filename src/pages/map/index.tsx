@@ -13,9 +13,12 @@ const PharmacyMap = () => {
 	const paths = [location.pathname];
 
 	const [detailData, setDetailData] = useState<PharmacyDetailType>();
+	const [selectedHpid, setSelectedHpid] = useState("");
 
 	return (
-		<MapContext.Provider value={{ detailData, setDetailData }}>
+		<MapContext.Provider
+			value={{ detailData, setDetailData, selectedHpid, setSelectedHpid }}
+		>
 			<section className={style.mapBox}>
 				<PathButton paths={paths} />
 				{/* <MapSearch /> */}

@@ -3,6 +3,8 @@
 @import "@/styles/global.scss";
 
 .checkWrap {
+  position: relative;
+
   .checkFlex {
     display: flex;
     align-items: flex-end;
@@ -43,4 +45,16 @@ p {
     gap: 5px;
     margin-left: 10px;
   }
+
+
+}
+
+.buttonStyle {
+  margin-top: 20px;
+}
+
+.count {
+  position: absolute;
+  right: 0;
+  top: 10px
 }
