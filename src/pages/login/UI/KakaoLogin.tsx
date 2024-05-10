@@ -1,4 +1,5 @@
 import userQueryOption from "@/api/user";
+import Loading from "@/pages/feedback/Loading";
 import { setAccessToken, setRefreshToken } from "@/utils/getToken";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,5 @@ export const KakaoLogin = () => {
 		toast.success("로그인이 완료되었습니다.", { autoClose: 2000 });
 		navigate("/home");
 	}
-	console.log(data);
-	return <>Loading</>;
+	return <Loading />;
 };

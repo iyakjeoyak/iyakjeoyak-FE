@@ -15,7 +15,7 @@ export function FameBottom() {
 						style={{
 							backgroundImage: user.image
 								? `url(${user.image.fullPath})`
-								: "url(/public/images/FameUser.png)",
+								: "url(/images/FameUser.png)",
 							backgroundColor:
 								index === 0 ? "#ffd700" : index === 1 ? "#c0c0c0" : "#cd7f32",
 						}}
@@ -24,7 +24,7 @@ export function FameBottom() {
 						<div className={styles.usernameTag}>
 							<div>{user.nickname}</div>
 							{index === 0 && (
-								<TagCommon text="허준" size="small" backgroundColor="green" />
+								<TagCommon text="이약" size="small" backgroundColor="green" />
 							)}
 						</div>
 

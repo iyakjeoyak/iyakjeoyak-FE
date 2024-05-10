@@ -1,6 +1,6 @@
 import axios from "../axiosConfig";
 
-export interface PatchBodyType {
+export interface ReviewPatchBodyType {
 	title: string;
 	tagList: number[];
 	content: string;
@@ -12,12 +12,8 @@ export default async function patchReviewById({
 	body,
 }: {
 	reviewId: number;
-	body: PatchBodyType;
+	body: ReviewPatchBodyType;
 }) {
-	const response = await axios.patch(`/review/${reviewId}`, body, {
-		headers: {
-			"Content-Type": "multipart/form-data",
-		},
-	});
+	const response = await axios.patch(`/review/${reviewId}`, body);
 	return response.data;
 }

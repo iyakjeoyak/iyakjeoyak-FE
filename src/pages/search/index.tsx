@@ -6,9 +6,11 @@ import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
 import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import qs from "qs";
 import { queryClient } from "@/main";
 
 export default function MedicineSearch() {
+	const [currentTapValue, setCurrentTapValue] = useState("");
 	const [isTagsModalOpen, setIsTagsModalOpen] = useState(false);
 	const [keywordSearchResult, setKeywordSearchResult] = useState<
 		KeywordResultItemType[]
@@ -18,7 +20,21 @@ export default function MedicineSearch() {
 	const { search } = useLocation();
 
 	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
+		const currentQueryString = location.search;
+		const currentQueryParams = qs.parse(currentQueryString, {
+			ignoreQueryPrefix: true,
+		});
+
+		const updatedQueryParams = {
+			...currentQueryParams,
+			keyword,
+		};
+
+		const newQueryString = qs.stringify(updatedQueryParams, {
+			addQueryPrefix: true,
+		});
+
+		navigate(`/search${newQueryString}`);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
@@ -36,6 +52,10 @@ export default function MedicineSearch() {
 			queryClient.resetQueries({ queryKey: ["medicine", "medicines"] });
 	};
 
+	const handleCurrentTab = (tapValue: string) => {
+		setCurrentTapValue(tapValue);
+	};
+
 	useEffect(() => {
 		setKeywordSearchResult([]);
 	}, [search]);
@@ -43,7 +63,10 @@ export default function MedicineSearch() {
 	return (
 		<>
 			{isTagsModalOpen && (
-				<TagsModal toggleIsTagsModalOpen={toggleIsTagsModalOpen} />
+				<TagsModal
+					currentTapValue={currentTapValue}
+					toggleIsTagsModalOpen={toggleIsTagsModalOpen}
+				/>
 			)}
 			<section>
 				<SearchBar>
@@ -57,7 +80,10 @@ export default function MedicineSearch() {
 					/>
 					<SearchBar.SelectedKeywordTagsList />
 				</SearchBar>
-				<MedicineCardList toggleIsTagsModalOpen={toggleIsTagsModalOpen} />
+				<MedicineCardList
+					handleCurrentTab={handleCurrentTab}
+					toggleIsTagsModalOpen={toggleIsTagsModalOpen}
+				/>
 			</section>
 		</>
 	);

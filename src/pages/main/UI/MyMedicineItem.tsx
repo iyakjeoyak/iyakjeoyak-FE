@@ -1,21 +1,16 @@
-// import { MedicineItemType } from "@/types";
-
-import { MedicineItemType } from "@/types";
+import { ShortSupplementInfo } from "@/pages/userinfo/userInfoType";
 import { calculateDday } from "../utils";
 import styles from "../styles/MyMedicineItem.module.scss";
 import { useState } from "react";
 
 // interface MyMedicineItem extends MedicineItemType{
 interface MyMedicineItem {
-	medicine?: MedicineItemType;
+	medicine?: ShortSupplementInfo;
 	isBlank?: boolean;
 }
 
-export default function MyMedicineItem({
-	medicine,
-	isBlank = false,
-}: MyMedicineItem) {
-	if (isBlank) {
+export default function MyMedicineItem({ medicine }: MyMedicineItem) {
+	if (!medicine) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.top}></div>
@@ -29,10 +24,11 @@ export default function MyMedicineItem({
 
 	const [isItemHovered, setIsItemHovered] = useState(false);
 	const today = new Date();
-	const medicineExpiration = new Date("2025-05-23");
+	const medicineExpiration = new Date(medicine.expirationDate);
 	const dday = calculateDday(today, medicineExpiration);
 
-	const splittedName = medicine?.prdlst_NM.split(" ");
+	const splittedName = medicine?.medicineName.split(" ");
+
 	return (
 		<div
 			className={`${styles.container} ${isItemHovered ? styles.hover : ""}`}

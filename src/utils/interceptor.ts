@@ -94,7 +94,6 @@ async function handleTokenRefresh(
 			);
 			if (tokenRefreshResult.status === 200) {
 				const accessToken = tokenRefreshResult.headers["authorization"];
-				console.log("accessToken", accessToken);
 				if (!accessToken) {
 					showToast({
 						type: "error",
