@@ -7,7 +7,6 @@ import { routerpaths } from "@/utils/pathName";
 import style from "../index.module.scss";
 import { useNavigate } from "react-router-dom";
 import useOpen from "@/hooks/useOpen";
-import { useUserContext } from "../utils/userContext";
 import Loading from "@/pages/feedback/Loading";
 
 export interface UserInfoBoxProps {

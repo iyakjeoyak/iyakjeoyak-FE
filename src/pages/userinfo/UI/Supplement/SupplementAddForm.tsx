@@ -2,7 +2,7 @@ import { Form } from "@/components/Form";
 import SearchBar from "@/components/SearchBar";
 import * as yup from "yup";
 import { SupplementFormValues } from "./SupplementModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import { KeywordResultItemType } from "@/pages/main";
 import { useMutation } from "@tanstack/react-query";

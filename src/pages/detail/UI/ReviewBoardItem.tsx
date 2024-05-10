@@ -80,7 +80,7 @@ export default function ReviewBoardItem({
 									<img src={imageResult[0].fullPath} />
 								)}
 								<div className={styles["content-container"]}>
-									<p>{title}</p>
+									<div>{title}</div>
 									<div className={styles["tags"]}>
 										{hashtagResult.slice(0, 4).map((tag) => (
 											<TagCommon key={tag.id} text={tag.name} />
