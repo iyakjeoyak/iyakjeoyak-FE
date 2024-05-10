@@ -10,7 +10,7 @@ import { ImgInput } from "./ImgInput";
 interface FormProps {
 	children: React.ReactNode;
 	className?: string;
-	onSubmit: FormEventHandler<HTMLFormElement>;
+	onSubmit?: FormEventHandler<HTMLFormElement>;
 }
 
 export const ControlForm = ({ children, className, onSubmit }: FormProps) => {
