@@ -5,58 +5,32 @@ import UserInfoBox from "./UI/UserInfoBox";
 import PointContent from "./UI/Point/PointContent";
 import FlexBox from "@/styles/FlexBox";
 import { Review, Supplement } from "./UI";
-import getUserInfo from "@/api/useInfo/getUserInfo";
-import { useEffect, useState } from "react";
-import { ReviewType, SupplementType, UserResult } from "./userInfoType";
-import { showToast } from "@/utils/ToastConfig";
-import Loading from "../feedback/Loading";
-import { userContext } from "./utils/userContext";
+import { useQuery } from "@tanstack/react-query";
+import userInfoQueryOptions from "@api/useInfo/index";
 
 const UserInfo = () => {
 	const navigate = useNavigate();
 
-	const [userData, setUserData] = useState<UserResult>();
-	const [latestReviews, setLatestReviews] = useState<ReviewType[]>();
-	const [favoriteSupplements, setFavoriteSupplements] =
-		useState<SupplementType[]>();
+	const { data } = useQuery({
+		...userInfoQueryOptions.getUserInfo(),
+	});
 
-	useEffect(() => {
-		const fetchUserInfo = async () => {
-			try {
-				const userInfo = await getUserInfo();
-				setUserData(userInfo?.userResult);
-				setLatestReviews(userInfo?.latestReviews);
-				setFavoriteSupplements(userInfo?.favoriteSupplements);
-			} catch (error) {
-				showToast({
-					type: "error",
-					message: "유저데이터 에러",
-				});
-			}
-		};
-		fetchUserInfo();
-	}, []);
+	const userData = data?.userResult;
 
-	useEffect(() => {}, [userData]);
-
+	console.log(userData);
 	const goToPointDetail = () => {
 		navigate(`/userinfo/point`);
 	};
 
-	if (!userData) {
-		return <Loading />;
-	}
 	return (
-		<userContext.Provider value={{ userData, setUserData }}>
-			<section className={style.mypageContainer}>
-				<UserInfoBox />
-				<FlexBox direction="column">
-					<PointContent onNavigate={goToPointDetail} />
-					<Review review={latestReviews} />
-					<Supplement supplement={favoriteSupplements} />
-				</FlexBox>
-			</section>
-		</userContext.Provider>
+		<section className={style.mypageContainer}>
+			<UserInfoBox userData={data?.userResult} />
+			<FlexBox direction="column">
+				<PointContent onNavigate={goToPointDetail} />
+				<Review review={data?.latestReviews} />
+				<Supplement supplement={data?.favoriteSupplements} />
+			</FlexBox>
+		</section>
 	);
 };
 

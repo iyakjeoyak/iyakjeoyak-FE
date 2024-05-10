@@ -4,12 +4,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import commonQueryOptions from "@/api/common";
-import getUserInfo from "@/api/useInfo/getUserInfo";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
 import { showToast } from "@/utils/ToastConfig";
 import style from "../style/userinfoedit.module.scss";
 import transformSubmmit from "../utils/transformSubmmit";
-import { useUserContext } from "../utils/userContext";
+import { queryClient } from "@/main";
+import { UserResult } from "../userInfoType";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -43,7 +43,7 @@ const userInfoSchema = yup.object().shape({
 });
 
 interface MyPageEditProps {
-	// data: UserResult;
+	userData: UserResult;
 	onClose: () => void;
 }
 interface imageEdit {
@@ -69,26 +69,12 @@ export interface UserEdit {
 	image?: imageEdit;
 }
 
-const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
-	const { userData: data, setUserData } = useUserContext();
-
+const UserInfoEdit = ({ userData, onClose }: MyPageEditProps) => {
 	const { mutate } = useMutation({
 		mutationFn: patchUserInfo,
 	});
 
-	const fetchUpdatedUserInfo = async () => {
-		const updatedUserInfo = await getUserInfo();
-		if (updatedUserInfo.userResult) {
-			setUserData(updatedUserInfo.userResult);
-		}
-	};
-
-	if (!data) {
-		showToast({ type: "error", message: "사용자 데이터가 없습니다." });
-		return null;
-	}
-
-	const submmitData = transformSubmmit(data);
+	const submmitData = transformSubmmit(userData);
 
 	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
 
@@ -110,9 +96,10 @@ const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
 		mutate(formData, {
 			onSuccess: () => {
 				showToast({ type: "success", message: "성공적으로 수정되었습니다." });
-				fetchUpdatedUserInfo();
+				queryClient.invalidateQueries({
+					queryKey: ["userInfo"],
+				});
 				onClose();
-				console.log(data);
 			},
 			onError: () => {
 				showToast({
@@ -134,7 +121,7 @@ const UserInfoEdit = ({ onClose }: MyPageEditProps) => {
 				<Form.ImgInput
 					name="imgFile"
 					title="내 프로필"
-					initialImage={data.image?.fullPath}
+					initialImage={userData.image?.fullPath}
 				/>
 			</section>
 			<section className={style.profileInfoEdit}>

@@ -11,12 +11,11 @@ import { useUserContext } from "../utils/userContext";
 import Loading from "@/pages/feedback/Loading";
 
 export interface UserInfoBoxProps {
-	userData: UserResult;
+	userData?: UserResult;
 }
 
-const UserInfoBox = () => {
+const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 	const navigate = useNavigate();
-	const { userData } = useUserContext();
 	const {
 		isOpen,
 		onClose: onCloseEditUserData,
@@ -66,7 +65,10 @@ const UserInfoBox = () => {
 								<div
 									className={`${style.profileEditModal} ${modalStyle.container} `}
 								>
-									<UserInfoEdit onClose={onCloseEditUserData} />
+									<UserInfoEdit
+										onClose={onCloseEditUserData}
+										userData={userData}
+									/>
 								</div>
 							</Modal.Content>
 						</Modal>

@@ -12,6 +12,7 @@ const LikedPharmacy = () => {
 		data: { data: likedData },
 	} = useQuery({
 		...pharmacyQueryOptions.getLikedPharmacy({ page: 0, size: 10 }),
+		// enabled에 어떤 조건을 줘야할까..?
 		enabled: true,
 	});
 
