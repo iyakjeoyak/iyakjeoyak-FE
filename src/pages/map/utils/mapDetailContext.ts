@@ -2,12 +2,14 @@ import React, { createContext, useContext } from "react";
 import { PharmacyDetailType } from "@pages/map/mapTypes";
 
 interface MapContextType {
-	isLikeChanged: boolean;
-	setIsLikeChanged: React.Dispatch<React.SetStateAction<boolean>>;
+	// isLikeChanged: boolean;
+	// setIsLikeChanged: React.Dispatch<React.SetStateAction<boolean>>;
 	detailData?: PharmacyDetailType;
 	setDetailData: React.Dispatch<
 		React.SetStateAction<PharmacyDetailType | undefined>
 	>;
+	selectedHpid: string;
+	setSelectedHpid: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const MapContext = createContext<MapContextType | null>(null);

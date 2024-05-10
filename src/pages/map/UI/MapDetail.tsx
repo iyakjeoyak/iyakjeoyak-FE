@@ -8,7 +8,9 @@ import { hourListType } from "../mapTypes";
 import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
 import { useEffect, useState } from "react";
 import { formatHour } from "../utils/formatHour";
-import { FaLeaf } from "react-icons/fa";
+import { queryClient } from "@/main";
+import { useQuery } from "@tanstack/react-query";
+import pharmacyQueryOptions from "@/api/map";
 
 const dayOfWeekMap = {
 	Mon: "월요일",
@@ -22,29 +24,39 @@ const dayOfWeekMap = {
 };
 
 const MapDetail = () => {
-	const { detailData, setDetailData, setIsLikeChanged } = useMapContext();
+	const { selectedHpid, setSelectedHpid } = useMapContext();
+
+	const { data: detailData, refetch } = useQuery({
+		...pharmacyQueryOptions.getPharmacyDetail({ hpid: selectedHpid || "" }),
+		enabled: selectedHpid !== "",
+	});
+
 	const [isLiked, setIsLiked] = useState(detailData?.liked ?? false);
 
 	useEffect(() => {
 		setIsLiked(detailData?.liked ?? false);
 	}, [detailData]);
 
-	if (!detailData) {
+	if (selectedHpid == "") {
 		return null;
 	}
 
 	const handleClose = () => {
 		if (detailData && detailData.liked == !isLiked) {
-			postLikedPharmacy({ ...detailData, liked: isLiked });
+			postLikedPharmacy({ ...detailData, liked: isLiked }).then(() => {
+				queryClient.invalidateQueries({
+					queryKey: ["pharmacy", "likedPharmacy"],
+				});
+			});
+			refetch();
 		}
-		setDetailData(undefined);
+
+		setSelectedHpid("");
 		setIsLiked(false);
-		setIsLikeChanged(true);
 	};
 
 	const toggleLike = () => {
 		setIsLiked((prev) => !prev);
-		setIsLikeChanged(false);
 	};
 
 	return (

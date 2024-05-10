@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Pharmacy } from "../mapTypes";
-import getPharmacyDetail from "@/api/map/getPharmacyDetail";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import { useMapContext } from "../utils/mapDetailContext";
 import { useDisplayMap, useInitMap, useUpdateMarkers } from "../hooks";
-import { showToast } from "@/utils/ToastConfig";
 import CurrentLocationButton from "./CurrentLocationButton";
 import style from "../styles/maproot.module.scss";
 
@@ -15,14 +13,11 @@ const Map = () => {
 		null,
 	);
 	const [marker, setMarker] = useState<naver.maps.Marker[] | null>(null);
-	const { setDetailData, detailData } = useMapContext();
+
+	const { setSelectedHpid } = useMapContext();
+
 	const handleMarkerClick = async (pharmacy: Pharmacy) => {
-		try {
-			const pharmacyDetail = await getPharmacyDetail(pharmacy.hpid);
-			setDetailData(pharmacyDetail);
-		} catch (error) {
-			showToast({ type: "error", message: "지도를 가져오는데 실패했습니다." });
-		}
+		setSelectedHpid(pharmacy.hpid);
 	};
 
 	// 맵 초기 설정

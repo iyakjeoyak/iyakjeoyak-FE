@@ -2,11 +2,11 @@ import axios from "../axiosConfig";
 import { ShortSupplementProps } from "@/pages/userinfo/userInfoType";
 
 export default async function getUserSupplement({
-	size,
 	page,
+	size,
 }: {
-	size: number;
 	page: number;
+	size: number;
 }) {
 	const response = await axios.get<ShortSupplementProps>(
 		`/storage?page=${page}&size=${size}`,

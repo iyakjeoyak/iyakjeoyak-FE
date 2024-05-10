@@ -1,41 +1,19 @@
 import { LazyMotion, m, AnimatePresence, domMax } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "../styles/likedpharmacy.module.scss";
 import stopEvent from "@/utils/stopEvent";
-import getLikedPharmacy from "@/api/map/getLikedPharmacy";
-import { showToast } from "@/utils/ToastConfig";
-import { useMutation } from "@tanstack/react-query";
-import { PharmacyDetailType } from "../mapTypes";
-import { useMapContext } from "../utils/mapDetailContext";
+import { useQuery } from "@tanstack/react-query";
+import pharmacyQueryOptions from "@/api/map";
 
 const LikedPharmacy = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const { isLikeChanged, detailData } = useMapContext();
-	const [likedData, setLikedData] = useState<PharmacyDetailType[]>([]);
 
-	const { mutate } = useMutation({
-		mutationFn: ({ page, size }: { page: number; size: number }) =>
-			getLikedPharmacy(page, size),
-		onSuccess: (data) => {
-			setLikedData(data.data);
-		},
-		onError: () => {
-			showToast({
-				type: "error",
-				message: "저장된 약국 정보를 가져오는데 실패했습니다.",
-			});
-		},
+	const {
+		data: { data: likedData },
+	} = useQuery({
+		...pharmacyQueryOptions.getLikedPharmacy({ page: 0, size: 10 }),
+		enabled: true,
 	});
-
-	useEffect(() => {
-		mutate({ size: 10, page: 0 });
-	}, [mutate]);
-
-	useEffect(() => {
-		if (isLikeChanged) {
-			mutate({ size: 10, page: 0 });
-		}
-	}, [isLikeChanged, detailData]);
 
 	return (
 		<>
