@@ -1,11 +1,11 @@
 import { FormEventHandler } from "react";
 import styles from "@/components/Form/index.module.scss";
 import { Input } from "./Input";
-import { Button } from "../Form/Button";
 import { RadioButton } from "./RadioButton";
 import TagButton from "./TagButton";
 import TagBoard from "./TagBoard";
 import { ImgInput } from "./ImgInput";
+import { Button } from "./Button";
 
 interface FormProps {
 	children: React.ReactNode;

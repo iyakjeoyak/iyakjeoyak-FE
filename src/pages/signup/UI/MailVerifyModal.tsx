@@ -12,6 +12,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import styles from "../styles/SignUp.module.scss";
+import Timer from "../utils/Timer";
 
 export default function MailVerifyModal({
 	isOpen,
@@ -27,6 +28,7 @@ export default function MailVerifyModal({
 	signUpData: SignUpFormType;
 }) {
 	const [isVerified, setIsVerified] = useState(false);
+	const [timerCount, setTimerCount] = useState(180);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -118,6 +120,11 @@ export default function MailVerifyModal({
 						readOnly
 					/>
 					<div className={styles.checkWrap}>
+						<Timer
+							count={timerCount}
+							setCount={setTimerCount}
+							className={styles.count}
+						/>
 						<div className={styles.checkFlex}>
 							<ControlForm.Input
 								title="이메일 인증번호"
@@ -125,7 +132,6 @@ export default function MailVerifyModal({
 								{...register("verify")}
 								className={errors.verify ? styles.error : ""}
 							/>
-
 							<ControlForm.Button
 								onClick={handleVerify}
 								text="인증번호 확인"

@@ -115,7 +115,7 @@ export function SignUp() {
 
 						<ControlForm.Button
 							onClick={handleCheckUserName}
-							text="이메일 중복확인"
+							text="중복확인"
 							type="button"
 							variant="dark"
 						/>
