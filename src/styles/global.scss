@@ -63,6 +63,7 @@ main {
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 	overflow: hidden;
+
 	@include mixins.responsive("tablet") {
 		padding-top: 100px;
 	}
@@ -92,4 +93,14 @@ main {
 
 .main::-webkit-scrollbar {
 	display: none;
+}
+
+.swiper {
+	.swiper-button-prev::after {
+		color: #23cc87;
+	}
+
+	.swiper-button-next::after {
+		color: #23cc87;
+	}
 }

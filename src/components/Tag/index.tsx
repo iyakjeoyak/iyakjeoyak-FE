@@ -5,7 +5,8 @@ interface TagCommonProps {
 	size?: "small" | "medium";
 	backgroundColor?: "green" | "midgreen" | "lightgreen" | "white";
 	className?: string;
-  onClick?: ()=>void
+	onClick?: () => void;
+	style?: React.CSSProperties;
 }
 
 const TagCommon: React.FC<TagCommonProps> = ({
@@ -13,13 +14,18 @@ const TagCommon: React.FC<TagCommonProps> = ({
 	size = "medium",
 	backgroundColor = "default",
 	className,
-  onClick
+	onClick,
+	style,
 }) => {
 	const sizeClass = styles[`tag-${size}`] || "";
 	const backgroundClass = styles[`background-${backgroundColor}`] || "";
 
 	return (
-		<span className={`${className} ${sizeClass} ${backgroundClass}`} onClick={onClick}>
+		<span
+			className={` ${sizeClass} ${backgroundClass}${className}`}
+			onClick={onClick}
+			style={style}
+		>
 			{text}
 		</span>
 	);

@@ -1,0 +1,28 @@
+@use "@styles/mixin" as mixins;
+@import "@styles/variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+	padding: 15px;
+	gap: 20px;
+	min-height: 230px;
+	.title {
+		@include mixins.b-medium;
+		color: $point-blue;
+		position: relative;
+		&::after {
+			position: absolute;
+			right: 0;
+			left: 0;
+			content: "";
+			height: 3px;
+			display: block;
+			background-color: $point-blue;
+			margin-top: 5px;
+		}
+	}
+}

@@ -1,13 +1,17 @@
 import { createContext, useContext } from "react";
 
 interface ModalContextType {
-	isModalOpen: boolean;
-	toggleModalOpen: () => void;
+	isOpen: boolean;
+	onOpen: () => void;
+	onClose: () => void;
+	toggleOpen: () => void;
 }
 
 export const ModalContext = createContext<ModalContextType>({
-	isModalOpen: false,
-	toggleModalOpen: () => {},
+	isOpen: false,
+	onOpen: () => {},
+	onClose: () => {},
+	toggleOpen: () => {},
 });
 
 export const useModal = () => {

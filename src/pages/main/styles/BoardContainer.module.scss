@@ -5,8 +5,20 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	.title {
-		color: $point-blue;
-		@include mixins.b-medium;
+	.title-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.title {
+			color: $point-blue;
+			@include mixins.b-medium;
+		}
+		.more {
+			color: $point-blue;
+			@include mixins.sb-medium;
+			background-color: $main-lightgreen;
+			border-radius: 15px;
+			padding: 5px 10px;
+		}
 	}
 }

@@ -1,8 +1,9 @@
 import { Button } from "@/components/Button";
-import { SupplementFormValues } from "./SupplementModal";
+import { DetailSupplementArgs } from "@/api/useInfo/getSupplementDetail";
+import style from "../../style/supplementdetail.module.scss";
 
 interface SupplementDetailProps {
-	supplementData: SupplementFormValues;
+	supplementData: DetailSupplementArgs;
 	onEdit: () => void;
 }
 
@@ -12,16 +13,28 @@ const SupplementDetail = ({
 }: SupplementDetailProps) => {
 	return (
 		supplementData && (
-			<div>
-				<img src={supplementData.img} alt="영양제 이미지" />
-				<div>{supplementData.name}</div>
-				<div>
-					<div>유통기한</div>
-					<div>{supplementData.dueDate}</div>
+			<div className={style.content}>
+				{supplementData.image ? (
+					<img
+						src={supplementData.image.fullPath}
+						alt="영양제 이미지"
+						className={style.image}
+					/>
+				) : (
+					<img
+						src="/images/no_medicine_img.jpg"
+						alt="영양제 이미지"
+						className={style.image}
+					/>
+				)}
+				<div className={style.title}>{supplementData.medicineName}</div>
+				<div className={style.box}>
+					<div className={style.headTitle}>유통기한</div>
+					<div className={style.text}>{supplementData.expirationDate}</div>
 				</div>
-				<div>
-					<div>한줄 메모</div>
-					<div>{supplementData.memo}</div>
+				<div className={style.box}>
+					<div className={style.headTitle}>한줄 메모</div>
+					<div className={style.text}>{supplementData.memo}</div>
 				</div>
 				<Button onClick={onEdit} variant="dark" size="l">
 					수정하기

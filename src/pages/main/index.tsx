@@ -1,31 +1,53 @@
-import { BestReviewBoard, MyMedicineBoard } from "./UI";
+import { BestReviewBoard, CuratingBoard, MyMedicineBoard } from "./UI";
 
 import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
-import getAutoCompleteResult from "@/api/etc/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import qs from "qs";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+export interface KeywordResultItemType {
+	id: number;
+	name: string;
+}
+
 export default function Main() {
 	const navigate = useNavigate();
-  const [keywordSearchResult, setKeywordSearchResult] = useState<string[]>([]);
+	const [keywordSearchResult, setKeywordSearchResult] = useState<
+		KeywordResultItemType[]
+	>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
+		const currentQueryString = location.search;
+		const currentQueryParams = qs.parse(currentQueryString, {
+			ignoreQueryPrefix: true,
+		});
+
+		const updatedQueryParams = {
+			...currentQueryParams,
+			keyword,
+		};
+
+		const newQueryString = qs.stringify(updatedQueryParams, {
+			addQueryPrefix: true,
+		});
+
+		navigate(`/search${newQueryString}`);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {
-    if (keyword.length <= 0) {
-      setKeywordSearchResult([]);
-      return;
-    }
-		const response = await getAutoCompleteResult({keyword});
+		if (keyword.length < 2) {
+			return;
+		}
+
+		const response = await getAutoCompleteResult({ keyword });
 		setKeywordSearchResult(response);
 	};
 
 	return (
-		<section className={styles.container}>
+		<section className={styles.container} style={{ paddingBottom: "220px" }}>
 			<SearchBar>
 				<SearchBar.KeywordInput
 					placeholder="검색어를 입력해주세요"
@@ -36,7 +58,8 @@ export default function Main() {
 			</SearchBar>
 			<MyMedicineBoard />
 			<BestReviewBoard />
-			<PickedMedicineBoard/>
+			<CuratingBoard />
+			<PickedMedicineBoard />
 		</section>
 	);
 }

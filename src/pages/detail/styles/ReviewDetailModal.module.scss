@@ -1,20 +1,59 @@
+@use "@styles/mixin" as mixins;
 @import "@/styles/variables.scss";
 
 .container {
 	display: flex;
 	flex-direction: column;
-  position: relative;
+	position: relative;
 	gap: 15px;
-	.tags {
-		background-color: $gray0;
-		display: flex;
-		gap: 15px;
+	.content {
+		border: 1px solid $gray3;
+		min-height: 100px;
 		padding: 10px;
 		border-radius: 10px;
 	}
-  .heart {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  } 
+	.tags {
+		background-color: $gray0;
+		display: flex;
+		gap: 5px;
+		padding: 10px;
+		border-radius: 10px;
+		flex-wrap: wrap;
+	}
+}
+
+.images {
+	display: flex;
+	gap: 5px;
+	img {
+		height: 100px;
+		width: 100px;
+	}
+}
+
+.icons-container {
+	display: flex;
+	justify-content: space-between;
+	.left {
+		display: flex;
+		gap: 15px;
+	}
+}
+
+.buttons-container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
+	button {
+		padding: 15px;
+		border-radius: 10px;
+		color: $white;
+		@include mixins.b-small;
+	}
+	.edit {
+		background-color: $main-green;
+	}
+	.delete {
+		background-color: $gray3;
+	}
 }

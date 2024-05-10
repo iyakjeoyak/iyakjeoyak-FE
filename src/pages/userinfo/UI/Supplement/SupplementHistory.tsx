@@ -1,93 +1,165 @@
 import "@styles/global.scss";
-import CommonHeaderBox from "../CommonHeaderBox";
-import { supplementRecords } from "../../mockData";
-import ListIcon from "../../assets/ListIcon";
-import CommonCardBox from "../CommonCardBox";
-import style from "../../style/supplementhistory.module.scss";
+
 import { useEffect, useState } from "react";
+import CommonCardBox from "../CommonCardBox";
+import CommonHeaderBox from "../CommonHeaderBox";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
+import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
-import { SupplementInfo } from "../../userInfoType";
+import { ShortSupplementInfo } from "../../userInfoType";
 import SupplementModal from "./SupplementModal";
-import SupplementEditForm from "./SupplementEditForm";
+import style from "../../style/supplementhistory.module.scss";
+import useOpen from "@/hooks/useOpen";
+import SupplementAddForm from "./SupplementAddForm";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import useIntersect from "@/hooks/useIntersect";
+import getUserSupplement from "@/api/useInfo/getUserSupplement";
 
 const noSupplementData = {
-	mySupplementId: 0,
-	name: "",
-	dosage: "",
-	dueDate: "",
-	effect: [],
+	medicineId: 0,
+	medicineName: "",
+	expirationDate: "",
 	memo: "",
-	img: "",
+	image: "",
 };
 
 const SupplementHistory = () => {
+	const {
+		isOpen: isOpenSupplement,
+		onClose: onCloseSupplement,
+		onOpen: onOpenSupplement,
+		toggleOpen: toggleOpenSupplement,
+	} = useOpen();
+	const {
+		isOpen: isOpenEditSupplement,
+		onClose: onCloseEditSupplement,
+		onOpen: onOpenEditSupplement,
+		toggleOpen: toggleOpenEditSupplement,
+	} = useOpen();
+
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
 	const [selectedSupplement, setSelectedSupplement] =
-		useState<SupplementInfo | null>(null);
+		useState<ShortSupplementInfo | null>(null);
 
-	const supplemenRecorddata = supplementRecords.mySupplements;
-	const count = supplementRecords.mySupplements.length;
+	const { data, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery(
+		{
+			queryKey: ["userInfo", "storage"],
+			// page : number로 넘어가면
+			queryFn: ({ pageParam = { page: 0 } }) => {
+				return getUserSupplement(pageParam);
+			},
+			getNextPageParam: (lastPage) => {
+				if (lastPage.number + 1 < lastPage.totalPages) {
+					return { page: lastPage.number + 1 };
+				}
+				return undefined;
+			},
+
+			initialPageParam: { page: 0 },
+			// 여기도 number로 받아야함
+			// 으으으ㅡ... 그래도 했다..
+			select: ({ pages }) => {
+				const returnData = pages?.map((page) => page.data).flat();
+				const totalElement = pages[0].totalElement;
+				const totalPages = pages[0].totalPages;
+				return { supplementData: returnData, totalElement, totalPages };
+			},
+		},
+	);
+
+	const { ref } = useIntersect({
+		root: null,
+		rootMargin: "0px",
+		threshold: 0.1,
+		onIntersect: ([entry]) => {
+			if (entry.isIntersecting && !isFetchingNextPage) {
+				fetchNextPage();
+			}
+		},
+	});
+
+	const isLastPage = data?.totalElement === data?.supplementData.length;
+
+	const count = data?.totalElement;
+	const supplementInfo = data?.supplementData;
 
 	const onChangeCardStyle = () => {
 		setCardForm((prevForm) => (prevForm === "slim" ? "wide" : "slim"));
 	};
 
-	const handleCardClick = (supplement: SupplementInfo) => {
+	const handleCardClick = (supplement: ShortSupplementInfo) => {
 		setSelectedSupplement(supplement);
 	};
 
-	const handleSubmmit = () => {
-		console.log("폼 제출");
-	};
-
-	console.log(selectedSupplement);
 	useEffect(() => {
-		console.log("state 변화");
-	}, [selectedSupplement]);
+		refetch(); // addForm에서 날린 invalidatequeries쿼리로 ui 업데이트가 안됨 resetqueries로는 됨 ?
+	}, [data]);
 
 	return (
 		<section className={style.userSupplementContainer}>
 			<CommonHeaderBox
 				titleText="복용 중인 영양제"
-				count={count}
+				count={count ? count : 0}
 				Icon={cardForm === "slim" ? ListIcon : GridIcon}
 				onClick={onChangeCardStyle}
 				className={style.header}
 			/>
 
-			<Modal>
+			<Modal
+				isOpen={isOpenSupplement}
+				onClose={onCloseSupplement}
+				toggleOpen={toggleOpenSupplement}
+				onOpen={onOpenSupplement}
+			>
 				<Modal.Trigger
 					openElement={
 						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplemenRecorddata.map((cardInfo, mySupplementId) => (
-								<CommonCardBox
-									key={mySupplementId}
-									form={cardForm}
-									onClick={() => handleCardClick(cardInfo)}
-									{...cardInfo}
-								/>
-							))}
+							{supplementInfo &&
+								supplementInfo?.map((cardInfo) => (
+									<CommonCardBox
+										key={cardInfo.id}
+										form={cardForm}
+										medicineNames={cardInfo.medicineName}
+										img={cardInfo.image?.fullPath}
+										onClick={() => handleCardClick(cardInfo)}
+										{...cardInfo}
+									/>
+								))}
 						</div>
 					}
 				/>
 
 				<Modal.Content>
-					{selectedSupplement && (
-						<SupplementModal itemId={selectedSupplement.mySupplementId} />
+					{selectedSupplement?.medicineName && (
+						<SupplementModal
+							itemId={selectedSupplement.id}
+							onClose={onCloseSupplement}
+						/>
 					)}
 				</Modal.Content>
 			</Modal>
 
-			<Modal>
+			<Modal
+				isOpen={isOpenEditSupplement}
+				onClose={onCloseEditSupplement}
+				toggleOpen={toggleOpenEditSupplement}
+				onOpen={onOpenEditSupplement}
+			>
 				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
 				<Modal.Content>
-					<SupplementEditForm
+					<SupplementAddForm
 						formInitialValues={noSupplementData}
-						onSubmit={handleSubmmit}
+						onClose={onCloseEditSupplement}
 					/>
 				</Modal.Content>
 			</Modal>
+
+			<div ref={ref} style={{ height: 20 }}>
+				{" "}
+				{!isLastPage && isFetchingNextPage && (
+					<p>영양제 정보를 불러오는 중입니다</p>
+				)}
+			</div>
 		</section>
 	);
 };

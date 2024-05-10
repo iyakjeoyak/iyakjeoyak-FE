@@ -9,7 +9,7 @@ import {
 } from "react-hook-form";
 
 import { Button } from "./Button";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import { ImgInput } from "@/components/Form/ImgInput";
 import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
@@ -23,7 +23,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 interface FormProps<T extends FieldValues> {
 	children: React.ReactNode;
-	validationSchema: yup.ObjectSchema<T>; // 폼 유효성 검사 스키마
+	validationSchema: yup.ObjectSchema<T>;
 	pageDefaultValues: DefaultValues<T>;
 	className?: string;
 	onSubmit?: (data: T) => void;
@@ -52,7 +52,7 @@ export const Form = <T extends FieldValues>({
 				onSubmit={methods.handleSubmit(onSubmit)}
 			>
 				{children}
-				<DevTool control={methods.control} />
+				{/* <DevTool control={methods.control} /> */}
 			</form>
 		</FormProvider>
 	); // 하위 컴포넌트에 useForm에서 생성된 메소드들을 제공하는 FormProvider 반환

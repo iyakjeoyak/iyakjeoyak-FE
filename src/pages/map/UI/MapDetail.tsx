@@ -1,109 +1,140 @@
 import style from "../styles/mapdetail.module.scss";
-import { motion } from "framer-motion";
-import Modal from "@/components/Modal";
-import { usePharmacy } from "../utils/mapDetailContext";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMapContext } from "../utils/mapDetailContext";
+import { Button } from "@/components/Button";
+import HeartIcon from "@/assets/icons/HeartIcon";
+import postLikedPharmacy from "@/api/map/postLikedPharmacy";
+import { hourListType } from "../mapTypes";
+import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
+import { useEffect, useState } from "react";
+import { formatHour } from "../utils/formatHour";
+import { queryClient } from "@/main";
+import { useQuery } from "@tanstack/react-query";
+import pharmacyQueryOptions from "@/api/map";
+
+const dayOfWeekMap = {
+	Mon: "월요일",
+	Tue: "화요일",
+	Wed: "수요일",
+	Thu: "목요일",
+	Fri: "금요일",
+	Sat: "토요일",
+	Sun: "일요일",
+	Hol: "공휴일",
+};
 
 const MapDetail = () => {
-	const { selectedPharmacy, showModal, setShowModal } = usePharmacy();
+	const { selectedHpid, setSelectedHpid } = useMapContext();
 
-	if (!selectedPharmacy) {
+	const { data: detailData, refetch } = useQuery({
+		...pharmacyQueryOptions.getPharmacyDetail({ hpid: selectedHpid || "" }),
+		enabled: selectedHpid !== "",
+	});
+
+	const [isLiked, setIsLiked] = useState(detailData?.liked ?? false);
+
+	useEffect(() => {
+		setIsLiked(detailData?.liked ?? false);
+	}, [detailData]);
+
+	if (selectedHpid == "") {
 		return null;
 	}
-	// console.log("왜안나와..:", showModal);
-	const toggleModal = () => {
-		// console.log("전에:", showModal);
-		setShowModal(showModal);
-		// console.log("뒤에:", showModal);
+
+	const handleClose = () => {
+		if (detailData && detailData.liked == !isLiked) {
+			postLikedPharmacy({ ...detailData, liked: isLiked }).then(() => {
+				queryClient.invalidateQueries({
+					queryKey: ["pharmacy", "likedPharmacy"],
+				});
+			});
+			refetch();
+		}
+
+		setSelectedHpid("");
+		setIsLiked(false);
+	};
+
+	const toggleLike = () => {
+		setIsLiked((prev) => !prev);
 	};
 
 	return (
-		// <AnimatePresence>
-		// 	{showModal && (
-		// 		<motion.div
-		// 			className={style.container}
-		// 			onClick={toggelModal}
-		// 			initial={{ opacity: 0 }}
-		// 			animate={{ opacity: 1 }}
-		// 			exit={{ opacity: 0 }}
-		// 			transition={{ duration: 0.3 }}
-		// 		>
-		// 			<motion.div
-		// 				className={style.element}
-		// 				onClick={handleContentClick}
-		// 				initial={{ y: 50 }}
-		// 				animate={{ y: 0 }}
-		// 				exit={{ y: 50 }}
-		// 				transition={{ duration: 0.3 }}
-		// 			>
-		// 				<div className={style.text}>{detailData.dutyName}</div>
-		// 				<div className={style.text}>주소 {detailData.dutyAddr}</div>
-		// 				<div className={style.text}>전화번호 {detailData.dutyTel1}</div>
-		// 				<div className={style.text}>
-		// 					{detailData.businessHoursList.map((item, index) => (
-		// 						<div key={index} className={style.timeBox}>
-		// 							<div className={style.timeElement}>
-		// 								{" "}
-		// 								{item.dayOfWeek} 요일
-		// 							</div>
-		// 							<div className={style.timeElement}>
-		// 								{" "}
-		// 								시간 : {item.startHour}{" "}
-		// 							</div>
-		// 							<div className={style.timeElement}> - {item.endHour} </div>
-		// 						</div>
-		// 					))}
-		// 				</div>
-		// 			</motion.div>
-		// 		</motion.div>
-		// 	)}
-		// </AnimatePresence>
+		<AnimatePresence>
+			<motion.div
+				className={style.container}
+				onClick={handleClose}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				exit={{ opacity: 0 }}
+				transition={{ duration: 0.3 }}
+			>
+				<motion.div
+					className={style.element}
+					onClick={(e) => e.stopPropagation()}
+					initial={{ y: 50 }}
+					animate={{ y: 0 }}
+					exit={{ y: 50 }}
+					transition={{ duration: 0.3 }}
+				>
+					<div className={style.header}>
+						<div className={style.title}>{detailData.dutyName}</div>
 
-		<Modal>
-			<Modal.Trigger
-				openElement={<button onClick={toggleModal}>Show Details</button>}
-			/>
-			{showModal && (
-				<Modal.Content>
-					<motion.div
-						className={style.container}
-						onClick={toggleModal}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.3 }}
-					>
-						<motion.div
-							className={style.element}
-							initial={{ y: 50 }}
-							animate={{ y: 0 }}
-							exit={{ y: 50 }}
-							transition={{ duration: 0.3 }}
+						<Button
+							// className={style.likeButton}
+							variant="greentransparent"
+							size="xs"
+							onClick={toggleLike}
+							icon={
+								isLiked ? (
+									<HeartFilledIcon width={15} height={15} />
+								) : (
+									<HeartIcon width={15} height={15} />
+								)
+							}
 						>
-							<div className={style.text}>{selectedPharmacy.dutyName}</div>
-							<div className={style.text}>주소 {selectedPharmacy.dutyAddr}</div>
-							<div className={style.text}>
-								전화번호 {selectedPharmacy.dutyTel1}
+							&nbsp; 좋아요
+						</Button>
+					</div>
+
+					<div className={style.detailBox}>
+						<div className={style.boxHead}>주소</div>
+						<div className={style.boxText}>{detailData.dutyAddr}</div>
+					</div>
+					<div className={style.detailBox}>
+						<div className={style.boxHead}>전화번호</div>
+						<div className={style.boxText}>{detailData.dutyTel1}</div>
+					</div>
+
+					<div className={style.timeBox}>
+						<div className={style.timeHeader}>운영시간</div>
+						{detailData.businessHoursList?.map((hour: hourListType) => (
+							<div key={hour.dayOfWeek} className={style.timeCotainer}>
+								<div className={style.timeElement}>
+									{" "}
+									{
+										dayOfWeekMap[hour.dayOfWeek as keyof typeof dayOfWeekMap]
+									}{" "}
+								</div>
+								&nbsp; &nbsp;
+								<div
+									className={style.timeElement}
+									style={
+										hour.startHour === "off" && hour.endHour === "off"
+											? { color: "red", fontWeight: 700 }
+											: {}
+									}
+								>
+									{hour.startHour === "off" && hour.endHour === "off"
+										? "휴무일"
+										: `${formatHour(hour.startHour)} - ${formatHour(hour.endHour)}`}
+								</div>
 							</div>
-							<div className={style.text}>
-								{selectedPharmacy.businessHoursList.map((item, index) => (
-									<div key={index} className={style.timeBox}>
-										<div className={style.timeElement}>
-											{" "}
-											{item.dayOfWeek} 요일
-										</div>
-										<div className={style.timeElement}>
-											{" "}
-											시간 : {item.startHour}{" "}
-										</div>
-										<div className={style.timeElement}> - {item.endHour} </div>
-									</div>
-								))}
-							</div>
-						</motion.div>
-					</motion.div>
-				</Modal.Content>
-			)}
-		</Modal>
+						))}
+					</div>
+				</motion.div>
+			</motion.div>
+		</AnimatePresence>
 	);
 };
 

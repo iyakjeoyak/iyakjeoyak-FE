@@ -8,6 +8,7 @@ interface TagButtonProps<T> {
 	size?: "small" | "medium";
 	backgroundColor?: "green" | "midgreen" | "lightgreen" | "white";
 	value?: number;
+	isTagSelected?: boolean;
 }
 
 const TagButton = <T,>({
@@ -16,12 +17,13 @@ const TagButton = <T,>({
 	size = "medium",
 	backgroundColor = "white",
 	value,
+	isTagSelected = false,
 }: TagButtonProps<T>) => {
 	const [selected, setSelected] = useState(false);
 	const { register, setValue, getValues } = useFormContext();
 	const sizeClass = styles[`tag-${size}`] || "";
 	const backgroundClass = styles[`background-${backgroundColor}`] || "";
-	const buttonClass = `${sizeClass} ${backgroundClass} ${selected ? styles.selected : ""}`;
+	const buttonClass = `${sizeClass} ${backgroundClass} ${isTagSelected || selected ? styles.selected : ""}`;
 
 	const handleClick = () => {
 		const currentTags = getValues(name as string) || []; // 현재 선택된 태그 배열 가져오기

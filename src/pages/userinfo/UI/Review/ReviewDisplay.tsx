@@ -4,37 +4,50 @@ import Modal from "@/components/Modal";
 import { ReviewDetailModal } from "@/pages/detail/UI";
 import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
+import formatDate from "@/utils/formatDate";
 import style from "../../style/reviewdisplay.module.scss";
-import { useModal } from "@/components/Modal/hooks/useModal";
+import useOpen from "@/hooks/useOpen";
+
+// import { DetailedReview } from "../../userInfoType";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
-	const { toggleModalOpen } = useModal();
+	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
 
 	return (
-		<Modal>
+		<Modal
+			isOpen={isOpen}
+			onClose={onClose}
+			toggleOpen={toggleOpen}
+			onOpen={onOpen}
+		>
 			<Modal.Trigger
 				openElement={
 					<div className={style.reviewContainer}>
 						{reviews.map((review) => (
 							<div
-								key={review.reviewId}
+								key={review.id}
 								className={style.reviewBox}
-								onClick={toggleModalOpen}
+								onClick={toggleOpen}
 							>
 								<div className={style.reviewHeadArea}>
-									<div className={style.supplementName}>{review.itemName}</div>
+									<div className={style.supplementName}>
+										{review.medicine.prdlst_NM}
+									</div>
 									<StarRating filledStars={4.5} size={20} />
 								</div>
 								<div className={style.reviewContents}>
-									<img
-										src={review.reviewImg[0].userImage}
-										alt="유저 제품 후기 사진"
-										className={style.reviewImg}
-									/>
-
+									{review.imageResult?.length > 0 && (
+										<img
+											src={review.imageResult?.[0].fullPath}
+											alt="유저 제품 후기 사진"
+											className={style.reviewImg}
+										/>
+									)}
 									<div className={style.reviewTextBox}>
 										<div className={style.reviewText}>{review.content}</div>
-										<div className={style.reviewDate}>{review.date} </div>
+										<div className={style.reviewDate}>
+											{formatDate(review.createdDate)}{" "}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -42,9 +55,14 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 					</div>
 				}
 			/>
-			<Modal.Content>
-				<ReviewDetailModal reviewId={1} />
-			</Modal.Content>
+			{reviews.map((review) => (
+				<Modal.Content>
+					<ReviewDetailModal
+						handleOpenConfirmDelete={onClose}
+						reviewId={review.id}
+					/>
+				</Modal.Content>
+			))}
 		</Modal>
 	);
 };

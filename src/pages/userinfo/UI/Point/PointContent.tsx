@@ -2,11 +2,11 @@ import style from "../../index.module.scss";
 import PointIcon from "@/assets/icons/PointIcon";
 
 interface UserPointInfoProps {
-	points: number;
+	points?: number;
 	onNavigate: () => void;
 }
 
-const PointContent = ({ points, onNavigate }: UserPointInfoProps) => {
+const PointContent = ({ onNavigate, points }: UserPointInfoProps) => {
 	return (
 		<section className={style.myPageContent}>
 			<section className={style.pointSection}>
@@ -16,7 +16,7 @@ const PointContent = ({ points, onNavigate }: UserPointInfoProps) => {
 				</div>
 
 				<div className={style.pointArea}>
-					<div className={style.userPoint}>{points}</div>
+					<div className={style.userPoint}>{points ? points : 0}</div>
 					<div className={style.pointDetail} onClick={onNavigate}>
 						내역 보기
 					</div>

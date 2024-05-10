@@ -1,28 +1,34 @@
-import TagCommon from "@/components/Tag";
+// import TagCommon from "@/components/Tag";
+import StarRating from "@/components/StarRating";
 import style from "../style/commoncardbox.module.scss";
 
 export interface UserCardInfoProps {
-	name?: string;
-	dosage?: string;
-	dueDate?: string;
+	medicineNames?: string;
+	expirationDate?: string;
 	memo?: string;
+	grade?: number;
 	effect?: string[];
 }
 
 const UserCardInfo = ({
-	name,
-	dueDate,
-	dosage,
+	medicineNames,
+	expirationDate,
+	grade,
 	memo,
-	effect,
 }: UserCardInfoProps) => {
 	return (
 		<div className={style.cardContent}>
-			{name && <div className={style.cardTitle}>{name}</div>}
-			{dosage && <div className={style.cardTitle}>{dosage}</div>}
-			{dueDate && <time className={style.cardDate}>{dueDate} 까지</time>}
+			{medicineNames && <div className={style.cardTitle}>{medicineNames}</div>}
+			{(grade === 0 || grade) && (
+				<div className={style.cardTitle}>
+					<StarRating filledStars={grade} />
+				</div>
+			)}
+			{expirationDate && (
+				<time className={style.cardDate}>{expirationDate} 까지</time>
+			)}
 			{memo && <p className={style.cardMemo}>{memo}</p>}
-			{effect &&
+			{/* {effect &&
 				effect.map((effectItem, index) => (
 					<TagCommon
 						key={index}
@@ -31,7 +37,7 @@ const UserCardInfo = ({
 						size="small"
 						className={style.cardTag}
 					/>
-				))}
+				))} */}
 		</div>
 	);
 };

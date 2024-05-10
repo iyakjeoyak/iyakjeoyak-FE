@@ -14,7 +14,7 @@ const useIntersect = ({
 	onIntersect,
 }: useIntersectProps) => {
 	// ref는 DOM에 대한 참조 저장
-	const ref = useRef<HTMLElement | null>(null);
+	const ref = useRef<HTMLDivElement | null>(null);
 	// observerRef는 인스턴스 관리를 위해 사용
 	const observerRef = useRef<IntersectionObserver | null>(null);
 

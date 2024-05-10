@@ -1,27 +1,60 @@
-@use "@styles/mixin" as mixins;
+@use "@styles/mixin"as mixins;
 @import "@/styles/variables.scss";
 @import "@/styles/global.scss";
 
-.genderBox {
-	display: flex;
-	gap: 20px;
+.checkWrap {
+  position: relative;
 
-	& label {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 5px;
-		margin-left: 10px;
-	}
+  .checkFlex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    button {
+      width: 30%;
+      height: 40px;
+    }
+
+    label {
+      width: 65%;
+    }
+  }
+
+
 }
 
-.tagWrap {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 20px;
+.error {
+  border: 1px solid #23cc87;
 
-	& > span {
-		width: 20%;
-	}
+}
+
+p {
+  margin-top: 10px;
+  text-align: right;
+  color: #23cc87;
+}
+
+.genderBox {
+  display: flex;
+  gap: 20px;
+
+  & label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-left: 10px;
+  }
+
+
+}
+
+.buttonStyle {
+  margin-top: 20px;
+}
+
+.count {
+  position: absolute;
+  right: 0;
+  top: 10px
 }

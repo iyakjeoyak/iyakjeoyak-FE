@@ -1,17 +1,45 @@
 import "@styles/global.scss";
-import { reviewMockData } from "../../mockData";
-import ReviewEmpty from "./ReviewEmpty";
+
 import ReviewDisplay from "./ReviewDisplay";
-import FlexBox from "@/styles/FlexBox";
+import ReviewEmpty from "./ReviewEmpty";
+import getUserReview from "@/api/useInfo/getUserReview";
+import { useEffect, useState } from "react";
+import { DetailedReview } from "../../userInfoType";
+import { showToast } from "@/utils/ToastConfig";
+import CommonHeaderBox from "../CommonHeaderBox";
+import style from "../../style/reviewhistory.module.scss";
 
-const ReviewHistory: React.FC = () => {
-	const reviews = reviewMockData.reviews || [];
+const ReviewHistory = () => {
+	const [reviews, setReviews] = useState<DetailedReview[] | null>(null);
 
-	if (reviews.length > 0) {
+	useEffect(() => {
+		const fetchReviews = async () => {
+			try {
+				const userReview = await getUserReview({ page: 0, size: 10 });
+				setReviews(userReview.data);
+			} catch (error) {
+				showToast({
+					type: "error",
+					message: "리뷰 데이터를 가져오는 중 오류가 발생했습니다.",
+				});
+			}
+		};
+
+		fetchReviews();
+	}, []);
+
+	if (reviews && reviews.length > 0) {
 		return (
-			<FlexBox>
-				<ReviewDisplay reviews={reviews} />
-			</FlexBox>
+			<section className={style.reviewWrapper}>
+				<CommonHeaderBox
+					className={style.reviewHeader}
+					titleText="내 영양제 리뷰"
+					count={reviews && reviews?.length}
+				/>
+				{reviews.map((reviewItem) => (
+					<ReviewDisplay reviews={[reviewItem]} key={reviewItem.id} />
+				))}
+			</section>
 		);
 	}
 

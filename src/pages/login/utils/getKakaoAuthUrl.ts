@@ -1,8 +1,7 @@
+import { envConfig } from "@/utils/envConfig";
+
 export const getKakaoAuthUrl = () => {
-	const restApiKey = import.meta.env.VITE_KAKAO_RESTAPI_KEY;
-	const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
-	
-	return `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUri}&response_type=code`;
+	return `https://kauth.kakao.com/oauth/authorize?client_id=${envConfig.KAKAO_RESTAPI_KEY}&redirect_uri=${envConfig.KAKAO_REDIRECT_URI}&response_type=code`;
 };
 
 export const handleKakaoLogin = () => {

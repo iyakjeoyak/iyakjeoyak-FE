@@ -2,6 +2,8 @@
 @use "@styles/variables.scss" as *;
 .starRatingContainer {
 	display: flex;
+	width: 70rem;
+	max-width: 105px;
 	align-items: center;
 	.stars {
 		display: flex;
@@ -9,7 +11,6 @@
 		width: 60rem;
 	}
 	.ratingNumber {
-		margin-left: 5rem;
 		color: $black;
 		@include mixins.sb-regular;
 	}

@@ -25,6 +25,7 @@ export interface MedicineItemType {
 	grade: number; // 리뷰 평점
 	hashtags: TagType[]; // 해시 태그 모음
 	reviewCount: number; // 후기 수
+	image: ImageType;
 }
 
 export interface MedicineDetailItemType extends MedicineItemType {
@@ -40,7 +41,12 @@ export interface MedicineDetailItemType extends MedicineItemType {
 export interface ReviewWriterType {
 	userId: number;
 	nickname: string;
-	image: null;
+	image: ImageType;
+}
+
+export interface ImageType {
+	id: number;
+	fullPath: string;
 }
 export interface ReviewItemType {
 	id: number;
@@ -52,4 +58,6 @@ export interface ReviewItemType {
 	createdDate: string;
 	modifiedDate: string;
 	hashtagResult: TagType[];
+	imageResult: ImageType[];
+	isOwner: boolean;
 }
