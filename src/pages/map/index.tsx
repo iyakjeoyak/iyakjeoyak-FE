@@ -7,8 +7,6 @@ import { PathButton } from "@/components/PathButton/PathButton";
 import { useLocation } from "react-router-dom";
 import { LikedPharmacy } from "./UI";
 import style from "./styles/maproot.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import pharmacyQueryOptions from "@/api/map";
 
 const PharmacyMap = () => {
 	const location = useLocation();

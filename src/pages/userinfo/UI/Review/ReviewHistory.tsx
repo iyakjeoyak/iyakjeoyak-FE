@@ -17,7 +17,6 @@ const ReviewHistory = () => {
 			try {
 				const userReview = await getUserReview({ page: 0, size: 10 });
 				setReviews(userReview.data);
-				console.log(reviews);
 			} catch (error) {
 				showToast({
 					type: "error",

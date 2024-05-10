@@ -14,7 +14,7 @@ const LikedItem = () => {
 	useEffect(() => {
 		const fetchItems = async () => {
 			try {
-				const likedData = await getLikedSupplement({ page: 0, size: 10 });
+				const likedData = await getLikedSupplement({ page: 0, size: 20 });
 				setLikedItem(likedData);
 			} catch (error) {
 				showToast({
@@ -24,7 +24,6 @@ const LikedItem = () => {
 			}
 		};
 		fetchItems();
-		console.log(likedItem);
 	}, []);
 
 	return (

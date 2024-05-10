@@ -68,7 +68,7 @@ export function SignUpTest() {
 		}
 	};
 	const gender = watch("gender");
-	console.log(gender);
+
 	return (
 		<ControlForm onSubmit={handleSubmit(onSubmit)}>
 			{/* <ControlForm.ImgInput name="profileImage" /> */}

@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
 import { KeywordResultItemType } from "@/pages/main";
 import { useMutation } from "@tanstack/react-query";
-import patchUserSupplement from "@/api/useInfo/patchUserSupplement";
+import postUserSupplement from "@/api/useInfo/postUserSupplement";
 import { showToast } from "@/utils/ToastConfig";
 import getSearchedSupplement, {
 	SupplementProduct,
 } from "@/api/useInfo/getSearchedSupplement";
+import { queryClient } from "@/main";
 
 const supplementValidationSchema = yup.object().shape({
 	medicineName: yup.string().required("영양제 이름을 작성해주세요."),
@@ -30,7 +31,7 @@ interface SupplementEditFormProps {
 	onClose: () => void;
 }
 
-const SupplementEditForm = ({
+const SupplementAddForm = ({
 	formInitialValues,
 	onClose,
 }: SupplementEditFormProps) => {
@@ -43,15 +44,22 @@ const SupplementEditForm = ({
 	const [searchData, setSearchData] = useState<SupplementProduct | null>(null);
 
 	const { mutate } = useMutation({
-		mutationFn: (formdata: FormData): Promise<any> => {
-			if (typeof formInitialValues.id === "number") {
-				return patchUserSupplement(formInitialValues.id, formdata);
-			}
-			return Promise.reject("영양제 정보 id가 적절하지 않습니다.");
+		mutationFn: postUserSupplement,
+		onSuccess: () => {
+			queryClient.resetQueries({ queryKey: ["userInfo", "storage"] });
+			showToast({
+				type: "success",
+				message: "영양제가 성공적으로 추가되었습니다.",
+			});
+			onClose();
+		},
+		onError: () => {
+			showToast({
+				type: "error",
+				message: "영양제 정보가 정상적으로 추가되지 않았습니다.",
+			});
 		},
 	});
-
-	useEffect(() => {}, [medicineName, searchData]);
 
 	const handleKeywordCompletedClick = async (keyword: string) => {
 		try {
@@ -60,9 +68,11 @@ const SupplementEditForm = ({
 			if (supplementDetails) {
 				supplementDetails.map((supplementDetail) => {
 					setMedicineName(supplementDetail.prdlst_NM);
-
 					setSearchData(supplementDetail);
-					setKeywordSearchResult([]);
+
+					if (searchData) {
+						setKeywordSearchResult([]);
+					}
 				});
 			} else {
 				showToast({
@@ -97,7 +107,7 @@ const SupplementEditForm = ({
 			formData.set("medicine", searchData.bssh_NM);
 		}
 
-		const userStorageEditPayload = {
+		const userStorageCreatePayload = {
 			...josnData,
 			medicineName: medicineName,
 			medicine: searchData ? searchData.bssh_NM : null,
@@ -105,26 +115,15 @@ const SupplementEditForm = ({
 		};
 
 		formData.append(
-			"userStorageEditPayload",
-			new Blob([JSON.stringify(userStorageEditPayload)], {
+			"userStorageCreatePayload",
+			new Blob([JSON.stringify(userStorageCreatePayload)], {
 				type: "application/json",
 			}),
 		);
 
-		formData.append("imgFile", image || "");
+		formData.append("image", image || "");
 
-		mutate(formData, {
-			onSuccess: () => {
-				showToast({ type: "success", message: "성공적으로 작성되었습니다." });
-				onClose();
-			},
-			onError: () => {
-				showToast({
-					type: "error",
-					message: "내 영양제 정보가 정상적으로 수정되지 않았습니다.",
-				});
-			},
-		});
+		mutate(formData);
 	};
 
 	return (
@@ -133,12 +132,9 @@ const SupplementEditForm = ({
 			pageDefaultValues={formInitialValues}
 			validationSchema={supplementValidationSchema}
 		>
-			<div>영양제 편집</div>
+			<div>영양제 추가</div>
 
-			<Form.ImgInput
-				name="imgFile"
-				initialImage={searchData?.image?.fullPath}
-			/>
+			<Form.ImgInput name="image" initialImage={searchData?.image?.fullPath} />
 			<SearchBar>
 				<SearchBar.SupplementKeywordInput
 					placeholder="검색어를 입력해주세요"
@@ -180,4 +176,4 @@ const SupplementEditForm = ({
 	);
 };
 
-export default SupplementEditForm;
+export default SupplementAddForm;

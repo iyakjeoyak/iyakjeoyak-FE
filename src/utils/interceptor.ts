@@ -44,19 +44,6 @@ export const rejectInterceptor = (
 
 	// 토큰 만료 시
 	if (status === 401) {
-		// if (authData.message && authData.message === "만료된 토큰입니다.") {
-		// 	// 토큰 리프레시 로직
-		// 	return handleTokenRefresh(error.config);
-		// } else {
-		// 	// 로그아웃 처리
-		// 	// logout();
-		// 	showToast({
-		// 		type: "error",
-		// 		message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
-		// 	});
-		// 	console.log("401");
-		// 	return Promise.reject(error);
-		// }
 		return handleTokenRefresh(error.config);
 	}
 
@@ -94,7 +81,6 @@ async function handleTokenRefresh(
 			);
 			if (tokenRefreshResult.status === 200) {
 				const accessToken = tokenRefreshResult.headers["authorization"];
-				console.log("accessToken", accessToken);
 				if (!accessToken) {
 					showToast({
 						type: "error",
@@ -104,7 +90,6 @@ async function handleTokenRefresh(
 				}
 
 				// 로컬 스토리지에 access 갱신
-				// const token = accessToken.startsWith("Bearer ");
 				setAccessToken(accessToken);
 
 				// 가져온 응답으로 헤더 갱신

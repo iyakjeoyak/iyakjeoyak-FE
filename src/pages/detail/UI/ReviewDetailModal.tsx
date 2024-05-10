@@ -94,13 +94,7 @@ export default function ReviewDetailModal({
 							}}
 						/>
 					</div>
-					<IconTag
-						icon={<FaShare />}
-						text="신고하기"
-						onClick={() => {
-							console.log("얍");
-						}}
-					/>
+					<IconTag icon={<FaShare />} text="신고하기" onClick={() => {}} />
 				</div>
 			)}
 			{isOwner && (

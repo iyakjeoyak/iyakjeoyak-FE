@@ -1,4 +1,5 @@
 import getPharmacyData from "@/api/map/getPharmacyData";
+import { showToast } from "@/utils/ToastConfig";
 
 export const setGelocationMap = async (
 	latitude: number,
@@ -26,7 +27,7 @@ export const setGelocationMap = async (
 		if (initialResponse && initialResponse.data) {
 			onDataLoaded(newMap, initialResponse);
 		} else {
-			console.log("약국 데이터를 찾을 수 없습니다.");
+			showToast({ type: "error", message: "약국 데이터를 찾을 수 없습니다." });
 		}
 
 		let dragTimeout: NodeJS.Timeout | undefined;
@@ -49,11 +50,14 @@ export const setGelocationMap = async (
 				if (updatedResponse && updatedResponse.data) {
 					onDataLoaded(newMap, updatedResponse);
 				} else {
-					console.log("드래그 후 약국 데이터를 찾을 수 없습니다.");
+					showToast({
+						type: "error",
+						message: "드래그 후 약국을 찾을 수 없습니다.",
+					});
 				}
 			}, 1000);
 		});
 	} else {
-		console.log("맵을 찾을 수 없습니다.");
+		showToast({ type: "error", message: "맵을 찾을 수 없습니다." });
 	}
 };

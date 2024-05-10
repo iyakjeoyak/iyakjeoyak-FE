@@ -1,15 +1,12 @@
 import style from "../../index.module.scss";
 import PointIcon from "@/assets/icons/PointIcon";
-import { useUserContext } from "../../utils/userContext";
 
 interface UserPointInfoProps {
+	points?: number;
 	onNavigate: () => void;
 }
 
-const PointContent = ({ onNavigate }: UserPointInfoProps) => {
-	const { userData } = useUserContext();
-	const points = userData?.point;
-
+const PointContent = ({ onNavigate, points }: UserPointInfoProps) => {
 	return (
 		<section className={style.myPageContent}>
 			<section className={style.pointSection}>

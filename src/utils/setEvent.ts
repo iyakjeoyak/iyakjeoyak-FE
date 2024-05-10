@@ -18,7 +18,6 @@ export const Events: ComponentEvents = {
 	Button: {
 		click: (e: React.MouseEvent<HTMLButtonElement>) => {
 			if (cancelEvent.Button.click) return;
-			console.log("button clicked", e);
 		},
 	},
 };

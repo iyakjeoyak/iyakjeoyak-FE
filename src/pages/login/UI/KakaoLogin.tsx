@@ -21,6 +21,5 @@ export const KakaoLogin = () => {
 		toast.success("로그인이 완료되었습니다.", { autoClose: 2000 });
 		navigate("/home");
 	}
-	console.log(data);
 	return <>Loading</>;
 };

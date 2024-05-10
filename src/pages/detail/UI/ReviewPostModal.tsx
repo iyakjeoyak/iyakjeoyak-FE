@@ -73,8 +73,6 @@ export default function ReviewPostModal({
 	};
 
 	const onSubmit = ({ title, tagList, content, star }: PostReviewBody) => {
-		console.log("제출 시작");
-
 		if (reviewId) {
 			const body = {
 				title,

@@ -11,24 +11,24 @@ import userInfoQueryOptions from "@api/useInfo/index";
 const UserInfo = () => {
 	const navigate = useNavigate();
 
-	const { data } = useQuery({
+	const { data: userData } = useQuery({
 		...userInfoQueryOptions.getUserInfo(),
 	});
 
-	const userData = data?.userResult;
-
-	console.log(userData);
 	const goToPointDetail = () => {
 		navigate(`/userinfo/point`);
 	};
 
 	return (
 		<section className={style.mypageContainer}>
-			<UserInfoBox userData={data?.userResult} />
+			<UserInfoBox userData={userData?.userResult} />
 			<FlexBox direction="column">
-				<PointContent onNavigate={goToPointDetail} />
-				<Review review={data?.latestReviews} />
-				<Supplement supplement={data?.favoriteSupplements} />
+				<PointContent
+					onNavigate={goToPointDetail}
+					points={userData?.userResult.point}
+				/>
+				<Review review={userData?.latestReviews} />
+				<Supplement supplement={userData?.favoriteSupplements} />
 			</FlexBox>
 		</section>
 	);

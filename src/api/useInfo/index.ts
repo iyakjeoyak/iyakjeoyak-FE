@@ -59,10 +59,10 @@ const userInfoQueryOptions = {
 			},
 		}),
 
-	getUserSupplement: ({ page, size }: { page: number; size: number }) =>
+	getUserSupplement: ({ page }: { page: number }) =>
 		queryOptions({
 			queryKey: ["userInfo", "storage"],
-			queryFn: () => getUserSupplement({ page, size }),
+			queryFn: () => getUserSupplement({ page }),
 			initialData: {
 				data: [],
 				number: 0,
