@@ -4,7 +4,10 @@
 
 100세 시대를 넘어 150세 시대를 바라보는 요즘 너무나도 중요시되는 현대인의 건강관리 필수품인 영양제를 관리하기 위한 ‘이약저약’ 웹 서비스
 
-🔗 서비스 링크 :
+🔗 서비스 링크 : http://ec2-54-180-121-206.ap-northeast-2.compute.amazonaws.com/
+
+![image](https://github.com/iyakjeoyak/iyakjeoyak-FE/assets/75254185/9a44d935-3300-460d-be90-0736a871c620)
+
 
 ## 주요 기능 및 특징
 
@@ -26,11 +29,12 @@ MD 선정 영양제, 베스트 리뷰를 통해 영양제를 추천받고, 공�
 
 ## IA
 
--
+![image](https://github.com/iyakjeoyak/iyakjeoyak-FE/assets/75254185/fe038de2-de2b-4a41-9e04-09db37c6fce7)
 
-## Wiki
 
--
+## Infra
+
+![image](https://github.com/iyakjeoyak/iyakjeoyak-FE/assets/75254185/229d5b28-ca66-4ca4-ac0e-0121ebe10dc4)
 
 ## Period
 
@@ -49,19 +53,8 @@ MD 선정 영양제, 베스트 리뷰를 통해 영양제를 추천받고, 공�
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=ffffff)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=ffffff)
 
-## Detail
-
--
-
 ## Developers
-
-|  이름  |     역할     |
-| :----: | :----------: |
-| 김준혁 | 팀장/ 백엔드 |
-| 박웅서 |    백엔드    |
-| 나승준 |    백엔드    |
-| 백민혁 |  프론트엔드  |
-| 배현진 |  프론트엔드  |
-| 정아현 |  프론트엔드  |
-
-http commit test
+| 백민혁 | 배현진 | 배현진 |
+| :----: | :----: | :---: |
+| <img src="https://avatars.githubusercontent.com/hyunjinb394" alt="profile" width="180" height="180"> | <img src="https://avatars.githubusercontent.com/BaekMinHyeok" alt="profile" width="180" height="180"> |  <img src="https://avatars.githubusercontent.com/a-honey" alt="profile" width="180" height="180"> |
+| [@hyunjinb394](https://github.com/hyunjinb394) | [@BaekMinHyeok](https://github.com/BaekMinHyeok) | [@a-honey](https://github.com/a-honey) |
