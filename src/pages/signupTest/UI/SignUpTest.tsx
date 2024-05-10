@@ -6,7 +6,6 @@ import postSignUp from "@/api/user/postSignUp";
 import styles from "@/pages/signup/styles/SignUp.module.scss";
 import { ControlForm } from "@/components/ControlForm";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import {
 	getDuplicationEmail,
 	getDuplicationNickName,
@@ -15,15 +14,13 @@ import Container from "@/components/ControlForm/Container";
 
 export function SignUpTest() {
 	const navigate = useNavigate();
-	const { register, handleSubmit, getValues, watch, control } =
-		useForm<SignUpFormType>({
-			mode: "onSubmit",
-		});
+	const { register, handleSubmit, getValues } = useForm<SignUpFormType>({
+		mode: "onSubmit",
+	});
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
 
-	// const { data: tags } = useQuery(commonQueryOptions.getHashtags());
 	const onSubmit = (data: SignUpFormType) => {
 		const { profileImage, ...jsonData } = data;
 
@@ -67,11 +64,10 @@ export function SignUpTest() {
 			toast.error("이미 사용 중인 닉네임 입니다.", { autoClose: 2000 });
 		}
 	};
-	const gender = watch("gender");
 
+	// const gender = watch("gender");
 	return (
 		<ControlForm onSubmit={handleSubmit(onSubmit)}>
-			{/* <ControlForm.ImgInput name="profileImage" /> */}
 			<ControlForm.Input
 				title="이메일"
 				placeholder="이메일을 입력해주세요."
@@ -138,7 +134,6 @@ export function SignUpTest() {
 			/>
 
 			<ControlForm.Button text="확인" type="submit" variant="dark" />
-			<DevTool control={control} />
 		</ControlForm>
 	);
 }

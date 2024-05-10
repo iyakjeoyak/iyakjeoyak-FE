@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { ControlForm } from "@/components/ControlForm";
 import { useForm, useWatch } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import {
 	getDuplicationEmail,
 	getDuplicationNickName,
@@ -238,7 +238,7 @@ export function SignUp() {
 					variant="dark"
 					className={styles.buttonStyle}
 				/>
-				<DevTool control={control} />
+				{/* <DevTool control={control} /> */}
 			</ControlForm>
 		</>
 	);
