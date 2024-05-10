@@ -1,11 +1,12 @@
 import { queryOptions } from "@tanstack/react-query";
-import getUserInfo from "./getUserInfo";
 import getUserPoints from "./getUserPoints";
 import getUserReview from "./getUserReview";
-import getUserSupplement from "./getUserSupplement";
 import getSupplementDetail from "./getSupplementDetail";
 import getLikedSupplement from "./getLikedSupplement";
 import getSearchedSupplement from "./getSearchedSupplement";
+import getUserInfo from "./getUserInfo";
+import getUserSupplement from "./getUserSupplement";
+import getUserSupplementMain from "./getUserSupplementMain";
 
 const userInfoQueryOptions = {
 	getUserInfo: () =>
@@ -35,6 +36,12 @@ const userInfoQueryOptions = {
 		queryOptions({
 			queryKey: ["userInfo", "userReview"],
 			queryFn: () => getUserReview({ page, size }),
+		}),
+
+	getUserSupplementMain: ({ size, page }: { size: number; page: number }) =>
+		queryOptions({
+			queryKey: ["user", "all"],
+			queryFn: () => getUserSupplementMain({ size, page }),
 			initialData: {
 				data: [],
 				number: 0,

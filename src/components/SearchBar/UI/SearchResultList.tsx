@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { KeywordResultItemType } from "@/pages/main";
+import qs from "qs";
 import styles from "../styles/SearchResultList.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelect } from "../hooks/useSelect";
@@ -20,11 +21,28 @@ export default function SearchResultList({
 	const [currentActiveKeyword, setCurrentActiveKeyword] =
 		useState<KeywordResultItemType>({ id: 0, name: "" });
 
+	// TODO: 밖으로 빼기,,가 가능한가
 	const handleSearchKeywordSelected = (
 		selectedKeyword: KeywordResultItemType,
 	) => {
+		const currentQueryString = location.search;
+		const currentQueryParams = qs.parse(currentQueryString, {
+			ignoreQueryPrefix: true,
+		});
+
+		const updatedQueryParams = {
+			...currentQueryParams,
+			keyword: selectedKeyword.name,
+		};
+
+		const newQueryString = qs.stringify(updatedQueryParams, {
+			addQueryPrefix: true,
+		});
+
 		handleCurrentKeyword({ id: 0, name: "" });
-		navigate(`/search?keyword=${selectedKeyword.name}`);
+		navigate(
+			`${location.pathname === "/home" ? "/search" : location.pathname}${newQueryString}`,
+		);
 	};
 
 	const handleMouseEnter = (keyword: KeywordResultItemType) => {

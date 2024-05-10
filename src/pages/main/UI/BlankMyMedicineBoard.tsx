@@ -8,7 +8,7 @@ export default function BlankMyMedicineBoard() {
 
 	return (
 		<div className={styles.container}>
-			<MyMedicineItem isBlank />
+			<MyMedicineItem />
 			<div className={styles["content-container"]}>
 				<div className={styles.icons}>
 					<XIcon width={34} height={32} />

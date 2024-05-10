@@ -3,6 +3,7 @@ import { BestReviewBoard, CuratingBoard, MyMedicineBoard } from "./UI";
 import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
 import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import qs from "qs";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -19,7 +20,21 @@ export default function Main() {
 	>([]);
 
 	const handleKeywordCompletedClick = (keyword: string) => {
-		navigate(`/search?keyword=${keyword}`);
+		const currentQueryString = location.search;
+		const currentQueryParams = qs.parse(currentQueryString, {
+			ignoreQueryPrefix: true,
+		});
+
+		const updatedQueryParams = {
+			...currentQueryParams,
+			keyword,
+		};
+
+		const newQueryString = qs.stringify(updatedQueryParams, {
+			addQueryPrefix: true,
+		});
+
+		navigate(`/search${newQueryString}`);
 	};
 
 	const handleGetAutoCompleteResults = async (keyword: string) => {

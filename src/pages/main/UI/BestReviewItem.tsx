@@ -28,8 +28,8 @@ export default function BestReviewItem({
 				{review?.hashtagResult[0]?.name && (
 					<TagCommon
 						text={review.hashtagResult[0].name}
-						size="medium"
-						backgroundColor={"green"}
+						size="small"
+						backgroundColor="green"
 					/>
 				)}
 			</div>

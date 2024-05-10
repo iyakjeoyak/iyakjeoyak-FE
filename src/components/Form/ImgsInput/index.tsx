@@ -1,4 +1,5 @@
 import Container from "../Container";
+import { ImageType } from "@/types";
 import { showToast } from "@/utils/ToastConfig";
 import styles from "./index.module.scss";
 import { useFormContext } from "react-hook-form";
@@ -6,7 +7,15 @@ import { useState } from "react";
 
 const MAX_IMG_LENGTH = 4;
 
-const ImgsInput = ({ addImgFile }: { addImgFile: (img: File[]) => void }) => {
+const ImgsInput = ({
+	imageResult,
+	addImgFile,
+	onDelete,
+}: {
+	onDelete?: (id: number) => void;
+	imageResult?: ImageType[];
+	addImgFile: (img: File[]) => void;
+}) => {
 	const { setValue } = useFormContext();
 	const [imgs, setImgs] = useState<string[]>([]);
 
@@ -46,6 +55,19 @@ const ImgsInput = ({ addImgFile }: { addImgFile: (img: File[]) => void }) => {
 					/>
 					<label htmlFor="input-file">+</label>
 				</div>
+				{onDelete &&
+					imageResult?.map((img) => (
+						<div className={styles["img-container"]}>
+							<img src={img.fullPath} key={img.id} />
+							<button
+								onClick={() => {
+									onDelete(img.id);
+								}}
+							>
+								X
+							</button>
+						</div>
+					))}
 				{imgs.map((img, index) => (
 					<img src={img} key={index} />
 				))}

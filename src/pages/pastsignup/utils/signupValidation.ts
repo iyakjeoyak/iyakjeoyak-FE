@@ -16,7 +16,7 @@ export const signUpDefault = {
 	confirmPassword: "", // 비밀번호 검사
 	nickname: "", // 닉네임
 	gender: "", // 성별
-	age: 20, // 나이
+	age: 0, // 나이
 	userHashtagList: [], //태그
 };
 
