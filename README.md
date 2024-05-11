@@ -54,7 +54,7 @@ MD 선정 영양제, 베스트 리뷰를 통해 영양제를 추천받고, 공�
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=ffffff)
 
 ## Developers
-| 백민혁 | 배현진 | 배현진 |
+| 배현진 | 백민혁 | 정아현 |
 | :----: | :----: | :---: |
 | <img src="https://avatars.githubusercontent.com/hyunjinb394" alt="profile" width="180" height="180"> | <img src="https://avatars.githubusercontent.com/BaekMinHyeok" alt="profile" width="180" height="180"> |  <img src="https://avatars.githubusercontent.com/a-honey" alt="profile" width="180" height="180"> |
 | [@hyunjinb394](https://github.com/hyunjinb394) | [@BaekMinHyeok](https://github.com/BaekMinHyeok) | [@a-honey](https://github.com/a-honey) |
