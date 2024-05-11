@@ -15,12 +15,12 @@
 	bottom: 0;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
-	min-height: 250px;
+	min-height: 230px;
 	background-color: $main-lightgreen;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	padding: 20px;
+	padding: 10px 20px;
 	cursor: pointer;
 	.title-container {
 		display: flex;
