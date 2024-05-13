@@ -36,7 +36,7 @@ export default async function getSearchedSupplement(
 	size: number = 4,
 ) {
 	const response = await axios.get<ResponsePagenation<SupplementProduct>>(
-		`/medicine/query?keyword=${keyword}&page=${page}&size=${size}`,
+		`/medicines/query?keyword=${keyword}&page=${page}&size=${size}`,
 	);
 	return response.data.data;
 }

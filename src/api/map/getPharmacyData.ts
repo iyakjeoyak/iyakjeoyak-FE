@@ -19,7 +19,7 @@ export default async function getPharmacyData(
 	size?: number,
 ) {
 	const response = await axios.get<PharmacyDataType>(
-		`/map?lat=${lat}&lon=${lon}&size=${size}`,
+		`/maps?lat=${lat}&lon=${lon}&size=${size}`,
 	);
 	return response.data;
 }

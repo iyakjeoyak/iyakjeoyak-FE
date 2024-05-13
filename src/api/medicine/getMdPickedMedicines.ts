@@ -4,7 +4,7 @@ import axios from "../axiosConfig";
 export default async function getMdPickedMedicines() {
 	const response =
 		await axios.get<{ ranking: number; medicine: MedicineDetailItemType }[]>(
-			`/medicine/week`,
+			`/medicines/week`,
 		);
 	return response.data;
 }

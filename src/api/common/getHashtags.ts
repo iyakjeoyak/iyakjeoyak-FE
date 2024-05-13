@@ -18,6 +18,6 @@ interface HashtagsType {
 */
 
 export default async function getHashtags() {
-	const response = await axios.get<HashtagsType[]>(`/hashtag`);
+	const response = await axios.get<HashtagsType[]>(`/hashtags`);
 	return response.data;
 }

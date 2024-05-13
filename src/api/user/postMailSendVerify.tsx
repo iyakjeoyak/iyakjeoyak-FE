@@ -5,6 +5,6 @@ export default async function postMailSendVerify({
 }: {
 	username: string;
 }) {
-	const response = await axios.post("/mail/send/verify", { email: username });
+	const response = await axios.post("/mails/send/verify", { email: username });
 	return response.data;
 }

@@ -7,7 +7,7 @@ export default async function getMedicineById({
 	medicineId: number;
 }) {
 	const response = await axios.get<MedicineDetailItemType>(
-		`/medicine/${medicineId}`,
+		`/medicines/${medicineId}`,
 	);
 	return response.data;
 }
