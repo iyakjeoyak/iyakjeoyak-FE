@@ -24,7 +24,7 @@ interface PharmacyLikedProps {
 
 export default async function getLikedPharmacy(page: number, size: number) {
 	const response = await axios.get<PharmacyLikedProps>(
-		`/pharmacy?page=${page}&size=${size}`,
+		`/pharmacies?page=${page}&size=${size}`,
 	);
 	return response.data;
 }

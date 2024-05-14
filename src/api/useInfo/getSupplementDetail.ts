@@ -46,7 +46,7 @@ export default async function getSupplementDetail({
 	storageId: number;
 }) {
 	const response = await axios.get<DetailSupplementArgs>(
-		`/storage/${storageId}`,
+		`/storages/${storageId}`,
 	);
 
 	return response.data;

@@ -6,6 +6,6 @@ export default async function getReviewById({
 }: {
 	reviewId: number;
 }) {
-	const response = await axios.get<ReviewItemType>(`/review/${reviewId}`);
+	const response = await axios.get<ReviewItemType>(`/reviews/${reviewId}`);
 	return response.data;
 }

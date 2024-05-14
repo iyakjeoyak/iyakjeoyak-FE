@@ -7,7 +7,7 @@ export default async function getAutoCompleteResult({
 	keyword: string;
 }) {
 	const response = await axios.get<KeywordResultItemType[]>(
-		`/auto-complete?keyword=${keyword}`,
+		`/auto-completes?keyword=${keyword}`,
 	);
 
 	return response.data;

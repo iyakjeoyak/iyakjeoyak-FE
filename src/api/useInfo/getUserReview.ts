@@ -9,7 +9,7 @@ export default async function getUserReview({
 	size: number;
 }) {
 	const response = await axios.get<ReviewData>(
-		`/my/review?page=${page}&size=${size}`,
+		`/my/reviews?page=${page}&size=${size}`,
 	);
 	return response.data;
 }

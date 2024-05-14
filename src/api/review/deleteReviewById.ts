@@ -5,6 +5,6 @@ export default async function deleteReviewById({
 }: {
 	reviewId: number;
 }) {
-	const response = await axios.delete(`/review/${reviewId}`);
+	const response = await axios.delete(`/reviews/${reviewId}`);
 	return response.data;
 }

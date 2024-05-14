@@ -14,6 +14,6 @@ export default async function patchReviewById({
 	reviewId: number;
 	body: ReviewPatchBodyType;
 }) {
-	const response = await axios.patch(`/review/${reviewId}`, body);
+	const response = await axios.patch(`/reviews/${reviewId}`, body);
 	return response.data;
 }

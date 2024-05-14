@@ -32,7 +32,7 @@ export default async function getLikedSupplement({
 	size: number;
 }) {
 	const response = await axios.get<LikedSupplmentArgs>(
-		`/heart/medicine?page=${page}&size=${size}`,
+		`/medicine-hearts?page=${page}&size=${size}`,
 	);
 
 	return response.data;

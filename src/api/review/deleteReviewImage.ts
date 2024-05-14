@@ -8,7 +8,7 @@ export default async function deleteReviewImage({
 	imageId: number;
 }) {
 	const response = await axios.delete(
-		`/review/image?reviewId=${reviewId}&imageId=${imageId}`,
+		`/reviews/image?reviewId=${reviewId}&imageId=${imageId}`,
 	);
 	return response.data;
 }
