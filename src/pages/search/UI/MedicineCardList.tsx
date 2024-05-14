@@ -92,7 +92,7 @@ const getMedicinesByQuery = async ({
 	pageParam?: { queryParams: string };
 }) => {
 	const res = await axios.get<ResponsePagenation<MedicineItemType>>(
-		`/medicine/query${pageParam?.queryParams}`,
+		`/medicines/query${pageParam?.queryParams}`,
 	);
 	return res.data;
 };
