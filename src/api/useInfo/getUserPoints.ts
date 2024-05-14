@@ -9,7 +9,7 @@ export default async function getUserPoints({
 	size: number;
 }) {
 	const response = await axios.get<PointData>(
-		`/point?page=${page}&size=${size}`,
+		`/points?page=${page}&size=${size}`,
 	);
 	return response.data;
 }

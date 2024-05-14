@@ -30,6 +30,6 @@ interface PostMedicineType {
 }
 
 export default async function postMedicine(body: PostMedicineType) {
-	const response = await axios.post(`/medicine`, { body });
+	const response = await axios.post(`/medicines`, { body });
 	return response.data;
 }

@@ -7,7 +7,7 @@ export default async function postMailVerify({
 	username: string;
 	authCode: string;
 }) {
-	const response = await axios.post("/mail/verify", {
+	const response = await axios.post("/mails/verify", {
 		email: username,
 		authCode: authCode,
 	});

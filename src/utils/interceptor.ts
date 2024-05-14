@@ -75,10 +75,9 @@ async function handleTokenRefresh(
 		// /user/createAccessByRefresh
 		const refreshToken = getRefreshToken();
 		if (refreshToken) {
-			const tokenRefreshResult = await axios.post(
-				"/user/createAccessByRefresh",
-				{ refreshToken: refreshToken },
-			);
+			const tokenRefreshResult = await axios.post("/users/access-token", {
+				refreshToken: refreshToken,
+			});
 			if (tokenRefreshResult.status === 200) {
 				const accessToken = tokenRefreshResult.headers["authorization"];
 				if (!accessToken) {

@@ -6,6 +6,6 @@ interface CategoriesType {
 }
 
 export default async function getCategories() {
-	const response = await axios.get<CategoriesType[]>(`/category`);
+	const response = await axios.get<CategoriesType[]>(`/categories`);
 	return response.data;
 }

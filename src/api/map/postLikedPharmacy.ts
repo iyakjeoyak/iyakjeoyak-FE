@@ -4,6 +4,6 @@ import { PharmacyDetailType } from "@pages/map/mapTypes";
 export default async function postLikedPharmacy(
 	likedPharmacy: PharmacyDetailType,
 ) {
-	const request = await axios.post(`/pharmacy`, likedPharmacy);
+	const request = await axios.post(`/pharmacies`, likedPharmacy);
 	return request.data;
 }

@@ -8,7 +8,7 @@ export default async function postMoreReviewImage({
 	reviewId: number;
 }) {
 	const response = await axios.post(
-		`/review/image?reviewId=${reviewId}`,
+		`/reviews/image?reviewId=${reviewId}`,
 		body,
 		{
 			headers: {

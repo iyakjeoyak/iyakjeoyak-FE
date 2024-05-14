@@ -4,7 +4,7 @@ export default async function patchUserSupplement(
 	storageId: number,
 	userSupplement: FormData,
 ) {
-	const response = await axios.patch(`/storage/${storageId}`, userSupplement, {
+	const response = await axios.patch(`/storages/${storageId}`, userSupplement, {
 		headers: {
 			"Content-Type": "multipart/form-data",
 		},

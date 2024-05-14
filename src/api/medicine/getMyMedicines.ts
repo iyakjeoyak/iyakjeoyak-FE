@@ -9,6 +9,6 @@ export default async function getMedicines(page: number = 0, size: number = 4) {
 			medicineName: string;
 			expirationDate: string;
 		}>
-	>(`/storage?page=${page}&size=${size}`);
+	>(`/storages?page=${page}&size=${size}`);
 	return response.data.data;
 }
