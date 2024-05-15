@@ -14,8 +14,8 @@ import { queryClient } from "@/main";
 import stopEvent from "@/utils/stopEvent";
 import styles from "../styles/ReviewBoardItem.module.scss";
 import { useMutation } from "@tanstack/react-query";
-import useOpen from "@/hooks/useOpen";
 import { useState } from "react";
+import useToggle from "@/hooks/useToggle";
 
 export default function ReviewBoardItem({
 	reviewItem,
@@ -23,7 +23,7 @@ export default function ReviewBoardItem({
 	reviewItem: ReviewItemType;
 }) {
 	const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
 	const {
 		id: reviewId,

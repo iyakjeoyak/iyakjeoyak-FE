@@ -11,8 +11,8 @@ import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import styles from "../styles/ReviewPostModal.module.scss";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
-import useOpen from "@/hooks/useOpen";
 import { useState } from "react";
+import useToggle from "@/hooks/useToggle";
 
 export interface PostReviewBody {
 	title: string;
@@ -33,7 +33,7 @@ export default function ReviewPostModal() {
 
 	const { data: tags } = useQuery(ectQueryOptions.getHashtags());
 	const [imgFiles, setImageFiles] = useState<File[]>([]);
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
 	const { mutate: postReviewMutation } = useMutation({
 		mutationFn: postReview,

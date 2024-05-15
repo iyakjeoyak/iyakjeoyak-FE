@@ -1,19 +1,20 @@
 import "@styles/global.scss";
 
 import { useEffect, useState } from "react";
+
 import CommonCardBox from "../CommonCardBox";
 import CommonHeaderBox from "../CommonHeaderBox";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
 import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import { ShortSupplementInfo } from "../../userInfoType";
-import SupplementModal from "./SupplementModal";
-import style from "../../style/supplementhistory.module.scss";
-import useOpen from "@/hooks/useOpen";
 import SupplementAddForm from "./SupplementAddForm";
+import SupplementModal from "./SupplementModal";
+import getUserSupplement from "@/api/useInfo/getUserSupplement";
+import style from "../../style/supplementhistory.module.scss";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useIntersect from "@/hooks/useIntersect";
-import getUserSupplement from "@/api/useInfo/getUserSupplement";
+import useToggle from "@/hooks/useToggle";
 
 const noSupplementData = {
 	medicineId: 0,
@@ -29,13 +30,13 @@ const SupplementHistory = () => {
 		onClose: onCloseSupplement,
 		onOpen: onOpenSupplement,
 		toggleOpen: toggleOpenSupplement,
-	} = useOpen();
+	} = useToggle();
 	const {
 		isOpen: isOpenEditSupplement,
 		onClose: onCloseEditSupplement,
 		onOpen: onOpenEditSupplement,
 		toggleOpen: toggleOpenEditSupplement,
-	} = useOpen();
+	} = useToggle();
 
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
 	const [selectedSupplement, setSelectedSupplement] =

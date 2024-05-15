@@ -3,7 +3,7 @@ import Content from "./Content";
 import { ModalContext } from "../hooks/useModal";
 import React from "react";
 import Trigger from "./Trigger";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 interface ModalRootProps {
 	isOpen: boolean;
@@ -27,7 +27,7 @@ export default function ModalRoot({
 }
 
 export function ModalWithOpen({ children }: { children: React.ReactNode }) {
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
 	const value = { isOpen, onOpen, onClose, toggleOpen };
 
@@ -36,20 +36,20 @@ export function ModalWithOpen({ children }: { children: React.ReactNode }) {
 	);
 }
 
-interface ModalFullTemplate {
+interface ModalTemplateProps {
 	trigger: React.ReactElement;
 	content: React.ReactElement;
 	close: boolean;
 }
 
-export function ModalTemplate({ trigger, content, close }: ModalFullTemplate) {
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+export function ModalTemplate({ trigger, content, close }: ModalTemplateProps) {
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
 	const value = { isOpen, onOpen, onClose, toggleOpen };
 
 	return (
 		<ModalContext.Provider value={value}>
-			<Trigger openElement={trigger} />
+			<Trigger>{trigger}</Trigger>
 			<Content>{content}</Content>
 			{close && <Close />}
 		</ModalContext.Provider>
