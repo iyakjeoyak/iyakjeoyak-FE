@@ -6,12 +6,12 @@ import { ReviewDisplayProps } from "../../userInfoType";
 import StarRating from "@/components/StarRating";
 import formatDate from "@/utils/formatDate";
 import style from "../../style/reviewdisplay.module.scss";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 // import { DetailedReview } from "../../userInfoType";
 
 const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
 	return (
 		<Modal

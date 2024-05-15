@@ -1,13 +1,13 @@
 import HeartIcon from "@/assets/icons/HeartIcon";
+import Loading from "@/pages/feedback/Loading";
 import Modal from "@/components/Modal";
-import { UserResult } from "../userInfoType";
 import UserInfoEdit from "../UI/UserInfoEdit";
+import { UserResult } from "../userInfoType";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
 import style from "../index.module.scss";
 import { useNavigate } from "react-router-dom";
-import useOpen from "@/hooks/useOpen";
-import Loading from "@/pages/feedback/Loading";
+import useToggle from "@/hooks/useToggle";
 
 export interface UserInfoBoxProps {
 	userData?: UserResult;
@@ -20,7 +20,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 		onClose: onCloseEditUserData,
 		onOpen,
 		toggleOpen,
-	} = useOpen();
+	} = useToggle();
 
 	if (!userData) {
 		return <Loading />;

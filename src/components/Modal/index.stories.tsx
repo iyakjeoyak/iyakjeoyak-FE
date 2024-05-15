@@ -1,7 +1,7 @@
 import "@styles/global.scss";
 
 import Modal from ".";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 export default {
 	title: "ModalContainer",
@@ -9,7 +9,7 @@ export default {
 };
 
 const Template = () => {
-	const { isOpen, onClose, toggleOpen, onOpen } = useOpen();
+	const { isOpen, onClose, toggleOpen, onOpen } = useToggle();
 
 	return (
 		<main>

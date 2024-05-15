@@ -3,24 +3,26 @@ import {
 	signUpDefault,
 	signupValidation,
 } from "../utils/signupValidation";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { ControlForm } from "@/components/ControlForm";
-import { useForm, useWatch } from "react-hook-form";
-// import { DevTool } from "@hookform/devtools";
 import {
 	getDuplicationEmail,
 	getDuplicationNickName,
 } from "@/api/user/duplication";
+import { useForm, useWatch } from "react-hook-form";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 import Container from "@/components/ControlForm/Container";
-import commonQueryOptions from "@/api/common";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { ControlForm } from "@/components/ControlForm";
 import { ErrorMessage } from "@hookform/error-message";
-import postMailSendVerify from "@/api/user/postMailSendVerify";
 import MailVerifyModal from "./MailVerifyModal";
-import { useState } from "react";
-import useOpen from "@/hooks/useOpen";
+import commonQueryOptions from "@/api/common";
+import postMailSendVerify from "@/api/user/postMailSendVerify";
 import styles from "../styles/SignUp.module.scss";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import useToggle from "@/hooks/useToggle";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+// import { DevTool } from "@hookform/devtools";
 
 export function SignUp() {
 	const [signUpData, setSignUpData] = useState<SignUpFormType>({
@@ -32,7 +34,7 @@ export function SignUp() {
 		age: 0, // 나이
 		userHashtagList: [], //태그
 	});
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 	const {
 		register,
 		handleSubmit,

@@ -12,7 +12,7 @@ import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
 import styles from "../styles/ReviewDetailModal.module.scss";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 export default function ReviewDetailModal({
 	handleOpenConfirmDelete,
@@ -21,7 +21,7 @@ export default function ReviewDetailModal({
 	handleOpenConfirmDelete: () => void;
 	reviewId: number;
 }) {
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 	const {
 		data: {
 			content,
