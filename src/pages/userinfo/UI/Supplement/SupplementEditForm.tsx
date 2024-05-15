@@ -1,16 +1,18 @@
-import { Form } from "@/components/Form";
-import SearchBar from "@/components/SearchBar";
 import * as yup from "yup";
-import { SupplementFormValues } from "./SupplementModal";
-import { useEffect, useState } from "react";
-import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
-import { KeywordResultItemType } from "@/pages/main";
-import { useMutation } from "@tanstack/react-query";
-import patchUserSupplement from "@/api/useInfo/patchUserSupplement";
-import { showToast } from "@/utils/ToastConfig";
+
 import getSearchedSupplement, {
 	SupplementProduct,
 } from "@/api/useInfo/getSearchedSupplement";
+import { useEffect, useState } from "react";
+
+import { Form } from "@/components/Form";
+import { KeywordResultItemType } from "@/pages/main";
+import SearchBar from "@/components/SearchBar";
+import { SupplementFormValues } from "./SupplementModal";
+import getAutoCompleteResult from "@/api/search/getAutoCompleteResult";
+import patchUserSupplement from "@/api/useInfo/patchUserSupplement";
+import { showToast } from "@/utils/ToastConfig";
+import { useMutation } from "@tanstack/react-query";
 
 const supplementValidationSchema = yup.object().shape({
 	medicineName: yup.string().required("영양제 이름을 작성해주세요."),

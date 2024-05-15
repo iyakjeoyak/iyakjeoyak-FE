@@ -5,11 +5,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import deleteReviewImage from "@/api/review/deleteReviewImage";
-import ectQueryOptions from "@/api/common";
 import medicineReviewPatchValidation from "../utils/medicineReviewPatchValidation";
 import postMoreReviewImage from "@/api/review/postMoreReviewImages";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
+import tagQueryOptions from "@/api/tag";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
 import { useState } from "react";
 
@@ -29,7 +29,7 @@ export default function ReviewEditModal({
 		).data.hashtagResult.map((tag) => tag.id),
 	};
 
-	const { data: tags } = useQuery(ectQueryOptions.getHashtags());
+	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 
 	const [imgFiles, setImageFiles] = useState<File[]>([]);
 

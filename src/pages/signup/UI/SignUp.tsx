@@ -14,9 +14,9 @@ import Container from "@/components/ControlForm/Container";
 import { ControlForm } from "@/components/ControlForm";
 import { ErrorMessage } from "@hookform/error-message";
 import MailVerifyModal from "./MailVerifyModal";
-import commonQueryOptions from "@/api/common";
 import postMailSendVerify from "@/api/user/postMailSendVerify";
 import styles from "../styles/SignUp.module.scss";
+import tagQueryOptions from "@/api/tag";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import useToggle from "@/hooks/useToggle";
@@ -49,7 +49,7 @@ export function SignUp() {
 	});
 	const selectedTags = useWatch({ control, name: "userHashtagList" });
 
-	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 	// 이메일 인증번호 전송
 	const { mutate: mailSendVerify } = useMutation({
 		mutationFn: postMailSendVerify,

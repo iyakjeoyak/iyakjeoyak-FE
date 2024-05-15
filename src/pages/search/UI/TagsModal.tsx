@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import Tag from "@/components/Tag";
 import { TagType } from "@/types";
-import ectQueryOptions from "@/api/common";
 import qs from "qs";
 import styles from "../styles/TagsModal.module.scss";
+import tagQueryOptions from "@/api/tag";
 import useGetURLSearch from "@/hooks/useGetURLSearch";
 import { useQuery } from "@tanstack/react-query";
 
@@ -19,8 +19,8 @@ export default function TagsModal({
 	const tap = useGetURLSearch("tap");
 	const { data: tags } = useQuery(
 		tap === TAPS_QUERIES.FEATURE
-			? ectQueryOptions.getCategories()
-			: ectQueryOptions.getHashtags(),
+			? tagQueryOptions.getCategories()
+			: tagQueryOptions.getHashtags(),
 	);
 
 	const navigate = useNavigate();

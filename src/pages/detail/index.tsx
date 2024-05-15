@@ -25,17 +25,14 @@ export default function MedicineDetail() {
 
 	const currentTapValue = useGetURLSearch("tap");
 
-	const matchResult = matchPath("/detail/:id", pathname);
+	const medicineId = Number(matchPath("/detail/:id", pathname)?.params.id);
 
-	const id = Number(matchResult?.params.id);
-
-	if (!id) return;
+	if (!medicineId) return;
 
 	const {
 		data: {
 			image,
 			isHeart,
-			id: medicineId,
 			grade,
 			bssh_NM: brand,
 			prdlst_NM: name,
@@ -47,7 +44,7 @@ export default function MedicineDetail() {
 			isBookMark,
 			reviewCount,
 		},
-	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId: id }));
+	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId }));
 
 	const handleTapClick = (tapValue: string) => {
 		navigate(`/detail/${medicineId}?tap=${tapValue}`);

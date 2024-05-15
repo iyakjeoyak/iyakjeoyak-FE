@@ -51,9 +51,9 @@ export default function MedicineCard({
 	const { mutate: likeMutate } = useMutation({
 		mutationFn: postMedicineLike,
 		onSuccess: () => {
-			queryClient.invalidateQueries(
-				medicineQueryOptions.getMedicineById({ medicineId }),
-			);
+			queryClient.invalidateQueries({
+				queryKey: medicineQueryOptions.getMedicineById({ medicineId }).queryKey,
+			});
 		},
 	});
 

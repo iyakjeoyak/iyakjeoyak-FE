@@ -2,7 +2,7 @@ import { BestReviewBoard, CuratingBoard, MyMedicineBoard } from "./UI";
 
 import PickedMedicineBoard from "./UI/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
-import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/search/getAutoCompleteResult";
 import qs from "qs";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
