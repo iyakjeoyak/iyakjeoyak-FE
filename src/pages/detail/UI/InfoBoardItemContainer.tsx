@@ -1,9 +1,5 @@
+import splitText from "../utils/splitText";
 import styles from "../styles/InfoBoardItemContainer.module.scss";
-
-function splitText(text: string) {
-	const splitText = text.split("\n").filter((item) => item !== "");
-	return splitText;
-}
 
 interface InfoBoardItemContainerProps {
 	title: string;
@@ -23,8 +19,8 @@ export default function InfoBoardItemContainer({
 			<div className={styles.title}>{title}</div>
 			<div className={styles["content-container"]}>
 				<div className={styles.description}>
-					{textArray.map((text) => (
-						<div key={text}>{text}</div>
+					{textArray.map((text, index) => (
+						<div key={`${text}${index}`}>{text}</div>
 					))}
 				</div>
 				{hasMoreBtn && <button>more</button>}

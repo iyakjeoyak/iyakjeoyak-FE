@@ -5,11 +5,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import Modal from "@/components/Modal";
-import ectQueryOptions from "@/api/common";
 import { getAccessToken } from "@/utils/getToken";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import styles from "../styles/ReviewPostModal.module.scss";
+import tagQueryOptions from "@/api/tag";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
 import { useState } from "react";
 import useToggle from "@/hooks/useToggle";
@@ -31,7 +31,7 @@ export default function ReviewPostModal() {
 
 	const initialData = initialMedicineReviewPostBody;
 
-	const { data: tags } = useQuery(ectQueryOptions.getHashtags());
+	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 	const [imgFiles, setImageFiles] = useState<File[]>([]);
 	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
@@ -78,9 +78,9 @@ export default function ReviewPostModal() {
 			toggleOpen={toggleOpen}
 			onOpen={onOpen}
 		>
-			<Modal.Trigger
-				openElement={<button className={styles.button}>후기 작성하기</button>}
-			/>
+			<Modal.Trigger>
+				<button className={styles.button}>후기 작성하기</button>
+			</Modal.Trigger>
 			<Modal.Content>
 				<Form
 					validationSchema={medicineReviewPostValidation}
