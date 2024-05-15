@@ -1,4 +1,4 @@
-import styles from "@/components/Form/RadioButton/index.module.scss";
+import styles from "./index.module.scss";
 import { InputHTMLAttributes, forwardRef } from "react";
 interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
 	text: string;

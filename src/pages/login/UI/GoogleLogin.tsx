@@ -10,7 +10,7 @@ export const GoogleLogin = () => {
 	const params = new URLSearchParams(window.location.search);
 	const code = params.get("code");
 	if (!code) {
-		return <>Loading</>;
+		return <Loading />;
 	}
 
 	const { data } = useQuery(userQueryOption.getGoogleAuthToken({ code }));

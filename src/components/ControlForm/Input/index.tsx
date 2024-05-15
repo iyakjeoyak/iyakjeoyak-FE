@@ -6,8 +6,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
 	placeholder?: string;
 	title?: string;
-	type?: string;
-	value?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,8 +26,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					{...props}
 					className={`${styles.element} ${className || ""} m-big`}
 					placeholder={placeholder}
-					type={type}
-					value={value}
 					ref={ref}
 				/>
 			</Container>

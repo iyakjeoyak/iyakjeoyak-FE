@@ -1,4 +1,4 @@
-import styles from "@/components/Form/TagButton/index.module.scss";
+import styles from "./index.module.scss";
 import { useState } from "react";
 
 interface TagButtonProps {
@@ -21,7 +21,6 @@ const TagButton = ({
 	const [selected, setSelected] = useState(isSelected);
 	const sizeClass = styles[`tag-${size}`] || "";
 	const backgroundClass = styles[`background-${backgroundColor}`] || "";
-	const buttonClass = `${sizeClass} ${backgroundClass} ${selected ? styles.selected : ""}`;
 
 	const handleClick = () => {
 		if (onClick) {
@@ -31,7 +30,10 @@ const TagButton = ({
 	};
 
 	return (
-		<span className={buttonClass} onClick={handleClick}>
+		<span
+			className={`${sizeClass} ${backgroundClass} ${selected ? styles.selected : ""}`}
+			onClick={handleClick}
+		>
 			{text}
 			<input type="hidden" value={value} />
 		</span>

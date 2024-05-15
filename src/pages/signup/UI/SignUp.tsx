@@ -21,6 +21,7 @@ import MailVerifyModal from "./MailVerifyModal";
 import { useState } from "react";
 import useOpen from "@/hooks/useOpen";
 import styles from "../styles/SignUp.module.scss";
+import TagBoard from "@/components/ControlForm/TagBoard";
 
 export function SignUp() {
 	const [signUpData, setSignUpData] = useState<SignUpFormType>({
@@ -216,7 +217,7 @@ export function SignUp() {
 					/>
 				</div>
 				<div>
-					<ControlForm.TagBoard
+					<TagBoard
 						title="건강 고민"
 						tags={tags}
 						selectedTags={selectedTags}

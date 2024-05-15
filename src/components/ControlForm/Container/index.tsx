@@ -1,4 +1,4 @@
-import styles from "@/components/Form/Container/index.module.scss";
+import styles from "./index.module.scss";
 import { forwardRef } from "react";
 
 interface ContainerProps {
