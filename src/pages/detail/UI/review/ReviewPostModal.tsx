@@ -1,6 +1,6 @@
 import medicineReviewPostValidation, {
 	initialMedicineReviewPostBody,
-} from "../utils/medicineReviewPostValidation";
+} from "../../utils/medicineReviewPostValidation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
@@ -8,9 +8,9 @@ import Modal from "@/components/Modal";
 import { getAccessToken } from "@/utils/getToken";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
-import styles from "../styles/ReviewPostModal.module.scss";
+import styles from "../../styles/ReviewPostModal.module.scss";
 import tagQueryOptions from "@/api/tag";
-import useGetIdByLocation from "../hooks/useGetIdByLocation";
+import useGetIdByLocation from "../../hooks/useGetIdByLocation";
 import { useState } from "react";
 import useToggle from "@/hooks/useToggle";
 

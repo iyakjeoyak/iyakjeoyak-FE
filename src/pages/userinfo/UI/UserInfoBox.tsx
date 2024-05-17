@@ -55,11 +55,9 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 							toggleOpen={toggleOpen}
 							onOpen={onOpen}
 						>
-							<Modal.Trigger
-								openElement={
-									<div className={style.editprofile}>프로필 수정하기</div>
-								}
-							/>
+							<Modal.Trigger>
+								<div className={style.editprofile}>프로필 수정하기</div>
+							</Modal.Trigger>
 							<Modal.Content>
 								<div
 									className={`${style.profileEditModal} ${modalStyle.container} `}

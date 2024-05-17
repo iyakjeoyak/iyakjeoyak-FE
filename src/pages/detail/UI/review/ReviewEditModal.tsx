@@ -5,12 +5,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
 import deleteReviewImage from "@/api/review/deleteReviewImage";
-import medicineReviewPatchValidation from "../utils/medicineReviewPatchValidation";
+import medicineReviewPatchValidation from "../../utils/medicineReviewPatchValidation";
 import postMoreReviewImage from "@/api/review/postMoreReviewImages";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
 import tagQueryOptions from "@/api/tag";
-import useGetIdByLocation from "../hooks/useGetIdByLocation";
+import useGetIdByLocation from "../../hooks/useGetIdByLocation";
 import { useState } from "react";
 
 export default function ReviewEditModal({

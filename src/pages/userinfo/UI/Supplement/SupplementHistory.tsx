@@ -112,23 +112,21 @@ const SupplementHistory = () => {
 				toggleOpen={toggleOpenSupplement}
 				onOpen={onOpenSupplement}
 			>
-				<Modal.Trigger
-					openElement={
-						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplementInfo &&
-								supplementInfo?.map((cardInfo) => (
-									<CommonCardBox
-										key={cardInfo.id}
-										form={cardForm}
-										medicineNames={cardInfo.medicineName}
-										img={cardInfo.image?.fullPath}
-										onClick={() => handleCardClick(cardInfo)}
-										{...cardInfo}
-									/>
-								))}
-						</div>
-					}
-				/>
+				<Modal.Trigger>
+					<div className={`${style.cardGrid} ${style[cardForm]}`}>
+						{supplementInfo &&
+							supplementInfo?.map((cardInfo) => (
+								<CommonCardBox
+									key={cardInfo.id}
+									form={cardForm}
+									medicineNames={cardInfo.medicineName}
+									img={cardInfo.image?.fullPath}
+									onClick={() => handleCardClick(cardInfo)}
+									{...cardInfo}
+								/>
+							))}
+					</div>
+				</Modal.Trigger>
 
 				<Modal.Content>
 					{selectedSupplement?.medicineName && (
@@ -146,7 +144,9 @@ const SupplementHistory = () => {
 				toggleOpen={toggleOpenEditSupplement}
 				onOpen={onOpenEditSupplement}
 			>
-				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
+				<Modal.Trigger>
+					<CommonCardBox form={cardForm} />
+				</Modal.Trigger>
 				<Modal.Content>
 					<SupplementAddForm
 						formInitialValues={noSupplementData}

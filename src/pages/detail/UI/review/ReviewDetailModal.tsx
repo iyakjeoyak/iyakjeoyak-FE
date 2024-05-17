@@ -11,7 +11,7 @@ import copyToClipboard from "@/utils/copyToClipboard";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
-import styles from "../styles/ReviewDetailModal.module.scss";
+import styles from "../../styles/ReviewDetailModal.module.scss";
 import useToggle from "@/hooks/useToggle";
 
 export default function ReviewDetailModal({

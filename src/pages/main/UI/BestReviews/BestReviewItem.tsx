@@ -1,7 +1,7 @@
 import { BestReviewItemType } from "@/api/review/getBestReview";
 import TagCommon from "@/components/Tag";
 import logo_gray from "@assets/images/logo_gray.png";
-import styles from "../styles/BestReviewItem.module.scss";
+import styles from "../../styles/BestReviewItem.module.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function BestReviewItem({

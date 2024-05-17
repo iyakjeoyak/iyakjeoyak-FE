@@ -3,7 +3,7 @@ import { MedicineItemType } from "@/types";
 import SpeechBubbleIcon from "@/assets/icons/SpeechBubbleIcon";
 import TagCommon from "@/components/Tag";
 import { getAccessToken } from "@/utils/getToken";
-import styles from "../styles/CuratingBoardItem.module.scss";
+import styles from "../../styles/CuratingBoardItem.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const CuratingBoardItem = ({ medicine }: { medicine: MedicineItemType }) => {

@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa";
 import { MedicineDetailItemType } from "@/types";
 import TagCommon from "@/components/Tag";
-import styles from "../styles/PickedMedicine.module.scss";
+import styles from "../../styles/PickedMedicine.module.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function PickedMedicine({

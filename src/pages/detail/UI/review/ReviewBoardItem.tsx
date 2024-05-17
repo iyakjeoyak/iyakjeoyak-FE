@@ -12,7 +12,7 @@ import isZero from "@/utils/isZero";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import stopEvent from "@/utils/stopEvent";
-import styles from "../styles/ReviewBoardItem.module.scss";
+import styles from "../../styles/ReviewBoardItem.module.scss";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import useToggle from "@/hooks/useToggle";
@@ -61,36 +61,34 @@ export default function ReviewBoardItem({
 				toggleOpen={toggleOpen}
 				onOpen={onOpen}
 			>
-				<Modal.Trigger
-					openElement={
-						<div className={styles.container}>
-							<button className={styles.heart} onClick={handleLikeClick}>
-								{isZero(heartCount) ? <IoMdHeartEmpty /> : <IoMdHeart />}
-								<span>{heartCount}</span>
-							</button>
-							<Title
-								createdDate={reviewItem.createdDate}
-								star={star}
-								userId={reviewItem.createdBy.userId}
-								nickname={reviewItem.createdBy.nickname}
-								image={reviewItem.createdBy.image}
-							/>
-							<div className={styles["review-container"]}>
-								{imageResult.length !== 0 && (
-									<img src={imageResult[0].fullPath} />
-								)}
-								<div className={styles["content-container"]}>
-									<div>{title}</div>
-									<div className={styles["tags"]}>
-										{hashtagResult.slice(0, 4).map((tag) => (
-											<TagCommon key={tag.id} text={tag.name} />
-										))}
-									</div>
+				<Modal.Trigger>
+					<div className={styles.container}>
+						<button className={styles.heart} onClick={handleLikeClick}>
+							{isZero(heartCount) ? <IoMdHeartEmpty /> : <IoMdHeart />}
+							<span>{heartCount}</span>
+						</button>
+						<Title
+							createdDate={reviewItem.createdDate}
+							star={star}
+							userId={reviewItem.createdBy.userId}
+							nickname={reviewItem.createdBy.nickname}
+							image={reviewItem.createdBy.image}
+						/>
+						<div className={styles["review-container"]}>
+							{imageResult.length !== 0 && (
+								<img src={imageResult[0].fullPath} />
+							)}
+							<div className={styles["content-container"]}>
+								<div>{title}</div>
+								<div className={styles["tags"]}>
+									{hashtagResult.slice(0, 4).map((tag) => (
+										<TagCommon key={tag.id} text={tag.name} />
+									))}
 								</div>
 							</div>
 						</div>
-					}
-				/>
+					</div>
+				</Modal.Trigger>
 				<Modal.Content>
 					<ReviewDetailModal
 						reviewId={reviewId}

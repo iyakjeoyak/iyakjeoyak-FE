@@ -5,7 +5,7 @@ import SelectSort from "@/components/SelectSort";
 import isZero from "@/utils/isZero";
 import qs from "qs";
 import reviewQueryOptions from "@/api/review";
-import styles from "../styles/ReviewBoard.module.scss";
+import styles from "../../styles/ReviewBoard.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

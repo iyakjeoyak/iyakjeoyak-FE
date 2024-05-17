@@ -1,6 +1,8 @@
-import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 
+import InfoBoard from "./UI/info/InfoBoard";
+import MedicineCard from "./UI/MedicineCard";
+import ReviewBoard from "./UI/review/ReviewBoard";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import medicineQueryOptions from "@/api/medicine";

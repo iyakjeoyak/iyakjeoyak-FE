@@ -1,5 +1,5 @@
 import BlankMyMedicineBoard from "./BlankMyMedicineBoard";
-import BoardContainer from "./BoardConatiner";
+import BoardContainer from "../BoardConatiner";
 import MyMedicineItem from "./MyMedicineItem";
 import { getAccessToken } from "@/utils/getToken";
 import { useNavigate } from "react-router-dom";

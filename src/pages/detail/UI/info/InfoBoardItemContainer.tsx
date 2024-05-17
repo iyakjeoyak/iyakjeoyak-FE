@@ -1,5 +1,5 @@
-import splitText from "../utils/splitText";
-import styles from "../styles/InfoBoardItemContainer.module.scss";
+import splitText from "../../utils/splitText";
+import styles from "../../styles/InfoBoardItemContainer.module.scss";
 
 interface InfoBoardItemContainerProps {
 	title: string;

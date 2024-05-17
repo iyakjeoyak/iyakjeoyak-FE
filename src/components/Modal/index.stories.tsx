@@ -19,7 +19,9 @@ const Template = () => {
 				toggleOpen={toggleOpen}
 				onOpen={onOpen}
 			>
-				<Modal.Trigger openElement={<button>모달 열기</button>} />
+				<Modal.Trigger>
+					<button>모달 열기</button>
+				</Modal.Trigger>
 				<Modal.Content>
 					모달입니다.
 					<Modal.Close />

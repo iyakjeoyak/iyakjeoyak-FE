@@ -1,5 +1,5 @@
 import BestReviewItem from "./BestReviewItem";
-import BoardContainer from "./BoardConatiner";
+import BoardContainer from "../BoardConatiner";
 import reviewQueryOptions from "@/api/review";
 import { useQuery } from "@tanstack/react-query";
 
