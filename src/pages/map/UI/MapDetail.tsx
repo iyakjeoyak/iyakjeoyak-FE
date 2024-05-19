@@ -4,7 +4,7 @@ import { useMapContext } from "../utils/mapDetailContext";
 import { Button } from "@/components/Button";
 import HeartIcon from "@/assets/icons/HeartIcon";
 import postLikedPharmacy from "@/api/map/postLikedPharmacy";
-import { hourListType } from "../mapTypes";
+import { hourListType } from "@/api/map/types";
 import HeartFilledIcon from "@/assets/icons/HeartFilledIcon";
 import { useEffect, useState } from "react";
 import { formatHour } from "../utils/formatHour";

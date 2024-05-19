@@ -72,6 +72,21 @@ export interface Medicine {
 	bssh_NM: string;
 }
 
+export interface MedicineId {
+	id: number;
+	image: {
+		id: number;
+		fullPath: string;
+	};
+	prdlst_NM: string;
+	bssh_NM: string;
+}
+
+export interface LikedSupplementProps {
+	id: number;
+	medicineId: MedicineId;
+}
+
 export interface CreateBy {
 	userId: number;
 	nickname?: "string";

@@ -1,5 +1,4 @@
 import "@styles/global.scss";
-
 import ReviewDisplay from "./ReviewDisplay";
 import ReviewEmpty from "./ReviewEmpty";
 import getUserReview from "@/api/useInfo/getUserReview";
