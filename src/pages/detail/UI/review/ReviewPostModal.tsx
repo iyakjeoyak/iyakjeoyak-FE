@@ -1,9 +1,10 @@
 import medicineReviewPostValidation, {
 	initialMedicineReviewPostBody,
 } from "../../utils/medicineReviewPostValidation";
+import { useForm, useWatch } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { Form } from "@/components/Form";
+import { ControlForm } from "@/components/ControlForm";
 import Modal from "@/components/Modal";
 import { getAccessToken } from "@/utils/getToken";
 import postReview from "@/api/review/postReview";
@@ -13,6 +14,7 @@ import tagQueryOptions from "@/api/tag";
 import useGetIdByLocation from "../../hooks/useGetIdByLocation";
 import { useState } from "react";
 import useToggle from "@/hooks/useToggle";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface PostReviewBody {
 	title: string;
@@ -28,6 +30,20 @@ export default function ReviewPostModal() {
 	if (!isLogin) return;
 
 	const medicineId = useGetIdByLocation();
+
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		formState: { errors },
+		control,
+	} = useForm({
+		mode: "onSubmit",
+		resolver: yupResolver(medicineReviewPostValidation),
+	});
+
+	const selectedTags = useWatch({ control, name: "tagList" });
+	const star = useWatch({ control, name: "star" });
 
 	const initialData = initialMedicineReviewPostBody;
 
@@ -48,7 +64,13 @@ export default function ReviewPostModal() {
 		setImageFiles(imgs);
 	};
 
-	const onSubmit = ({ title, tagList, content, star }: PostReviewBody) => {
+	console.log(errors);
+	const onSubmit = ({
+		title,
+		tagList,
+		content,
+		star,
+	}: Omit<PostReviewBody, "medicineId">) => {
 		const formData = new FormData();
 
 		const formBody = {
@@ -82,26 +104,31 @@ export default function ReviewPostModal() {
 				<button className={styles.button}>후기 작성하기</button>
 			</Modal.Trigger>
 			<Modal.Content>
-				<Form
-					validationSchema={medicineReviewPostValidation}
-					pageDefaultValues={initialData}
-					onSubmit={onSubmit}
-				>
-					<Form.Input<PostReviewBody>
-						name="title"
+				<ControlForm onSubmit={handleSubmit(onSubmit)}>
+					<ControlForm.Input
 						title="리뷰 제목"
 						placeholder="리뷰 제목을 입력해주세요"
+						{...register("title")}
 					/>
-					<Form.StarRating />
-					<Form.TagBoard title="태그 선택" tags={tags ?? []} name="tagList" />
-					<Form.ImgsInput addImgFile={addImgFile} />
-					<Form.Textarea
-						name="content"
+					<ControlForm.StarRating
+						star={star}
+						onClick={(rating: number) => setValue("star", rating)}
+					/>
+					<ControlForm.TagBoard
+						title="태그 선택"
+						tags={tags ?? []}
+						selectedTags={selectedTags}
+						onTagClick={(selectedTag) => setValue("tagList", selectedTag)}
+						{...register("tagList")}
+					/>
+					<ControlForm.ImgsInput addImgFile={addImgFile} />
+					<ControlForm.Textarea
 						title="후기 작성"
 						placeholder="리뷰를 입력해주세요(최소 50자 이상)"
+						{...register("content")}
 					/>
-					<Form.Button text="후기 작성완료" variant="dark" />
-				</Form>
+					<ControlForm.Button text="후기 작성완료" variant="dark" />
+				</ControlForm>
 			</Modal.Content>
 		</Modal>
 	);
