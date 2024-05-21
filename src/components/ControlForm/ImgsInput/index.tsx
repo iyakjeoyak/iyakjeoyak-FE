@@ -2,7 +2,6 @@ import Container from "../Container";
 import { ImageType } from "@/types";
 import { showToast } from "@/utils/ToastConfig";
 import styles from "./index.module.scss";
-import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 
 const MAX_IMG_LENGTH = 4;

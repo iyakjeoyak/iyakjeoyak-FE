@@ -1,12 +1,10 @@
-import medicineReviewPostValidation, {
-	initialMedicineReviewPostBody,
-} from "../../utils/medicineReviewPostValidation";
 import { useForm, useWatch } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { ControlForm } from "@/components/ControlForm";
 import Modal from "@/components/Modal";
 import { getAccessToken } from "@/utils/getToken";
+import medicineReviewPostValidation from "../../utils/medicineReviewPostValidation";
 import postReview from "@/api/review/postReview";
 import { queryClient } from "@/main";
 import styles from "../../styles/ReviewPostModal.module.scss";
@@ -44,8 +42,6 @@ export default function ReviewPostModal() {
 
 	const selectedTags = useWatch({ control, name: "tagList" });
 	const star = useWatch({ control, name: "star" });
-
-	const initialData = initialMedicineReviewPostBody;
 
 	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 	const [imgFiles, setImageFiles] = useState<File[]>([]);
