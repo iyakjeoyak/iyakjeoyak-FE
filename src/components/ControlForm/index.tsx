@@ -1,11 +1,14 @@
+import { Button } from "./Button";
 import { FormEventHandler } from "react";
-import styles from "@/components/Form/index.module.scss";
+import { ImgInput } from "./ImgInput";
+import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
 import { RadioButton } from "./RadioButton";
-import TagButton from "./TagButton";
+import StarRating from "./StarRating";
 import TagBoard from "./TagBoard";
-import { ImgInput } from "./ImgInput";
-import { Button } from "./Button";
+import TagButton from "./TagButton";
+import { Textarea } from "./Textarea";
+import styles from "@/components/Form/index.module.scss";
 
 interface FormProps {
 	children: React.ReactNode;
@@ -27,6 +30,6 @@ ControlForm.ImgInput = ImgInput;
 ControlForm.TagButton = TagButton;
 ControlForm.TagBoard = TagBoard;
 ControlForm.RadioButton = RadioButton;
-// ControlForm.Textarea = Textarea;
-// ControlForm.StarRating = StarRating;
-// ControlForm.ImgsInput = ImgsInput;
+ControlForm.Textarea = Textarea;
+ControlForm.StarRating = StarRating;
+ControlForm.ImgsInput = ImgsInput;

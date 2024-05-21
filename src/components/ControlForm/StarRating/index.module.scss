@@ -1,0 +1,20 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	svg {
+		color: $main-yellow;
+		@include mixins.b-super;
+	}
+	.stars {
+		display: flex;
+		gap: 10px;
+	}
+	.number {
+		@include mixins.b-big;
+		color: $gray6;
+	}
+}
