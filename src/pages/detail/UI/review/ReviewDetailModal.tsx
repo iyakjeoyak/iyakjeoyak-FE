@@ -57,9 +57,11 @@ export default function ReviewDetailModal({
 				toggleOpen={toggleOpen}
 				onOpen={onOpen}
 			>
-				<Modal.Content>
-					<ReviewEditModal reviewId={reviewId} onClose={onClose} />
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						<ReviewEditModal reviewId={reviewId} onClose={onClose} />
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 			<article className={styles.container}>
 				<h2>{title}</h2>

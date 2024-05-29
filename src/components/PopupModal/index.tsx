@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import styles from "./index.module.scss";
 
 interface PopupModalProps {
@@ -15,7 +16,7 @@ const PopupModal = ({
 	onClick,
 	onClose,
 }: PopupModalProps) => {
-	return (
+	return ReactDOM.createPortal(
 		<div className="background" onClick={onClose}>
 			<div className={styles.container}>
 				<div className={styles["content-container"]}>
@@ -33,7 +34,8 @@ const PopupModal = ({
 					</button>
 				</div>
 			</div>
-		</div>
+		</div>,
+		document.getElementById("modal-root")!,
 	);
 };
 

@@ -29,13 +29,7 @@ export default function ReviewPostModal() {
 
 	const medicineId = useGetIdByLocation();
 
-	const {
-		register,
-		handleSubmit,
-		setValue,
-		formState: { errors },
-		control,
-	} = useForm({
+	const { register, handleSubmit, setValue, control } = useForm({
 		mode: "onSubmit",
 		resolver: yupResolver(medicineReviewPostValidation),
 	});
@@ -60,7 +54,6 @@ export default function ReviewPostModal() {
 		setImageFiles(imgs);
 	};
 
-	console.log(errors);
 	const onSubmit = ({
 		title,
 		tagList,
@@ -99,33 +92,35 @@ export default function ReviewPostModal() {
 			<Modal.Trigger>
 				<button className={styles.button}>후기 작성하기</button>
 			</Modal.Trigger>
-			<Modal.Content>
-				<ControlForm onSubmit={handleSubmit(onSubmit)}>
-					<ControlForm.Input
-						title="리뷰 제목"
-						placeholder="리뷰 제목을 입력해주세요"
-						{...register("title")}
-					/>
-					<ControlForm.StarRating
-						star={star}
-						onClick={(rating: number) => setValue("star", rating)}
-					/>
-					<ControlForm.TagBoard
-						title="태그 선택"
-						tags={tags ?? []}
-						selectedTags={selectedTags}
-						onTagClick={(selectedTag) => setValue("tagList", selectedTag)}
-						{...register("tagList")}
-					/>
-					<ControlForm.ImgsInput addImgFile={addImgFile} />
-					<ControlForm.Textarea
-						title="후기 작성"
-						placeholder="리뷰를 입력해주세요(최소 50자 이상)"
-						{...register("content")}
-					/>
-					<ControlForm.Button text="후기 작성완료" variant="dark" />
-				</ControlForm>
-			</Modal.Content>
+			<Modal.Overlay>
+				<Modal.Content>
+					<ControlForm onSubmit={handleSubmit(onSubmit)}>
+						<ControlForm.Input
+							title="리뷰 제목"
+							placeholder="리뷰 제목을 입력해주세요"
+							{...register("title")}
+						/>
+						<ControlForm.StarRating
+							star={star}
+							onClick={(rating: number) => setValue("star", rating)}
+						/>
+						<ControlForm.TagBoard
+							title="태그 선택"
+							tags={tags ?? []}
+							selectedTags={selectedTags}
+							onTagClick={(selectedTag) => setValue("tagList", selectedTag)}
+							{...register("tagList")}
+						/>
+						<ControlForm.ImgsInput addImgFile={addImgFile} />
+						<ControlForm.Textarea
+							title="후기 작성"
+							placeholder="리뷰를 입력해주세요(최소 50자 이상)"
+							{...register("content")}
+						/>
+						<ControlForm.Button text="후기 작성완료" variant="dark" />
+					</ControlForm>
+				</Modal.Content>
+			</Modal.Overlay>
 		</Modal>
 	);
 }

@@ -127,15 +127,16 @@ const SupplementHistory = () => {
 							))}
 					</div>
 				</Modal.Trigger>
-
-				<Modal.Content>
-					{selectedSupplement?.medicineName && (
-						<SupplementModal
-							itemId={selectedSupplement.id}
-							onClose={onCloseSupplement}
-						/>
-					)}
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						{selectedSupplement?.medicineName && (
+							<SupplementModal
+								itemId={selectedSupplement.id}
+								onClose={onCloseSupplement}
+							/>
+						)}
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 
 			<Modal
@@ -147,12 +148,14 @@ const SupplementHistory = () => {
 				<Modal.Trigger>
 					<CommonCardBox form={cardForm} />
 				</Modal.Trigger>
-				<Modal.Content>
-					<SupplementAddForm
-						formInitialValues={noSupplementData}
-						onClose={onCloseEditSupplement}
-					/>
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						<SupplementAddForm
+							formInitialValues={noSupplementData}
+							onClose={onCloseEditSupplement}
+						/>
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 
 			<div ref={ref} style={{ height: 20 }}>

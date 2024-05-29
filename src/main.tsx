@@ -10,6 +10,7 @@ import React, { Suspense } from "react";
 import App from "./App.tsx";
 import Error from "@pages/feedback/UI/Error.tsx";
 import { ErrorBoundary } from "react-error-boundary";
+import JustReactDOM from "react-dom";
 import Loading from "./pages/feedback/Loading.tsx";
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
@@ -43,13 +44,20 @@ export const queryClient = new QueryClient({
 	// }),
 });
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const Toast = () => {
+	return JustReactDOM.createPortal(
+		<ToastContainer />,
+		document.getElementById("toast-root")!,
+	);
+};
+
+ReactDOM.createRoot(document.getElementById("app-root")!).render(
 	<React.StrictMode>
 		<ErrorBoundary FallbackComponent={Error}>
 			<Suspense fallback={<Loading isFullLoading />}>
 				<QueryClientProvider client={queryClient}>
 					<App />
-					<ToastContainer />
+					<Toast />
 					{/* <ReactQueryDevtools initialIsOpen={false} position="bottom" /> */}
 				</QueryClientProvider>
 			</Suspense>

@@ -53,34 +53,32 @@ export default function MedicineDetail() {
 	};
 
 	return (
-		<>
-			<section className={styles.container}>
-				<MedicineCard
-					image={image}
-					name={name}
-					isHeart={isHeart}
-					isBookMark={isBookMark}
-					reviewCount={reviewCount}
-					brand={brand}
-					hashtags={hashtags.slice(0, 2)}
-					grade={grade}
-					heartCount={heartCount}
-				/>
-				<div className={styles.board}>
-					<TapBar taps={TAPS} onClick={handleTapClick} />
-					{currentTapValue === TAPS_QUERIES.REVIEW && (
-						<ReviewBoard medicineId={medicineId} />
-					)}
-					{(currentTapValue === TAPS_QUERIES.INFO ||
-						currentTapValue === null) && (
-						<InfoBoard
-							howToEat={howToEat}
-							ingredient={ingredient}
-							describe={describe}
-						/>
-					)}
-				</div>
-			</section>
-		</>
+		<section className={styles.container}>
+			<MedicineCard
+				image={image}
+				name={name}
+				isHeart={isHeart}
+				isBookMark={isBookMark}
+				reviewCount={reviewCount}
+				brand={brand}
+				hashtags={hashtags.slice(0, 2)}
+				grade={grade}
+				heartCount={heartCount}
+			/>
+			<div className={styles.board}>
+				<TapBar taps={TAPS} onClick={handleTapClick} />
+				{currentTapValue === TAPS_QUERIES.REVIEW && (
+					<ReviewBoard medicineId={medicineId} />
+				)}
+				{(currentTapValue === TAPS_QUERIES.INFO ||
+					currentTapValue === null) && (
+					<InfoBoard
+						howToEat={howToEat}
+						ingredient={ingredient}
+						describe={describe}
+					/>
+				)}
+			</div>
+		</section>
 	);
 }
