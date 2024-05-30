@@ -80,32 +80,60 @@ export default function SearchResultList({
 		};
 	}, [activeKeywordIndex, keywordSearchResult]);
 
+	useEffect(() => {
+		if (!window.CSS || !CSS.highlights) {
+			console.warn("CSS Custom Highlight API 사용불가능");
+			return;
+		}
+
+		const highlight = new Highlight();
+
+		document.querySelectorAll(".highlight").forEach((el) => {
+			const textNodes = Array.from(el.childNodes).filter(
+				(node) => node.nodeType === Node.TEXT_NODE,
+			);
+			textNodes.forEach((node) => {
+				const text = node.textContent;
+				if (!text) return;
+
+				const range = new Range();
+
+				const startIndex = text.indexOf(currentKeyword.name);
+				if (startIndex === -1) return;
+				const endIndex = startIndex + currentKeyword.name.length;
+
+				range.setStart(node, startIndex);
+				range.setEnd(node, endIndex);
+
+				highlight.add(range);
+
+				CSS.highlights.set("highlight", highlight);
+			});
+		});
+	}, [currentKeyword.name, keywordSearchResult]);
+
 	return (
 		<div className={styles.container}>
 			{keywordSearchResult &&
-				keywordSearchResult?.length !== 0 &&
-				keywordSearchResult?.map((keyword) => {
-					return (
-						<div
-							tabIndex={0}
-							key={keyword.id}
-							className={`${styles.option} ${(keywordSearchResult[activeKeywordIndex].id === keyword.id || currentActiveKeyword.id === keyword.id) && styles.active}`}
-							onClick={() => {
-								handleSearchKeywordSelected(currentActiveKeyword);
-							}}
-							onMouseOut={() => {
-								handleMouseEnter({ id: 0, name: "" });
-							}}
-							onMouseEnter={() => {
-								handleMouseEnter(keyword);
-							}}
-						>
-							{keyword.name.split(currentKeyword.name)[0]}
-							<span>{currentKeyword.name}</span>
-							{keyword.name.split(currentKeyword.name)[1]}
-						</div>
-					);
-				})}
+				keywordSearchResult.length !== 0 &&
+				keywordSearchResult.map((keyword) => (
+					<div
+						tabIndex={0}
+						key={keyword.id}
+						className={`highlight ${styles.option} ${(keywordSearchResult[activeKeywordIndex].id === keyword.id || currentActiveKeyword.id === keyword.id) && styles.active}`}
+						onClick={() => {
+							handleSearchKeywordSelected(currentActiveKeyword);
+						}}
+						onMouseOut={() => {
+							handleMouseEnter({ id: 0, name: "" });
+						}}
+						onMouseEnter={() => {
+							handleMouseEnter(keyword);
+						}}
+					>
+						{keyword.name}
+					</div>
+				))}
 		</div>
 	);
 }

@@ -104,3 +104,7 @@ main {
 		color: #23cc87;
 	}
 }
+
+::highlight(highlight) {
+	color: vars.$main-red !important;
+}
