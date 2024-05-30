@@ -10,10 +10,10 @@ import React, { Suspense } from "react";
 import App from "./App.tsx";
 import Error from "@pages/feedback/UI/Error.tsx";
 import { ErrorBoundary } from "react-error-boundary";
-import JustReactDOM from "react-dom";
 import Loading from "./pages/feedback/Loading.tsx";
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
+import { createPortal } from "react-dom";
 import { showToast } from "./utils/ToastConfig.ts";
 
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -45,7 +45,7 @@ export const queryClient = new QueryClient({
 });
 
 const Toast = () => {
-	return JustReactDOM.createPortal(
+	return createPortal(
 		<ToastContainer />,
 		document.getElementById("toast-root")!,
 	);
