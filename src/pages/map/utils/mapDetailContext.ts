@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { PharmacyDetailType } from "@pages/map/mapTypes";
+import { PharmacyDetailType } from "@/api/map/types";
 
 interface MapContextType {
 	// isLikeChanged: boolean;

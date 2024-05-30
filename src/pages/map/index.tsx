@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Map from "./UI/Map";
 import MapDetail from "./UI/MapDetail";
-import { PharmacyDetailType } from "./mapTypes";
+import { PharmacyDetailType } from "@/api/map/types";
 import { MapContext } from "./utils/mapDetailContext";
 import { PathButton } from "@/components/PathButton/PathButton";
 import { useLocation } from "react-router-dom";

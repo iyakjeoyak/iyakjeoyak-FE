@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pharmacy } from "../mapTypes";
+import { Pharmacy } from "../map.types";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import { useMapContext } from "../utils/mapDetailContext";
 import { useDisplayMap, useInitMap, useUpdateMarkers } from "../hooks";

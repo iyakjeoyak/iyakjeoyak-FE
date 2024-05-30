@@ -7,14 +7,14 @@ interface useIntersectProps {
 	onIntersect: IntersectionObserverCallback;
 }
 
-const useIntersect = ({
+const useIntersect = <T extends HTMLElement>({
 	root = null,
 	rootMargin = "10px",
 	threshold = 0.5,
 	onIntersect,
 }: useIntersectProps) => {
 	// ref는 DOM에 대한 참조 저장
-	const ref = useRef<HTMLDivElement | null>(null);
+	const ref = useRef<T | null>(null);
 	// observerRef는 인스턴스 관리를 위해 사용
 	const observerRef = useRef<IntersectionObserver | null>(null);
 
