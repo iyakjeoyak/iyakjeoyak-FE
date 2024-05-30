@@ -22,10 +22,12 @@ const Template = () => {
 				<Modal.Trigger>
 					<button>모달 열기</button>
 				</Modal.Trigger>
-				<Modal.Content>
-					모달입니다.
-					<Modal.Close />
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						모달입니다.
+						<Modal.Close />
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 		</main>
 	);

@@ -1,18 +1,20 @@
 import * as yup from "yup";
-import { useMutation } from "@tanstack/react-query";
-import Modal from "@/components/Modal";
-import postMailVerify from "@/api/user/postMailVerify";
-import { toast } from "react-toastify";
-import postSignUp from "@/api/user/postSignUp";
-import { useNavigate } from "react-router-dom";
-import { ControlForm } from "@/components/ControlForm";
-import { SignUpFormType } from "../utils/signupValidation";
+
 import { useForm, useWatch } from "react-hook-form";
+
+import { ControlForm } from "@/components/ControlForm";
 import { ErrorMessage } from "@hookform/error-message";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import styles from "../styles/SignUp.module.scss";
+import Modal from "@/components/Modal";
+import { SignUpFormType } from "../utils/signupValidation";
 import Timer from "../utils/Timer";
+import postMailVerify from "@/api/user/postMailVerify";
+import postSignUp from "@/api/user/postSignUp";
+import styles from "../styles/SignUp.module.scss";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function MailVerifyModal({
 	isOpen,
@@ -111,48 +113,50 @@ export default function MailVerifyModal({
 			toggleOpen={toggleOpen}
 			onOpen={onOpen}
 		>
-			<Modal.Content>
-				<ControlForm onSubmit={handleSubmit(onSubmit)}>
-					<ControlForm.Input
-						title="이메일"
-						placeholder="이메일을 입력해주세요."
-						value={signUpData.username}
-						readOnly
-					/>
-					<div className={styles.checkWrap}>
-						<Timer
-							count={timerCount}
-							setCount={setTimerCount}
-							className={styles.count}
+			<Modal.Overlay>
+				<Modal.Content>
+					<ControlForm onSubmit={handleSubmit(onSubmit)}>
+						<ControlForm.Input
+							title="이메일"
+							placeholder="이메일을 입력해주세요."
+							value={signUpData.username}
+							readOnly
 						/>
-						<div className={styles.checkFlex}>
-							<ControlForm.Input
-								title="이메일 인증번호"
-								placeholder="인증번호를 입력해주세요."
-								{...register("verify")}
-								className={errors.verify ? styles.error : ""}
+						<div className={styles.checkWrap}>
+							<Timer
+								count={timerCount}
+								setCount={setTimerCount}
+								className={styles.count}
 							/>
-							<ControlForm.Button
-								onClick={handleVerify}
-								text="인증번호 확인"
-								type="button"
-								variant="dark"
+							<div className={styles.checkFlex}>
+								<ControlForm.Input
+									title="이메일 인증번호"
+									placeholder="인증번호를 입력해주세요."
+									{...register("verify")}
+									className={errors.verify ? styles.error : ""}
+								/>
+								<ControlForm.Button
+									onClick={handleVerify}
+									text="인증번호 확인"
+									type="button"
+									variant="dark"
+								/>
+							</div>
+							<ErrorMessage
+								errors={errors}
+								name="verify"
+								render={({ message }) => <p>{message}</p>}
 							/>
 						</div>
-						<ErrorMessage
-							errors={errors}
-							name="verify"
-							render={({ message }) => <p>{message}</p>}
+						<ControlForm.Button
+							text="가입하기"
+							type="submit"
+							variant="dark"
+							className={styles.buttonStyle}
 						/>
-					</div>
-					<ControlForm.Button
-						text="가입하기"
-						type="submit"
-						variant="dark"
-						className={styles.buttonStyle}
-					/>
-				</ControlForm>
-			</Modal.Content>
+					</ControlForm>
+				</Modal.Content>
+			</Modal.Overlay>
 		</Modal>
 	);
 }

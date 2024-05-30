@@ -54,14 +54,16 @@ const ReviewDisplay = ({ reviews }: ReviewDisplayProps) => {
 					))}
 				</div>
 			</Modal.Trigger>
-			{reviews.map((review) => (
-				<Modal.Content>
-					<ReviewDetailModal
-						handleOpenConfirmDelete={onClose}
-						reviewId={review.id}
-					/>
-				</Modal.Content>
-			))}
+			<Modal.Overlay>
+				{reviews.map((review) => (
+					<Modal.Content>
+						<ReviewDetailModal
+							handleOpenConfirmDelete={onClose}
+							reviewId={review.id}
+						/>
+					</Modal.Content>
+				))}
+			</Modal.Overlay>
 		</Modal>
 	);
 };

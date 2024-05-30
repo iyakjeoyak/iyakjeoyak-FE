@@ -1,6 +1,7 @@
 import Close from "./Close";
 import Content from "./Content";
 import { ModalContext } from "../hooks/useModal";
+import Overlay from "./Overlay";
 import React from "react";
 import Trigger from "./Trigger";
 import useToggle from "@/hooks/useToggle";
@@ -13,6 +14,7 @@ interface ModalRootProps {
 	children: React.ReactNode;
 }
 
+/** 외부에서 isOpen 상태 받아옴 */
 export default function ModalRoot({
 	isOpen,
 	onOpen,
@@ -26,6 +28,7 @@ export default function ModalRoot({
 	);
 }
 
+/** 내부에서 isOpen 상태 생성 */
 export function ModalWithOpen({ children }: { children: React.ReactNode }) {
 	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
@@ -42,6 +45,7 @@ interface ModalTemplateProps {
 	close: boolean;
 }
 
+/** 외부에서 모든 정보를 받아오는 가이드 */
 export function ModalTemplate({ trigger, content, close }: ModalTemplateProps) {
 	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 
@@ -50,8 +54,10 @@ export function ModalTemplate({ trigger, content, close }: ModalTemplateProps) {
 	return (
 		<ModalContext.Provider value={value}>
 			<Trigger>{trigger}</Trigger>
-			<Content>{content}</Content>
-			{close && <Close />}
+			<Overlay>
+				<Content>{content}</Content>
+				{close && <Close />}
+			</Overlay>
 		</ModalContext.Provider>
 	);
 }

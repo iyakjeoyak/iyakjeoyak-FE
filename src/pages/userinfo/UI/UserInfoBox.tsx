@@ -58,16 +58,18 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 							<Modal.Trigger>
 								<div className={style.editprofile}>프로필 수정하기</div>
 							</Modal.Trigger>
-							<Modal.Content>
-								<div
-									className={`${style.profileEditModal} ${modalStyle.container} `}
-								>
-									<UserInfoEdit
-										onClose={onCloseEditUserData}
-										userData={userData}
-									/>
-								</div>
-							</Modal.Content>
+							<Modal.Overlay>
+								<Modal.Content>
+									<div
+										className={`${style.profileEditModal} ${modalStyle.container} `}
+									>
+										<UserInfoEdit
+											onClose={onCloseEditUserData}
+											userData={userData}
+										/>
+									</div>
+								</Modal.Content>
+							</Modal.Overlay>
 						</Modal>
 					</div>
 				</div>

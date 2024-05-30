@@ -89,14 +89,16 @@ export default function ReviewBoardItem({
 						</div>
 					</div>
 				</Modal.Trigger>
-				<Modal.Content>
-					<ReviewDetailModal
-						reviewId={reviewId}
-						handleOpenConfirmDelete={() => {
-							setIsOpenConfirmDelete(true);
-						}}
-					/>
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						<ReviewDetailModal
+							reviewId={reviewId}
+							handleOpenConfirmDelete={() => {
+								setIsOpenConfirmDelete(true);
+							}}
+						/>
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 			{isOpenConfirmDelete && (
 				<PopupModal
