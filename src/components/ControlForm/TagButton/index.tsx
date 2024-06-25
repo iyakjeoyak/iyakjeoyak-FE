@@ -6,7 +6,7 @@ interface TagButtonProps {
 	size?: "small" | "medium";
 	backgroundColor?: "green" | "midgreen" | "lightgreen" | "white";
 	value?: number;
-	isSelected?: boolean;
+	defaultIsSelected?: boolean;
 	onClick?: () => void;
 }
 
@@ -15,10 +15,10 @@ const TagButton = ({
 	size = "medium",
 	backgroundColor = "white",
 	value,
-	isSelected = false,
+	defaultIsSelected = false,
 	onClick,
 }: TagButtonProps) => {
-	const [selected, setSelected] = useState(isSelected);
+	const [selected, setSelected] = useState(defaultIsSelected);
 	const sizeClass = styles[`tag-${size}`] || "";
 	const backgroundClass = styles[`background-${backgroundColor}`] || "";
 

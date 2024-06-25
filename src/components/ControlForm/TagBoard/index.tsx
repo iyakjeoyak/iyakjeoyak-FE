@@ -28,7 +28,7 @@ const TagBoard = forwardRef<HTMLDivElement, TagBoardProps>(
 								key={tag.id}
 								text={tag.name}
 								value={tag.id}
-								isSelected={isTagSelected}
+								defaultIsSelected={isTagSelected}
 								onClick={() => handleClick(tag.id)}
 							/>
 						);
