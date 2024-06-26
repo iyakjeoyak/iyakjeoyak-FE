@@ -1,0 +1,49 @@
+@use "@styles/global" as *;
+@use "@styles/mixin" as mixins;
+@import "@styles/variables";
+@import "@/components/ModalContainer/index.module.scss";
+
+.imgBox {
+	position: relative;
+	display: flex;
+	justify-content: center;
+
+	.backgroundColor {
+		background-color: #000;
+		opacity: 50%;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+
+	.imgLabel {
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: $main-green;
+		font-size: 7rem;
+	}
+
+	& svg {
+		font-size: 14rem;
+	}
+
+	.imgCon {
+		width: 70rem;
+		height: 70rem;
+		border-radius: 100%;
+		overflow: hidden;
+		background-color: $gray3;
+
+		@include mixins.responsive("tablet") {
+			width: 50rem;
+			height: 50rem;
+		}
+	}
+}

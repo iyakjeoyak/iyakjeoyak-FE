@@ -24,6 +24,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 // import { DevTool } from "@hookform/devtools";
 
+
 export function SignUp() {
 	const [signUpData, setSignUpData] = useState<SignUpFormType>({
 		username: "", // 아이디

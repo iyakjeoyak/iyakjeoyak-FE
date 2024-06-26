@@ -1,0 +1,24 @@
+@use "@styles/mixin" as mixins;
+@import "@/styles/variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 20px;
+	font-weight: 500;
+	font-size: var(--big-font-size);
+
+	.errorWrap {
+		text-align: right;
+	}
+
+	.title {
+		@include mixins.b-small;
+	}
+
+	p {
+		margin-top: 10px;
+		color: $main-green;
+	}
+}

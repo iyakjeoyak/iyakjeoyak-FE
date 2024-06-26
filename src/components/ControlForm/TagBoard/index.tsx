@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import Container from "../Container";
 import TagButton from "../TagButton";
-import styles from "@/components/Form/TagBoard/index.module.scss";
+import styles from "./index.module.scss";
 
 interface TagBoardProps {
 	title: string;
@@ -28,7 +28,7 @@ const TagBoard = forwardRef<HTMLDivElement, TagBoardProps>(
 								key={tag.id}
 								text={tag.name}
 								value={tag.id}
-								isSelected={isTagSelected}
+								defaultIsSelected={isTagSelected}
 								onClick={() => handleClick(tag.id)}
 							/>
 						);

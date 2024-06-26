@@ -8,7 +8,7 @@ import {
 	useRef,
 	useState,
 } from "react";
-import styles from "@/components/Form/ImgInput/index.module.scss";
+import styles from "./index.module.scss";
 import ImageWithDefault from "@/components/ImageWithDefault";
 
 interface ImgInput extends InputHTMLAttributes<HTMLInputElement> {
