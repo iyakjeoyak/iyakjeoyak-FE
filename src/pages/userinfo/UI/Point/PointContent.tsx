@@ -16,7 +16,7 @@ const PointContent = ({ onNavigate, points }: UserPointInfoProps) => {
 				</div>
 
 				<div className={style.pointArea}>
-					<div className={style.userPoint}>{points ? points : 0}</div>
+					<div className={style.userPoint}>{points ?? 0}</div>
 					<div className={style.pointDetail} onClick={onNavigate}>
 						내역 보기
 					</div>

@@ -14,25 +14,23 @@ export default function Content({
 	className,
 	...props
 }: ContentProps) {
-	const { isOpen, toggleOpen } = useModal();
+	const { isOpen } = useModal();
 	if (!isOpen) return null;
 
 	return (
 		<LazyMotion features={domAnimation}>
-			<div className="background" onClick={toggleOpen}>
-				<m.div
-					{...props}
-					className={`${styles.container} ${className}`}
-					initial={{ opacity: 0, y: "100%" }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: "100%" }}
-					transition={{ duration: 0.3 }}
-					onClick={stopEvent("propagation")}
-				>
-					<div className={styles.element} />
-					{children}
-				</m.div>
-			</div>
+			<m.div
+				{...props}
+				className={`${styles.container} ${className}`}
+				initial={{ opacity: 0, y: "100%" }}
+				animate={{ opacity: 1, y: 0 }}
+				exit={{ opacity: 0, y: "100%" }}
+				transition={{ duration: 0.3 }}
+				onClick={stopEvent("propagation")}
+			>
+				<div className={styles.element} />
+				{children}
+			</m.div>
 		</LazyMotion>
 	);
 }

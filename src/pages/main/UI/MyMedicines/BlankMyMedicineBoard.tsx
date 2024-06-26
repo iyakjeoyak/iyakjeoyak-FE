@@ -1,6 +1,6 @@
 import MyMedicineItem from "./MyMedicineItem";
 import XIcon from "@/assets/icons/XIcon";
-import styles from "../styles/BlankMyMedicineBoard.module.scss";
+import styles from "../../styles/BlankMyMedicineBoard.module.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function BlankMyMedicineBoard() {

@@ -11,8 +11,8 @@ import copyToClipboard from "@/utils/copyToClipboard";
 import postReviewLike from "@/api/review/postReviewLike";
 import { queryClient } from "@/main";
 import reviewQueryOptions from "@/api/review";
-import styles from "../styles/ReviewDetailModal.module.scss";
-import useOpen from "@/hooks/useOpen";
+import styles from "../../styles/ReviewDetailModal.module.scss";
+import useToggle from "@/hooks/useToggle";
 
 export default function ReviewDetailModal({
 	handleOpenConfirmDelete,
@@ -21,7 +21,7 @@ export default function ReviewDetailModal({
 	handleOpenConfirmDelete: () => void;
 	reviewId: number;
 }) {
-	const { isOpen, onClose, onOpen, toggleOpen } = useOpen();
+	const { isOpen, onClose, onOpen, toggleOpen } = useToggle();
 	const {
 		data: {
 			content,
@@ -57,9 +57,11 @@ export default function ReviewDetailModal({
 				toggleOpen={toggleOpen}
 				onOpen={onOpen}
 			>
-				<Modal.Content>
-					<ReviewEditModal reviewId={reviewId} onClose={onClose} />
-				</Modal.Content>
+				<Modal.Overlay>
+					<Modal.Content>
+						<ReviewEditModal reviewId={reviewId} onClose={onClose} />
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 			<article className={styles.container}>
 				<h2>{title}</h2>

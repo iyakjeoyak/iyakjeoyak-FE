@@ -1,23 +1,24 @@
-import { useNavigate } from "react-router-dom";
 import {
 	SignUpFormType,
 	signUpDefault,
 	signupValidation,
 } from "../utils/signupValidation";
-import { Form } from "@/components/Form";
-import Container from "@/components/Form/Container";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+
+import Container from "@/components/Form/Container";
+import { Form } from "@/components/Form";
 import postSignUp from "@/api/user/postSignUp";
 import styles from "@/pages/signup/styles/SignUp.module.scss";
-import commonQueryOptions from "@/api/common";
+import tagQueryOptions from "@/api/tag";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export function SignUp() {
 	const navigate = useNavigate();
 	const { mutate } = useMutation({
 		mutationFn: postSignUp,
 	});
-	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 	const onSubmit = (data: SignUpFormType) => {
 		const { profileImage, ...jsonData } = data;
 

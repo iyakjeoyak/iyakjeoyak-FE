@@ -1,9 +1,14 @@
+import { Button } from "./Button";
 import { FormEventHandler } from "react";
-import styles from "@/components/Form/index.module.scss";
+import { ImgInput } from "./ImgInput";
+import ImgsInput from "./ImgsInput";
 import { Input } from "./Input";
 import { RadioButton } from "./RadioButton";
-import { ImgInput } from "./ImgInput";
-import { Button } from "./Button";
+import StarRating from "./StarRating";
+import TagBoard from "./TagBoard";
+import TagButton from "./TagButton";
+import { Textarea } from "./Textarea";
+import styles from "@/components/Form/index.module.scss";
 
 interface FormProps {
 	children: React.ReactNode;
@@ -22,9 +27,9 @@ export const ControlForm = ({ children, className, onSubmit }: FormProps) => {
 ControlForm.Input = Input;
 ControlForm.Button = Button;
 ControlForm.ImgInput = ImgInput;
+ControlForm.TagButton = TagButton;
+ControlForm.TagBoard = TagBoard;
 ControlForm.RadioButton = RadioButton;
-// ControlForm.TagButton = TagButton;
-// ControlForm.TagBoard = TagBoard;
-// ControlForm.Textarea = Textarea;
-// ControlForm.StarRating = StarRating;
-// ControlForm.ImgsInput = ImgsInput;
+ControlForm.Textarea = Textarea;
+ControlForm.StarRating = StarRating;
+ControlForm.ImgsInput = ImgsInput;

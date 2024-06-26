@@ -13,11 +13,16 @@ export interface PharmacyDataType {
 	data: PharmacyMapType[];
 }
 
+export interface GetPharmacyDataParams {
+	lat: string;
+	lon: string;
+	size?: number;
+}
+
 export default async function getPharmacyData(
-	lat: string,
-	lon: string,
-	size?: number,
-) {
+	params: GetPharmacyDataParams,
+): Promise<PharmacyDataType> {
+	const { lat, lon, size } = params;
 	const response = await axios.get<PharmacyDataType>(
 		`/maps?lat=${lat}&lon=${lon}&size=${size}`,
 	);

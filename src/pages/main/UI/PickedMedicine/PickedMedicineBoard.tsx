@@ -7,7 +7,7 @@ import ElementIcon from "@/assets/icons/Element";
 import PickedMedicine from "./PickedMedicine";
 import getArrayRandomElement from "@/utils/getArrayRandomElement";
 import medicineQueryOptions from "@/api/medicine";
-import styles from "../styles/PickedMedicine.module.scss";
+import styles from "../../styles/PickedMedicine.module.scss";
 import { useQuery } from "@tanstack/react-query";
 
 const PickedMedicineBoard = () => {

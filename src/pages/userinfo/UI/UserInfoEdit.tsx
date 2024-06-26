@@ -3,13 +3,13 @@ import * as yup from "yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Form } from "@/components/Form";
-import commonQueryOptions from "@/api/common";
+import { UserResult } from "../userInfoType";
 import patchUserInfo from "@/api/useInfo/patchUserInfo";
+import { queryClient } from "@/main";
 import { showToast } from "@/utils/ToastConfig";
 import style from "../style/userinfoedit.module.scss";
+import tagQueryOptions from "@/api/tag";
 import transformSubmmit from "../utils/transformSubmmit";
-import { queryClient } from "@/main";
-import { UserResult } from "../userInfoType";
 
 const userInfoSchema = yup.object().shape({
 	nickname: yup
@@ -76,7 +76,7 @@ const UserInfoEdit = ({ userData, onClose }: MyPageEditProps) => {
 
 	const submmitData = transformSubmmit(userData);
 
-	const { data: tags } = useQuery(commonQueryOptions.getHashtags());
+	const { data: tags } = useQuery(tagQueryOptions.getHashtags());
 
 	const onSubmit = (submmitData: UserSubmmit) => {
 		const { imgFile, ...jsonData } = submmitData;

@@ -3,15 +3,15 @@
 
 .container {
 	background-color: $white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	position: absolute;
 	top: 50px;
 	left: 20px;
 	right: 65px;
 	z-index: 900;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  span {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	span {
 		color: $main-red;
 	}
 	::placeholder {
@@ -27,6 +27,6 @@
 			color: $main-red;
 		}
 		@include mixins.m-big;
-    padding: 5px;
+		padding: 5px;
 	}
 }

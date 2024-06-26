@@ -5,7 +5,7 @@ import { KeywordResultItemType } from "../main";
 import { MedicineCardList } from "@/pages/search/UI";
 import SearchBar from "@/components/SearchBar";
 import TagsModal from "./UI/TagsModal";
-import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/search/getAutoCompleteResult";
 import qs from "qs";
 import { queryClient } from "@/main";
 

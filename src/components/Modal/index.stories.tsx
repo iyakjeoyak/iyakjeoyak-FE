@@ -1,7 +1,7 @@
 import "@styles/global.scss";
 
 import Modal from ".";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 export default {
 	title: "ModalContainer",
@@ -9,7 +9,7 @@ export default {
 };
 
 const Template = () => {
-	const { isOpen, onClose, toggleOpen, onOpen } = useOpen();
+	const { isOpen, onClose, toggleOpen, onOpen } = useToggle();
 
 	return (
 		<main>
@@ -19,11 +19,15 @@ const Template = () => {
 				toggleOpen={toggleOpen}
 				onOpen={onOpen}
 			>
-				<Modal.Trigger openElement={<button>모달 열기</button>} />
-				<Modal.Content>
-					모달입니다.
-					<Modal.Close />
-				</Modal.Content>
+				<Modal.Trigger>
+					<button>모달 열기</button>
+				</Modal.Trigger>
+				<Modal.Overlay>
+					<Modal.Content>
+						모달입니다.
+						<Modal.Close />
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 		</main>
 	);

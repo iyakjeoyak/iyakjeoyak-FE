@@ -1,4 +1,4 @@
-import { Pharmacy } from "../mapTypes";
+import { Pharmacy } from "../map.types";
 
 export default function createMarker(
 	pharmacy: Pharmacy,

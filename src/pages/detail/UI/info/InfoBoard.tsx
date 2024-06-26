@@ -1,5 +1,5 @@
 import InfoBoardItemContainer from "./InfoBoardItemContainer";
-import styles from "../styles/InfoBoard.module.scss";
+import styles from "../../styles/InfoBoard.module.scss";
 
 interface InfoBoardProps {
 	howToEat: string;

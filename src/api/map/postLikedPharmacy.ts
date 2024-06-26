@@ -1,5 +1,5 @@
 import axios from "../axiosConfig";
-import { PharmacyDetailType } from "@pages/map/mapTypes";
+import { PharmacyDetailType } from "./types";
 
 export default async function postLikedPharmacy(
 	likedPharmacy: PharmacyDetailType,

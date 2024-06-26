@@ -11,11 +11,10 @@ export default function SelectedKeywordTagsList() {
 
 	const handleTagRemove = (tagKey: string) => {
 		const updatedQuery = { ...parsedQuery };
-		if (tagKey === "keyword") {
-			delete updatedQuery[tagKey];
-		}
+
+		delete updatedQuery[tagKey];
+
 		if (tagKey === "name") {
-			delete updatedQuery[tagKey];
 			delete updatedQuery["categoryId"];
 			delete updatedQuery["hashtagId"];
 		}

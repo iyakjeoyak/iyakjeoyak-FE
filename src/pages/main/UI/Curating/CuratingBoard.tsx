@@ -1,7 +1,7 @@
 import CuratingBoardItem from "./CuratingBoardItem";
 import getArrayRandomElement from "@/utils/getArrayRandomElement";
 import medicineQueryOptions from "@/api/medicine";
-import styles from "../styles/CuratingBoard.module.scss";
+import styles from "../../styles/CuratingBoard.module.scss";
 import { useQuery } from "@tanstack/react-query";
 
 const CuratingBoard = () => {

@@ -18,7 +18,7 @@ import styles from "../styles/MedicineCard.module.scss";
 import useGetIdByLocation from "../hooks/useGetIdByLocation";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import useOpen from "@/hooks/useOpen";
+import useToggle from "@/hooks/useToggle";
 
 interface MedicineCardProps {
 	name: string;
@@ -43,7 +43,7 @@ export default function MedicineCard({
 	reviewCount,
 }: MedicineCardProps) {
 	const navigate = useNavigate();
-	const { isOpen, onOpen, onClose } = useOpen();
+	const { isOpen, onOpen, onClose } = useToggle();
 
 	const medicineId = useGetIdByLocation();
 	const isLogin = getAccessToken();
@@ -51,9 +51,9 @@ export default function MedicineCard({
 	const { mutate: likeMutate } = useMutation({
 		mutationFn: postMedicineLike,
 		onSuccess: () => {
-			queryClient.invalidateQueries(
-				medicineQueryOptions.getMedicineById({ medicineId }),
-			);
+			queryClient.invalidateQueries({
+				queryKey: medicineQueryOptions.getMedicineById({ medicineId }).queryKey,
+			});
 		},
 	});
 

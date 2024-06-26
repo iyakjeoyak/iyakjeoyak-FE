@@ -1,8 +1,9 @@
-import { BestReviewBoard, CuratingBoard, MyMedicineBoard } from "./UI";
-
-import PickedMedicineBoard from "./UI/PickedMedicineBoard";
+import BestReviewBoard from "./UI/BestReviews/BestReviewBoard";
+import CuratingBoard from "./UI/Curating/CuratingBoard";
+import MyMedicineBoard from "./UI/MyMedicines/MyMedicineBoard";
+import PickedMedicineBoard from "./UI/PickedMedicine/PickedMedicineBoard";
 import SearchBar from "@/components/SearchBar";
-import getAutoCompleteResult from "@/api/common/getAutoCompleteResult";
+import getAutoCompleteResult from "@/api/search/getAutoCompleteResult";
 import qs from "qs";
 import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";

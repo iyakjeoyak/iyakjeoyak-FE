@@ -36,25 +36,6 @@ const PointHistory = () => {
 		fetchPoints();
 	}, []);
 
-	const renderPointItems = pointData
-		? pointData.map((points, index) => (
-				<div key={index} className={style.pointItem}>
-					{index + 1}
-					<div className={style.description}>
-						{mapPointDomain[points.domain as keyof typeof mapPointDomain]}
-					</div>
-					<div className={style.pointBox}>
-						<div className={style.description}>
-							{" "}
-							{points.changedValue >= 0
-								? `+${points.changedValue}`
-								: `-${Math.abs(points.changedValue)}`}{" "}
-						</div>
-					</div>
-				</div>
-			))
-		: null;
-
 	return (
 		<section className={style.pointContainer}>
 			<PathButton paths={paths} />
@@ -63,7 +44,23 @@ const PointHistory = () => {
 				<div className={style.pointTitleNumber}>{pointSum?.point} point</div>
 			</div>
 
-			<div className={style.pointHistoryList}>{renderPointItems}</div>
+			<div className={style.pointHistoryList}>
+				{pointData?.map((points, index) => (
+					<div key={index} className={style.pointItem}>
+						{index + 1}
+						<div className={style.description}>
+							{mapPointDomain[points.domain as keyof typeof mapPointDomain]}
+						</div>
+						<div className={style.pointBox}>
+							<div className={style.description}>
+								{points.changedValue >= 0
+									? `+${points.changedValue}`
+									: `-${Math.abs(points.changedValue)}`}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
 		</section>
 	);
 };

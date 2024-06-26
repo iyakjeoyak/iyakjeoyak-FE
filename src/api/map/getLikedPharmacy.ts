@@ -1,5 +1,5 @@
 import axios from "../axiosConfig";
-import { hourListType } from "@/pages/map/mapTypes";
+import { hourListType } from "./types";
 
 export interface PharmacyLikedType {
 	id: number;
@@ -13,7 +13,7 @@ export interface PharmacyLikedType {
 	businessHoursList?: hourListType[];
 }
 
-interface PharmacyLikedProps {
+interface LikedPharmacyList {
 	data: PharmacyLikedType[];
 	number: number;
 	size: number;
@@ -23,7 +23,7 @@ interface PharmacyLikedProps {
 }
 
 export default async function getLikedPharmacy(page: number, size: number) {
-	const response = await axios.get<PharmacyLikedProps>(
+	const response = await axios.get<LikedPharmacyList>(
 		`/pharmacies?page=${page}&size=${size}`,
 	);
 	return response.data;

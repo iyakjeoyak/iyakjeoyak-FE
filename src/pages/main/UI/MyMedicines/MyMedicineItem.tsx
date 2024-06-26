@@ -1,6 +1,6 @@
 import { ShortSupplementInfo } from "@/pages/userinfo/userInfoType";
-import { calculateDday } from "../utils";
-import styles from "../styles/MyMedicineItem.module.scss";
+import { calculateDday } from "../../utils";
+import styles from "../../styles/MyMedicineItem.module.scss";
 import { useState } from "react";
 
 // interface MyMedicineItem extends MedicineItemType{

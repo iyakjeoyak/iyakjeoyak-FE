@@ -1,6 +1,8 @@
-import { InfoBoard, MedicineCard, ReviewBoard } from "./UI";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 
+import InfoBoard from "./UI/info/InfoBoard";
+import MedicineCard from "./UI/MedicineCard";
+import ReviewBoard from "./UI/review/ReviewBoard";
 import { TAPS_QUERIES } from "@/constants/TAPS";
 import TapBar from "@/components/TapBar";
 import medicineQueryOptions from "@/api/medicine";
@@ -25,17 +27,14 @@ export default function MedicineDetail() {
 
 	const currentTapValue = useGetURLSearch("tap");
 
-	const matchResult = matchPath("/detail/:id", pathname);
+	const medicineId = Number(matchPath("/detail/:id", pathname)?.params.id);
 
-	const id = Number(matchResult?.params.id);
-
-	if (!id) return;
+	if (!medicineId) return;
 
 	const {
 		data: {
 			image,
 			isHeart,
-			id: medicineId,
 			grade,
 			bssh_NM: brand,
 			prdlst_NM: name,
@@ -47,41 +46,39 @@ export default function MedicineDetail() {
 			isBookMark,
 			reviewCount,
 		},
-	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId: id }));
+	} = useQuery(medicineQueryOptions.getMedicineById({ medicineId }));
 
 	const handleTapClick = (tapValue: string) => {
 		navigate(`/detail/${medicineId}?tap=${tapValue}`);
 	};
 
 	return (
-		<>
-			<section className={styles.container}>
-				<MedicineCard
-					image={image}
-					name={name}
-					isHeart={isHeart}
-					isBookMark={isBookMark}
-					reviewCount={reviewCount}
-					brand={brand}
-					hashtags={hashtags.slice(0, 2)}
-					grade={grade}
-					heartCount={heartCount}
-				/>
-				<div className={styles.board}>
-					<TapBar taps={TAPS} onClick={handleTapClick} />
-					{currentTapValue === TAPS_QUERIES.REVIEW && (
-						<ReviewBoard medicineId={medicineId} />
-					)}
-					{(currentTapValue === TAPS_QUERIES.INFO ||
-						currentTapValue === null) && (
-						<InfoBoard
-							howToEat={howToEat}
-							ingredient={ingredient}
-							describe={describe}
-						/>
-					)}
-				</div>
-			</section>
-		</>
+		<section className={styles.container}>
+			<MedicineCard
+				image={image}
+				name={name}
+				isHeart={isHeart}
+				isBookMark={isBookMark}
+				reviewCount={reviewCount}
+				brand={brand}
+				hashtags={hashtags.slice(0, 2)}
+				grade={grade}
+				heartCount={heartCount}
+			/>
+			<div className={styles.board}>
+				<TapBar taps={TAPS} onClick={handleTapClick} />
+				{currentTapValue === TAPS_QUERIES.REVIEW && (
+					<ReviewBoard medicineId={medicineId} />
+				)}
+				{(currentTapValue === TAPS_QUERIES.INFO ||
+					currentTapValue === null) && (
+					<InfoBoard
+						howToEat={howToEat}
+						ingredient={ingredient}
+						describe={describe}
+					/>
+				)}
+			</div>
+		</section>
 	);
 }

@@ -1,10 +1,10 @@
 import { useModal } from "../hooks/useModal";
 
 interface TriggerProps {
-	openElement: React.ReactNode;
+	children: React.ReactNode;
 }
 
-export default function Trigger({ openElement }: TriggerProps) {
+export default function Trigger({ children }: TriggerProps) {
 	const { onOpen } = useModal();
-	return <div onClick={onOpen}>{openElement}</div>;
+	return <div onClick={onOpen}>{children}</div>;
 }

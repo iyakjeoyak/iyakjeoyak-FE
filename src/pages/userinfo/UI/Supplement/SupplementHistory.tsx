@@ -1,19 +1,20 @@
 import "@styles/global.scss";
 
 import { useEffect, useState } from "react";
+
 import CommonCardBox from "../CommonCardBox";
 import CommonHeaderBox from "../CommonHeaderBox";
 import GridIcon from "@/pages/userinfo/assets/GridIcon";
 import ListIcon from "../../assets/ListIcon";
 import Modal from "@/components/Modal";
 import { ShortSupplementInfo } from "../../userInfoType";
-import SupplementModal from "./SupplementModal";
-import style from "../../style/supplementhistory.module.scss";
-import useOpen from "@/hooks/useOpen";
 import SupplementAddForm from "./SupplementAddForm";
+import SupplementModal from "./SupplementModal";
+import getUserSupplement from "@/api/useInfo/getUserSupplement";
+import style from "../../style/supplementhistory.module.scss";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useIntersect from "@/hooks/useIntersect";
-import getUserSupplement from "@/api/useInfo/getUserSupplement";
+import useToggle from "@/hooks/useToggle";
 
 const noSupplementData = {
 	medicineId: 0,
@@ -29,13 +30,13 @@ const SupplementHistory = () => {
 		onClose: onCloseSupplement,
 		onOpen: onOpenSupplement,
 		toggleOpen: toggleOpenSupplement,
-	} = useOpen();
+	} = useToggle();
 	const {
 		isOpen: isOpenEditSupplement,
 		onClose: onCloseEditSupplement,
 		onOpen: onOpenEditSupplement,
 		toggleOpen: toggleOpenEditSupplement,
-	} = useOpen();
+	} = useToggle();
 
 	const [cardForm, setCardForm] = useState<"slim" | "wide">("slim");
 	const [selectedSupplement, setSelectedSupplement] =
@@ -111,32 +112,31 @@ const SupplementHistory = () => {
 				toggleOpen={toggleOpenSupplement}
 				onOpen={onOpenSupplement}
 			>
-				<Modal.Trigger
-					openElement={
-						<div className={`${style.cardGrid} ${style[cardForm]}`}>
-							{supplementInfo &&
-								supplementInfo?.map((cardInfo) => (
-									<CommonCardBox
-										key={cardInfo.id}
-										form={cardForm}
-										medicineNames={cardInfo.medicineName}
-										img={cardInfo.image?.fullPath}
-										onClick={() => handleCardClick(cardInfo)}
-										{...cardInfo}
-									/>
-								))}
-						</div>
-					}
-				/>
-
-				<Modal.Content>
-					{selectedSupplement?.medicineName && (
-						<SupplementModal
-							itemId={selectedSupplement.id}
-							onClose={onCloseSupplement}
-						/>
-					)}
-				</Modal.Content>
+				<Modal.Trigger>
+					<div className={`${style.cardGrid} ${style[cardForm]}`}>
+						{supplementInfo &&
+							supplementInfo?.map((cardInfo) => (
+								<CommonCardBox
+									key={cardInfo.id}
+									form={cardForm}
+									medicineNames={cardInfo.medicineName}
+									img={cardInfo.image?.fullPath}
+									onClick={() => handleCardClick(cardInfo)}
+									{...cardInfo}
+								/>
+							))}
+					</div>
+				</Modal.Trigger>
+				<Modal.Overlay>
+					<Modal.Content>
+						{selectedSupplement?.medicineName && (
+							<SupplementModal
+								itemId={selectedSupplement.id}
+								onClose={onCloseSupplement}
+							/>
+						)}
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 
 			<Modal
@@ -145,13 +145,17 @@ const SupplementHistory = () => {
 				toggleOpen={toggleOpenEditSupplement}
 				onOpen={onOpenEditSupplement}
 			>
-				<Modal.Trigger openElement={<CommonCardBox form={cardForm} />} />
-				<Modal.Content>
-					<SupplementAddForm
-						formInitialValues={noSupplementData}
-						onClose={onCloseEditSupplement}
-					/>
-				</Modal.Content>
+				<Modal.Trigger>
+					<CommonCardBox form={cardForm} />
+				</Modal.Trigger>
+				<Modal.Overlay>
+					<Modal.Content>
+						<SupplementAddForm
+							formInitialValues={noSupplementData}
+							onClose={onCloseEditSupplement}
+						/>
+					</Modal.Content>
+				</Modal.Overlay>
 			</Modal>
 
 			<div ref={ref} style={{ height: 20 }}>

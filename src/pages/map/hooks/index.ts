@@ -4,7 +4,7 @@ import setDefaultMap from "../utils/setDefaultMap";
 import { setGelocationMap } from "../utils/setGelocationMap";
 import { PharmacyMapType } from "@/api/map/getPharmacyData";
 import createMarker from "../utils/createMarker";
-import { Pharmacy } from "../mapTypes";
+import { Pharmacy } from "../map.types";
 
 interface UseDisplayMapArgs {
 	map: naver.maps.Map | null;

@@ -1,21 +1,17 @@
 import { queryOptions } from "@tanstack/react-query";
-import getPharmacyData from "./getPharmacyData";
+import getPharmacyData, { GetPharmacyDataParams } from "./getPharmacyData";
 import getPharmacyDetail from "./getPharmacyDetail";
 import getLikedPharmacy from "./getLikedPharmacy";
 
 const pharmacyQueryOptions = {
 	getPharmacyInfo: ({
-		lat,
-		long,
+		lat, // 줄임말 지양
+		lon,
 		size,
-	}: {
-		lat: string;
-		long: string;
-		size: number;
-	}) =>
+	}: GetPharmacyDataParams) =>
 		queryOptions({
 			queryKey: ["pharmacy"],
-			queryFn: () => getPharmacyData(lat, long, size),
+			queryFn: () => getPharmacyData({ lat, lon, size }),
 		}),
 
 	getPharmacyDetail: ({ hpid }: { hpid: string }) =>

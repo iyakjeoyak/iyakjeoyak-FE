@@ -1,13 +1,13 @@
 import HeartIcon from "@/assets/icons/HeartIcon";
+import Loading from "@/pages/feedback/Loading";
 import Modal from "@/components/Modal";
-import { UserResult } from "../userInfoType";
 import UserInfoEdit from "../UI/UserInfoEdit";
+import { UserResult } from "../userInfoType";
 import modalStyle from "@/components/ModalContainer/index.module.scss";
 import { routerpaths } from "@/utils/pathName";
 import style from "../index.module.scss";
 import { useNavigate } from "react-router-dom";
-import useOpen from "@/hooks/useOpen";
-import Loading from "@/pages/feedback/Loading";
+import useToggle from "@/hooks/useToggle";
 
 export interface UserInfoBoxProps {
 	userData?: UserResult;
@@ -20,7 +20,7 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 		onClose: onCloseEditUserData,
 		onOpen,
 		toggleOpen,
-	} = useOpen();
+	} = useToggle();
 
 	if (!userData) {
 		return <Loading />;
@@ -55,21 +55,21 @@ const UserInfoBox = ({ userData }: UserInfoBoxProps) => {
 							toggleOpen={toggleOpen}
 							onOpen={onOpen}
 						>
-							<Modal.Trigger
-								openElement={
-									<div className={style.editprofile}>프로필 수정하기</div>
-								}
-							/>
-							<Modal.Content>
-								<div
-									className={`${style.profileEditModal} ${modalStyle.container} `}
-								>
-									<UserInfoEdit
-										onClose={onCloseEditUserData}
-										userData={userData}
-									/>
-								</div>
-							</Modal.Content>
+							<Modal.Trigger>
+								<div className={style.editprofile}>프로필 수정하기</div>
+							</Modal.Trigger>
+							<Modal.Overlay>
+								<Modal.Content>
+									<div
+										className={`${style.profileEditModal} ${modalStyle.container} `}
+									>
+										<UserInfoEdit
+											onClose={onCloseEditUserData}
+											userData={userData}
+										/>
+									</div>
+								</Modal.Content>
+							</Modal.Overlay>
 						</Modal>
 					</div>
 				</div>
